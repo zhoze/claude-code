@@ -24,6 +24,8 @@ OUTDIR="${OUTDIR:-./captures}"
 FACTOR="${FACTOR:-2}"               # upscale factor
 QUALITY="${QUALITY:-95}"            # JPEG quality of upscaled output
 KEEP_RAW="${KEEP_RAW:-0}"           # 1 = keep original (pre-upscale) frames
+UPLOAD="${UPLOAD:-0}"               # 1 = upload each upscaled frame via rclone
+REMOTE="${REMOTE:-gdrive:${CAM}}"   # rclone destination remote:folder
 
 here="$(cd "$(dirname "$0")" && pwd)"
 url="${BASE_URL}/${CAM}.jpg"
@@ -51,6 +53,14 @@ for ((i=1; i<=count; i++)); do
                         --factor "$FACTOR" --quality "$QUALITY")"
             sz="$(wc -c < "$up")"
             echo "  [$i/$count] ${ts}  NEW  ${dims}  ${sz} bytes  -> $(basename "$up")"
+            if [ "$UPLOAD" = "1" ]; then
+                if rclone copyto "$up" "${REMOTE}/$(basename "$up")" \
+                        --retries 4 --low-level-retries 10; then
+                    echo "        uploaded to ${REMOTE}/"
+                else
+                    echo "        upload FAILED" >&2
+                fi
+            fi
             prev_md5="$md5"
             unique=$((unique + 1))
             [ "$KEEP_RAW" = "1" ] || rm -f "$raw"

@@ -115,12 +115,16 @@ python3 upscale.py in.jpg out.jpg --factor 2 --quality 95
 The defaults reproduce the "1 minute, every 10 seconds, upscaled 2x" test:
 
 ```bash
-./test_capture.sh                          # 6 grabs, 10s apart, 2x upscale
+./test_capture.sh                          # 6 grabs, 10s apart, 2x upscale (local only)
 DURATION=120 INTERVAL=15 FACTOR=3 ./test_capture.sh
+
+# also upload each upscaled frame to Drive via rclone:
+UPLOAD=1 REMOTE=gdrive:cam103 ./test_capture.sh
 ```
 
-Because the source only refreshes ~once per minute, byte-identical consecutive
-frames are detected and skipped, so you keep only genuinely new images.
+Byte-identical consecutive frames are detected and skipped, so you keep only
+genuinely new images. (In practice cam103 refreshes about every 10–12 seconds,
+so a 10s interval yields mostly fresh frames.)
 
 ## How it works
 
