@@ -141,9 +141,23 @@ python3 detect.py --cam cam103 --save out.jpg   # also write an annotated image
 ```
 
 Options: `--model` (e.g. `yolov8s.pt` for higher accuracy), `--conf`
-(confidence threshold, default 0.25). Detection is best-effort — small or
-distant objects on a 1280×720 traffic frame may be missed; use a larger model
-or higher-resolution source for better recall.
+(confidence threshold, default 0.25), `--format pretty|csv|json`. Detection is
+best-effort — small or distant objects on a 1280×720 traffic frame may be
+missed; use a larger model or higher-resolution source for better recall.
+
+### Logging counts on every capture
+
+`capture.sh` can run detection on each captured frame and append the counts to
+a CSV log. Set `DETECT=1`:
+
+```bash
+DETECT=1 ./capture.sh
+# appends to detections.csv:  timestamp_utc,cam,file,person,car,bus
+```
+
+Tune with `DETECT_MODEL` (default `yolov8n.pt`), `DETECT_CONF` (default `0.25`),
+and `DETECT_LOG` (default `detections.csv`). Detection is optional — if
+ultralytics isn't installed the capture/upload still proceeds with a warning.
 
 ## How it works
 

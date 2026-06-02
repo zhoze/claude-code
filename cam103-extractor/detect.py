@@ -41,6 +41,8 @@ def main() -> int:
     ap.add_argument("--model", default="yolov8n.pt", help="YOLO weights (default yolov8n.pt)")
     ap.add_argument("--conf", type=float, default=0.25, help="confidence threshold")
     ap.add_argument("--save", metavar="OUT", help="write an annotated image to OUT")
+    ap.add_argument("--format", choices=("pretty", "csv", "json"), default="pretty",
+                    help="output format: pretty (default), csv (person,car,bus), json")
     args = ap.parse_args()
 
     if args.cam:
@@ -56,8 +58,13 @@ def main() -> int:
         print("Ultralytics not installed. Run: pip install ultralytics", file=sys.stderr)
         return 2
 
-    model = YOLO(args.model)
-    results = model.predict(image, conf=args.conf, verbose=False)
+    # In machine-readable modes keep stdout clean: route model download /
+    # loading chatter to stderr so only the csv/json line lands on stdout.
+    import contextlib
+    sink = sys.stderr if args.format != "pretty" else sys.stdout
+    with contextlib.redirect_stdout(sink):
+        model = YOLO(args.model)
+        results = model.predict(image, conf=args.conf, verbose=False)
     r = results[0]
 
     counts = {name: 0 for name in TARGETS.values()}
@@ -69,20 +76,28 @@ def main() -> int:
         elif cid in EXTRAS:
             extras[EXTRAS[cid]] += 1
 
-    print(f"Image: {image}")
-    print(f"Model: {args.model}  conf>={args.conf}")
-    print("-" * 32)
-    for name in ("person", "car", "bus"):
-        print(f"  {name:<8}: {counts[name]}")
-    if any(extras.values()):
-        print("  (also seen)")
-        for name, n in extras.items():
-            if n:
-                print(f"  {name:<8}: {n}")
+    if args.format == "csv":
+        # person,car,bus — machine-readable for logging/scripts.
+        print(f"{counts['person']},{counts['car']},{counts['bus']}")
+    elif args.format == "json":
+        import json
+        print(json.dumps({**counts, **{k: v for k, v in extras.items() if v}}))
+    else:
+        print(f"Image: {image}")
+        print(f"Model: {args.model}  conf>={args.conf}")
+        print("-" * 32)
+        for name in ("person", "car", "bus"):
+            print(f"  {name:<8}: {counts[name]}")
+        if any(extras.values()):
+            print("  (also seen)")
+            for name, n in extras.items():
+                if n:
+                    print(f"  {name:<8}: {n}")
 
     if args.save:
         r.save(filename=args.save)
-        print(f"\nAnnotated image written to {args.save}")
+        if args.format == "pretty":
+            print(f"\nAnnotated image written to {args.save}")
     return 0
 
 

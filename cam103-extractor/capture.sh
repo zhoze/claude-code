@@ -26,6 +26,10 @@ WORKDIR="${WORKDIR:-$(mktemp -d)}"                      # local scratch dir
 KEEP_LOCAL="${KEEP_LOCAL:-0}"                           # 1 = keep local copy
 FACTOR="${FACTOR:-1}"                                   # upscale factor (1 = off)
 QUALITY="${QUALITY:-95}"                                # JPEG quality when upscaling
+DETECT="${DETECT:-0}"                                   # 1 = count person/car/bus
+DETECT_MODEL="${DETECT_MODEL:-yolov8n.pt}"              # YOLO weights for detection
+DETECT_CONF="${DETECT_CONF:-0.25}"                      # detection confidence threshold
+DETECT_LOG="${DETECT_LOG:-detections.csv}"             # CSV log of counts
 # -----------------------------------------------------------------------------
 
 mkdir -p "$WORKDIR"
@@ -53,6 +57,22 @@ if [ ! -s "$local_path" ] || ! file -b "$local_path" | grep -qi jpeg; then
 fi
 size="$(wc -c < "$local_path")"
 echo "[*] Saved ${fname} (${size} bytes)"
+
+# Optional object detection (needs python3 + ultralytics). Runs on the original
+# frame and appends a row to DETECT_LOG: timestamp,cam,file,person,car,bus.
+if [ "$DETECT" = "1" ]; then
+    echo "[*] Detecting person/car/bus (${DETECT_MODEL})"
+    if counts="$(python3 "$(dirname "$0")/detect.py" "$local_path" \
+                    --model "$DETECT_MODEL" --conf "$DETECT_CONF" --format csv | tail -1)"; then
+        IFS=',' read -r n_person n_car n_bus <<< "$counts"
+        echo "    person=${n_person} car=${n_car} bus=${n_bus}"
+        [ -f "$DETECT_LOG" ] || echo "timestamp_utc,cam,file,person,car,bus" > "$DETECT_LOG"
+        echo "${ts},${CAM},${fname},${counts}" >> "$DETECT_LOG"
+        echo "    logged to ${DETECT_LOG}"
+    else
+        echo "[!] Detection failed (is ultralytics installed?); continuing" >&2
+    fi
+fi
 
 # Optional upscaling (needs python3 + Pillow).
 upload_path="$local_path"
