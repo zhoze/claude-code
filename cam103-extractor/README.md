@@ -40,6 +40,13 @@ capture per run; you schedule it (cron) to accumulate images over time.
    rclone lsd gdrive:
    ```
 
+### Headless / SSH (no browser on the machine)
+
+When `rclone config` asks **"Use auto config?"**, answer **`n`**. It prints an
+`rclone authorize "drive"` command — run that on any computer that *does* have a
+browser, complete the Google login, then paste the returned token back into the
+prompt on the headless machine. The rest of the prompts are the same.
+
 The script uploads to the remote/folder named in `REMOTE` (default
 `gdrive:cam103`). rclone creates the folder automatically if it doesn't exist.
 
