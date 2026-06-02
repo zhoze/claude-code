@@ -24,6 +24,8 @@ BASE_URL="${BASE_URL:-https://ristmikud.tallinn.ee/last}"
 REMOTE="${REMOTE:-gdrive:${CAM}}"                       # rclone remote:folder
 WORKDIR="${WORKDIR:-$(mktemp -d)}"                      # local scratch dir
 KEEP_LOCAL="${KEEP_LOCAL:-0}"                           # 1 = keep local copy
+FACTOR="${FACTOR:-1}"                                   # upscale factor (1 = off)
+QUALITY="${QUALITY:-95}"                                # JPEG quality when upscaling
 # -----------------------------------------------------------------------------
 
 mkdir -p "$WORKDIR"
@@ -52,8 +54,19 @@ fi
 size="$(wc -c < "$local_path")"
 echo "[*] Saved ${fname} (${size} bytes)"
 
+# Optional upscaling (needs python3 + Pillow).
+upload_path="$local_path"
+if [ "$FACTOR" != "1" ]; then
+    up_path="${WORKDIR}/${CAM}_${ts}_x${FACTOR}.jpg"
+    echo "[*] Upscaling x${FACTOR} (quality ${QUALITY})"
+    python3 "$(dirname "$0")/upscale.py" "$local_path" "$up_path" \
+        --factor "$FACTOR" --quality "$QUALITY"
+    fname="${CAM}_${ts}_x${FACTOR}.jpg"
+    upload_path="$up_path"
+fi
+
 echo "[*] Uploading to rclone remote: ${REMOTE}/"
-rclone copyto "$local_path" "${REMOTE}/${fname}" \
+rclone copyto "$upload_path" "${REMOTE}/${fname}" \
     --retries 4 --low-level-retries 10
 
 echo "[OK] Uploaded ${fname} to ${REMOTE}"

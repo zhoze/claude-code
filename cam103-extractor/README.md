@@ -19,6 +19,7 @@ capture per run; you schedule it (cron) to accumulate images over time.
 
 - `bash`, `curl`, and `file` (standard on Linux/macOS)
 - `rclone` — install from <https://rclone.org/install/>
+- For upscaling only: `python3` + Pillow (`pip install Pillow`)
 
 ## One-time setup
 
@@ -61,6 +62,8 @@ Each run creates a timestamped file in the Drive folder, e.g.
 | `REMOTE`     | `gdrive:<CAM>`                       | rclone destination remote:folder         |
 | `WORKDIR`    | a temp dir                           | Local scratch directory                  |
 | `KEEP_LOCAL` | `0`                                  | Set to `1` to keep the local JPEG too    |
+| `FACTOR`     | `1`                                  | Upscale factor (`1` = off, e.g. `2`, `3`)|
+| `QUALITY`    | `95`                                 | JPEG quality used when upscaling         |
 
 Examples:
 
@@ -86,6 +89,38 @@ Every 5 minutes:
 
 > Note: the source frame typically updates roughly once a minute, so capturing
 > more often than that just stores duplicates.
+
+## Upscaling
+
+`upscale.py` enlarges a frame using high-quality Lanczos resampling plus a mild
+unsharp mask. Enable it in the capture by setting `FACTOR`:
+
+```bash
+FACTOR=2 ./capture.sh          # upload a 2x (2560x1440) version instead
+```
+
+Or run it standalone:
+
+```bash
+python3 upscale.py in.jpg out.jpg --factor 2 --quality 95
+```
+
+> Reality check: upscaling makes the image larger and visually smoother, but it
+> **cannot add real detail** the camera never recorded. For genuine
+> super-resolution you'd need an ML model such as Real-ESRGAN.
+
+## Timed capture test
+
+`test_capture.sh` captures repeatedly over a window and upscales each frame.
+The defaults reproduce the "1 minute, every 10 seconds, upscaled 2x" test:
+
+```bash
+./test_capture.sh                          # 6 grabs, 10s apart, 2x upscale
+DURATION=120 INTERVAL=15 FACTOR=3 ./test_capture.sh
+```
+
+Because the source only refreshes ~once per minute, byte-identical consecutive
+frames are detected and skipped, so you keep only genuinely new images.
 
 ## How it works
 
