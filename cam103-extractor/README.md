@@ -126,6 +126,25 @@ Byte-identical consecutive frames are detected and skipped, so you keep only
 genuinely new images. (In practice cam103 refreshes about every 10–12 seconds,
 so a 10s interval yields mostly fresh frames.)
 
+## Counting persons, cars and buses
+
+`detect.py` runs a COCO-pretrained [Ultralytics YOLO](https://docs.ultralytics.com/)
+detector and counts `person`, `car` and `bus` (also reporting `truck` /
+`motorcycle`, which are easily confused with cars/buses).
+
+```bash
+pip install ultralytics            # first time (downloads ~6 MB weights on first run)
+
+python3 detect.py frame.jpg                 # analyze a local image
+python3 detect.py --cam cam103              # grab + analyze the live cam103 frame
+python3 detect.py --cam cam103 --save out.jpg   # also write an annotated image
+```
+
+Options: `--model` (e.g. `yolov8s.pt` for higher accuracy), `--conf`
+(confidence threshold, default 0.25). Detection is best-effort — small or
+distant objects on a 1280×720 traffic frame may be missed; use a larger model
+or higher-resolution source for better recall.
+
 ## How it works
 
 1. `curl` downloads `<BASE_URL>/<CAM>.jpg` (with retries on transient errors).
