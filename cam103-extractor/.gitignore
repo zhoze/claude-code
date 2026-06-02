@@ -1,0 +1,11 @@
+# Auto-downloaded YOLO model weights (fetched on first run)
+*.pt
+
+# Detection logs and captured/processed frames
+detections.csv
+captures/
+*.jpg
+
+# Python
+__pycache__/
+*.pyc
