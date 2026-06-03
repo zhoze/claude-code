@@ -34,8 +34,21 @@ def lanczos_upscale(im: Image.Image, factor: float, sharpen: bool) -> Image.Imag
     return up
 
 
-def ml_upscale(im: Image.Image, scale: int, model_name: str) -> Image.Image:
+def _sr_one(model, ImageLoader, tile: Image.Image):
+    """Run the SR model on a single (small) PIL tile -> PIL."""
+    import numpy as np
+
+    pred = model(ImageLoader.load_image(tile))
+    arr = pred.squeeze(0).clamp(0, 1).mul(255).round().byte().permute(1, 2, 0).cpu().numpy()
+    return Image.fromarray(arr.astype(np.uint8), "RGB")
+
+
+def ml_upscale(im: Image.Image, scale: int, model_name: str, tile: int = 256,
+               overlap: int = 16) -> Image.Image:
     """ML super-resolution via super-image (EDSR by default).
+
+    Large images are processed in overlapping tiles so memory stays bounded
+    (a full-frame SR pass otherwise allocates gigabytes and gets OOM-killed).
 
     Requires: pip install super-image torch
     """
@@ -47,14 +60,26 @@ def ml_upscale(im: Image.Image, scale: int, model_name: str) -> Image.Image:
             "    pip install super-image torch\n"
             f"(import error: {exc})"
         )
-    import numpy as np
 
     model = EdsrModel.from_pretrained(model_name, scale=scale)
-    inputs = ImageLoader.load_image(im)
-    pred = model(inputs)
-    # pred is a torch tensor (1, C, H, W) in 0..1 -> PIL
-    arr = pred.squeeze(0).clamp(0, 1).mul(255).round().byte().permute(1, 2, 0).cpu().numpy()
-    return Image.fromarray(arr.astype(np.uint8), "RGB")
+    w, h = im.size
+
+    # Small enough to do in one shot.
+    if w <= tile and h <= tile:
+        return _sr_one(model, ImageLoader, im)
+
+    out = Image.new("RGB", (w * scale, h * scale))
+    step = tile - overlap
+    for y in range(0, h, step):
+        for x in range(0, w, step):
+            box = (x, y, min(x + tile, w), min(y + tile, h))
+            piece = _sr_one(model, ImageLoader, im.crop(box))
+            # Drop the overlap margin (except at the top/left edges) to avoid seams.
+            ox = 0 if x == 0 else overlap * scale // 2
+            oy = 0 if y == 0 else overlap * scale // 2
+            paste = piece.crop((ox, oy, piece.width, piece.height))
+            out.paste(paste, (box[0] * scale + ox, box[1] * scale + oy))
+    return out
 
 
 def main() -> None:
@@ -70,13 +95,15 @@ def main() -> None:
                     help="ML upscale factor (default 4)")
     ap.add_argument("--ml-model", default="eugenesiow/edsr-base",
                     help="super-image model id (default eugenesiow/edsr-base)")
+    ap.add_argument("--ml-tile", type=int, default=256,
+                    help="ML tile size in px to bound memory (default 256)")
     args = ap.parse_args()
 
     im = Image.open(args.src).convert("RGB")
     w, h = im.size
 
     if args.ml:
-        up = ml_upscale(im, args.ml_scale, args.ml_model)
+        up = ml_upscale(im, args.ml_scale, args.ml_model, tile=args.ml_tile)
         mode = f"ML:{args.ml_model}@x{args.ml_scale}"
     else:
         up = lanczos_upscale(im, args.factor, not args.no_sharpen)
