@@ -159,6 +159,19 @@ Tune with `DETECT_MODEL` (default `yolov8n.pt`), `DETECT_CONF` (default `0.25`),
 and `DETECT_LOG` (default `detections.csv`). Detection is optional — if
 ultralytics isn't installed the capture/upload still proceeds with a warning.
 
+## Identifying a specific model (e.g. Hyundai IONIQ 5)
+
+`detect.py` only knows the generic COCO class **car** — it can't tell one model
+from another. To help pick a specific model out of the `car` detections, the
+[`ioniq5-reference/`](ioniq5-reference/) folder ships a curated library of
+**confirmed, freely-licensed IONIQ 5 photos** across 8 angles, plus
+[`IONIQ5_SIGNATURE.md`](ioniq5-reference/IONIQ5_SIGNATURE.md) — a field guide of
+the model's unique tells (parametric *pixel* lights, clamshell nose, kammback
+roof, black wheel-arch cladding), a confuser table, and a section deriving the
+**steep ~75° top-down cam103 view** from each side. Workflow: let `detect.py`
+narrow frames to those containing a `car`, then crop/`upscale.py` the candidate
+and compare against the references.
+
 ## How it works
 
 1. `curl` downloads `<BASE_URL>/<CAM>.jpg` (with retries on transient errors).

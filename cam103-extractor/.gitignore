@@ -6,6 +6,9 @@ detections.csv
 captures/
 *.jpg
 
+# ...but keep the curated IONIQ 5 identification reference library
+!ioniq5-reference/*.jpg
+
 # Python
 __pycache__/
 *.pyc
