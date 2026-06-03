@@ -20,6 +20,7 @@ capture per run; you schedule it (cron) to accumulate images over time.
 - `bash`, `curl`, and `file` (standard on Linux/macOS)
 - `rclone` — install from <https://rclone.org/install/>
 - For upscaling only: `python3` + Pillow (`pip install Pillow`)
+- For AI (ML) upscaling: `super-image` + torch (`pip install super-image torch`)
 
 ## One-time setup
 
@@ -69,8 +70,10 @@ Each run creates a timestamped file in the Drive folder, e.g.
 | `REMOTE`     | `gdrive:<CAM>`                       | rclone destination remote:folder         |
 | `WORKDIR`    | a temp dir                           | Local scratch directory                  |
 | `KEEP_LOCAL` | `0`                                  | Set to `1` to keep the local JPEG too    |
-| `FACTOR`     | `1`                                  | Upscale factor (`1` = off, e.g. `2`, `3`)|
+| `FACTOR`     | `1`                                  | Lanczos upscale factor (`1` = off, e.g. `2`)|
 | `QUALITY`    | `95`                                 | JPEG quality used when upscaling         |
+| `UPSCALE_ML` | `0`                                  | Set to `1` for ML super-res (overrides `FACTOR`)|
+| `ML_SCALE`   | `4`                                  | ML upscale factor (`2`/`3`/`4`)          |
 
 Examples:
 
@@ -112,9 +115,27 @@ Or run it standalone:
 python3 upscale.py in.jpg out.jpg --factor 2 --quality 95
 ```
 
-> Reality check: upscaling makes the image larger and visually smoother, but it
-> **cannot add real detail** the camera never recorded. For genuine
-> super-resolution you'd need an ML model such as Real-ESRGAN.
+### AI (ML) upscaling
+
+`upscale.py --ml` runs a neural super-resolution model (EDSR via the
+[`super-image`](https://pypi.org/project/super-image/) package) that adds
+plausible high-frequency detail instead of plain interpolation:
+
+```bash
+pip install super-image torch
+python3 upscale.py in.jpg out.jpg --ml --ml-scale 4
+
+# or in the capture pipeline:
+UPSCALE_ML=1 ML_SCALE=4 ./capture.sh
+```
+
+> **Reality check — important.** Neither Lanczos nor ML upscaling can *recover*
+> detail the camera never recorded. Lanczos only interpolates. ML
+> super-resolution does **not** reconstruct the truth either — it *hallucinates*
+> plausible detail. On a license plate that is only a few pixels per character,
+> the ML model will invent crisp-looking characters that are **not guaranteed to
+> be the real ones**. Treat upscaled traffic-cam frames as visual enhancement
+> only, never as a reliable source for reading plates or other small text.
 
 ## Timed capture test
 
