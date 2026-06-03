@@ -26,6 +26,8 @@ WORKDIR="${WORKDIR:-$(mktemp -d)}"                      # local scratch dir
 KEEP_LOCAL="${KEEP_LOCAL:-0}"                           # 1 = keep local copy
 FACTOR="${FACTOR:-1}"                                   # upscale factor (1 = off)
 QUALITY="${QUALITY:-95}"                                # JPEG quality when upscaling
+UPSCALE_ML="${UPSCALE_ML:-0}"                          # 1 = ML super-res (needs super-image+torch)
+ML_SCALE="${ML_SCALE:-4}"                              # ML upscale factor (2/3/4)
 DETECT="${DETECT:-0}"                                   # 1 = count person/car/bus
 DETECT_MODEL="${DETECT_MODEL:-yolov8n.pt}"              # YOLO weights for detection
 DETECT_CONF="${DETECT_CONF:-0.25}"                      # detection confidence threshold
@@ -74,9 +76,16 @@ if [ "$DETECT" = "1" ]; then
     fi
 fi
 
-# Optional upscaling (needs python3 + Pillow).
+# Optional upscaling (needs python3 + Pillow; ML mode also needs super-image+torch).
 upload_path="$local_path"
-if [ "$FACTOR" != "1" ]; then
+if [ "$UPSCALE_ML" = "1" ]; then
+    up_path="${WORKDIR}/${CAM}_${ts}_ml${ML_SCALE}.jpg"
+    echo "[*] ML upscaling x${ML_SCALE} (quality ${QUALITY})"
+    python3 "$(dirname "$0")/upscale.py" "$local_path" "$up_path" \
+        --ml --ml-scale "$ML_SCALE" --quality "$QUALITY"
+    fname="${CAM}_${ts}_ml${ML_SCALE}.jpg"
+    upload_path="$up_path"
+elif [ "$FACTOR" != "1" ]; then
     up_path="${WORKDIR}/${CAM}_${ts}_x${FACTOR}.jpg"
     echo "[*] Upscaling x${FACTOR} (quality ${QUALITY})"
     python3 "$(dirname "$0")/upscale.py" "$local_path" "$up_path" \
