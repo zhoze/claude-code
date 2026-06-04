@@ -1,23 +1,20 @@
 /* =========================================================================
- * Elite Magic Trader — stock screener logic
+ * Elite Magic Trader — screener UI
  *
- * Pipeline:  raw universe  ->  Magic Score (ranked)  ->  filters  ->  sort  ->  render
+ * Pipeline:  universe -> MagicEngine.computeMagic -> filters -> sort -> render
  *
- * The "Magic Score" is a 0-100 blend of Joel Greenblatt's Magic Formula:
- * rank every stock by earnings yield (cheapness) and by return on capital
- * (quality), sum the two ranks, then rescale so the best combined rank = 100.
+ * Signals, colors and Explorations follow the Magic Trader® Elite manual
+ * (see magic.js for the interpretation of each indicator).
  * ========================================================================= */
 
 (function () {
   "use strict";
 
-  // ---- working dataset (swapped out if live data is fetched) -------------
-  let universe = STOCK_UNIVERSE.map((s) => ({ ...s }));
+  let universe = STOCK_UNIVERSE.map((s) => MagicEngine.computeMagic(s));
 
   // ---- formatting helpers ------------------------------------------------
-  const fmtMoney = (n) =>
-    n == null ? "—" : "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
+  const $ = (id) => document.getElementById(id);
+  const fmtMoney = (n) => (n == null ? "—" : "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
   const fmtCap = (n) => {
     if (n == null) return "—";
     if (n >= 1e12) return "$" + (n / 1e12).toFixed(2) + "T";
@@ -25,99 +22,100 @@
     if (n >= 1e6) return "$" + (n / 1e6).toFixed(0) + "M";
     return "$" + n.toLocaleString();
   };
-
-  const fmtNum = (n, d = 1) => (n == null ? "—" : n.toFixed(d));
-  const fmtPct = (n, d = 1) => (n == null ? "—" : n.toFixed(d) + "%");
+  const fmtPct = (n, d = 1) => (n == null ? "—" : (n > 0 ? "+" : "") + n.toFixed(d) + "%");
   const fmtVol = (n) => (n == null ? "—" : n >= 1e6 ? (n / 1e6).toFixed(1) + "M" : (n / 1e3).toFixed(0) + "K");
   const signed = (n) => (n == null ? "" : n > 0 ? "pos" : n < 0 ? "neg" : "");
 
-  // ---- Magic Formula scoring --------------------------------------------
-  // Higher earnings yield and higher ROIC are both better -> rank descending.
-  function computeMagicScores(list) {
-    const rankDesc = (key) => {
-      const order = [...list].sort((a, b) => (b[key] ?? -1e9) - (a[key] ?? -1e9));
-      const rankOf = new Map();
-      order.forEach((s, i) => rankOf.set(s.ticker, i + 1)); // 1 = best
-      return rankOf;
-    };
-    const eyRank = rankDesc("earnYield");
-    const roicRank = rankDesc("roic");
+  const CM = MagicEngine.CANDLE_META;
 
-    // Combined rank: lower is better. Map to 0-100 where best = 100.
-    const combined = list.map((s) => ({
-      ticker: s.ticker,
-      sum: eyRank.get(s.ticker) + roicRank.get(s.ticker),
-    }));
-    const sums = combined.map((c) => c.sum);
-    const minSum = Math.min(...sums);
-    const maxSum = Math.max(...sums);
-    const span = maxSum - minSum || 1;
-    const scoreOf = new Map();
-    combined.forEach((c) => scoreOf.set(c.ticker, Math.round(((maxSum - c.sum) / span) * 100)));
-
-    list.forEach((s) => (s.magicScore = scoreOf.get(s.ticker)));
-    return list;
+  function candleChip(s) {
+    const m = CM[s.candle];
+    return `<span class="chip c-${s.candle}" title="${m.desc}">${m.glyph} ${m.label}</span>`;
   }
-
-  // ---- technical signal glyphs ------------------------------------------
-  function signalFor(s) {
-    const parts = [];
-    if (s.price > s.sma50 && s.price > s.sma200) parts.push({ g: "▲", cls: "pos" });
-    else if (s.price < s.sma50 && s.price < s.sma200) parts.push({ g: "▽", cls: "neg" });
-    else parts.push({ g: "•", cls: "" });
-    if (s.rsi14 != null && s.rsi14 < 35) parts.push({ g: "⚑", cls: "pos" }); // oversold = potential buy
-    else if (s.rsi14 != null && s.rsi14 > 70) parts.push({ g: "⚑", cls: "neg" }); // overbought
-    return parts;
+  function ribbonChip(s) {
+    const risk = s.ribbonRisk ? ` ${s.ribbonRisk > 0 ? "+" : ""}${s.ribbonRisk}` : "";
+    const label = s.ribbon === "green" ? "Bull" : s.ribbon === "red" ? "Bear" : "Neutral";
+    return `<span class="chip r-${s.ribbon}" title="Horizontal Time Risk — ${label}; risk number grows with time since the ribbon flipped">${label}${risk}</span>`;
+  }
+  function ingCell(s) {
+    const bull = s.ingBull, bear = s.ingBear;
+    const dom = bull >= bear ? "bull" : "bear";
+    const n = Math.max(bull, bear);
+    const trig = s.entryTrigger !== "none" ? `<span class="trigger ${s.entryTrigger}" title="Entry Trigger fired">⚡</span>` : "";
+    return `<span class="ing ${dom}">${n}/5${trig}</span>`;
+  }
+  function mlGateCell(s) {
+    if (s.mlGate === 1) return `<span class="pos" title="Close above both Magic Lines — long confirmed">▲ above</span>`;
+    if (s.mlGate === -1) return `<span class="neg" title="Close below both Magic Lines — short confirmed">▼ below</span>`;
+    return `<span class="muted" title="Between the Magic Lines — no confirmation">— between</span>`;
   }
 
   // =======================================================================
-  //  Column definitions (drive both header and body rendering)
+  //  Columns
   // =======================================================================
   const COLUMNS = [
     { key: "ticker", label: "Ticker", txt: true, sortType: "str",
       render: (s) => `<span class="ticker">${s.ticker}</span><div class="coname">${s.name}</div><span class="sector-tag">${s.sector}</span>` },
     { key: "price", label: "Price", sortType: "num", render: (s) => fmtMoney(s.price) },
-    { key: "perfYTD", label: "YTD", sortType: "num",
-      render: (s) => `<span class="${signed(s.perfYTD)}">${fmtPct(s.perfYTD)}</span>` },
-    { key: "perfMonth", label: "1M", sortType: "num",
-      render: (s) => `<span class="${signed(s.perfMonth)}">${fmtPct(s.perfMonth)}</span>` },
-    { key: "marketCap", label: "Mkt Cap", sortType: "num", render: (s) => fmtCap(s.marketCap) },
-    { key: "pe", label: "P/E", sortType: "num", render: (s) => fmtNum(s.pe) },
-    { key: "divYield", label: "Div %", sortType: "num", render: (s) => fmtPct(s.divYield, 2) },
-    { key: "roic", label: "ROIC", sortType: "num", render: (s) => fmtPct(s.roic) },
-    { key: "earnYield", label: "Earn Yld", sortType: "num", render: (s) => fmtPct(s.earnYield) },
-    { key: "rsi14", label: "RSI", sortType: "num",
-      render: (s) => `<span class="${s.rsi14 < 35 ? "pos" : s.rsi14 > 70 ? "neg" : ""}">${fmtNum(s.rsi14, 0)}</span>` },
-    { key: "signal", label: "Signal", sortType: "num", sortKey: (s) => (s.price > s.sma200 ? 1 : 0),
-      render: (s) => `<span class="signal">${signalFor(s).map((p) => `<span class="${p.cls}">${p.g}</span>`).join("")}</span>` },
+    { key: "perfMonth", label: "1M", sortType: "num", render: (s) => `<span class="${signed(s.perfMonth)}">${fmtPct(s.perfMonth)}</span>` },
+    { key: "territory", label: "Territory", sortType: "str", sortKey: (s) => s.territory,
+      render: (s) => `<span class="chip t-${s.territory}" title="Blue Line territory">${s.territory === "bull" ? "Bull" : "Bear"}</span>` },
+    { key: "mlGate", label: "Magic Lines", sortType: "num", sortKey: (s) => s.mlGate, render: mlGateCell },
+    { key: "zone", label: "Zone", sortType: "num", render: (s) => `<span class="zone-pill z${s.zone}">${s.zone}</span>` },
+    { key: "candle", label: "Candle", sortType: "num", sortKey: (s) => candleSortVal(s), render: candleChip },
+    { key: "dsprCode", label: "DSPR", sortType: "num",
+      render: (s) => `<span class="dspr ${MagicEngine.DSPR_META[s.dspr].side}" title="${MagicEngine.DSPR_META[s.dspr].desc}">${s.dspr} (${s.dsprCode})</span>` },
+    { key: "atrPct", label: "Vola", sortType: "num",
+      render: (s) => `<span class="${s.exVola ? "neg" : s.lowRisk ? "pos" : ""}" title="${s.exVola ? "Excessive volatility" : s.lowRisk ? "Lowest-risk volatility" : "Pure Volatility %"}">${s.atrPct}%${s.exVola ? " ⚠" : ""}</span>` },
+    { key: "ribbon", label: "Ribbon", sortType: "num", sortKey: (s) => ribbonSortVal(s), render: ribbonChip },
+    { key: "ing", label: "5 Ing.", sortType: "num", sortKey: (s) => (s.ingBull - s.ingBear), render: ingCell },
     { key: "magicScore", label: "Magic", sortType: "num",
-      render: (s) => `<span class="magic-cell"><span class="magic-bar"><span class="magic-fill" style="width:${s.magicScore}%"></span></span><span class="magic-val">${s.magicScore}</span></span>` },
+      render: (s) => `<span class="magic-cell"><span class="magic-bar"><span class="magic-fill ${s.magicScore >= 50 ? "bull" : "bear"}" style="width:${s.magicScore}%"></span></span><span class="magic-val ${s.magicScore >= 50 ? "pos" : "neg"}">${s.magicScore}</span></span>` },
   ];
 
+  // sort helpers so colored chips order sensibly (bull -> bear)
+  const candleSortVal = (s) => ({ turquoise: 6, green: 5, yellow: 4, neutral: 3, indigo: 2, golden: 1, red: 0 })[s.candle];
+  const ribbonSortVal = (s) => (s.ribbon === "green" ? 2 + s.ribbonRisk / 10 : s.ribbon === "black" ? 1 : 0 + s.ribbonRisk / 10);
+
   // =======================================================================
-  //  Presets — one-click screens
+  //  Explorations (presets) — mirror the manual's scan list
   // =======================================================================
-  const PRESETS = [
-    { id: "magic", name: "Magic Formula", desc: "Cheap + high quality", apply: (st) => { reset(st); st.magicMin = 70; st.sort = { key: "magicScore", dir: -1 }; } },
-    { id: "value", name: "Deep Value", desc: "Low P/E, pays a dividend", apply: (st) => { reset(st); st.peMax = 15; st.divMin = 2; st.profitableOnly = true; st.sort = { key: "pe", dir: 1 }; } },
-    { id: "momentum", name: "Momentum", desc: "Above MAs, strong YTD", apply: (st) => { reset(st); st.aboveSMA50 = true; st.aboveSMA200 = true; st.rsiNotOverbought = true; st.sort = { key: "perfYTD", dir: -1 }; } },
-    { id: "dividend", name: "Dividend", desc: "Yield ≥ 3%", apply: (st) => { reset(st); st.divMin = 3; st.sort = { key: "divYield", dir: -1 }; } },
-    { id: "oversold", name: "Oversold Dip", desc: "RSI < 35", apply: (st) => { reset(st); st.rsiOversold = true; st.sort = { key: "rsi14", dir: 1 }; } },
-    { id: "mega", name: "Mega Caps", desc: "$200B+ leaders", apply: (st) => { reset(st); st.capMin = 200e9; st.sort = { key: "marketCap", dir: -1 }; } },
+  const EXPLORATIONS = [
+    { id: "fiveBull", name: "5 Ingredients — Bull", desc: "Full bullish alignment", apply: (st) => { reset(st); st.ingSide = "bull"; st.ingMin = 4; st.volFilter = true; st.sort = { key: "ing", dir: -1 }; } },
+    { id: "fiveBear", name: "5 Ingredients — Bear", desc: "Full bearish alignment", apply: (st) => { reset(st); st.ingSide = "bear"; st.ingMin = 4; st.volFilter = true; st.sort = { key: "ing", dir: 1 }; } },
+    { id: "entry", name: "Entry Triggers", desc: "5/5 + volume + candle", apply: (st) => { reset(st); st.entryOnly = true; st.sort = { key: "magicScore", dir: -1 }; } },
+    { id: "magicLong", name: "Magic Lines Long", desc: "Above both, bull ribbon", apply: (st) => { reset(st); st.mlGate = "1"; st.ribbon = "green"; st.sort = { key: "magicScore", dir: -1 }; } },
+    { id: "turquoise", name: "Turquoise Reversal", desc: "Sudden bull reversal", apply: (st) => { reset(st); st.candle = "turquoise"; st.sort = { key: "perfMonth", dir: 1 }; } },
+    { id: "yellow", name: "Yellow Warnings", desc: "Bull pre-entry setups", apply: (st) => { reset(st); st.candle = "yellow"; st.sort = { key: "magicScore", dir: -1 }; } },
+    { id: "golden", name: "Golden Warnings", desc: "Sudden bear reversal", apply: (st) => { reset(st); st.candle = "golden"; st.sort = { key: "magicScore", dir: 1 }; } },
+    { id: "volSurge", name: "Volume Surge", desc: "Unusually high volume", apply: (st) => { reset(st); st.volQual = true; st.sort = { key: "relVol", dir: -1 }; } },
+    { id: "lowRisk", name: "Lowest Risk", desc: "Calm volatility, neutral health", apply: (st) => { reset(st); st.lowRiskOnly = true; st.sort = { key: "atrPct", dir: 1 }; } },
+    { id: "bottomZone", name: "Deep Zones 5–6", desc: "Washed-out vs. trend", apply: (st) => { reset(st); st.zoneMin = 5; st.zoneMax = 6; st.sort = { key: "magicScore", dir: 1 }; } },
   ];
 
   // =======================================================================
   //  State
   // =======================================================================
   const defaultState = () => ({
-    search: "", sector: "All", capMin: 0, priceMin: null, priceMax: null,
-    peMax: null, profitableOnly: false, divMin: null, magicMin: 0,
-    aboveSMA50: false, aboveSMA200: false, goldenCross: false,
-    rsiOversold: false, rsiNotOverbought: false,
+    search: "", sector: "All", priceBand: "any", capMin: 0,
+    volFilter: true, volQual: false,
+    territory: "any", mlGate: "any", candle: "any", ribbon: "any", dspr: "any",
+    zoneMin: null, zoneMax: null,
+    ingMin: 0, ingSide: "bull", entryOnly: false, lowRiskOnly: false,
     sort: { key: "magicScore", dir: -1 },
   });
   let state = defaultState();
   function reset(st) { Object.assign(st, defaultState()); }
+
+  const PRICE_BANDS = {
+    any: () => true,
+    u5: (p) => p < 5,
+    "5-15": (p) => p >= 5 && p < 15,
+    "15-100": (p) => p >= 15 && p < 100,
+    "100-200": (p) => p >= 100 && p < 200,
+    "200-500": (p) => p >= 200 && p < 500,
+    o500: (p) => p >= 500,
+  };
 
   // =======================================================================
   //  Filtering + sorting
@@ -127,18 +125,23 @@
     let rows = universe.filter((s) => {
       if (q && !(s.ticker.toLowerCase().includes(q) || s.name.toLowerCase().includes(q) || s.sector.toLowerCase().includes(q))) return false;
       if (state.sector !== "All" && s.sector !== state.sector) return false;
+      if (!PRICE_BANDS[state.priceBand](s.price)) return false;
       if (s.marketCap < state.capMin) return false;
-      if (state.priceMin != null && s.price < state.priceMin) return false;
-      if (state.priceMax != null && s.price > state.priceMax) return false;
-      if (state.profitableOnly && !(s.pe > 0)) return false;
-      if (state.peMax != null && !(s.pe != null && s.pe <= state.peMax)) return false;
-      if (state.divMin != null && s.divYield < state.divMin) return false;
-      if (state.magicMin > 0 && s.magicScore < state.magicMin) return false;
-      if (state.aboveSMA50 && !(s.price > s.sma50)) return false;
-      if (state.aboveSMA200 && !(s.price > s.sma200)) return false;
-      if (state.goldenCross && !(s.sma50 > s.sma200)) return false;
-      if (state.rsiOversold && !(s.rsi14 < 35)) return false;
-      if (state.rsiNotOverbought && !(s.rsi14 < 70)) return false;
+      if (state.volFilter && !s.volPass) return false;
+      if (state.volQual && !s.volQual) return false;
+      if (state.territory !== "any" && s.territory !== state.territory) return false;
+      if (state.mlGate !== "any" && String(s.mlGate) !== state.mlGate) return false;
+      if (state.candle !== "any" && s.candle !== state.candle) return false;
+      if (state.ribbon !== "any" && s.ribbon !== state.ribbon) return false;
+      if (state.dspr !== "any" && s.dspr !== state.dspr) return false;
+      if (state.zoneMin != null && s.zone < state.zoneMin) return false;
+      if (state.zoneMax != null && s.zone > state.zoneMax) return false;
+      if (state.ingMin > 0) {
+        const v = state.ingSide === "bull" ? s.ingBull : s.ingBear;
+        if (v < state.ingMin) return false;
+      }
+      if (state.entryOnly && s.entryTrigger === "none") return false;
+      if (state.lowRiskOnly && !s.lowRisk) return false;
       return true;
     });
 
@@ -158,37 +161,66 @@
   // =======================================================================
   //  Rendering
   // =======================================================================
-  const $ = (id) => document.getElementById(id);
-
   function renderHeader() {
     $("headerRow").innerHTML = COLUMNS.map((c) => {
       const active = state.sort.key === c.key;
       const arrow = active ? `<span class="arrow">${state.sort.dir < 0 ? "▾" : "▴"}</span>` : "";
       return `<th data-key="${c.key}" class="${c.txt ? "txt" : ""}">${c.label}${arrow}</th>`;
     }).join("");
-    $("headerRow").querySelectorAll("th").forEach((th) => {
+    $("headerRow").querySelectorAll("th").forEach((th) =>
       th.addEventListener("click", () => {
         const key = th.dataset.key;
         if (state.sort.key === key) state.sort.dir *= -1;
         else state.sort = { key, dir: key === "ticker" ? 1 : -1 };
         render();
-      });
-    });
+      }));
   }
 
   function render() {
     const rows = applyScreen();
     $("matchCount").textContent = rows.length;
     $("universeCount").textContent = `of ${universe.length} screened`;
-
-    const body = $("resultsBody");
-    body.innerHTML = rows.map((s) =>
+    $("resultsBody").innerHTML = rows.map((s) =>
       "<tr>" + COLUMNS.map((c) => `<td class="${c.txt ? "txt" : ""}">${c.render(s)}</td>`).join("") + "</tr>"
     ).join("");
-
     $("emptyState").hidden = rows.length !== 0;
     renderHeader();
-    $("resultsTable").lastRows = rows; // stash for CSV export
+    $("resultsTable").lastRows = rows;
+  }
+
+  // =======================================================================
+  //  Bond inversion banner
+  // =======================================================================
+  function renderBonds() {
+    const inv = MagicEngine.computeInversions(BOND_YIELDS);
+    const invMaturities = new Set(inv.active.flat());
+    $("bondCurve").innerHTML = BOND_YIELDS.map((y) =>
+      `<span class="yield-chip ${invMaturities.has(y.maturity) ? "inv" : ""}" title="${y.symbol}">${y.maturity}<b>${y.yield.toFixed(2)}%</b></span>`
+    ).join("");
+    $("bondGauge").textContent = `${inv.count}/${inv.total} inverted · ${inv.pct}%`;
+    const banner = $("bondBanner");
+    banner.classList.toggle("warn", inv.pct >= 30);
+    banner.classList.toggle("danger", inv.pct >= 60);
+    $("bondNote").textContent = inv.pct >= 60 ? "Deeply inverted — elevated macro risk"
+      : inv.pct >= 30 ? "Partially inverted — watch the short end"
+      : inv.pct > 0 ? "Mild inversion" : "Curve normal";
+  }
+
+  // =======================================================================
+  //  Color legend
+  // =======================================================================
+  function renderLegend() {
+    const items = [
+      ["c-turquoise", "Turquoise — sudden bull reversal"],
+      ["c-green", "Bull (confirmed)"],
+      ["c-yellow", "Yellow — bull warning"],
+      ["c-neutral", "Neutral"],
+      ["c-indigo", "Indigo — bear warning"],
+      ["c-golden", "Golden — sudden bear reversal"],
+      ["c-red", "Bear (confirmed)"],
+    ];
+    $("legendColors").innerHTML = items.map(([cls, label]) =>
+      `<span class="legend-item"><span class="swatch ${cls}"></span>${label}</span>`).join("");
   }
 
   // =======================================================================
@@ -196,7 +228,7 @@
   // =======================================================================
   function exportCSV() {
     const rows = $("resultsTable").lastRows || applyScreen();
-    const cols = ["ticker", "name", "sector", "price", "perfYTD", "perfMonth", "marketCap", "pe", "divYield", "roic", "earnYield", "rsi14", "magicScore"];
+    const cols = ["ticker", "name", "sector", "price", "perfMonth", "territory", "mlGate", "zone", "candle", "dspr", "dsprCode", "atrPct", "ribbon", "ribbonRisk", "ingBull", "ingBear", "entryTrigger", "magicScore"];
     const head = cols.join(",");
     const lines = rows.map((s) => cols.map((k) => {
       const v = s[k];
@@ -212,62 +244,71 @@
   }
 
   // =======================================================================
-  //  Wiring up controls
+  //  Controls
   // =======================================================================
   function syncControlsFromState() {
     $("searchInput").value = state.search;
     $("sectorSelect").value = state.sector;
+    $("priceBand").value = state.priceBand;
     $("capMin").value = String(state.capMin);
-    $("priceMin").value = state.priceMin ?? "";
-    $("priceMax").value = state.priceMax ?? "";
-    $("peMax").value = state.peMax ?? "";
-    $("profitableOnly").checked = state.profitableOnly;
-    $("divMin").value = state.divMin ?? "";
-    $("magicMin").value = state.magicMin;
-    $("magicMinOut").value = state.magicMin;
-    $("aboveSMA50").checked = state.aboveSMA50;
-    $("aboveSMA200").checked = state.aboveSMA200;
-    $("goldenCross").checked = state.goldenCross;
-    $("rsiOversold").checked = state.rsiOversold;
-    $("rsiNotOverbought").checked = state.rsiNotOverbought;
-    markActivePreset();
+    $("volFilter").checked = state.volFilter;
+    $("volQual").checked = state.volQual;
+    $("territory").value = state.territory;
+    $("mlGate").value = state.mlGate;
+    $("candle").value = state.candle;
+    $("ribbon").value = state.ribbon;
+    $("dspr").value = state.dspr;
+    $("zoneMin").value = state.zoneMin ?? "";
+    $("zoneMax").value = state.zoneMax ?? "";
+    $("ingMin").value = state.ingMin;
+    $("ingMinOut").value = state.ingMin + " / 5";
+    $("ingSide").value = state.ingSide;
+    $("entryOnly").checked = state.entryOnly;
+    $("lowRiskOnly").checked = state.lowRiskOnly;
+    markActiveExploration();
   }
 
   const numOrNull = (v) => (v === "" || v == null ? null : Number(v));
 
   function bindControls() {
-    $("searchInput").addEventListener("input", (e) => { state.search = e.target.value; clearPreset(); render(); });
-    $("sectorSelect").addEventListener("change", (e) => { state.sector = e.target.value; clearPreset(); render(); });
-    $("capMin").addEventListener("change", (e) => { state.capMin = Number(e.target.value); clearPreset(); render(); });
-    $("priceMin").addEventListener("input", (e) => { state.priceMin = numOrNull(e.target.value); clearPreset(); render(); });
-    $("priceMax").addEventListener("input", (e) => { state.priceMax = numOrNull(e.target.value); clearPreset(); render(); });
-    $("peMax").addEventListener("input", (e) => { state.peMax = numOrNull(e.target.value); clearPreset(); render(); });
-    $("profitableOnly").addEventListener("change", (e) => { state.profitableOnly = e.target.checked; clearPreset(); render(); });
-    $("divMin").addEventListener("input", (e) => { state.divMin = numOrNull(e.target.value); clearPreset(); render(); });
-    $("magicMin").addEventListener("input", (e) => { state.magicMin = Number(e.target.value); $("magicMinOut").value = e.target.value; clearPreset(); render(); });
-    ["aboveSMA50", "aboveSMA200", "goldenCross", "rsiOversold", "rsiNotOverbought"].forEach((id) =>
-      $(id).addEventListener("change", (e) => { state[id] = e.target.checked; clearPreset(); render(); }));
+    $("searchInput").addEventListener("input", (e) => { state.search = e.target.value; clearExploration(); render(); });
+    $("sectorSelect").addEventListener("change", (e) => { state.sector = e.target.value; clearExploration(); render(); });
+    $("priceBand").addEventListener("change", (e) => { state.priceBand = e.target.value; clearExploration(); render(); });
+    $("capMin").addEventListener("change", (e) => { state.capMin = Number(e.target.value); clearExploration(); render(); });
+    $("volFilter").addEventListener("change", (e) => { state.volFilter = e.target.checked; clearExploration(); render(); });
+    $("volQual").addEventListener("change", (e) => { state.volQual = e.target.checked; clearExploration(); render(); });
+    $("territory").addEventListener("change", (e) => { state.territory = e.target.value; clearExploration(); render(); });
+    $("mlGate").addEventListener("change", (e) => { state.mlGate = e.target.value; clearExploration(); render(); });
+    $("candle").addEventListener("change", (e) => { state.candle = e.target.value; clearExploration(); render(); });
+    $("ribbon").addEventListener("change", (e) => { state.ribbon = e.target.value; clearExploration(); render(); });
+    $("dspr").addEventListener("change", (e) => { state.dspr = e.target.value; clearExploration(); render(); });
+    $("zoneMin").addEventListener("input", (e) => { state.zoneMin = numOrNull(e.target.value); clearExploration(); render(); });
+    $("zoneMax").addEventListener("input", (e) => { state.zoneMax = numOrNull(e.target.value); clearExploration(); render(); });
+    $("ingMin").addEventListener("input", (e) => { state.ingMin = Number(e.target.value); $("ingMinOut").value = e.target.value + " / 5"; clearExploration(); render(); });
+    $("ingSide").addEventListener("change", (e) => { state.ingSide = e.target.value; clearExploration(); render(); });
+    $("entryOnly").addEventListener("change", (e) => { state.entryOnly = e.target.checked; clearExploration(); render(); });
+    $("lowRiskOnly").addEventListener("change", (e) => { state.lowRiskOnly = e.target.checked; clearExploration(); render(); });
 
-    $("resetBtn").addEventListener("click", () => { state = defaultState(); activePreset = null; syncControlsFromState(); render(); });
+    $("resetBtn").addEventListener("click", () => { state = defaultState(); activeExploration = null; syncControlsFromState(); render(); });
     $("exportBtn").addEventListener("click", exportCSV);
     $("liveBtn").addEventListener("click", tryLiveData);
   }
 
-  // ---- presets ui --------------------------------------------------------
-  let activePreset = null;
-  function clearPreset() { activePreset = null; markActivePreset(); }
-  function markActivePreset() {
-    document.querySelectorAll(".preset-btn").forEach((b) =>
-      b.classList.toggle("active", b.dataset.id === activePreset));
+  // ---- explorations ui ---------------------------------------------------
+  let activeExploration = null;
+  function clearExploration() { activeExploration = null; markActiveExploration(); }
+  function markActiveExploration() {
+    document.querySelectorAll(".preset-btn").forEach((b) => b.classList.toggle("active", b.dataset.id === activeExploration));
+    const e = EXPLORATIONS.find((x) => x.id === activeExploration);
+    $("activeExploration").textContent = e ? "▸ " + e.name : "";
   }
-  function buildPresets() {
-    $("presetGrid").innerHTML = PRESETS.map((p) =>
+  function buildExplorations() {
+    $("presetGrid").innerHTML = EXPLORATIONS.map((p) =>
       `<button class="preset-btn" data-id="${p.id}">${p.name}<small>${p.desc}</small></button>`).join("");
     document.querySelectorAll(".preset-btn").forEach((b) =>
       b.addEventListener("click", () => {
-        const p = PRESETS.find((x) => x.id === b.dataset.id);
-        p.apply(state);
-        activePreset = p.id;
+        EXPLORATIONS.find((x) => x.id === b.dataset.id).apply(state);
+        activeExploration = b.dataset.id;
         syncControlsFromState();
         render();
       }));
@@ -279,17 +320,11 @@
   }
 
   // =======================================================================
-  //  Optional live data hook
-  //
-  //  Drop a free Financial Modeling Prep key into FMP_API_KEY below (or set
-  //  window.FMP_API_KEY before this script loads) to pull live quotes for the
-  //  bundled tickers. Without a key, the screener runs entirely on demo data.
+  //  Optional live data hook (Financial Modeling Prep)
   // =======================================================================
   const FMP_API_KEY = window.FMP_API_KEY || "";
-
   async function tryLiveData() {
-    const pill = $("dataStatus");
-    const txt = $("dataStatusText");
+    const pill = $("dataStatus"), txt = $("dataStatusText");
     if (!FMP_API_KEY) {
       pill.classList.add("error");
       txt.textContent = "No API key — using demo data";
@@ -303,21 +338,20 @@
       if (!res.ok) throw new Error("HTTP " + res.status);
       const quotes = await res.json();
       const byTicker = new Map(quotes.map((q) => [q.symbol.replace("-", "."), q]));
-      universe.forEach((s) => {
-        const q = byTicker.get(s.ticker);
-        if (!q) return;
-        s.price = q.price ?? s.price;
-        s.marketCap = q.marketCap ?? s.marketCap;
-        s.pe = q.pe ?? s.pe;
-        s.sma50 = q.priceAvg50 ?? s.sma50;
-        s.sma200 = q.priceAvg200 ?? s.sma200;
-        s.volume = q.avgVolume ?? s.volume;
-        if (q.yearHigh && q.yearLow) {
-          // approximate YTD-ish positioning from the 52-week range
-          s.perfYTD = q.changesPercentage ?? s.perfYTD;
+      universe = STOCK_UNIVERSE.map((base) => {
+        const q = byTicker.get(base.ticker);
+        const merged = { ...base };
+        if (q) {
+          merged.price = q.price ?? base.price;
+          merged.marketCap = q.marketCap ?? base.marketCap;
+          merged.pe = q.pe ?? base.pe;
+          merged.sma50 = q.priceAvg50 ?? base.sma50;
+          merged.sma200 = q.priceAvg200 ?? base.sma200;
+          merged.volume = q.avgVolume ?? base.volume;
+          merged.perfMonth = q.changesPercentage ?? base.perfMonth;
         }
+        return MagicEngine.computeMagic(merged);
       });
-      computeMagicScores(universe);
       pill.classList.add("live");
       txt.textContent = "Live quotes";
       render();
@@ -332,10 +366,11 @@
   //  Init
   // =======================================================================
   function init() {
-    computeMagicScores(universe);
     buildSectorOptions();
-    buildPresets();
+    buildExplorations();
     bindControls();
+    renderBonds();
+    renderLegend();
     syncControlsFromState();
     render();
   }

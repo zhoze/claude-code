@@ -42,7 +42,7 @@ const STOCK_UNIVERSE = [
   { ticker: "PEP",   name: "PepsiCo Inc.",               sector: "Consumer Defensive",  price: 168.30, marketCap: 231e9,  pe: 23.4, pb: 12.0, divYield: 3.21, roic: 16.1, earnYield: 5.6, perfYTD: -1.0, perfMonth: -1.8, rsi14: 45, sma50: 171.20, sma200: 173.40, volume: 5_200_000,  beta: 0.55 },
   { ticker: "MRK",   name: "Merck & Co. Inc.",           sector: "Healthcare",          price: 124.60, marketCap: 315e9,  pe: 20.7, pb: 6.8,  divYield: 2.48, roic: 19.3, earnYield: 6.3, perfYTD: 14.4, perfMonth: 2.6,  rsi14: 59, sma50: 119.80, sma200: 112.40, volume: 9_100_000,  beta: 0.39 },
   { ticker: "AVGO",  name: "Broadcom Inc.",              sector: "Technology",          price: 162.40, marketCap: 755e9,  pe: 65.8, pb: 11.9, divYield: 1.30, roic: 17.5, earnYield: 2.4, perfYTD: 45.3, perfMonth: 6.2,  rsi14: 66, sma50: 145.60, sma200: 124.30, volume: 27_000_000, beta: 1.18 },
-  { ticker: "COST",  name: "Costco Wholesale",           sector: "Consumer Defensive",  price: 845.70, marketCap: 375e9,  pe: 52.6, pb: 16.8, divYield: 0.50, roic: 22.1, earnYield: 2.3, perfYTD: 28.0, perfMonth: 3.4,  rsi14: 68, sma50: 805.30, sma200: 720.40, volume: 2_400_000,  beta: 0.79 },
+  { ticker: "COST",  name: "Costco Wholesale",           sector: "Consumer Defensive",  price: 845.70, marketCap: 375e9,  pe: 52.6, pb: 16.8, divYield: 0.50, roic: 22.1, earnYield: 2.3, perfYTD: 28.0, perfMonth: -0.6, rsi14: 71, sma50: 805.30, sma200: 720.40, volume: 2_400_000,  beta: 0.79 },
   { ticker: "ABBV",  name: "AbbVie Inc.",                sector: "Healthcare",          price: 171.20, marketCap: 302e9,  pe: 60.1, pb: 41.2, divYield: 3.62, roic: 18.9, earnYield: 5.1, perfYTD: 10.9, perfMonth: 1.7,  rsi14: 56, sma50: 165.40, sma200: 158.10, volume: 6_300_000,  beta: 0.60 },
   { ticker: "CVX",   name: "Chevron Corp.",              sector: "Energy",              price: 156.80, marketCap: 290e9,  pe: 14.6, pb: 1.8,  divYield: 4.16, roic: 11.8, earnYield: 8.4, perfYTD: 5.1,  perfMonth: -2.2, rsi14: 46, sma50: 159.20, sma200: 156.40, volume: 8_200_000,  beta: 1.08 },
   { ticker: "WMT",   name: "Walmart Inc.",               sector: "Consumer Defensive",  price: 67.40,  marketCap: 542e9,  pe: 28.9, pb: 7.6,  divYield: 1.23, roic: 13.7, earnYield: 4.0, perfYTD: 28.5, perfMonth: 2.9,  rsi14: 62, sma50: 64.10,  sma200: 58.30,  volume: 18_000_000, beta: 0.51 },
@@ -53,7 +53,7 @@ const STOCK_UNIVERSE = [
   { ticker: "AMD",   name: "Advanced Micro Devices",     sector: "Technology",          price: 158.90, marketCap: 257e9,  pe: 232.0, pb: 4.2, divYield: 0.0,  roic: 3.1,  earnYield: 0.8, perfYTD: 7.8,  perfMonth: -5.9, rsi14: 39, sma50: 165.30, sma200: 162.70, volume: 48_000_000, beta: 1.69 },
   { ticker: "INTC",  name: "Intel Corp.",                sector: "Technology",          price: 30.40,  marketCap: 129e9,  pe: null, pb: 1.3,  divYield: 1.64, roic: -2.4, earnYield: -1.2, perfYTD: -39.4, perfMonth: -8.1, rsi14: 31, sma50: 33.60,  sma200: 38.90,  volume: 52_000_000, beta: 1.04 },
   { ticker: "T",     name: "AT&T Inc.",                  sector: "Communication",       price: 19.10,  marketCap: 137e9,  pe: 11.2, pb: 1.4,  divYield: 5.81, roic: 7.1,  earnYield: 9.4, perfYTD: 13.7, perfMonth: 1.0,  rsi14: 55, sma50: 18.40,  sma200: 17.20,  volume: 38_000_000, beta: 0.62 },
-  { ticker: "DIS",   name: "Walt Disney Co.",            sector: "Communication",       price: 98.40,  marketCap: 179e9,  pe: 38.5, pb: 1.8,  divYield: 0.91, roic: 5.6,  earnYield: 3.3, perfYTD: 9.0,  perfMonth: -2.3, rsi14: 48, sma50: 100.20, sma200: 99.40,  volume: 10_000_000, beta: 1.40 },
+  { ticker: "DIS",   name: "Walt Disney Co.",            sector: "Communication",       price: 99.80,  marketCap: 179e9,  pe: 38.5, pb: 1.8,  divYield: 0.91, roic: 5.6,  earnYield: 3.3, perfYTD: 9.0,  perfMonth: 1.5,  rsi14: 48, sma50: 100.20, sma200: 99.40,  volume: 10_000_000, beta: 1.40 },
   { ticker: "PFE",   name: "Pfizer Inc.",                sector: "Healthcare",          price: 28.10,  marketCap: 159e9,  pe: 33.0, pb: 1.7,  divYield: 5.98, roic: 4.2,  earnYield: 6.8, perfYTD: -2.4, perfMonth: -1.1, rsi14: 44, sma50: 28.70,  sma200: 28.30,  volume: 33_000_000, beta: 0.61 },
   { ticker: "CSCO",  name: "Cisco Systems Inc.",         sector: "Technology",          price: 46.20,  marketCap: 187e9,  pe: 19.6, pb: 4.3,  divYield: 3.46, roic: 16.4, earnYield: 6.9, perfYTD: -8.6, perfMonth: -0.7, rsi14: 46, sma50: 47.10,  sma200: 48.40,  volume: 18_000_000, beta: 0.83 },
   { ticker: "MCD",   name: "McDonald's Corp.",           sector: "Consumer Cyclical",   price: 257.30, marketCap: 184e9,  pe: 22.1, pb: null, divYield: 2.60, roic: 17.3, earnYield: 6.0, perfYTD: -13.2, perfMonth: -3.0, rsi14: 42, sma50: 263.40, sma200: 277.10, volume: 3_000_000,  beta: 0.66 },
@@ -76,7 +76,7 @@ const STOCK_UNIVERSE = [
   { ticker: "PLD",   name: "Prologis Inc.",              sector: "Real Estate",         price: 112.30, marketCap: 104e9,  pe: 35.2, pb: 1.9,  divYield: 3.42, roic: 4.9,  earnYield: 3.7, perfYTD: -16.2, perfMonth: -2.9, rsi14: 39, sma50: 118.60, sma200: 124.10, volume: 4_500_000,  beta: 1.10 },
   { ticker: "SBUX",  name: "Starbucks Corp.",            sector: "Consumer Cyclical",   price: 79.20,  marketCap: 90e9,   pe: 22.6, pb: null, divYield: 2.88, roic: 21.4, earnYield: 5.9, perfYTD: -17.5, perfMonth: -3.6, rsi14: 37, sma50: 84.30,  sma200: 92.40,  volume: 8_700_000,  beta: 0.95 },
   { ticker: "MMM",   name: "3M Co.",                     sector: "Industrials",         price: 102.40, marketCap: 56e9,   pe: 18.9, pb: null, divYield: 2.74, roic: 11.2, earnYield: 7.1, perfYTD: 12.9, perfMonth: 1.0,  rsi14: 56, sma50: 98.70,  sma200: 96.20,  volume: 4_100_000,  beta: 0.98 },
-  { ticker: "GILD",  name: "Gilead Sciences",            sector: "Healthcare",          price: 68.90,  marketCap: 86e9,   pe: 20.1, pb: 4.6,  divYield: 4.47, roic: 12.9, earnYield: 6.5, perfYTD: -4.3, perfMonth: -1.2, rsi14: 45, sma50: 70.20,  sma200: 73.60,  volume: 6_900_000,  beta: 0.28 },
+  { ticker: "GILD",  name: "Gilead Sciences",            sector: "Healthcare",          price: 71.00,  marketCap: 86e9,   pe: 20.1, pb: 4.6,  divYield: 4.47, roic: 12.9, earnYield: 6.5, perfYTD: -4.3, perfMonth: -1.2, rsi14: 45, sma50: 70.20,  sma200: 73.60,  volume: 6_900_000,  beta: 0.28 },
   { ticker: "MO",    name: "Altria Group Inc.",          sector: "Consumer Defensive",  price: 50.10,  marketCap: 86e9,   pe: 9.2,  pb: null, divYield: 7.84, roic: 28.6, earnYield: 11.4, perfYTD: 24.3, perfMonth: 1.6, rsi14: 61, sma50: 47.80,  sma200: 44.10,  volume: 8_000_000,  beta: 0.59 },
   { ticker: "BKNG",  name: "Booking Holdings",           sector: "Consumer Cyclical",   price: 3892.00, marketCap: 130e9, pe: 27.8, pb: null, divYield: 0.90, roic: 49.2, earnYield: 4.9, perfYTD: 9.8,  perfMonth: 0.7,  rsi14: 54, sma50: 3820.0, sma200: 3640.0, volume: 320_000,    beta: 1.34 },
   { ticker: "UPS",   name: "United Parcel Service",      sector: "Industrials",         price: 134.60, marketCap: 115e9,  pe: 18.4, pb: 6.8,  divYield: 4.86, roic: 14.1, earnYield: 7.3, perfYTD: -14.4, perfMonth: -2.8, rsi14: 40, sma50: 140.20, sma200: 145.70, volume: 4_300_000,  beta: 1.05 },
@@ -87,6 +87,24 @@ const STOCK_UNIVERSE = [
   { ticker: "ENPH",  name: "Enphase Energy",             sector: "Technology",          price: 102.50, marketCap: 14e9,   pe: 88.4, pb: 12.3, divYield: 0.0,  roic: 14.8, earnYield: 1.6, perfYTD: -22.3, perfMonth: -9.4, rsi14: 29, sma50: 116.40, sma200: 124.80, volume: 4_200_000,  beta: 1.43 }
 ];
 
+/**
+ * US Treasury yields for the Bond Inversion macro panel (illustrative snapshot).
+ * The Magic Trader Elite manual lists these nine instruments (US3MT=RR …
+ * US30YT=RR) and flags an inversion whenever a longer maturity yields less
+ * than a shorter one. This snapshot shows a partially inverted short end.
+ */
+const BOND_YIELDS = [
+  { maturity: "3M",  symbol: "US3MT=RR",  yield: 4.85 },
+  { maturity: "6M",  symbol: "US6MT=RR",  yield: 4.70 },
+  { maturity: "1Y",  symbol: "US1YT=RR",  yield: 4.45 },
+  { maturity: "2Y",  symbol: "US2YT=RR",  yield: 4.20 },
+  { maturity: "3Y",  symbol: "US3YT=RR",  yield: 4.10 },
+  { maturity: "5Y",  symbol: "US5YT=RR",  yield: 4.15 },
+  { maturity: "7Y",  symbol: "US7YT=RR",  yield: 4.30 },
+  { maturity: "10Y", symbol: "US10YT=RR", yield: 4.45 },
+  { maturity: "30Y", symbol: "US30YT=RR", yield: 4.70 },
+];
+
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { STOCK_UNIVERSE };
+  module.exports = { STOCK_UNIVERSE, BOND_YIELDS };
 }
