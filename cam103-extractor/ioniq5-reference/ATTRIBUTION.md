@@ -29,3 +29,4 @@ attribution and share-alike; CC0 is public domain.
 | `threequarter_04.jpg` | Calreyn88 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Commons](https://commons.wikimedia.org/wiki/File:2022_Hyundai_ioniq_5.jpg) |
 | `threequarter_05.jpg` | Benespit | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Commons](https://commons.wikimedia.org/wiki/File:0_Hyundai_Ioniq_5.jpg) |
 | `threequarter_06.jpg` | Alex Neman | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Commons](https://commons.wikimedia.org/wiki/File:2022_Hyundai_Ioniq_5_Signature.jpg) |
+| `lights_on_01.jpg` | Alex Neman | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Commons](https://commons.wikimedia.org/wiki/File:2022_Hyundai_Ioniq_5_Signature_with_lights_on.jpg) |

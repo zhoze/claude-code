@@ -6,8 +6,10 @@ cam103 frames — and to find one in the live feed.
 
 ## Contents
 
-- **22 images, 8 angles** — `front`, `rear`, `front_left`, `front_right`,
+- **23 images, 8 angles** — `front`, `rear`, `front_left`, `front_right`,
   `rear_left`, `rear_right`, `side`, and `threequarter` (classic marketing 3/4).
+  Includes `lights_on_01.jpg` — a front_right shot with the **pixel DRLs lit**,
+  the clearest illuminated-light signature for low-light cam frames.
 - **`IONIQ5_SIGNATURE.md`** — the field guide: the five tells unique to the
   IONIQ 5, a confuser table (EV6, ID.4, Bolt, generic hatch/SUV), and a section
   deriving the **steep ~75° top-down cam103 view** from each side.
