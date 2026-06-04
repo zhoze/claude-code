@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elite Magic Trader — Stock Screener</title>
+  <meta name="description" content="An elite, Magic-Formula-powered stock screener with technical signals." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">◆</span>
+      <div>
+        <h1>Elite&nbsp;Magic&nbsp;Trader</h1>
+        <p class="tagline">Magic-Formula screening · technical signals · live ranking</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <div class="status-pill" id="dataStatus" title="Where the current data comes from">
+        <span class="dot"></span><span id="dataStatusText">Demo dataset</span>
+      </div>
+      <button class="ghost-btn" id="liveBtn" title="Attempt to fetch live quotes (requires a configured API key)">⟳ Live data</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- ============ FILTER SIDEBAR ============ -->
+    <aside class="filters" id="filters">
+      <div class="filters-head">
+        <h2>Screen</h2>
+        <button class="link-btn" id="resetBtn">Reset</button>
+      </div>
+
+      <label class="field">
+        <span>Search ticker / name</span>
+        <input type="search" id="searchInput" placeholder="e.g. AAPL or Energy" autocomplete="off" />
+      </label>
+
+      <div class="presets">
+        <span class="field-label">Presets</span>
+        <div class="preset-grid" id="presetGrid"></div>
+      </div>
+
+      <label class="field">
+        <span>Sector</span>
+        <select id="sectorSelect"></select>
+      </label>
+
+      <fieldset class="range-field">
+        <legend>Market cap</legend>
+        <select id="capMin">
+          <option value="0">Any min</option>
+          <option value="2e9">$2B+</option>
+          <option value="10e9">$10B+</option>
+          <option value="50e9">$50B+</option>
+          <option value="200e9">$200B+</option>
+          <option value="1e12">$1T+</option>
+        </select>
+      </fieldset>
+
+      <fieldset class="range-field">
+        <legend>Price (USD)</legend>
+        <div class="row">
+          <input type="number" id="priceMin" placeholder="Min" min="0" step="1" />
+          <span class="dash">–</span>
+          <input type="number" id="priceMax" placeholder="Max" min="0" step="1" />
+        </div>
+      </fieldset>
+
+      <fieldset class="range-field">
+        <legend>Max P/E</legend>
+        <input type="number" id="peMax" placeholder="No max" min="0" step="1" />
+        <label class="check"><input type="checkbox" id="profitableOnly" /> Profitable only (P/E &gt; 0)</label>
+      </fieldset>
+
+      <fieldset class="range-field">
+        <legend>Min dividend yield (%)</legend>
+        <input type="number" id="divMin" placeholder="0" min="0" step="0.1" />
+      </fieldset>
+
+      <fieldset class="range-field">
+        <legend>Min Magic Score</legend>
+        <input type="range" id="magicMin" min="0" max="100" value="0" />
+        <output id="magicMinOut">0</output>
+      </fieldset>
+
+      <fieldset class="range-field">
+        <legend>Technical signal</legend>
+        <label class="check"><input type="checkbox" id="aboveSMA50" /> Price above 50-day MA</label>
+        <label class="check"><input type="checkbox" id="aboveSMA200" /> Price above 200-day MA</label>
+        <label class="check"><input type="checkbox" id="goldenCross" /> Golden cross (50&gt;200)</label>
+        <label class="check"><input type="checkbox" id="rsiOversold" /> RSI oversold (&lt;35)</label>
+        <label class="check"><input type="checkbox" id="rsiNotOverbought" /> RSI not overbought (&lt;70)</label>
+      </fieldset>
+    </aside>
+
+    <!-- ============ RESULTS ============ -->
+    <section class="results">
+      <div class="results-head">
+        <div class="summary">
+          <strong id="matchCount">0</strong> matches
+          <span class="muted" id="universeCount"></span>
+        </div>
+        <div class="results-actions">
+          <button class="ghost-btn" id="exportBtn">⤓ Export CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="resultsTable">
+          <thead>
+            <tr id="headerRow"><!-- built by JS --></tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+        <p class="empty" id="emptyState" hidden>No stocks match these filters. Loosen a constraint.</p>
+      </div>
+
+      <footer class="legend">
+        <span><strong>Magic Score</strong>: combined rank of earnings yield (cheapness) &amp; return on capital (quality), 0–100 — higher is better.</span>
+        <span><strong>Signal</strong>: ▲ bullish trend · ▽ below trend · ⚑ RSI extreme.</span>
+        <span class="disclaimer">Demo data for educational use only — not investment advice.</span>
+      </footer>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
