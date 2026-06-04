@@ -179,6 +179,33 @@ tbody tr:hover { background: rgba(61,169,255,0.06); }
 .magic-fill.bear { background: linear-gradient(90deg, var(--red), var(--c-golden)); }
 .magic-val { width: 26px; text-align: right; font-weight: 700; }
 
+/* ---------- 8-dimension weighted risk ---------- */
+.data-row { cursor: pointer; }
+.data-row.open { background: rgba(61,169,255,0.08); }
+.risk-pill { display: inline-block; min-width: 30px; padding: 2px 9px; border-radius: 999px; font-weight: 700; font-family: var(--mono); }
+.risk-pill.low { color: var(--c-green); background: rgba(46,204,113,0.14); border: 1px solid rgba(46,204,113,0.4); }
+.risk-pill.elevated { color: var(--c-yellow); background: rgba(255,216,77,0.13); border: 1px solid rgba(255,216,77,0.4); }
+.risk-pill.high { color: var(--c-red); background: rgba(255,91,110,0.14); border: 1px solid rgba(255,91,110,0.4); }
+
+.detail-row td { background: var(--bg-2); padding: 0; }
+.dim-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 14px 18px; }
+.dim-title { grid-column: 1 / -1; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 2px; }
+.dim-title .muted { text-transform: none; letter-spacing: 0; }
+.dim { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "h lvl" "note note"; gap: 2px 10px; padding: 8px 11px; border: 1px solid var(--border); border-radius: 8px; background: var(--panel-2); border-left-width: 3px; }
+.dim.low { border-left-color: var(--c-green); }
+.dim.elevated { border-left-color: var(--c-yellow); }
+.dim.high { border-left-color: var(--c-red); }
+.dim.unknown { border-left-color: var(--muted-2); }
+.dim-h { grid-area: h; font-size: 12.5px; color: var(--text); }
+.dim-h b { color: var(--accent); margin-right: 4px; }
+.dim-lvl { grid-area: lvl; font-size: 10.5px; text-transform: uppercase; letter-spacing: .6px; font-weight: 700; align-self: center; }
+.dim-lvl.low { color: var(--c-green); }
+.dim-lvl.elevated { color: var(--c-yellow); }
+.dim-lvl.high { color: var(--c-red); }
+.dim-lvl.unknown { color: var(--muted-2); }
+.dim-note { grid-area: note; font-size: 11px; color: var(--muted); font-family: var(--mono); }
+@media (max-width: 720px) { .dim-grid { grid-template-columns: 1fr; } }
+
 .empty { text-align: center; color: var(--muted); padding: 40px 20px; }
 
 /* ---------- legend ---------- */

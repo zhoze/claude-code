@@ -1,16 +1,20 @@
 # Elite Magic Trader — Stock Screener
 
 A self-contained, "trading terminal" style **stock screener** modeled on the
-**Magic Trader® Elite** add-on for MetaStock (Save Dollar Enterprises, 2019).
-It reproduces the manual's *believer-based signals, risk-color scheme,
-Explorations (scans), and bond-inversion macro gauge* — as an interpretive
-teaching model in a single static web app with **no build step and no API key
-required**.
+**Magic Trader® Elite** add-on for MetaStock (Save Dollar Enterprises). Per the
+product's own framing, it is *"designed to identify risk on a weighted basis —
+no buy or sell signals are given for live trading."* It reproduces the manual's
+*believer-based signals, risk-color scheme, the **Magic Eight Dimensions℠**
+weighted-risk framework, Explorations (scans), and bond-inversion macro gauge* —
+as an interpretive teaching model in a single static web app with **no build
+step and no API key required**.
 
 > **Not affiliated with MetaStock or Save Dollar Enterprises.** This is an
 > independent, educational re-interpretation of the concepts described in the
-> Magic Trader® Elite manual. The real product's formulas are proprietary and
-> are **not** reproduced here. Demo data only — **not investment advice.**
+> Magic Trader® Elite manual, the Magic Trader® Overview, and the
+> "Creating Templates Using MetaStock" guide. The real product's formulas are
+> proprietary and are **not** reproduced here. Demo data only — **not
+> investment advice.**
 
 ## Quick start
 
@@ -49,6 +53,29 @@ The **Magic** column is a 0–100 directional conviction (50 = neutral): it blen
 the net Five-Ingredient alignment, the Health black-line, and Blue-Line
 territory. 100 = fully aligned bull, 0 = fully aligned bear.
 
+### Magic Eight Dimensions℠ — weighted risk
+
+The Overview document defines the system's organizing taxonomy: the **Magic
+Eight Dimensions℠ of Markets and Securities**. The **8D Risk** column rolls the
+engine's signals up into a single **0–100 weighted-risk** read (higher = more
+risk) — **click any row** to expand the per-dimension breakdown:
+
+| # | Dimension | Driven by |
+| --- | --- | --- |
+| 1 | Dynamic Sectional Price Risk | DSPR preceptor cycle position (a–f) |
+| 2 | Vertical Risk | zone extremity & distance from the 200-MA |
+| 3 | Horizontal Time Risk | Ribbon colour + elapsed-time risk number |
+| 4 | Health Risk | health direction vs. price territory |
+| 5 | Sudden Spot Risk | turquoise / golden sudden-reversal candles |
+| 6 | Trend Change Risk & Warnings | yellow / indigo / neutral warning candles |
+| 7 | Special Conditional Risks | excessive / calm volatility, volume surge |
+| 8 | Fundamental Risk | valuation & quality (P/E, ROIC, earnings yield) |
+
+This weighted risk is **orthogonal to the directional Magic score** — a name can
+read fully-aligned bull (Magic 100) yet carry high 8D risk because it is
+extended and late-stage, which is exactly the risk-first distinction the product
+is built to surface.
+
 ## Explorations (one-click scans)
 
 Mirroring the manual's *Explorations*:
@@ -60,6 +87,7 @@ Mirroring the manual's *Explorations*:
 - **Volume Surge** — unusually high volume (VQua)
 - **Lowest Risk** — calm volatility, neutral health
 - **Deep Zones 5–6** — washed-out vs. trend
+- **Risk-Adjusted Longs** — bull-confirmed names sorted by lowest 8D weighted risk
 
 Plus filters for sector, price band (the Volume-Explorer ranges: <$5, $5–15,
 $15–100, $100–200, $200–500, >$500), territory, Magic Lines gate, candle,
@@ -87,7 +115,7 @@ signal. Without a key it stays on demo data.
 | --- | --- |
 | `index.html` | Layout: bond banner, filter sidebar, results table |
 | `styles.css` | Dark terminal theme + the Magic risk-color palette |
-| `magic.js` | **Signal engine** — computes every Magic Trader indicator per stock + bond inversions |
+| `magic.js` | **Signal engine** — every Magic Trader indicator + the Magic Eight Dimensions weighted risk + bond inversions |
 | `app.js` | Screener UI: filters, Explorations, sorting, color rendering, CSV, live-data hook |
 | `data.js` | Bundled demo universe + Treasury yields |
 
@@ -99,5 +127,9 @@ signal. Without a key it stays on demo data.
 - Two fields the demo dataset doesn't carry — **Pure Volatility %** and
   **relative volume** — are synthesized deterministically per ticker for
   illustration.
+- The real product is **multi-timeframe** — its canonical template stacks
+  Weekly → Daily → 60-min → 5-min (`W-D-60m-5m`). This single-snapshot screen
+  works on one timeframe; treat each higher-timeframe confirmation as out of
+  scope here.
 - All figures are illustrative snapshots. **Educational use only; not investment
   advice.**

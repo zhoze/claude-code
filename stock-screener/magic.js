@@ -173,7 +173,7 @@
       0, 100
     );
 
-    return {
+    const out = {
       ...s,
       atrPct, relVol, distMA50: round(distMA50), distMA200: round(distMA200),
       golden, aboveBoth, belowBoth,
@@ -189,6 +189,88 @@
       ingBull, ingBear, volQual, volPass, entryTrigger,
       magicScore,
     };
+
+    // --- Magic Eight Dimensions℠ — weighted multi-dimensional risk read -----
+    const { dims, score: dimRisk } = computeDimensions(out);
+    out.dims = dims;
+    out.dimRisk = dimRisk;
+    return out;
+  }
+
+  // =======================================================================
+  //  Magic Eight Dimensions℠ of Markets and Securities (per the Overview doc)
+  //
+  //  The product is "designed to identify risk on a weighted basis" — not to
+  //  emit buy/sell signals. This maps the engine's signals onto the eight
+  //  canonical risk dimensions and rolls them up into a 0–100 weighted risk
+  //  read (higher = more risk), orthogonal to the directional Magic score.
+  // =======================================================================
+  const MAGIC_DIMENSIONS = [
+    { num: 1, key: "dspr", name: "Dynamic Sectional Price Risk" },
+    { num: 2, key: "vertical", name: "Vertical Risk" },
+    { num: 3, key: "htr", name: "Horizontal Time Risk" },
+    { num: 4, key: "health", name: "Health Risk" },
+    { num: 5, key: "spot", name: "Sudden Spot Risk" },
+    { num: 6, key: "trendchange", name: "Trend Change Risk & Warnings" },
+    { num: 7, key: "special", name: "Special Conditional Risks" },
+    { num: 8, key: "fundamental", name: "Fundamental Risk" },
+  ];
+  const LEVEL_VAL = { low: 1, elevated: 2, high: 3, unknown: 2 };
+
+  function computeDimensions(r) {
+    const dims = [];
+    const add = (key, level, note) => {
+      const meta = MAGIC_DIMENSIONS.find((d) => d.key === key);
+      dims.push({ num: meta.num, key, name: meta.name, level, note });
+    };
+
+    // 1. Dynamic Sectional Price Risk — the price-preceptor cycle position
+    const dsprHigh = ["c", "d", "f"].includes(r.dspr);
+    add("dspr", dsprHigh ? "high" : r.dspr === "a" ? "elevated" : "low",
+      `Type ${r.dspr} (${r.dspr}=${r.dsprCode})`);
+
+    // 2. Vertical Risk — how vertically extended price is within its zones
+    add("vertical", r.zone === 1 || r.zone === 6 ? "high" : r.zone === 2 || r.zone === 5 ? "elevated" : "low",
+      `Zone ${r.zone}; ${r.distMA200 >= 0 ? "+" : ""}${r.distMA200}% vs 200-MA`);
+
+    // 3. Horizontal Time Risk — elapsed-time risk since the ribbon flipped
+    const ar = Math.abs(r.ribbonRisk);
+    add("htr", ar >= 6 ? "high" : ar >= 3 ? "elevated" : r.ribbon === "black" ? "elevated" : "low",
+      `Ribbon ${r.ribbon}${r.ribbonRisk ? ` ${r.ribbonRisk > 0 ? "+" : ""}${r.ribbonRisk}` : ""}`);
+
+    // 4. Health Risk — internal health vs. price territory
+    const aligned = (r.healthDir === "bull" && r.territory === "bull") || (r.healthDir === "bear" && r.territory === "bear");
+    add("health", !aligned ? "high" : Math.abs(r.healthBlack) < 2 ? "elevated" : "low",
+      `${r.healthDir} health (black ${r.healthBlack})${aligned ? "" : " — conflicts with territory"}`);
+
+    // 5. Sudden Spot Risk — a sudden bull/bear reversal spot just printed
+    const spot = r.candle === "turquoise" || r.candle === "golden";
+    add("spot", spot ? "high" : "low", spot ? `${r.candle} sudden reversal` : "no sudden spot");
+
+    // 6. Trend Change Risk & Warnings — pre-entry warning / equilibrium candles
+    const warn = r.candle === "yellow" || r.candle === "indigo" || r.candle === "neutral";
+    add("trendchange", warn ? "elevated" : "low", warn ? `${r.candle} warning candle` : "trend confirmed");
+
+    // 7. Special Conditional Risks — volatility / liquidity anomalies
+    add("special", r.exVola ? "high" : r.lowRisk ? "low" : "elevated",
+      `Volatility ${r.atrPct}%${r.exVola ? " (excessive)" : r.lowRisk ? " (calm)" : ""}${r.volQual ? ", volume surge" : ""}`);
+
+    // 8. Fundamental Risk — valuation & quality (null when data unavailable)
+    if (r.pe === null) {
+      add("fundamental", "high", "unprofitable / no P/E");
+    } else if (r.pe == null || r.roic == null) {
+      add("fundamental", "unknown", "fundamentals unavailable");
+    } else {
+      let fr = 0;
+      if (r.pe > 40) fr += 2; else if (r.pe > 25) fr += 1;
+      if (r.roic < 10) fr += 2; else if (r.roic < 18) fr += 1;
+      if (r.earnYield != null && r.earnYield < 3) fr += 1;
+      add("fundamental", fr >= 3 ? "high" : fr >= 1 ? "elevated" : "low",
+        `P/E ${r.pe}, ROIC ${r.roic}%, earn yld ${r.earnYield}%`);
+    }
+
+    const score = Math.round(dims.reduce((a, d) => a + LEVEL_VAL[d.level], 0) / (dims.length * 3) * 100);
+    return { dims, score };
   }
 
   // =======================================================================
@@ -218,7 +300,7 @@
     };
   }
 
-  const MagicEngine = { computeMagic, computeInversions, CANDLE_META, DSPR_META, BOND_INVERSION_PAIRS };
+  const MagicEngine = { computeMagic, computeInversions, computeDimensions, CANDLE_META, DSPR_META, MAGIC_DIMENSIONS, BOND_INVERSION_PAIRS };
 
   if (typeof module !== "undefined" && module.exports) module.exports = MagicEngine;
   else root.MagicEngine = MagicEngine;

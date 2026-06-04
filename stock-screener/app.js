@@ -71,7 +71,22 @@
     { key: "ing", label: "5 Ing.", sortType: "num", sortKey: (s) => (s.ingBull - s.ingBear), render: ingCell },
     { key: "magicScore", label: "Magic", sortType: "num",
       render: (s) => `<span class="magic-cell"><span class="magic-bar"><span class="magic-fill ${s.magicScore >= 50 ? "bull" : "bear"}" style="width:${s.magicScore}%"></span></span><span class="magic-val ${s.magicScore >= 50 ? "pos" : "neg"}">${s.magicScore}</span></span>` },
+    { key: "dimRisk", label: "8D Risk", sortType: "num", render: (s) => dimRiskPill(s) },
   ];
+
+  // Weighted 8-dimension risk pill (higher = more risk). Click a row to expand.
+  const riskBand = (v) => (v >= 67 ? "high" : v >= 45 ? "elevated" : "low");
+  function dimRiskPill(s) {
+    const band = riskBand(s.dimRisk);
+    return `<span class="risk-pill ${band}" title="Magic 8-Dimension weighted risk — click row for the breakdown">${s.dimRisk}</span>`;
+  }
+  function dimDetail(s) {
+    const cells = s.dims.map((d) =>
+      `<div class="dim ${d.level}"><span class="dim-h"><b>${d.num}</b> ${d.name}</span>` +
+      `<span class="dim-lvl ${d.level}">${d.level}</span><span class="dim-note">${d.note}</span></div>`).join("");
+    return `<div class="dim-grid"><div class="dim-title">Magic Eight Dimensions℠ — weighted risk ${s.dimRisk}/100 ` +
+      `<span class="muted">(directional Magic conviction ${s.magicScore})</span></div>${cells}</div>`;
+  }
 
   // sort helpers so colored chips order sensibly (bull -> bear)
   const candleSortVal = (s) => ({ turquoise: 6, green: 5, yellow: 4, neutral: 3, indigo: 2, golden: 1, red: 0 })[s.candle];
@@ -91,6 +106,7 @@
     { id: "volSurge", name: "Volume Surge", desc: "Unusually high volume", apply: (st) => { reset(st); st.volQual = true; st.sort = { key: "relVol", dir: -1 }; } },
     { id: "lowRisk", name: "Lowest Risk", desc: "Calm volatility, neutral health", apply: (st) => { reset(st); st.lowRiskOnly = true; st.sort = { key: "atrPct", dir: 1 }; } },
     { id: "bottomZone", name: "Deep Zones 5–6", desc: "Washed-out vs. trend", apply: (st) => { reset(st); st.zoneMin = 5; st.zoneMax = 6; st.sort = { key: "magicScore", dir: 1 }; } },
+    { id: "riskAdjLong", name: "Risk-Adjusted Longs", desc: "Bull, lowest 8D risk", apply: (st) => { reset(st); st.territory = "bull"; st.mlGate = "1"; st.sort = { key: "dimRisk", dir: 1 }; } },
   ];
 
   // =======================================================================
@@ -180,12 +196,28 @@
     const rows = applyScreen();
     $("matchCount").textContent = rows.length;
     $("universeCount").textContent = `of ${universe.length} screened`;
-    $("resultsBody").innerHTML = rows.map((s) =>
-      "<tr>" + COLUMNS.map((c) => `<td class="${c.txt ? "txt" : ""}">${c.render(s)}</td>`).join("") + "</tr>"
-    ).join("");
+    $("resultsBody").innerHTML = rows.map((s) => {
+      const open = expanded.has(s.ticker);
+      const main = `<tr class="data-row${open ? " open" : ""}" data-ticker="${s.ticker}">` +
+        COLUMNS.map((c) => `<td class="${c.txt ? "txt" : ""}">${c.render(s)}</td>`).join("") + "</tr>";
+      const detail = open ? `<tr class="detail-row"><td colspan="${COLUMNS.length}">${dimDetail(s)}</td></tr>` : "";
+      return main + detail;
+    }).join("");
     $("emptyState").hidden = rows.length !== 0;
     renderHeader();
     $("resultsTable").lastRows = rows;
+  }
+
+  // Click a data row to expand its Magic 8-Dimension risk breakdown.
+  const expanded = new Set();
+  function bindRowExpand() {
+    $("resultsBody").addEventListener("click", (e) => {
+      const tr = e.target.closest("tr.data-row");
+      if (!tr) return;
+      const t = tr.dataset.ticker;
+      if (expanded.has(t)) expanded.delete(t); else expanded.add(t);
+      render();
+    });
   }
 
   // =======================================================================
@@ -228,7 +260,7 @@
   // =======================================================================
   function exportCSV() {
     const rows = $("resultsTable").lastRows || applyScreen();
-    const cols = ["ticker", "name", "sector", "price", "perfMonth", "territory", "mlGate", "zone", "candle", "dspr", "dsprCode", "atrPct", "ribbon", "ribbonRisk", "ingBull", "ingBear", "entryTrigger", "magicScore"];
+    const cols = ["ticker", "name", "sector", "price", "perfMonth", "territory", "mlGate", "zone", "candle", "dspr", "dsprCode", "atrPct", "ribbon", "ribbonRisk", "ingBull", "ingBear", "entryTrigger", "magicScore", "dimRisk"];
     const head = cols.join(",");
     const lines = rows.map((s) => cols.map((k) => {
       const v = s[k];
@@ -369,6 +401,7 @@
     buildSectorOptions();
     buildExplorations();
     bindControls();
+    bindRowExpand();
     renderBonds();
     renderLegend();
     syncControlsFromState();
