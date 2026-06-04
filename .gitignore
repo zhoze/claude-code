@@ -1,2 +1,6 @@
 .DS_Store
 
+# Scratch copy of the copyrighted Magic Trader Elite manual used only as a
+# reference while building the screener — must never be committed.
+magic_trader_manual.txt
+
