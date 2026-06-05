@@ -76,6 +76,23 @@ read fully-aligned bull (Magic 100) yet carry high 8D risk because it is
 extended and late-stage, which is exactly the risk-first distinction the product
 is built to surface.
 
+### Multi-timeframe: weekly trend → daily 5 ingredients
+
+The canonical Magic Trader template stacks timeframes biggest-to-smallest
+(`W-D-60m-5m`) and trades the lower-timeframe entry only in the direction of the
+higher-timeframe trend. The screener models the two ends of that stack:
+
+- **Weekly** column — the higher-timeframe trend (long-horizon Blue-Line
+  territory + year-to-date momentum): Bull / Bear / Flat.
+- **Daily** column — the daily Blue-Line territory, where the 5-ingredient
+  alignment is evaluated.
+
+A ⇉ glyph marks names where the two **agree** (weekly trend + daily 5-ingredient
+alignment in the same direction). The **Wk→Daily Long / Short** Explorations take
+only those agreements — so a daily 5/5 bull that fights a bearish weekly trend is
+filtered out as counter-trend, and a strong weekly with no daily entry yet is set
+aside until the daily aligns.
+
 ## Explorations (one-click scans)
 
 Mirroring the manual's *Explorations*:
@@ -88,6 +105,7 @@ Mirroring the manual's *Explorations*:
 - **Lowest Risk** — calm volatility, neutral health
 - **Deep Zones 5–6** — washed-out vs. trend
 - **Risk-Adjusted Longs** — bull-confirmed names sorted by lowest 8D weighted risk
+- **Wk→Daily Long / Short** — multi-timeframe: weekly trend confirms the direction, then the daily 5-ingredient alignment provides the entry
 
 Plus filters for sector, price band (the Volume-Explorer ranges: <$5, $5–15,
 $15–100, $100–200, $200–500, >$500), territory, Magic Lines gate, candle,

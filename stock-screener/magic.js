@@ -167,6 +167,16 @@
     const entryTrigger = ingBull === 5 && volPass && bullCandle ? "bull"
       : ingBear === 5 && volPass && bearCandle ? "bear" : "none";
 
+    // --- Multi-timeframe: weekly trend (higher TF) -> daily 5 ingredients --
+    // The canonical Magic Trader template works biggest-to-smallest timeframe:
+    // confirm the weekly trend first, then take the daily 5-ingredient entry
+    // only in that direction. Weekly trend here = the long-horizon Blue Line
+    // territory (price vs 200-MA) combined with year-to-date momentum.
+    const weeklyTrend = s.price >= s.sma200 && s.perfYTD > 0 ? "bull"
+      : s.price < s.sma200 && s.perfYTD < 0 ? "bear" : "neutral";
+    const mtfAlign = weeklyTrend === "bull" && ingBull >= 4 && volPass ? "long"
+      : weeklyTrend === "bear" && ingBear >= 4 && volPass ? "short" : "none";
+
     // --- Magic Bull Score: 0..100 directional conviction (50 = neutral) ---
     const magicScore = clamp(
       Math.round(50 + (ingBull - ingBear) * 8 + healthBlack * 2 + (territory === "bull" ? 4 : -4)),
@@ -187,6 +197,7 @@
       candle,
       dspr, dsprCode: DSPR_META[dspr].code,
       ingBull, ingBear, volQual, volPass, entryTrigger,
+      weeklyTrend, mtfAlign,
       magicScore,
     };
 

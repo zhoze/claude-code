@@ -157,6 +157,9 @@ tbody tr:hover { background: rgba(61,169,255,0.06); }
 .chip.r-red   { color: var(--c-red); background: rgba(255,91,110,0.12); border-color: rgba(255,91,110,0.4); }
 .chip.r-black { color: var(--c-neutral); background: rgba(154,167,194,0.1); border-color: rgba(154,167,194,0.3); }
 
+.mtf-long { color: var(--c-green); font-weight: 700; }
+.mtf-short { color: var(--c-red); font-weight: 700; }
+
 .zone-pill { display: inline-block; min-width: 22px; padding: 1px 7px; border-radius: 6px; font-weight: 700; color: var(--text); }
 .zone-pill.z1, .zone-pill.z2 { background: rgba(255,91,110,0.18); color: #ffb3bd; }
 .zone-pill.z3, .zone-pill.z4 { background: rgba(154,167,194,0.16); }

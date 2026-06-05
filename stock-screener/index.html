@@ -74,7 +74,17 @@
       <label class="check stacked"><input type="checkbox" id="volQual" /> Unusually high volume (VQua)</label>
 
       <fieldset class="range-field">
-        <legend>Believer territory <small class="hint">(Blue Line)</small></legend>
+        <legend>Weekly trend <small class="hint">(higher timeframe)</small></legend>
+        <select id="weekly">
+          <option value="any">Any</option>
+          <option value="bull">Bullish weekly</option>
+          <option value="bear">Bearish weekly</option>
+          <option value="neutral">Flat / mixed</option>
+        </select>
+      </fieldset>
+
+      <fieldset class="range-field">
+        <legend>Daily territory <small class="hint">(Blue Line)</small></legend>
         <select id="territory">
           <option value="any">Any</option>
           <option value="bull">Bullish (Close &gt; Blue Line)</option>
@@ -188,6 +198,7 @@
       <footer class="legend">
         <div class="legend-colors" id="legendColors"></div>
         <div class="legend-text">
+          <span><strong>Weekly → Daily</strong> = multi-timeframe: the <strong>Weekly</strong> column is the higher-timeframe trend; ⇉ marks names where it agrees with the daily 5-ingredient alignment.</span>
           <span><strong>8D Risk</strong> = Magic Eight Dimensions℠ weighted risk (0–100, higher = more risk); <strong>click any row</strong> for the per-dimension breakdown. It is orthogonal to the directional <strong>Magic</strong> conviction score.</span>
           <span><strong>Ribbon</strong> = who controls Magic Health (green bull / red bear / black neutral); the number is elapsed-time risk (+1→+7 bull, −1→−7 bear).</span>
           <span><strong>5 Ing.</strong> = Direction + Health + Spike + Pure Health + Ribbon aligned on the same bar.</span>

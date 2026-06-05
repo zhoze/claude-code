@@ -44,6 +44,12 @@
     const trig = s.entryTrigger !== "none" ? `<span class="trigger ${s.entryTrigger}" title="Entry Trigger fired">⚡</span>` : "";
     return `<span class="ing ${dom}">${n}/5${trig}</span>`;
   }
+  function weeklyChip(s) {
+    const cls = s.weeklyTrend === "bull" ? "t-bull" : s.weeklyTrend === "bear" ? "t-bear" : "r-black";
+    const label = s.weeklyTrend === "bull" ? "Bull" : s.weeklyTrend === "bear" ? "Bear" : "Flat";
+    const mtf = s.mtfAlign !== "none" ? ` <span class="mtf-${s.mtfAlign}" title="Weekly trend and daily 5 ingredients agree">⇉</span>` : "";
+    return `<span class="chip ${cls}" title="Weekly (higher-timeframe) trend">${label}</span>${mtf}`;
+  }
   function mlGateCell(s) {
     if (s.mlGate === 1) return `<span class="pos" title="Close above both Magic Lines — long confirmed">▲ above</span>`;
     if (s.mlGate === -1) return `<span class="neg" title="Close below both Magic Lines — short confirmed">▼ below</span>`;
@@ -58,8 +64,10 @@
       render: (s) => `<span class="ticker">${s.ticker}</span><div class="coname">${s.name}</div><span class="sector-tag">${s.sector}</span>` },
     { key: "price", label: "Price", sortType: "num", render: (s) => fmtMoney(s.price) },
     { key: "perfMonth", label: "1M", sortType: "num", render: (s) => `<span class="${signed(s.perfMonth)}">${fmtPct(s.perfMonth)}</span>` },
-    { key: "territory", label: "Territory", sortType: "str", sortKey: (s) => s.territory,
-      render: (s) => `<span class="chip t-${s.territory}" title="Blue Line territory">${s.territory === "bull" ? "Bull" : "Bear"}</span>` },
+    { key: "weeklyTrend", label: "Weekly", sortType: "str", sortKey: (s) => s.weeklyTrend,
+      render: (s) => weeklyChip(s) },
+    { key: "territory", label: "Daily", sortType: "str", sortKey: (s) => s.territory,
+      render: (s) => `<span class="chip t-${s.territory}" title="Daily Blue Line territory">${s.territory === "bull" ? "Bull" : "Bear"}</span>` },
     { key: "mlGate", label: "Magic Lines", sortType: "num", sortKey: (s) => s.mlGate, render: mlGateCell },
     { key: "zone", label: "Zone", sortType: "num", render: (s) => `<span class="zone-pill z${s.zone}">${s.zone}</span>` },
     { key: "candle", label: "Candle", sortType: "num", sortKey: (s) => candleSortVal(s), render: candleChip },
@@ -107,6 +115,8 @@
     { id: "lowRisk", name: "Lowest Risk", desc: "Calm volatility, neutral health", apply: (st) => { reset(st); st.lowRiskOnly = true; st.sort = { key: "atrPct", dir: 1 }; } },
     { id: "bottomZone", name: "Deep Zones 5–6", desc: "Washed-out vs. trend", apply: (st) => { reset(st); st.zoneMin = 5; st.zoneMax = 6; st.sort = { key: "magicScore", dir: 1 }; } },
     { id: "riskAdjLong", name: "Risk-Adjusted Longs", desc: "Bull, lowest 8D risk", apply: (st) => { reset(st); st.territory = "bull"; st.mlGate = "1"; st.sort = { key: "dimRisk", dir: 1 }; } },
+    { id: "mtfLong", name: "Wk→Daily Long", desc: "Weekly bull + daily 5-Ing", apply: (st) => { reset(st); st.weekly = "bull"; st.ingSide = "bull"; st.ingMin = 4; st.sort = { key: "dimRisk", dir: 1 }; } },
+    { id: "mtfShort", name: "Wk→Daily Short", desc: "Weekly bear + daily 5-Ing", apply: (st) => { reset(st); st.weekly = "bear"; st.ingSide = "bear"; st.ingMin = 4; st.sort = { key: "dimRisk", dir: 1 }; } },
   ];
 
   // =======================================================================
@@ -115,7 +125,7 @@
   const defaultState = () => ({
     search: "", sector: "All", priceBand: "any", capMin: 0,
     volFilter: true, volQual: false,
-    territory: "any", mlGate: "any", candle: "any", ribbon: "any", dspr: "any",
+    weekly: "any", territory: "any", mlGate: "any", candle: "any", ribbon: "any", dspr: "any",
     zoneMin: null, zoneMax: null,
     ingMin: 0, ingSide: "bull", entryOnly: false, lowRiskOnly: false,
     sort: { key: "magicScore", dir: -1 },
@@ -145,6 +155,7 @@
       if (s.marketCap < state.capMin) return false;
       if (state.volFilter && !s.volPass) return false;
       if (state.volQual && !s.volQual) return false;
+      if (state.weekly !== "any" && s.weeklyTrend !== state.weekly) return false;
       if (state.territory !== "any" && s.territory !== state.territory) return false;
       if (state.mlGate !== "any" && String(s.mlGate) !== state.mlGate) return false;
       if (state.candle !== "any" && s.candle !== state.candle) return false;
@@ -260,7 +271,7 @@
   // =======================================================================
   function exportCSV() {
     const rows = $("resultsTable").lastRows || applyScreen();
-    const cols = ["ticker", "name", "sector", "price", "perfMonth", "territory", "mlGate", "zone", "candle", "dspr", "dsprCode", "atrPct", "ribbon", "ribbonRisk", "ingBull", "ingBear", "entryTrigger", "magicScore", "dimRisk"];
+    const cols = ["ticker", "name", "sector", "price", "perfMonth", "weeklyTrend", "territory", "mtfAlign", "mlGate", "zone", "candle", "dspr", "dsprCode", "atrPct", "ribbon", "ribbonRisk", "ingBull", "ingBear", "entryTrigger", "magicScore", "dimRisk"];
     const head = cols.join(",");
     const lines = rows.map((s) => cols.map((k) => {
       const v = s[k];
@@ -285,6 +296,7 @@
     $("capMin").value = String(state.capMin);
     $("volFilter").checked = state.volFilter;
     $("volQual").checked = state.volQual;
+    $("weekly").value = state.weekly;
     $("territory").value = state.territory;
     $("mlGate").value = state.mlGate;
     $("candle").value = state.candle;
@@ -309,6 +321,7 @@
     $("capMin").addEventListener("change", (e) => { state.capMin = Number(e.target.value); clearExploration(); render(); });
     $("volFilter").addEventListener("change", (e) => { state.volFilter = e.target.checked; clearExploration(); render(); });
     $("volQual").addEventListener("change", (e) => { state.volQual = e.target.checked; clearExploration(); render(); });
+    $("weekly").addEventListener("change", (e) => { state.weekly = e.target.value; clearExploration(); render(); });
     $("territory").addEventListener("change", (e) => { state.territory = e.target.value; clearExploration(); render(); });
     $("mlGate").addEventListener("change", (e) => { state.mlGate = e.target.value; clearExploration(); render(); });
     $("candle").addEventListener("change", (e) => { state.candle = e.target.value; clearExploration(); render(); });
