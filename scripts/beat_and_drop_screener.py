@@ -91,7 +91,10 @@ class FMP:
                 r.raise_for_status()
                 time.sleep(self.pause)
                 return r.json()
-            except requests.RequestException as e:
+            except (requests.RequestException, ValueError) as e:
+                # ValueError covers JSONDecodeError on a non-JSON 200 body (e.g.
+                # an HTML error page) — retry, then fall through to None so
+                # callers' truthiness checks handle it instead of crashing.
                 log.debug("retry %s on %s (%s)", attempt, path, e)
                 time.sleep(0.8 * (attempt + 1))
         return None
@@ -168,7 +171,14 @@ def price_reaction(api: FMP, symbol: str, edate: str, spy_prices: pd.Series):
     # market-relative: SPY over the same calendar window
     d0, d1 = df.loc[idx - 1, "d"], df.loc[idx + 1, "d"]
     try:
-        spy_ret = spy_prices.asof(d1) / spy_prices.asof(d0) - 1
+        s0, s1 = spy_prices.asof(d0), spy_prices.asof(d1)
+        # .asof() returns NaN (no exception) when the date precedes the series
+        # or the SPY fetch was empty; fall back to the absolute reaction so the
+        # market-relative guard is never silently bypassed by a NaN comparison.
+        if pd.isna(s0) or pd.isna(s1) or s0 == 0:
+            spy_ret = 0.0
+        else:
+            spy_ret = s1 / s0 - 1
     except (KeyError, ZeroDivisionError, TypeError):
         spy_ret = 0.0
     return stock_ret, stock_ret - spy_ret

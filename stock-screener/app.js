@@ -272,12 +272,15 @@
   function exportCSV() {
     const rows = $("resultsTable").lastRows || applyScreen();
     const cols = ["ticker", "name", "sector", "price", "perfMonth", "weeklyTrend", "territory", "mtfAlign", "mlGate", "zone", "candle", "dspr", "dsprCode", "atrPct", "ribbon", "ribbonRisk", "ingBull", "ingBear", "entryTrigger", "magicScore", "dimRisk"];
-    const head = cols.join(",");
-    const lines = rows.map((s) => cols.map((k) => {
-      const v = s[k];
+    const csvCell = (v) => {
       if (v == null) return "";
-      return typeof v === "string" && v.includes(",") ? `"${v}"` : v;
-    }).join(","));
+      const str = String(v);
+      // RFC 4180: quote if the value contains a comma, quote, or newline,
+      // and escape inner quotes by doubling them.
+      return /[",\n\r]/.test(str) ? `"${str.replace(/"/g, '""')}"` : str;
+    };
+    const head = cols.join(",");
+    const lines = rows.map((s) => cols.map((k) => csvCell(s[k])).join(","));
     const blob = new Blob([head + "\n" + lines.join("\n")], { type: "text/csv" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
@@ -382,14 +385,22 @@
       const res = await fetch(`https://financialmodelingprep.com/api/v3/quote/${symbols}?apikey=${FMP_API_KEY}`);
       if (!res.ok) throw new Error("HTTP " + res.status);
       const quotes = await res.json();
-      const byTicker = new Map(quotes.map((q) => [q.symbol.replace("-", "."), q]));
+      if (!Array.isArray(quotes)) throw new Error("Unexpected quote payload");
+      // Skip entries without a symbol so one malformed quote can't abort the
+      // whole rebuild.
+      const byTicker = new Map(
+        quotes.filter((q) => q && typeof q.symbol === "string")
+          .map((q) => [q.symbol.replace("-", "."), q])
+      );
       universe = STOCK_UNIVERSE.map((base) => {
         const q = byTicker.get(base.ticker);
         const merged = { ...base };
         if (q) {
           merged.price = q.price ?? base.price;
           merged.marketCap = q.marketCap ?? base.marketCap;
-          merged.pe = q.pe ?? base.pe;
+          // A null/0 live P/E means unprofitable — keep it null so the engine
+          // flags Fundamental Risk HIGH rather than falling back to demo P/E.
+          merged.pe = q.pe == null || q.pe <= 0 ? null : q.pe;
           merged.sma50 = q.priceAvg50 ?? base.sma50;
           merged.sma200 = q.priceAvg200 ?? base.sma200;
           merged.volume = q.avgVolume ?? base.volume;
