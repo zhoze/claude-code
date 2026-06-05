@@ -1,5 +1,9 @@
 .DS_Store
 
+# Python build artifacts (e.g. from compiling scripts/*.py)
+__pycache__/
+*.pyc
+
 # Scratch copy of the copyrighted Magic Trader Elite manual used only as a
 # reference while building the screener — must never be committed.
 magic_trader_manual.txt
