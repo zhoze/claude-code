@@ -39,11 +39,14 @@ value-screener/
 ├── screener.py          # pure-Python scoring engine (stdlib only)
 ├── requirements.txt     # (optional) deps; the engine itself needs none
 └── data/
-    ├── universe_sp500.csv      # all 503 S&P 500 constituents (snapshot)
-    ├── fundamentals.csv        # input metrics for the screened names
+    ├── universe_sp500.csv        # all 503 S&P 500 constituents (snapshot)
+    ├── fundamentals.csv          # full-metric input (17 names, FMP-sourced)
+    ├── fundamentals_yahoo.csv    # valuation-only input (9 names, Yahoo-sourced)
     └── results/
-        ├── screen_results.csv  # full ranked output
-        └── top_candidates.md   # human-readable ranked report
+        ├── screen_results.csv         # full ranked output
+        ├── top_candidates.md          # human-readable ranked report
+        ├── yahoo_valuation_screen.csv # valuation-only ranking (Yahoo names)
+        └── yahoo_valuation_screen.md  # valuation-only report
 ```
 
 ---
@@ -104,6 +107,25 @@ for the full table and per-name failed gates):
   with a read of *why* earnings look the way they do.
 
 ---
+
+### Supplementary valuation-only screen (Yahoo-sourced)
+
+Nine names that the FMP data tier could not serve (PG, MO, MRK, MA, HON, HD,
+CAT, TXN, MCD) were back-filled from **finance.yahoo.com** quote pages. Yahoo's
+detailed statistics pages (`/key-statistics`, `/financials`) and its JSON
+`quoteSummary` API were not retrievable from this environment (HTTP 503/401), so
+only headline figures — price, trailing P/E, EPS (TTM), dividend yield — are
+available for them. That is enough for a **Graham-style earnings-value check**
+(intrinsic value, Graham formula, margin of safety) but **not** the quality
+pillar, so these names are scored on valuation only (growth defaults to a
+conservative 5%) and reported separately in
+[`data/results/yahoo_valuation_screen.md`](data/results/yahoo_valuation_screen.md).
+
+Result: only **MO** shows a positive margin of safety (+20.8%) under these
+conservative assumptions; the rest screen as richly valued — consistent with the
+main run's "quality is expensive in 2026" finding. Their low *scores* reflect the
+**absence of quality data**, not poor businesses — do not compare them directly
+to the fully-scored table above.
 
 ## How the data was sourced (reproducibility)
 

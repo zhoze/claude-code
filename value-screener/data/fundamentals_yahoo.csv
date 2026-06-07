@@ -1,0 +1,10 @@
+symbol,name,sector,price,eps,pe,dividend_yield,eps_growth_5y
+PG,Procter & Gamble,Consumer Staples,146.54,6.84,21.42,0.0291,
+MO,Altria Group,Consumer Staples,72.19,4.79,15.07,0.0587,
+MRK,Merck & Co,Health Care,120.79,3.55,34.03,0.0281,
+MA,Mastercard,Financials,491.08,17.29,28.40,0.0071,
+HON,Honeywell International,Industrials,213.97,6.27,34.18,0.0222,
+HD,Home Depot,Consumer Discretionary,310.78,14.08,22.07,0.0300,
+CAT,Caterpillar,Industrials,904.28,20.08,45.03,0.0067,
+TXN,Texas Instruments,Information Technology,285.06,5.84,48.81,0.0199,
+MCD,McDonald's,Consumer Discretionary,272.72,12.14,22.46,0.0273,
