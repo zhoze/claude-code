@@ -1,0 +1,18 @@
+rank,symbol,name,sector,price,intrinsic_value_dcf,graham_value,graham_number,margin_of_safety,quality_score,valuation_score,buffett_score,verdict,failed_gates
+1,META,Meta Platforms,Communication Services,593.04,774.28,635.12,245.5,0.2341,60.0,33.9,93.9,Strong Candidate,
+2,MSFT,Microsoft,Information Technology,416.71,468.69,384.45,145.5,0.1109,58.0,16.8,74.8,Strong Candidate,
+3,KO,Coca-Cola,Consumer Staples,79.48,88.52,72.61,23.67,0.1022,58.0,15.6,73.6,Strong Candidate,
+4,JPM,JPMorgan Chase,Financials,312.37,587.07,481.55,249.07,0.4679,33.0,40.0,73.0,Watch,ROIC >= 12%; Net debt/EBITDA < 3x; Interest coverage > 5x; Current ratio > 1.5
+5,JNJ,Johnson & Johnson,Health Care,232.78,239.17,196.18,80.17,0.0267,58.0,5.2,63.2,Watch,
+6,GOOGL,Alphabet,Communication Services,368.55,368.06,301.9,108.58,-0.0013,60.0,1.4,61.4,Watch,
+7,V,Visa,Financials,323.58,323.01,264.96,69.81,-0.0018,58.0,1.4,59.4,Watch,
+8,PEP,PepsiCo,Consumer Staples,141.93,106.64,76.66,47.45,-0.3309,52.0,5.2,57.2,Watch,Current ratio > 1.5
+9,NVDA,NVIDIA,Information Technology,205.1,182.68,149.85,34.5,-0.1227,56.0,0.0,56.0,Watch,Earnings backed by cash
+10,AAPL,Apple,Information Technology,307.35,231.61,189.98,36.84,-0.327,53.0,0.0,53.0,Watch,Interest coverage > 5x (no data)
+11,LMT,Lockheed Martin,Industrials,523.78,272.67,141.77,123.61,-0.9209,45.0,3.3,48.3,Pass,Net margin >= 10%; Gross margin >= 40% (moat)
+12,XOM,Exxon Mobil,Energy,149.92,168.21,137.98,91.0,0.1087,29.5,16.5,46.0,Pass,ROE >= 15%; ROIC >= 12%
+13,COST,Costco Wholesale,Consumer Staples,971.85,553.39,453.92,183.88,-0.7562,45.0,0.0,45.0,Pass,Net margin >= 10%; Gross margin >= 40% (moat)
+14,ABBV,AbbVie,Health Care,227.23,26.83,13.95,26.75,-7.4689,39.0,0.0,39.0,Pass,Net margin >= 10%; Current ratio > 1.5
+15,WMT,Walmart,Consumer Staples,118.88,80.42,65.96,27.76,-0.4783,38.0,0.0,38.0,Pass,Net margin >= 10%; Gross margin >= 40% (moat); Current ratio > 1.5
+16,CVX,Chevron,Energy,187.31,154.54,126.76,107.73,-0.2121,25.5,0.0,25.5,Pass,ROE >= 15%; ROIC >= 12%; Net margin >= 10%
+17,UNH,UnitedHealth Group,Health Care,399.46,173.1,90.0,184.39,-1.3077,24.5,0.0,24.5,Pass,ROIC >= 12%; Net margin >= 10%; Gross margin >= 40% (moat); Current ratio > 1.5

@@ -1,0 +1,10 @@
+# The screener engine (screener.py) uses only the Python standard library
+# (csv, json, math, argparse) and needs NO third-party packages.
+#
+# These are optional, only if you want to extend the project with your own
+# data-pulling or analysis notebooks:
+#
+# pandas>=2.0      # convenient CSV/dataframe manipulation
+# requests>=2.31   # if you wire up a live fundamentals API
+#
+# Tested on Python 3.8+.
