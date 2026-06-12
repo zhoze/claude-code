@@ -30,7 +30,8 @@ jobs:
           set -euxo pipefail
           chmod +x expressvpn.run
           ./expressvpn.run --noexec --keep --target xv
-          sudo bash xv/multi_arch_installer.sh --no-gui --skip-service
+          cd xv
+          sudo bash multi_arch_installer.sh --no-gui --skip-service
 
       - name: Activate, connect Estonia, verify exit IP
         env:
