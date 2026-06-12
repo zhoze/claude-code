@@ -12,6 +12,17 @@ jobs:
   estonia-vpn-check:
     runs-on: ubuntu-latest
     steps:
+      - name: Diagnose secret vs variable presence (lengths only)
+        env:
+          S: ${{ secrets.EXPRESSVPN_ACTIVATION_CODE }}
+          V: ${{ vars.EXPRESSVPN_ACTIVATION_CODE }}
+        run: |
+          echo "secret   EXPRESSVPN_ACTIVATION_CODE length: ${#S}"
+          echo "variable EXPRESSVPN_ACTIVATION_CODE length: ${#V}"
+          if [ -n "$S" ]; then echo "=> arrives as a SECRET"; \
+          elif [ -n "$V" ]; then echo "=> arrives as a VARIABLE (wrong tab)"; \
+          else echo "=> NOT present as either (wrong repo / environment / not saved)"; fi
+
       - name: Baseline egress IP (before VPN)
         run: curl -s https://ipinfo.io/json || true
 
@@ -31,16 +42,15 @@ jobs:
           chmod +x expressvpn.run
           ./expressvpn.run --noexec --keep --target xv
           cd xv
-          # installer refuses sudo; it escalates internally via passwordless sudo
           bash multi_arch_installer.sh --no-gui --skip-service
 
       - name: Activate, connect Estonia, verify exit IP
         env:
-          XV_CODE: ${{ secrets.EXPRESSVPN_ACTIVATION_CODE }}
+          XV_CODE: ${{ secrets.EXPRESSVPN_ACTIVATION_CODE || vars.EXPRESSVPN_ACTIVATION_CODE }}
         run: |
           set -uo pipefail
           if [ -z "${XV_CODE:-}" ]; then
-            echo "::error::EXPRESSVPN_ACTIVATION_CODE secret is not set"; exit 1
+            echo "::error::EXPRESSVPN_ACTIVATION_CODE not found as a secret or variable on this repo"; exit 1
           fi
           sudo nohup /opt/expressvpn/bin/expressvpn-daemon >/tmp/xvd.log 2>&1 &
           sleep 6
