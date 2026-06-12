@@ -1,0 +1,68 @@
+name: scan-viimsi
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - claude/cam103-photo-extraction-MN0wq
+    paths:
+      - .github/workflows/scan-viimsi.yml
+
+jobs:
+  estonia-vpn-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baseline egress IP (before VPN)
+        run: curl -s https://ipinfo.io/json || true
+
+      - name: Download ExpressVPN installer from Drive
+        run: |
+          set -euxo pipefail
+          FILEID=1Wcfq7-CdcE8N34KklWsEN_yRE5Fgdr39
+          curl -sL -A "Mozilla/5.0" \
+            "https://drive.usercontent.google.com/download?id=${FILEID}&export=download&confirm=t" \
+            -o expressvpn.run
+          ls -l expressvpn.run
+          file expressvpn.run
+
+      - name: Install ExpressVPN (headless)
+        run: |
+          set -euxo pipefail
+          chmod +x expressvpn.run
+          ./expressvpn.run --noexec --keep --target xv
+          sudo bash xv/multi_arch_installer.sh --no-gui --skip-service
+
+      - name: Activate, connect Estonia, verify exit IP
+        env:
+          XV_CODE: ${{ secrets.EXPRESSVPN_ACTIVATION_CODE }}
+        run: |
+          set -uo pipefail
+          if [ -z "${XV_CODE:-}" ]; then
+            echo "::error::EXPRESSVPN_ACTIVATION_CODE secret is not set"; exit 1
+          fi
+          sudo nohup /opt/expressvpn/bin/expressvpn-daemon >/tmp/xvd.log 2>&1 &
+          sleep 6
+          sudo /opt/expressvpn/bin/expressvpnctl background enable -t 20 || true
+          umask 077; printf '%s\n' "$XV_CODE" > code.txt
+          sudo /opt/expressvpn/bin/expressvpnctl login code.txt -t 90; rc=$?
+          rm -f code.txt
+          if [ "$rc" -ne 0 ]; then
+            echo "::error::ExpressVPN login failed (rc=$rc)"; sudo tail -n 40 /tmp/xvd.log || true; exit 1
+          fi
+          echo "Available Estonia region(s):"
+          sudo /opt/expressvpn/bin/expressvpnctl get regions 2>/dev/null | grep -i eston || true
+          sudo /opt/expressvpn/bin/expressvpnctl set region Estonia -t 30 || true
+          sudo /opt/expressvpn/bin/expressvpnctl connect Estonia -t 90 \
+            || sudo /opt/expressvpn/bin/expressvpnctl connect -t 90 || true
+          sleep 8
+          echo "Connection state:"
+          sudo /opt/expressvpn/bin/expressvpnctl get connectionstate || true
+          echo "Exit IP info:"
+          curl -s https://ipinfo.io/json || true
+          CC=$(curl -s https://ipinfo.io/country | tr -d '[:space:]')
+          echo "Exit country: $CC"
+          if [ "$CC" = "EE" ]; then
+            echo "SUCCESS: Estonian exit IP confirmed"
+          else
+            echo "::error::Exit IP is not Estonian (got '$CC')"; exit 1
+          fi
