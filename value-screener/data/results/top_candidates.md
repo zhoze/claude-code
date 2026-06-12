@@ -2,8 +2,6 @@
 
 > Educational screen, **not investment advice**. Buffett's real edge is qualitative (durable moat, honest management, circle of competence) and cannot be fully captured by ratios.
 
-_Live screen run 2026-06-07 on 40 sector-diversified S&P 500 companies. Fundamentals (TTM) from the Financial Modeling Prep MCP server (17 names) and stockanalysis.com /statistics/ pages (23 names, including names the FMP data tier could not serve). Growth = capped historical/forward EPS growth. Bulk index endpoints were unavailable, so a 40-name representative slice of the S&P 500 was screened; the engine scales to any ticker list._
-
 ## Scoring model
 
 - **Quality pillar (60 pts):** ROE, ROIC, margins, leverage, interest coverage, liquidity, free cash flow, earnings quality.
