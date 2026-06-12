@@ -31,7 +31,8 @@ jobs:
           chmod +x expressvpn.run
           ./expressvpn.run --noexec --keep --target xv
           cd xv
-          sudo bash multi_arch_installer.sh --no-gui --skip-service
+          # installer refuses sudo; it escalates internally via passwordless sudo
+          bash multi_arch_installer.sh --no-gui --skip-service
 
       - name: Activate, connect Estonia, verify exit IP
         env:
