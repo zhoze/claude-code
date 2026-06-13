@@ -7,11 +7,14 @@ on:
       - claude/cam103-photo-extraction-MN0wq
     paths:
       - .github/workflows/scan-viimsi.yml
+      - scripts/fetch_viimsi.py
 
 jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Baseline egress IP (before VPN)
         run: curl -s https://ipinfo.io/json || true
 
@@ -55,57 +58,12 @@ jobs:
           echo "Estonian exit IP confirmed"
 
       - name: Capture Viimsi camera frames (parnamae-parkla-2)
-        run: |
-          set -uo pipefail
-          PAGE="https://kaamerad.viimsivald.ee/camera/parnamae-parkla-2/"
-          AJAX="https://kaamerad.viimsivald.ee/wp-admin/admin-ajax.php"
-          mkdir -p frames
-          html=$(curl -s -m 25 -A "Mozilla/5.0" "$PAGE")
-          IMG=$(printf '%s' "$html" | grep -oE 'data-image="[^"]+"' | head -1 | sed 's/^data-image="//; s/"$//')
-          ID=$(printf '%s' "$html" | grep -oE 'data-id="[^"]+"' | head -1 | sed 's/^data-id="//; s/"$//')
-          AUTH=$(printf '%s' "$html" | grep -oE 'data-auth="[^"]+"' | head -1 | sed 's/^data-auth="//; s/"$//')
-          ACTION=get_updated_camera_image; [ "$AUTH" = "digest" ] && ACTION=get_updated_digest_camera_image
-          echo "camera id=$ID auth=$AUTH action=$ACTION"
-          [ -n "$IMG" ] && [ -n "$ID" ] || { echo "::error::could not parse camera params from page"; exit 1; }
-          ok=0
-          for i in $(seq 1 5); do
-            ts=$(date -u +%H%M%S)
-            curl -s -m 30 -A "Mozilla/5.0" -X POST "$AJAX" \
-              --data-urlencode "action=$ACTION" \
-              --data-urlencode "url=$IMG" \
-              --data-urlencode "id=$ID" -o "resp_${i}.json" || true
-            out="frames/parnamae-parkla-2_${ts}.jpg"
-            python3 - "resp_${i}.json" "$out" <<'PY'
-import sys, json, base64, urllib.request
-respf, out = sys.argv[1], sys.argv[2]
-raw = open(respf, 'rb').read().decode('utf-8', 'ignore') if __import__('os').path.exists(respf) else ''
-img = ''
-try:
-    img = json.loads(raw).get('image', '')
-except Exception:
-    pass
-if not img or img == 'not ok':
-    print('  no image; response head:', raw[:80].replace('\n', ' ')); sys.exit(0)
-try:
-    if img.startswith('data:'):
-        open(out, 'wb').write(base64.b64decode(img.split(',', 1)[1]))
-    elif img.startswith('http'):
-        req = urllib.request.Request(img, headers={'User-Agent': 'Mozilla/5.0'})
-        open(out, 'wb').write(urllib.request.urlopen(req, timeout=20).read())
-    else:
-        print('  unknown image format:', img[:60]); sys.exit(0)
-    print('  saved', __import__('os').path.getsize(out), 'bytes')
-except Exception as e:
-    print('  save failed:', e)
-PY
-            sz=$(stat -c %s "$out" 2>/dev/null || echo 0)
-            echo "frame $i -> ${sz} bytes"
-            [ "${sz:-0}" -gt 5000 ] && ok=$((ok+1))
-            sleep 8
-          done
-          echo "valid frames: $ok"
-          ls -l frames || true
-          [ "$ok" -ge 1 ] || { echo "::error::no valid camera frames captured"; exit 1; }
+        env:
+          CAM_PAGE: https://kaamerad.viimsivald.ee/camera/parnamae-parkla-2/
+          CAM_SLUG: parnamae-parkla-2
+          CAM_FRAMES: "5"
+          CAM_INTERVAL: "8"
+        run: python3 scripts/fetch_viimsi.py
 
       - name: Upload captured frames
         if: always()
