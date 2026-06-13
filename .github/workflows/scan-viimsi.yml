@@ -9,20 +9,9 @@ on:
       - .github/workflows/scan-viimsi.yml
 
 jobs:
-  estonia-vpn-check:
+  scan:
     runs-on: ubuntu-latest
     steps:
-      - name: Diagnose secret vs variable presence (lengths only)
-        env:
-          S: ${{ secrets.EXPRESSVPN_ACTIVATION_CODE }}
-          V: ${{ vars.EXPRESSVPN_ACTIVATION_CODE }}
-        run: |
-          echo "secret   EXPRESSVPN_ACTIVATION_CODE length: ${#S}"
-          echo "variable EXPRESSVPN_ACTIVATION_CODE length: ${#V}"
-          if [ -n "$S" ]; then echo "=> arrives as a SECRET"; \
-          elif [ -n "$V" ]; then echo "=> arrives as a VARIABLE (wrong tab)"; \
-          else echo "=> NOT present as either (wrong repo / environment / not saved)"; fi
-
       - name: Baseline egress IP (before VPN)
         run: curl -s https://ipinfo.io/json || true
 
@@ -33,7 +22,6 @@ jobs:
           curl -sL -A "Mozilla/5.0" \
             "https://drive.usercontent.google.com/download?id=${FILEID}&export=download&confirm=t" \
             -o expressvpn.run
-          ls -l expressvpn.run
           file expressvpn.run
 
       - name: Install ExpressVPN (headless)
@@ -44,37 +32,60 @@ jobs:
           cd xv
           bash multi_arch_installer.sh --no-gui --skip-service
 
-      - name: Activate, connect Estonia, verify exit IP
+      - name: Activate & connect Estonia
         env:
-          XV_CODE: ${{ secrets.EXPRESSVPN_ACTIVATION_CODE || vars.EXPRESSVPN_ACTIVATION_CODE }}
+          XV_CODE: ${{ secrets.EXPRESSVPN_ACTIVATION_CODE }}
         run: |
           set -uo pipefail
-          if [ -z "${XV_CODE:-}" ]; then
-            echo "::error::EXPRESSVPN_ACTIVATION_CODE not found as a secret or variable on this repo"; exit 1
-          fi
+          if [ -z "${XV_CODE:-}" ]; then echo "::error::EXPRESSVPN_ACTIVATION_CODE not set"; exit 1; fi
           sudo nohup /opt/expressvpn/bin/expressvpn-daemon >/tmp/xvd.log 2>&1 &
           sleep 6
           sudo /opt/expressvpn/bin/expressvpnctl background enable -t 20 || true
           umask 077; printf '%s\n' "$XV_CODE" > code.txt
           sudo /opt/expressvpn/bin/expressvpnctl login code.txt -t 90; rc=$?
           rm -f code.txt
-          if [ "$rc" -ne 0 ]; then
-            echo "::error::ExpressVPN login failed (rc=$rc)"; sudo tail -n 40 /tmp/xvd.log || true; exit 1
-          fi
-          echo "Available Estonia region(s):"
-          sudo /opt/expressvpn/bin/expressvpnctl get regions 2>/dev/null | grep -i eston || true
-          sudo /opt/expressvpn/bin/expressvpnctl set region Estonia -t 30 || true
-          sudo /opt/expressvpn/bin/expressvpnctl connect Estonia -t 90 \
-            || sudo /opt/expressvpn/bin/expressvpnctl connect -t 90 || true
+          if [ "$rc" -ne 0 ]; then echo "::error::login failed"; sudo tail -n 40 /tmp/xvd.log; exit 1; fi
+          sudo /opt/expressvpn/bin/expressvpnctl set region estonia -t 30 || true
+          sudo /opt/expressvpn/bin/expressvpnctl connect estonia -t 90 || true
           sleep 8
-          echo "Connection state:"
           sudo /opt/expressvpn/bin/expressvpnctl get connectionstate || true
-          echo "Exit IP info:"
-          curl -s https://ipinfo.io/json || true
           CC=$(curl -s https://ipinfo.io/country | tr -d '[:space:]')
           echo "Exit country: $CC"
-          if [ "$CC" = "EE" ]; then
-            echo "SUCCESS: Estonian exit IP confirmed"
-          else
-            echo "::error::Exit IP is not Estonian (got '$CC')"; exit 1
-          fi
+          [ "$CC" = "EE" ] || { echo "::error::exit IP not Estonian ($CC)"; exit 1; }
+          echo "Estonian exit IP confirmed"
+
+      - name: Capture Viimsi camera frames (parnamae-parkla-2)
+        run: |
+          set -uo pipefail
+          PAGE="https://kaamerad.viimsivald.ee/camera/parnamae-parkla-2/"
+          mkdir -p frames
+          html=$(curl -s -m 25 -A "Mozilla/5.0" "$PAGE")
+          IMG=$(printf '%s' "$html" | grep -oE 'data-image="[^"]+"' | head -1 | sed 's/^data-image="//; s/"$//')
+          if [ -z "$IMG" ]; then echo "::error::camera image URL not found on page"; exit 1; fi
+          # split credentials from URL (do not echo creds)
+          CREDS=$(printf '%s' "$IMG" | sed -E 's#^https?://([^@]+)@.*#\1#')
+          URL=$(printf '%s' "$IMG" | sed -E 's#^(https?://)[^@]+@#\1#')
+          echo "camera endpoint: $URL"
+          ok=0
+          for i in $(seq 1 6); do
+            ts=$(date -u +%H%M%S)
+            if curl -s --digest -u "$CREDS" -m 15 "$URL" -o "frames/parnamae-parkla-2_${ts}.jpg"; then
+              sz=$(stat -c %s "frames/parnamae-parkla-2_${ts}.jpg" 2>/dev/null || echo 0)
+              echo "frame $i -> ${sz} bytes"
+              [ "${sz:-0}" -gt 5000 ] && ok=$((ok+1))
+            else
+              echo "frame $i -> fetch failed"
+            fi
+            sleep 4
+          done
+          echo "valid frames: $ok"
+          ls -l frames || true
+          [ "$ok" -ge 1 ] || { echo "::error::no valid camera frames captured"; exit 1; }
+
+      - name: Upload captured frames
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: viimsi-parnamae-parkla-2-frames
+          path: frames/
+          if-no-files-found: warn
