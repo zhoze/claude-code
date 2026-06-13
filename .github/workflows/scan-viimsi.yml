@@ -57,18 +57,18 @@ jobs:
           [ "$CC" = "EE" ] || { echo "::error::exit IP not Estonian ($CC)"; exit 1; }
           echo "Estonian exit IP confirmed"
 
-      - name: Capture Viimsi camera frames (parnamae-parkla-2)
+      - name: Capture Viimsi camera frames (viimsi-artiumi-ulekaigurada)
         env:
-          CAM_PAGE: https://kaamerad.viimsivald.ee/camera/parnamae-parkla-2/
-          CAM_SLUG: parnamae-parkla-2
-          CAM_FRAMES: "5"
-          CAM_INTERVAL: "8"
+          CAM_PAGE: https://kaamerad.viimsivald.ee/camera/viimsi-artiumi-ulekaigurada/
+          CAM_SLUG: viimsi-artiumi-ulekaigurada
+          CAM_FRAMES: "18"
+          CAM_INTERVAL: "10"
         run: python3 scripts/fetch_viimsi.py
 
       - name: Upload captured frames
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: viimsi-parnamae-parkla-2-frames
+          name: viimsi-artiumi-ulekaigurada-frames
           path: frames/
           if-no-files-found: warn
