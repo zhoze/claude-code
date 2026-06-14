@@ -26,6 +26,35 @@ python3 -m http.server 8000   # then open http://localhost:8000
 Or open `index.html` directly — it runs offline on the bundled demo universe
 (~60 large-cap US tickers + the Treasury curve).
 
+## Command-line (CLI)
+
+`cli.js` runs the **same engine** from the terminal — no browser needed.
+
+```bash
+# from the stock-screener/ directory:
+node cli.js AAPL                  # bundled demo data (offline; may be stale)
+node cli.js ADBE --price 204.02 --sma50 244.89 --sma200 298.34 --rsi 29.38 \
+            --beta 1.40 --perf-month -18 --perf-ytd -30 --volume 6857428 \
+            --pe 11.67 --roic 59.7        # fresh data you provide
+node cli.js ADBE --live           # fetch fresh data from FMP (needs FMP_API_KEY)
+node cli.js --screen              # score the whole demo universe (+ bond banner)
+node cli.js --list                # list demo tickers
+node cli.js --help
+```
+
+Install the **`magic`** keyword globally (optional):
+
+```bash
+cd stock-screener && npm link     # then: magic ADBE --live   ·   magic --screen
+```
+
+The CLI prints the full directional read — Blue-Line territory, Magic Lines gate,
+Trading Zone, Magic Candle, HTR Ribbon, the Five Ingredients and the 0–100 Magic
+score — plus the **Magic Eight Dimensions℠ 8D weighted-risk** breakdown. Pass
+fresh numbers via flags (or `--live`) so the read reflects current data, not the
+stale demo snapshot. **Educational risk model — no buy/sell signals, not
+investment advice.**
+
 ## The Magic Trader model
 
 Magic Trader Elite frames the market as a contest between **bullish believers**
