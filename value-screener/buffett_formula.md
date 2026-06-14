@@ -148,7 +148,39 @@ of the method.
 
 ---
 
-## 6. How the score becomes a verdict
+## 6. Forward-return estimates (expected return & time-to-target)
+
+Margin of safety says *how cheap* a stock is, not *what return* that implies or
+*how long* it might take. These three optional metrics translate the gap into
+return terms. They reuse the DCF intrinsic value (§4a) and the discount rate `r`.
+
+```
+Upside to value          = Intrinsic / Price − 1            (total % to fair value)
+
+Expected return / year   = (1 + r) · (Intrinsic / Price)^(1/H) − 1
+                           where H = horizon_years (default 5)
+
+Years to +target%        = ln(1 + target) / ln(1 + Expected return/year)
+                           target default = 35%
+```
+
+The logic: a DCF asset bought *at* fair value earns the discount rate `r` per
+year. Buying at a discount adds a one-time revaluation, which — spread over `H`
+years of convergence to intrinsic value — lifts the annual return. `horizon_years`
+and `target_gain` live in `config.json`.
+
+> ⚠️ **These are model estimates, not predictions.** They assume the price
+> actually reaches the screen's *estimated* intrinsic value within the horizon.
+> A cheap stock can stay cheap for years, and the intrinsic-value estimate itself
+> can be wrong (the screen is quantitative; it can't see a broken moat). Stocks
+> trading **above** intrinsic value have negative upside and no time-to-target
+> (you'd never reach a positive gain at a negative expected return). Worked
+> example (2026-06-14): ADBE at $204 vs. ~$486 intrinsic → +138% upside,
+> ~30%/yr expected over 5 years, ≈1.2 years to +35%.
+
+---
+
+## 7. How the score becomes a verdict
 
 ```
 Buffett score (0-100) = Quality pillar (0-60) + Valuation pillar (0-40)

@@ -206,12 +206,36 @@ def valuation_score(row, cfg, mos):
     return score
 
 
+def expected_return_metrics(intrinsic, price, cfg):
+    """Forward-return estimates derived from the screen's own DCF.
+
+    Assumes price converges to intrinsic value over `horizon_years`, while
+    intrinsic value itself compounds at the discount rate (a standard DCF
+    property). Returns (upside_to_intrinsic, expected_return_annual,
+    years_to_target). These are MODEL ESTIMATES, not predictions of price or
+    timing - a cheap stock can stay cheap, or the value estimate can be wrong.
+    """
+    er = cfg.get("expected_return", {})
+    horizon = er.get("horizon_years", 5)
+    target = er.get("target_gain", 0.35)
+    if intrinsic is None or price is None or price <= 0 or intrinsic <= 0:
+        return None, None, None
+    r = cfg["valuation"]["discount_rate"]
+    ratio = intrinsic / price
+    upside = ratio - 1.0
+    expected_annual = (1 + r) * ratio ** (1.0 / horizon) - 1.0
+    years = math.log(1 + target) / math.log(1 + expected_annual) if expected_annual > 0 else None
+    return upside, expected_annual, years
+
+
 def score_company(row, cfg):
     q_points, failed, statuses = quality_score(row, cfg)
 
     iv_dcf = intrinsic_value_dcf(row, cfg)
     iv_graham = graham_formula_value(row, cfg)
     mos = margin_of_safety(iv_dcf, row.get("price"))
+    upside, expected_annual, years_to_target = expected_return_metrics(
+        iv_dcf, row.get("price"), cfg)
 
     v_points = valuation_score(row, cfg, mos)
     total = round(q_points + v_points, 1)
@@ -238,6 +262,9 @@ def score_company(row, cfg):
         "graham_value": None if iv_graham is None else round(iv_graham, 2),
         "graham_number": row.get("graham_number"),
         "margin_of_safety": None if mos is None else round(mos, 4),
+        "upside_to_intrinsic": None if upside is None else round(upside, 4),
+        "expected_return_annual": None if expected_annual is None else round(expected_annual, 4),
+        "years_to_target": None if years_to_target is None else round(years_to_target, 1),
         "verdict": verdict,
         "failed_gates": "; ".join(failed) if failed else "",
     }
@@ -248,7 +275,8 @@ def score_company(row, cfg):
 # --------------------------------------------------------------------------- #
 RESULT_COLUMNS = [
     "rank", "symbol", "name", "sector", "price", "intrinsic_value_dcf",
-    "graham_value", "graham_number", "margin_of_safety", "quality_score",
+    "graham_value", "graham_number", "margin_of_safety", "upside_to_intrinsic",
+    "expected_return_annual", "years_to_target", "quality_score",
     "valuation_score", "buffett_score", "verdict", "failed_gates",
 ]
 
@@ -278,6 +306,10 @@ def _fmt_money(x):
     return "n/a" if x is None else f"${x:,.2f}"
 
 
+def _fmt_years(x):
+    return "n/a" if x is None else f"{x:.1f}"
+
+
 def write_markdown(results, cfg, path, source_note=""):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     strong = [r for r in results if r["verdict"] == "Strong Candidate"]
@@ -300,32 +332,46 @@ def write_markdown(results, cfg, path, source_note=""):
     lines.append(f"- **Verdict:** Strong Candidate >= {cfg['verdict']['strong_score']} "
                  f"(and core gates pass), Watch >= {cfg['verdict']['watch_score']}, else Pass.\n")
 
+    er = cfg.get("expected_return", {})
+    horizon = er.get("horizon_years", 5)
+    tgt = int(round(er.get("target_gain", 0.35) * 100))
+    lines.append("## Forward-return estimates (model, not predictions)\n")
+    lines.append(f"- **Upside to value** = intrinsic ÷ price − 1 (total % to reach DCF fair value).")
+    lines.append(f"- **Exp. return/yr** = annualized return *if* price converges to intrinsic value "
+                 f"over {horizon} years (intrinsic itself compounds at the discount rate).")
+    lines.append(f"- **Yrs to +{tgt}%** = time to a +{tgt}% gain at that expected annual return.")
+    lines.append("> ⚠️ These assume the price reaches the screen's *estimated* intrinsic value — a "
+                 "cheap stock can stay cheap, or the estimate can be wrong. Not a forecast of price "
+                 "or timing, and not investment advice.\n")
+
     def table(title, group):
         lines.append(f"## {title} ({len(group)})\n")
         if not group:
             lines.append("_None in this run._\n")
             return
-        lines.append("| Rank | Ticker | Company | Sector | Score | Price | Intrinsic (DCF) | Margin of Safety | Failed gates |")
-        lines.append("|---:|:--|:--|:--|---:|---:|---:|---:|:--|")
+        lines.append(f"| Rank | Ticker | Company | Sector | Score | Price | Intrinsic (DCF) | "
+                     f"Margin of Safety | Upside to value | Exp. return/yr | Yrs to +{tgt}% | Failed gates |")
+        lines.append("|---:|:--|:--|:--|---:|---:|---:|---:|---:|---:|---:|:--|")
         for r in group:
             lines.append(
                 f"| {r['rank']} | {r['symbol']} | {r['name']} | {r['sector']} | "
                 f"{r['buffett_score']:.1f} | {_fmt_money(r['price'])} | "
                 f"{_fmt_money(r['intrinsic_value_dcf'])} | {_fmt_pct(r['margin_of_safety'])} | "
-                f"{r['failed_gates'] or '-'} |")
+                f"{_fmt_pct(r['upside_to_intrinsic'])} | {_fmt_pct(r['expected_return_annual'])} | "
+                f"{_fmt_years(r['years_to_target'])} | {r['failed_gates'] or '-'} |")
         lines.append("")
 
     table("Strong Candidates", strong)
     table("Watch List", watch)
 
     lines.append("## Full ranking\n")
-    lines.append("| Rank | Ticker | Score | Quality | Valuation | MOS | Verdict |")
+    lines.append(f"| Rank | Ticker | Score | MOS | Exp. return/yr | Yrs to +{tgt}% | Verdict |")
     lines.append("|---:|:--|---:|---:|---:|---:|:--|")
     for r in results:
         lines.append(
             f"| {r['rank']} | {r['symbol']} | {r['buffett_score']:.1f} | "
-            f"{r['quality_score']:.1f} | {r['valuation_score']:.1f} | "
-            f"{_fmt_pct(r['margin_of_safety'])} | {r['verdict']} |")
+            f"{_fmt_pct(r['margin_of_safety'])} | {_fmt_pct(r['expected_return_annual'])} | "
+            f"{_fmt_years(r['years_to_target'])} | {r['verdict']} |")
     lines.append("")
 
     with open(path, "w") as fh:
@@ -369,6 +415,13 @@ def selftest():
     assert by_sym["GOOD"]["margin_of_safety"] > 0, by_sym["GOOD"]
     assert by_sym["BAD"]["verdict"] == "Pass", by_sym["BAD"]
     assert by_sym["BAD"]["buffett_score"] < 30, by_sym["BAD"]
+
+    # Forward-return metrics: the cheap GOOD has upside, a positive expected
+    # return, and a finite time-to-target; the expensive BAD does not.
+    assert by_sym["GOOD"]["upside_to_intrinsic"] > 0, by_sym["GOOD"]
+    assert by_sym["GOOD"]["expected_return_annual"] > 0, by_sym["GOOD"]
+    assert by_sym["GOOD"]["years_to_target"] is not None, by_sym["GOOD"]
+    assert by_sym["BAD"]["years_to_target"] is None, by_sym["BAD"]
 
     # Net-cash override: negative net debt passes the leverage gate.
     pts, status = evaluate_gate({"net_debt_to_ebitda": -1.0}, cfg["quality_gates"][4])

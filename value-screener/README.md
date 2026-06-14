@@ -24,6 +24,12 @@ Buffett score** plus a verdict (**Strong Candidate / Watch / Pass**):
 3. **Margin of safety (40 pts)** — only a bargain if price sits well below
    intrinsic value (Graham's ≥ 25% discount), with a P/E penalty for overpaying.
 
+It also reports **forward-return estimates** per name — *upside to intrinsic
+value*, an *expected annual return* (assuming convergence to the DCF value over a
+configurable horizon), and *years to a target gain* (default +35%). These are
+model estimates, **not** predictions of price or timing — see §6 of
+[`buffett_formula.md`](buffett_formula.md).
+
 The full formula, every threshold, and the sourced rationale are in
 **[`buffett_formula.md`](buffett_formula.md)**.
 
