@@ -2,7 +2,7 @@
 
 > Educational screen, **not investment advice**. Buffett's real edge is qualitative (durable moat, honest management, circle of competence) and cannot be fully captured by ratios.
 
-_Live screen run 2026-06-14 on 40 sector-diversified S&P 500 companies; fundamentals and prices from stockanalysis.com /statistics/ pages. Forward-return columns are model estimates assuming convergence to intrinsic value, not predictions._
+_Live screen 2026-06-14; fundamentals/prices from stockanalysis.com. Forward-return columns are model estimates. Risk notes are fresh-news bear cases (dated/sourced) in data/risk_notes.json._
 
 ## Scoring model
 
@@ -102,3 +102,112 @@ _Live screen run 2026-06-14 on 40 sector-diversified S&P 500 companies; fundamen
 | 38 | ABBV | 36.0 | -303.6% | -17.5% | n/a | Pass |
 | 39 | UNH | 29.5 | -10.9% | 6.8% | 4.6 | Pass |
 | 40 | CVX | 28.0 | -17.1% | 5.6% | 5.5 | Pass |
+
+## Why it's cheap - key risks (fresh news)
+
+> The screen is quantitative; a low price often reflects a real risk it can't measure (a broken moat, a credit cycle, a pending deal). These dated, sourced notes are the bear case to weigh against the score. **News goes stale - check the date.**
+
+### 1. META - Meta Platforms  (Strong Candidate, score 96) — _as of 2026-06-14_
+
+Near the lower third of its 52-week range (~28% off peak) on AI-capex fears rather than ad weakness.
+
+- Massive AI/datacenter capex crushing near-term free cash flow with uncertain payoff; a possible equity raise threatens dilution
+- Reality Labs still burning ~$6B/quarter (>$75B cumulative losses since 2020)
+- Ad-growth deceleration or a capex scare could compress the multiple toward ~20-22x
+- Ongoing regulatory scrutiny
+
+Sources: [Investing.com - Meta capex fears explain the lag](https://www.investing.com/analysis/meta-capex-fears-explain-why-the-stock-is-lagging-the-market-rally-200682088) · [Cryptonomist - AI spending fears erase earnings beat](https://en.cryptonomist.ch/2026/06/09/meta-platforms-stock-drops-as-ai-spending-fears-erase-a-57-earnings-beat/)
+
+### 2. ADBE - Adobe  (Strong Candidate, score 96) — _as of 2026-06-14_
+
+Down ~60% from its 2024 peak: the market is pricing AI disruption to Adobe's creative moat, not weak fundamentals (EPS still growing ~19%, ~30% margins).
+
+- Generative-AI rivals (OpenAI Sora, Midjourney, Canva, Figma, Google, Anthropic) encroaching on core creative tools
+- Revenue growth slowed to ~10%; AI/Firefly monetization still modest vs AI-native competitors
+- Long-time CEO Shantanu Narayen stepping down - leadership transition at a critical moment
+- Pending Semrush acquisition + $25B buyback raise capital-allocation questions
+
+Sources: [Motley Fool - Is Adobe an undervalued stock to buy?](https://www.fool.com/investing/2026/05/26/is-adobe-stock-an-undervalued-stock-to-buy/) · [TIKR - Adobe down 24% in 2026, $25B buyback](https://www.tikr.com/blog/adobe-stock-is-down-24-in-2026-does-the-25-billion-buyback-change-the-math) · [Yahoo Finance - Assessing Adobe valuation, AI & CEO shift](https://finance.yahoo.com/markets/stocks/articles/assessing-adobe-adbe-valuation-earnings-140848800.html)
+
+### 3. MSFT - Microsoft  (Strong Candidate, score 82) — _as of 2026-06-14_
+
+Well off its $551 high; the ~$190B FY26 AI capex program is simultaneously the bull and the bear case.
+
+- Record AI capex ($30.9B in a single quarter, +84% YoY) must convert into revenue; margin-compression risk
+- OpenAI-related losses a growing GAAP drag (~$3.1B in Q1 FY26 vs $0.5B prior year)
+- Analysts (e.g. Stifel) warn Azure growth expectations may be too optimistic; component-cost headwinds
+- Regulatory scrutiny in the US and EU
+
+Sources: [Investing.com - Microsoft's $190B AI bet, bull & bear](https://www.investing.com/analysis/microsofts-190-billion-ai-bet-is-both-the-bull-case-and-bear-case-200682005) · [TIKR - MSFT AI ARR grew 123% to $37B](https://www.tikr.com/blog/microsoft-stock-is-down-8-over-the-past-year-while-ai-arr-grew-123-to-37-billion-heres-what-investors-need-to-know)
+
+### 4. DIS - Disney  (Watch, score 82) — _as of 2026-06-14_
+
+Trades below most DCF fair-value estimates; near-term operational headwinds temper the streaming-inflection thesis.
+
+- Streaming profitability inflection must keep delivering the projected double-digit EPS growth
+- ESPN flagship streaming launch and sports-rights costs (NFL) carry execution risk
+- Continued linear-TV decline; mixed recent share performance
+
+Sources: [Investing.com - Disney SWOT, mixed signals](https://www.investing.com/news/swot-analysis/walt-disneys-swot-analysis-stock-faces-mixed-signals-amid-streaming-gains-93CH-4705706) · [Yahoo Finance - Assessing Disney valuation & ESPN](https://finance.yahoo.com/markets/stocks/articles/assessing-walt-disney-dis-valuation-201054371.html)
+
+### 5. COP - ConocoPhillips  (Watch, score 79) — _as of 2026-06-14_
+
+Trades near 52-week highs while earnings power has compressed - classic commodity-price sensitivity.
+
+- Q1 2026 net income fell ~23% YoY as realized prices slipped to ~$50.36/BOE
+- Oil-price sensitivity; a bear case lands near $105 (about -17%)
+- Impairment risk on long-lived assets in prolonged low-price periods
+
+Sources: [24/7 Wall St - COP a hold as target trails](https://247wallst.com/investing/2026/05/04/despite-soaring-46-conocophillips-is-a-hold-as-price-target-trails/) · [ConocoPhillips Q1 2026 8-K (SEC)](https://www.sec.gov/Archives/edgar/data/0001163165/000116316526000016/cop-20260430x8kexx991.htm)
+
+### 6. AXP - American Express  (Watch, score 78) — _as of 2026-06-14_
+
+Premium multiple (~17x vs peers under 9x); risk is credit normalization plus a premium-spend rollover.
+
+- Credit-loss provisions +11% YoY to ~$1.4B; rising delinquencies in lower tiers
+- ~27% margins depend on marketing efficiency and rewards costs - small increases pressure margins fast
+- Premium-card competition (e.g. Robinhood's $695 Platinum); spend softens if labor market weakens
+
+Sources: [TIKR - Why analysts flag AXP valuation risk](https://www.tikr.com/blog/american-express-stock-outlook-why-analysts-flag-valuation-risk-in-2026) · [24/7 Wall St - V/MA/AXP down double digits: buy or trap?](https://247wallst.com/investing/2026/04/28/visa-mastercard-american-express-are-down-by-double-digits-in-2026-buying-opportunity-or-trap/)
+
+### 7. BAC - Bank of America  (Watch, score 75) — _as of 2026-06-14_
+
+DCF screens ~20% undervalued, but net-interest-income/margin growth is limited and regulatory risk looms.
+
+- Limited NII/margin growth; the 6-8% NII guide assumes steady rates and is vulnerable to a flatter curve
+- Early-2026 proposals to cap credit-card rates at 10% threaten consumer-segment profitability
+- Underperformance vs the S&P 500; high rate sensitivity
+
+Sources: [Simply Wall St - Bank of America valuation after Q1](https://simplywall.st/stocks/us/banks/nyse-bac/bank-of-america) · [Yahoo Finance - BAC valuation after strong Q1](https://finance.yahoo.com/markets/stocks/articles/bank-america-bac-stock-valuation-081619211.html)
+
+### 8. JPM - JPMorgan Chase  (Strong Candidate, score 73) — _as of 2026-06-14_
+
+Trades at a premium-to-peers multiple; the risk is a de-rating to a 'plain lender' if the consumer-credit cycle deteriorates.
+
+- Lowered 2026 net-interest-income guidance (to ~$103B from ~$104.5B)
+- Card Services net charge-offs guided ~3.4%; consumer-credit-cycle exposure
+- Multiple compression risk if the ~$105B spend is seen as failing to buffer a hard landing
+- Dimon flags geopolitical tensions, fiscal deficits and elevated asset prices
+
+Sources: [TIKR - JPM cuts NII guidance despite earnings beat](https://www.tikr.com/blog/jpmorgan-chase-nyse-stock-falls-as-bank-lowers-net-interest-income-guidance-despite-earnings-beat) · [CNBC - JPMorgan Q1 2026 earnings](https://www.cnbc.com/2026/04/14/jpmorgan-chase-jpm-earnings-1q-2026.html)
+
+### 9. MO - Altria Group  (Watch, score 72) — _as of 2026-06-14_
+
+Optically cheap on a high dividend yield, but the bear case is a structurally shrinking core - cigarette volumes fell ~10%.
+
+- Domestic cigarette shipments down ~10%; raising prices on declining volume seen as unsustainable
+- Smoke-free diversification still lagging peers (PM, BAT)
+- EPS growth guided to just ~2.5-5.5%; some analysts call it slightly overvalued vs that growth
+
+Sources: [Motley Fool - Major long-term risk facing Altria](https://www.fool.com/investing/2026/03/31/the-major-long-term-risk-facing-altria-stock-in-20/) · [TIKR - Is Altria overvalued at $72?](https://www.tikr.com/blog/is-altria-stock-overvalued-at-72-in-2026)
+
+### 10. UNP - Union Pacific  (Strong Candidate, score 72) — _as of 2026-06-14_
+
+Overhang from the ~$72B Norfolk Southern merger - regulators (STB) paused the review on May 28, 2026.
+
+- Regulatory/antitrust risk: STB paused its review, DOJ skeptical, rivals BNSF/CN/CSX opposing
+- Integration/execution risk - synergy delivery uncertain on the biggest rail deal ever
+- Elevated debt; a collapsed deal could mean a reported ~$2.5B breakup fee
+- Freight-volume sensitivity to the economy
+
+Sources: [Bloomberg - UNP/NSC tumble as regulator pauses review](https://www.bloomberg.com/news/articles/2026-05-28/union-pacific-norfolk-tumble-as-regulator-pauses-merger-review) · [Globe and Mail - merger execution & credit risk](https://www.theglobeandmail.com/investing/markets/stocks/UNP/pressreleases/93833/union-pacificnorfolk-southern-merger-faces-high-execution-risk-potential-credit-pressure-and-cost-overruns/)

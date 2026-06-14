@@ -38,6 +38,7 @@ DEFAULT_CONFIG = os.path.join(HERE, "config.json")
 DEFAULT_INPUT = os.path.join(HERE, "data", "fundamentals.csv")
 DEFAULT_CSV_OUT = os.path.join(HERE, "data", "results", "screen_results.csv")
 DEFAULT_MD_OUT = os.path.join(HERE, "data", "results", "top_candidates.md")
+DEFAULT_RISK_NOTES = os.path.join(HERE, "data", "risk_notes.json")
 
 # Columns the engine understands. Missing/blank values are treated as None and
 # handled gracefully (a gate with no data is reported as "n/a", not a failure).
@@ -267,6 +268,8 @@ def score_company(row, cfg):
         "years_to_target": None if years_to_target is None else round(years_to_target, 1),
         "verdict": verdict,
         "failed_gates": "; ".join(failed) if failed else "",
+        "risk_note_date": "",
+        "risk_note": "",
     }
 
 
@@ -278,7 +281,33 @@ RESULT_COLUMNS = [
     "graham_value", "graham_number", "margin_of_safety", "upside_to_intrinsic",
     "expected_return_annual", "years_to_target", "quality_score",
     "valuation_score", "buffett_score", "verdict", "failed_gates",
+    "risk_note_date", "risk_note",
 ]
+
+
+def load_risk_notes(path):
+    """Load fresh-news 'why it's cheap' notes (optional). Returns {ticker: note}.
+
+    The engine is offline and does NOT fetch news itself - notes are gathered at
+    screen time and stored, dated and sourced, in data/risk_notes.json. Missing
+    or malformed file -> no notes (the screen still runs).
+    """
+    if not path or not os.path.exists(path):
+        return {}
+    try:
+        with open(path) as fh:
+            data = json.load(fh)
+        return {k.upper(): v for k, v in data.get("notes", {}).items()}
+    except (ValueError, OSError):
+        return {}
+
+
+def attach_risk_notes(results, notes):
+    for r in results:
+        note = notes.get(r["symbol"].upper())
+        if note:
+            r["risk_note"] = note.get("summary", "")
+            r["risk_note_date"] = note.get("as_of", "")
 
 
 def screen(rows, cfg):
@@ -310,8 +339,9 @@ def _fmt_years(x):
     return "n/a" if x is None else f"{x:.1f}"
 
 
-def write_markdown(results, cfg, path, source_note=""):
+def write_markdown(results, cfg, path, source_note="", notes=None):
     os.makedirs(os.path.dirname(path), exist_ok=True)
+    notes = notes or {}
     strong = [r for r in results if r["verdict"] == "Strong Candidate"]
     watch = [r for r in results if r["verdict"] == "Watch"]
 
@@ -373,6 +403,29 @@ def write_markdown(results, cfg, path, source_note=""):
             f"{_fmt_pct(r['margin_of_safety'])} | {_fmt_pct(r['expected_return_annual'])} | "
             f"{_fmt_years(r['years_to_target'])} | {r['verdict']} |")
     lines.append("")
+
+    # Fresh-news risk notes: the qualitative bear case a ratio screen can't see.
+    noted = [r for r in results if notes.get(r["symbol"].upper())]
+    if noted:
+        lines.append("## Why it's cheap - key risks (fresh news)\n")
+        lines.append("> The screen is quantitative; a low price often reflects a real "
+                     "risk it can't measure (a broken moat, a credit cycle, a pending deal). "
+                     "These dated, sourced notes are the bear case to weigh against the score. "
+                     "**News goes stale - check the date.**\n")
+        for r in noted:
+            note = notes[r["symbol"].upper()]
+            lines.append(f"### {r['rank']}. {r['symbol']} - {r['name']}  "
+                         f"({r['verdict']}, score {r['buffett_score']:.0f}) — _as of {note.get('as_of','n/a')}_\n")
+            if note.get("summary"):
+                lines.append(f"{note['summary']}\n")
+            for risk in note.get("key_risks", []):
+                lines.append(f"- {risk}")
+            srcs = note.get("sources", [])
+            if srcs:
+                lines.append("")
+                lines.append("Sources: " + " · ".join(
+                    f"[{s.get('title','link')}]({s.get('url','')})" for s in srcs))
+            lines.append("")
 
     with open(path, "w") as fh:
         fh.write("\n".join(lines))
@@ -448,6 +501,7 @@ def main(argv=None):
     p.add_argument("--csv-out", default=DEFAULT_CSV_OUT, help="Ranked results CSV output")
     p.add_argument("--md-out", default=DEFAULT_MD_OUT, help="Markdown summary output")
     p.add_argument("--source-note", default="", help="Provenance note rendered into the markdown report")
+    p.add_argument("--risk-notes", default=DEFAULT_RISK_NOTES, help="Fresh-news risk-notes JSON (optional)")
     p.add_argument("--top", type=int, default=0, help="Print only the top N to stdout (0 = all)")
     p.add_argument("--selftest", action="store_true", help="Run built-in sanity checks and exit")
     args = p.parse_args(argv)
@@ -461,9 +515,11 @@ def main(argv=None):
         print(f"No fundamentals found in {args.input}", file=sys.stderr)
         return 1
 
+    notes = load_risk_notes(args.risk_notes)
     results = screen(rows, cfg)
+    attach_risk_notes(results, notes)
     write_csv(results, args.csv_out)
-    write_markdown(results, cfg, args.md_out, args.source_note)
+    write_markdown(results, cfg, args.md_out, args.source_note, notes)
 
     shown = results if args.top <= 0 else results[:args.top]
     print(f"Screened {len(results)} companies. Wrote {args.csv_out} and {args.md_out}.\n")

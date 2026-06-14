@@ -1,0 +1,142 @@
+{
+  "_comment": "Fresh-news 'why it's cheap / key risks' notes per ticker - the qualitative bear case a ratio screen CANNOT see. NEWS GOES STALE: regenerate before relying on this. Each entry is dated (as_of) and carries source links. To refresh, gather current news per flagged ticker (e.g. web search 'TICKER stock <month year> valuation risks bear case') and rewrite the entries with today's date. The offline screener.py merges this file into its output; it does not fetch news itself.",
+  "_as_of": "2026-06-14",
+  "notes": {
+    "ADBE": {
+      "as_of": "2026-06-14",
+      "summary": "Down ~60% from its 2024 peak: the market is pricing AI disruption to Adobe's creative moat, not weak fundamentals (EPS still growing ~19%, ~30% margins).",
+      "key_risks": [
+        "Generative-AI rivals (OpenAI Sora, Midjourney, Canva, Figma, Google, Anthropic) encroaching on core creative tools",
+        "Revenue growth slowed to ~10%; AI/Firefly monetization still modest vs AI-native competitors",
+        "Long-time CEO Shantanu Narayen stepping down - leadership transition at a critical moment",
+        "Pending Semrush acquisition + $25B buyback raise capital-allocation questions"
+      ],
+      "sources": [
+        {"title": "Motley Fool - Is Adobe an undervalued stock to buy?", "url": "https://www.fool.com/investing/2026/05/26/is-adobe-stock-an-undervalued-stock-to-buy/"},
+        {"title": "TIKR - Adobe down 24% in 2026, $25B buyback", "url": "https://www.tikr.com/blog/adobe-stock-is-down-24-in-2026-does-the-25-billion-buyback-change-the-math"},
+        {"title": "Yahoo Finance - Assessing Adobe valuation, AI & CEO shift", "url": "https://finance.yahoo.com/markets/stocks/articles/assessing-adobe-adbe-valuation-earnings-140848800.html"}
+      ]
+    },
+    "META": {
+      "as_of": "2026-06-14",
+      "summary": "Near the lower third of its 52-week range (~28% off peak) on AI-capex fears rather than ad weakness.",
+      "key_risks": [
+        "Massive AI/datacenter capex crushing near-term free cash flow with uncertain payoff; a possible equity raise threatens dilution",
+        "Reality Labs still burning ~$6B/quarter (>$75B cumulative losses since 2020)",
+        "Ad-growth deceleration or a capex scare could compress the multiple toward ~20-22x",
+        "Ongoing regulatory scrutiny"
+      ],
+      "sources": [
+        {"title": "Investing.com - Meta capex fears explain the lag", "url": "https://www.investing.com/analysis/meta-capex-fears-explain-why-the-stock-is-lagging-the-market-rally-200682088"},
+        {"title": "Cryptonomist - AI spending fears erase earnings beat", "url": "https://en.cryptonomist.ch/2026/06/09/meta-platforms-stock-drops-as-ai-spending-fears-erase-a-57-earnings-beat/"}
+      ]
+    },
+    "MSFT": {
+      "as_of": "2026-06-14",
+      "summary": "Well off its $551 high; the ~$190B FY26 AI capex program is simultaneously the bull and the bear case.",
+      "key_risks": [
+        "Record AI capex ($30.9B in a single quarter, +84% YoY) must convert into revenue; margin-compression risk",
+        "OpenAI-related losses a growing GAAP drag (~$3.1B in Q1 FY26 vs $0.5B prior year)",
+        "Analysts (e.g. Stifel) warn Azure growth expectations may be too optimistic; component-cost headwinds",
+        "Regulatory scrutiny in the US and EU"
+      ],
+      "sources": [
+        {"title": "Investing.com - Microsoft's $190B AI bet, bull & bear", "url": "https://www.investing.com/analysis/microsofts-190-billion-ai-bet-is-both-the-bull-case-and-bear-case-200682005"},
+        {"title": "TIKR - MSFT AI ARR grew 123% to $37B", "url": "https://www.tikr.com/blog/microsoft-stock-is-down-8-over-the-past-year-while-ai-arr-grew-123-to-37-billion-heres-what-investors-need-to-know"}
+      ]
+    },
+    "JPM": {
+      "as_of": "2026-06-14",
+      "summary": "Trades at a premium-to-peers multiple; the risk is a de-rating to a 'plain lender' if the consumer-credit cycle deteriorates.",
+      "key_risks": [
+        "Lowered 2026 net-interest-income guidance (to ~$103B from ~$104.5B)",
+        "Card Services net charge-offs guided ~3.4%; consumer-credit-cycle exposure",
+        "Multiple compression risk if the ~$105B spend is seen as failing to buffer a hard landing",
+        "Dimon flags geopolitical tensions, fiscal deficits and elevated asset prices"
+      ],
+      "sources": [
+        {"title": "TIKR - JPM cuts NII guidance despite earnings beat", "url": "https://www.tikr.com/blog/jpmorgan-chase-nyse-stock-falls-as-bank-lowers-net-interest-income-guidance-despite-earnings-beat"},
+        {"title": "CNBC - JPMorgan Q1 2026 earnings", "url": "https://www.cnbc.com/2026/04/14/jpmorgan-chase-jpm-earnings-1q-2026.html"}
+      ]
+    },
+    "UNP": {
+      "as_of": "2026-06-14",
+      "summary": "Overhang from the ~$72B Norfolk Southern merger - regulators (STB) paused the review on May 28, 2026.",
+      "key_risks": [
+        "Regulatory/antitrust risk: STB paused its review, DOJ skeptical, rivals BNSF/CN/CSX opposing",
+        "Integration/execution risk - synergy delivery uncertain on the biggest rail deal ever",
+        "Elevated debt; a collapsed deal could mean a reported ~$2.5B breakup fee",
+        "Freight-volume sensitivity to the economy"
+      ],
+      "sources": [
+        {"title": "Bloomberg - UNP/NSC tumble as regulator pauses review", "url": "https://www.bloomberg.com/news/articles/2026-05-28/union-pacific-norfolk-tumble-as-regulator-pauses-merger-review"},
+        {"title": "Globe and Mail - merger execution & credit risk", "url": "https://www.theglobeandmail.com/investing/markets/stocks/UNP/pressreleases/93833/union-pacificnorfolk-southern-merger-faces-high-execution-risk-potential-credit-pressure-and-cost-overruns/"}
+      ]
+    },
+    "DIS": {
+      "as_of": "2026-06-14",
+      "summary": "Trades below most DCF fair-value estimates; near-term operational headwinds temper the streaming-inflection thesis.",
+      "key_risks": [
+        "Streaming profitability inflection must keep delivering the projected double-digit EPS growth",
+        "ESPN flagship streaming launch and sports-rights costs (NFL) carry execution risk",
+        "Continued linear-TV decline; mixed recent share performance"
+      ],
+      "sources": [
+        {"title": "Investing.com - Disney SWOT, mixed signals", "url": "https://www.investing.com/news/swot-analysis/walt-disneys-swot-analysis-stock-faces-mixed-signals-amid-streaming-gains-93CH-4705706"},
+        {"title": "Yahoo Finance - Assessing Disney valuation & ESPN", "url": "https://finance.yahoo.com/markets/stocks/articles/assessing-walt-disney-dis-valuation-201054371.html"}
+      ]
+    },
+    "MO": {
+      "as_of": "2026-06-14",
+      "summary": "Optically cheap on a high dividend yield, but the bear case is a structurally shrinking core - cigarette volumes fell ~10%.",
+      "key_risks": [
+        "Domestic cigarette shipments down ~10%; raising prices on declining volume seen as unsustainable",
+        "Smoke-free diversification still lagging peers (PM, BAT)",
+        "EPS growth guided to just ~2.5-5.5%; some analysts call it slightly overvalued vs that growth"
+      ],
+      "sources": [
+        {"title": "Motley Fool - Major long-term risk facing Altria", "url": "https://www.fool.com/investing/2026/03/31/the-major-long-term-risk-facing-altria-stock-in-20/"},
+        {"title": "TIKR - Is Altria overvalued at $72?", "url": "https://www.tikr.com/blog/is-altria-stock-overvalued-at-72-in-2026"}
+      ]
+    },
+    "COP": {
+      "as_of": "2026-06-14",
+      "summary": "Trades near 52-week highs while earnings power has compressed - classic commodity-price sensitivity.",
+      "key_risks": [
+        "Q1 2026 net income fell ~23% YoY as realized prices slipped to ~$50.36/BOE",
+        "Oil-price sensitivity; a bear case lands near $105 (about -17%)",
+        "Impairment risk on long-lived assets in prolonged low-price periods"
+      ],
+      "sources": [
+        {"title": "24/7 Wall St - COP a hold as target trails", "url": "https://247wallst.com/investing/2026/05/04/despite-soaring-46-conocophillips-is-a-hold-as-price-target-trails/"},
+        {"title": "ConocoPhillips Q1 2026 8-K (SEC)", "url": "https://www.sec.gov/Archives/edgar/data/0001163165/000116316526000016/cop-20260430x8kexx991.htm"}
+      ]
+    },
+    "AXP": {
+      "as_of": "2026-06-14",
+      "summary": "Premium multiple (~17x vs peers under 9x); risk is credit normalization plus a premium-spend rollover.",
+      "key_risks": [
+        "Credit-loss provisions +11% YoY to ~$1.4B; rising delinquencies in lower tiers",
+        "~27% margins depend on marketing efficiency and rewards costs - small increases pressure margins fast",
+        "Premium-card competition (e.g. Robinhood's $695 Platinum); spend softens if labor market weakens"
+      ],
+      "sources": [
+        {"title": "TIKR - Why analysts flag AXP valuation risk", "url": "https://www.tikr.com/blog/american-express-stock-outlook-why-analysts-flag-valuation-risk-in-2026"},
+        {"title": "24/7 Wall St - V/MA/AXP down double digits: buy or trap?", "url": "https://247wallst.com/investing/2026/04/28/visa-mastercard-american-express-are-down-by-double-digits-in-2026-buying-opportunity-or-trap/"}
+      ]
+    },
+    "BAC": {
+      "as_of": "2026-06-14",
+      "summary": "DCF screens ~20% undervalued, but net-interest-income/margin growth is limited and regulatory risk looms.",
+      "key_risks": [
+        "Limited NII/margin growth; the 6-8% NII guide assumes steady rates and is vulnerable to a flatter curve",
+        "Early-2026 proposals to cap credit-card rates at 10% threaten consumer-segment profitability",
+        "Underperformance vs the S&P 500; high rate sensitivity"
+      ],
+      "sources": [
+        {"title": "Simply Wall St - Bank of America valuation after Q1", "url": "https://simplywall.st/stocks/us/banks/nyse-bac/bank-of-america"},
+        {"title": "Yahoo Finance - BAC valuation after strong Q1", "url": "https://finance.yahoo.com/markets/stocks/articles/bank-america-bac-stock-valuation-081619211.html"}
+      ]
+    }
+  }
+}

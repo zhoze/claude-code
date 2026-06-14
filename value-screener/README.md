@@ -47,6 +47,7 @@ value-screener/
 └── data/
     ├── universe_sp500.csv        # all 503 S&P 500 constituents (snapshot)
     ├── fundamentals.csv          # full-metric input (40 names, stockanalysis.com, 2026-06-14)
+    ├── risk_notes.json           # fresh-news "why it's cheap" bear cases (dated + sourced)
     └── results/
         ├── screen_results.csv         # full ranked output
         └── top_candidates.md          # human-readable ranked report
@@ -144,6 +145,27 @@ ROE/ROTCE, not the industrial-style gates.
 
 Anyone with a fundamentals provider can regenerate the CSV and re-run the engine;
 the scoring logic is entirely in `screener.py` + `config.json` with no hidden state.
+
+## Fresh-news risk notes ("why it's cheap")
+
+A low price usually reflects a real risk the ratios can't see — a moat under
+attack, a credit cycle, a pending deal. `data/risk_notes.json` holds the
+**qualitative bear case** per flagged ticker, each entry **dated (`as_of`) and
+sourced with links**. The screener merges it in: a `risk_note` + `risk_note_date`
+column in the CSV, and a **"Why it's cheap — key risks (fresh news)"** section in
+the report. It's optional — delete the file and the screen still runs.
+
+> **News goes stale — keep it fresh.** The engine is offline and does **not**
+> fetch news itself; notes are gathered at screen time and stored. Refresh before
+> relying on them: for each flagged ticker, pull current news (e.g. search
+> *"TICKER stock <month year> valuation risks bear case"*) and rewrite that
+> entry with **today's** date and live source links. The committed notes are
+> dated 2026-06-14.
+
+Example (ADBE, as of 2026-06-14): *"Down ~60% from its 2024 peak — the market is
+pricing AI disruption to Adobe's creative moat (OpenAI/Canva/Figma/Google), a
+slowdown to ~10% growth, and a CEO transition — not weak fundamentals."* The
+screen flags the bargain; the note is the reason to dig deeper before buying.
 
 ---
 
