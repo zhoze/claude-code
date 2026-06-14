@@ -2,6 +2,8 @@
 
 > Educational screen, **not investment advice**. Buffett's real edge is qualitative (durable moat, honest management, circle of competence) and cannot be fully captured by ratios.
 
+_Live screen run 2026-06-14 on 40 sector-diversified S&P 500 companies. All fundamentals (TTM) and current prices sourced from stockanalysis.com /statistics/ pages on 2026-06-14. Growth = published EPS-growth estimate capped to [0,10%]. Bulk index endpoints unavailable, so a 40-name slice was screened; the engine scales to any list._
+
 ## Scoring model
 
 - **Quality pillar (60 pts):** ROE, ROIC, margins, leverage, interest coverage, liquidity, free cash flow, earnings quality.
@@ -12,83 +14,84 @@
 
 | Rank | Ticker | Company | Sector | Score | Price | Intrinsic (DCF) | Margin of Safety | Failed gates |
 |---:|:--|:--|:--|---:|---:|---:|---:|:--|
-| 1 | ADBE | Adobe | Information Technology | 96.0 | $251.42 | $476.70 | 47.3% | Current ratio > 1.5 |
-| 2 | META | Meta Platforms | Communication Services | 93.9 | $593.04 | $774.28 | 23.4% | - |
-| 7 | MSFT | Microsoft | Information Technology | 74.8 | $416.71 | $468.69 | 11.1% | - |
-| 8 | KO | Coca-Cola | Consumer Staples | 73.6 | $79.48 | $88.52 | 10.2% | - |
-| 10 | UNP | Union Pacific | Industrials | 72.0 | $272.28 | $299.64 | 9.1% | Current ratio > 1.5 |
+| 1 | META | Meta Platforms | Communication Services | 96.2 | $566.98 | $764.11 | 25.8% | - |
+| 2 | ADBE | Adobe | Information Technology | 96.0 | $204.02 | $485.87 | 58.0% | Current ratio > 1.5 |
+| 3 | MSFT | Microsoft | Information Technology | 82.0 | $390.74 | $466.69 | 16.3% | - |
+| 8 | JPM | JPMorgan Chase | Financials | 72.8 | $320.72 | $560.94 | 42.8% | ROIC >= 12% (no data); Gross margin >= 40% (moat) (no data); Current ratio > 1.5 (no data); Positive free cash flow (no data); Earnings backed by cash (no data) |
+| 10 | UNP | Union Pacific | Industrials | 71.8 | $272.70 | $299.64 | 9.0% | Current ratio > 1.5 |
 
-## Watch List (25)
+## Watch List (26)
 
 | Rank | Ticker | Company | Sector | Score | Price | Intrinsic (DCF) | Margin of Safety | Failed gates |
 |---:|:--|:--|:--|---:|---:|---:|---:|:--|
-| 3 | DIS | Disney | Communication Services | 81.9 | $99.72 | $174.00 | 42.7% | Current ratio > 1.5 |
-| 4 | AXP | American Express | Financials | 79.1 | $310.63 | $445.29 | 30.2% | Net debt/EBITDA < 3x (no data); Interest coverage > 5x (no data) |
-| 5 | COP | ConocoPhillips | Energy | 78.7 | $117.13 | $163.44 | 28.3% | ROIC >= 12% |
-| 6 | BAC | Bank of America | Financials | 75.0 | $53.75 | $111.74 | 51.9% | ROIC >= 12% (no data); Gross margin >= 40% (moat) (no data); Current ratio > 1.5 (no data) |
-| 9 | JPM | JPMorgan Chase | Financials | 73.0 | $312.37 | $587.07 | 46.8% | ROIC >= 12%; Net debt/EBITDA < 3x; Interest coverage > 5x; Current ratio > 1.5 |
-| 11 | MO | Altria Group | Consumer Staples | 71.4 | $72.28 | $84.63 | 14.6% | ROE >= 15% (no data); Current ratio > 1.5 |
-| 12 | LOW | Lowe's | Consumer Discretionary | 63.5 | $210.69 | $252.47 | 16.6% | ROE >= 15% (no data) |
-| 13 | JNJ | Johnson & Johnson | Health Care | 63.2 | $232.78 | $239.17 | 2.7% | - |
-| 14 | PG | Procter & Gamble | Consumer Staples | 61.7 | $146.58 | $113.27 | -29.4% | Current ratio > 1.5 |
-| 15 | GOOGL | Alphabet | Communication Services | 61.4 | $368.55 | $368.06 | -0.1% | - |
-| 16 | TXN | Texas Instruments | Information Technology | 60.0 | $285.01 | $162.61 | -75.3% | - |
-| 17 | AVGO | Broadcom | Information Technology | 60.0 | $385.84 | $167.05 | -131.0% | - |
-| 18 | V | Visa | Financials | 59.4 | $323.58 | $323.01 | -0.2% | - |
-| 19 | AMGN | Amgen | Health Care | 59.3 | $349.62 | $248.96 | -40.4% | - |
-| 20 | MRK | Merck & Co | Health Care | 58.0 | $120.93 | $77.63 | -55.8% | - |
-| 21 | CL | Colgate-Palmolive | Consumer Staples | 58.0 | $88.65 | $51.32 | -72.7% | - |
-| 22 | PEP | PepsiCo | Consumer Staples | 57.2 | $141.93 | $106.64 | -33.1% | Current ratio > 1.5 |
-| 23 | MA | Mastercard | Financials | 57.1 | $491.21 | $480.59 | -2.2% | Current ratio > 1.5 |
-| 24 | HD | Home Depot | Consumer Discretionary | 56.8 | $310.75 | $294.86 | -5.4% | - |
-| 25 | NVDA | NVIDIA | Information Technology | 56.0 | $205.10 | $182.68 | -12.3% | Earnings backed by cash |
-| 26 | HON | Honeywell International | Industrials | 55.5 | $220.98 | $160.50 | -37.7% | - |
-| 27 | CAT | Caterpillar | Industrials | 55.5 | $904.20 | $558.14 | -62.0% | - |
-| 28 | ABT | Abbott Laboratories | Health Care | 54.1 | $91.07 | $94.32 | 3.5% | - |
-| 29 | AAPL | Apple | Information Technology | 53.0 | $307.35 | $231.61 | -32.7% | Interest coverage > 5x (no data) |
-| 30 | PFE | Pfizer | Health Care | 52.8 | $26.03 | $17.13 | -51.9% | ROE >= 15% |
+| 4 | DIS | Disney | Communication Services | 81.8 | $100.04 | $174.00 | 42.5% | Current ratio > 1.5 |
+| 5 | COP | ConocoPhillips | Energy | 78.7 | $116.98 | $163.44 | 28.4% | ROIC >= 12% |
+| 6 | AXP | American Express | Financials | 78.5 | $325.44 | $445.29 | 26.9% | Net debt/EBITDA < 3x (no data); Interest coverage > 5x (no data) |
+| 7 | BAC | Bank of America | Financials | 75.0 | $56.02 | $111.74 | 49.9% | ROIC >= 12% (no data); Gross margin >= 40% (moat) (no data); Current ratio > 1.5 (no data) |
+| 9 | MO | Altria Group | Consumer Staples | 72.0 | $71.94 | $84.63 | 15.0% | ROE >= 15% (no data); Current ratio > 1.5 |
+| 11 | GOOGL | Alphabet | Communication Services | 63.3 | $359.68 | $364.40 | 1.3% | - |
+| 12 | PG | Procter & Gamble | Consumer Staples | 61.4 | $149.61 | $113.27 | -32.1% | Current ratio > 1.5 |
+| 13 | KO | Coca-Cola | Consumer Staples | 60.7 | $82.62 | $72.82 | -13.5% | - |
+| 14 | TXN | Texas Instruments | Information Technology | 60.0 | $301.12 | $162.61 | -85.2% | - |
+| 15 | AVGO | Broadcom | Information Technology | 60.0 | $382.07 | $167.05 | -128.7% | - |
+| 16 | JNJ | Johnson & Johnson | Health Care | 59.4 | $240.87 | $212.92 | -13.1% | - |
+| 17 | V | Visa | Financials | 59.3 | $322.39 | $318.82 | -1.1% | - |
+| 18 | AMGN | Amgen | Health Care | 59.0 | $355.20 | $249.14 | -42.6% | - |
+| 19 | ABT | Abbott Laboratories | Health Care | 58.3 | $88.18 | $94.32 | 6.5% | - |
+| 20 | LOW | Lowe's | Consumer Discretionary | 58.1 | $220.78 | $252.47 | 12.6% | ROE >= 15% (no data) |
+| 21 | AAPL | Apple | Information Technology | 58.0 | $291.13 | $229.32 | -27.0% | - |
+| 22 | MRK | Merck & Co | Health Care | 58.0 | $119.05 | $77.63 | -53.4% | - |
+| 23 | CL | Colgate-Palmolive | Consumer Staples | 58.0 | $89.45 | $51.24 | -74.6% | - |
+| 24 | MA | Mastercard | Financials | 57.1 | $489.98 | $480.59 | -1.9% | Current ratio > 1.5 |
+| 25 | PEP | PepsiCo | Consumer Staples | 56.9 | $144.27 | $131.69 | -9.6% | Current ratio > 1.5 |
+| 26 | NVDA | NVIDIA | Information Technology | 56.0 | $205.19 | $181.51 | -13.1% | Earnings backed by cash |
+| 27 | HD | Home Depot | Consumer Discretionary | 56.0 | $328.39 | $294.86 | -11.4% | - |
+| 28 | HON | Honeywell International | Industrials | 55.5 | $220.31 | $159.65 | -38.0% | - |
+| 29 | CAT | Caterpillar | Industrials | 55.5 | $910.57 | $558.14 | -63.1% | - |
+| 30 | LMT | Lockheed Martin | Industrials | 54.4 | $540.33 | $573.15 | 5.7% | Net margin >= 10%; Gross margin >= 40% (moat) |
+| 31 | PFE | Pfizer | Health Care | 52.7 | $26.21 | $17.13 | -53.0% | ROE >= 15% |
 
 ## Full ranking
 
 | Rank | Ticker | Score | Quality | Valuation | MOS | Verdict |
 |---:|:--|---:|---:|---:|---:|:--|
-| 1 | ADBE | 96.0 | 56.0 | 40.0 | 47.3% | Strong Candidate |
-| 2 | META | 93.9 | 60.0 | 33.9 | 23.4% | Strong Candidate |
-| 3 | DIS | 81.9 | 42.5 | 39.4 | 42.7% | Watch |
-| 4 | AXP | 79.1 | 42.0 | 37.1 | 30.2% | Watch |
-| 5 | COP | 78.7 | 42.0 | 36.7 | 28.3% | Watch |
-| 6 | BAC | 75.0 | 35.0 | 40.0 | 51.9% | Watch |
-| 7 | MSFT | 74.8 | 58.0 | 16.8 | 11.1% | Strong Candidate |
-| 8 | KO | 73.6 | 58.0 | 15.6 | 10.2% | Strong Candidate |
-| 9 | JPM | 73.0 | 33.0 | 40.0 | 46.8% | Watch |
-| 10 | UNP | 72.0 | 56.0 | 16.0 | 9.1% | Strong Candidate |
-| 11 | MO | 71.4 | 44.0 | 27.4 | 14.6% | Watch |
-| 12 | LOW | 63.5 | 35.5 | 28.0 | 16.6% | Watch |
-| 13 | JNJ | 63.2 | 58.0 | 5.2 | 2.7% | Watch |
-| 14 | PG | 61.7 | 56.0 | 5.7 | -29.4% | Watch |
-| 15 | GOOGL | 61.4 | 60.0 | 1.4 | -0.1% | Watch |
-| 16 | TXN | 60.0 | 60.0 | 0.0 | -75.3% | Watch |
-| 17 | AVGO | 60.0 | 60.0 | 0.0 | -131.0% | Watch |
-| 18 | V | 59.4 | 58.0 | 1.4 | -0.2% | Watch |
-| 19 | AMGN | 59.3 | 55.5 | 3.8 | -40.4% | Watch |
-| 20 | MRK | 58.0 | 58.0 | 0.0 | -55.8% | Watch |
-| 21 | CL | 58.0 | 58.0 | 0.0 | -72.7% | Watch |
-| 22 | PEP | 57.2 | 52.0 | 5.2 | -33.1% | Watch |
-| 23 | MA | 57.1 | 56.0 | 1.1 | -2.2% | Watch |
-| 24 | HD | 56.8 | 51.5 | 5.3 | -5.4% | Watch |
-| 25 | NVDA | 56.0 | 56.0 | 0.0 | -12.3% | Watch |
-| 26 | HON | 55.5 | 55.5 | 0.0 | -37.7% | Watch |
-| 27 | CAT | 55.5 | 55.5 | 0.0 | -62.0% | Watch |
-| 28 | ABT | 54.1 | 47.0 | 7.1 | 3.5% | Watch |
-| 29 | AAPL | 53.0 | 53.0 | 0.0 | -32.7% | Watch |
-| 30 | PFE | 52.8 | 46.0 | 6.8 | -51.9% | Watch |
-| 31 | MCD | 49.9 | 42.0 | 7.9 | 2.8% | Pass |
-| 32 | NKE | 49.1 | 48.0 | 1.1 | -62.5% | Pass |
-| 33 | LMT | 48.3 | 45.0 | 3.3 | -92.1% | Pass |
-| 34 | XOM | 46.0 | 29.5 | 16.5 | 10.9% | Pass |
-| 35 | COST | 45.0 | 45.0 | 0.0 | -75.6% | Pass |
-| 36 | ABBV | 39.0 | 39.0 | 0.0 | -746.9% | Pass |
-| 37 | ORCL | 38.5 | 38.5 | 0.0 | -37.9% | Pass |
-| 38 | WMT | 38.0 | 38.0 | 0.0 | -47.8% | Pass |
-| 39 | CVX | 25.5 | 25.5 | 0.0 | -21.2% | Pass |
-| 40 | UNH | 24.5 | 24.5 | 0.0 | -130.8% | Pass |
+| 1 | META | 96.2 | 60.0 | 36.2 | 25.8% | Strong Candidate |
+| 2 | ADBE | 96.0 | 56.0 | 40.0 | 58.0% | Strong Candidate |
+| 3 | MSFT | 82.0 | 58.0 | 24.0 | 16.3% | Strong Candidate |
+| 4 | DIS | 81.8 | 42.5 | 39.3 | 42.5% | Watch |
+| 5 | COP | 78.7 | 42.0 | 36.7 | 28.4% | Watch |
+| 6 | AXP | 78.5 | 42.0 | 36.5 | 26.9% | Watch |
+| 7 | BAC | 75.0 | 35.0 | 40.0 | 49.9% | Watch |
+| 8 | JPM | 72.8 | 33.0 | 39.8 | 42.8% | Strong Candidate |
+| 9 | MO | 72.0 | 44.0 | 28.0 | 15.0% | Watch |
+| 10 | UNP | 71.8 | 56.0 | 15.8 | 9.0% | Strong Candidate |
+| 11 | GOOGL | 63.3 | 60.0 | 3.3 | 1.3% | Watch |
+| 12 | PG | 61.4 | 56.0 | 5.4 | -32.1% | Watch |
+| 13 | KO | 60.7 | 58.0 | 2.7 | -13.5% | Watch |
+| 14 | TXN | 60.0 | 60.0 | 0.0 | -85.2% | Watch |
+| 15 | AVGO | 60.0 | 60.0 | 0.0 | -128.7% | Watch |
+| 16 | JNJ | 59.4 | 58.0 | 1.4 | -13.1% | Watch |
+| 17 | V | 59.3 | 58.0 | 1.3 | -1.1% | Watch |
+| 18 | AMGN | 59.0 | 55.5 | 3.5 | -42.6% | Watch |
+| 19 | ABT | 58.3 | 47.0 | 11.3 | 6.5% | Watch |
+| 20 | LOW | 58.1 | 35.5 | 22.6 | 12.6% | Watch |
+| 21 | AAPL | 58.0 | 58.0 | 0.0 | -27.0% | Watch |
+| 22 | MRK | 58.0 | 58.0 | 0.0 | -53.4% | Watch |
+| 23 | CL | 58.0 | 58.0 | 0.0 | -74.6% | Watch |
+| 24 | MA | 57.1 | 56.0 | 1.1 | -1.9% | Watch |
+| 25 | PEP | 56.9 | 52.0 | 4.9 | -9.6% | Watch |
+| 26 | NVDA | 56.0 | 56.0 | 0.0 | -13.1% | Watch |
+| 27 | HD | 56.0 | 51.5 | 4.5 | -11.4% | Watch |
+| 28 | HON | 55.5 | 55.5 | 0.0 | -38.0% | Watch |
+| 29 | CAT | 55.5 | 55.5 | 0.0 | -63.1% | Watch |
+| 30 | LMT | 54.4 | 45.0 | 9.4 | 5.7% | Watch |
+| 31 | PFE | 52.7 | 46.0 | 6.7 | -53.0% | Watch |
+| 32 | NKE | 48.3 | 48.0 | 0.3 | -72.4% | Pass |
+| 33 | MCD | 47.5 | 42.0 | 5.5 | 1.0% | Pass |
+| 34 | XOM | 46.2 | 29.5 | 16.7 | 11.0% | Pass |
+| 35 | COST | 45.0 | 45.0 | 0.0 | -77.8% | Pass |
+| 36 | WMT | 43.0 | 43.0 | 0.0 | -53.3% | Pass |
+| 37 | ORCL | 42.5 | 42.5 | 0.0 | -13.6% | Pass |
+| 38 | ABBV | 36.0 | 36.0 | 0.0 | -303.6% | Pass |
+| 39 | UNH | 29.5 | 29.5 | 0.0 | -10.9% | Pass |
+| 40 | CVX | 28.0 | 28.0 | 0.0 | -17.1% | Pass |

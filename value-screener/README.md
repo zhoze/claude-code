@@ -40,7 +40,7 @@ value-screener/
 ├── requirements.txt     # (optional) deps; the engine itself needs none
 └── data/
     ├── universe_sp500.csv        # all 503 S&P 500 constituents (snapshot)
-    ├── fundamentals.csv          # full-metric input (40 names, FMP + stockanalysis.com)
+    ├── fundamentals.csv          # full-metric input (40 names, stockanalysis.com, 2026-06-14)
     └── results/
         ├── screen_results.csv         # full ranked output
         └── top_candidates.md          # human-readable ranked report
@@ -70,74 +70,71 @@ reported as "no data" rather than silently failing.
 
 ---
 
-## The live screen (run 2026-06-07)
+## The live screen (run 2026-06-14)
 
-This repo ships a **real screen**, not mock data. Trailing-twelve-month
-fundamentals were pulled for **40 sector-diversified S&P 500 companies** from two
-reliable sources: the **Financial Modeling Prep** API (via its MCP server, 17
-names) and **stockanalysis.com** `/statistics/` pages (23 names, including the
-ones FMP's data tier could not serve). Bulk index endpoints weren't available, so
-a 40-name slice was screened rather than all 503 — the engine itself scales to
-any list.
+This repo ships a **real screen**, not mock data. Current prices and
+trailing-twelve-month fundamentals for **40 sector-diversified S&P 500 companies**
+were pulled from **stockanalysis.com** `/statistics/` pages on **2026-06-14**
+(a single, consistent source). Bulk index endpoints weren't available, so a
+40-name slice was screened rather than all 503 — the engine itself scales to any
+list.
 
 Top of the ranking (see [`data/results/top_candidates.md`](data/results/top_candidates.md)
 for the full 40-name table and per-name failed gates):
 
 | Rank | Ticker | Score | Margin of Safety | Verdict |
 |---:|:--|---:|---:|:--|
-| 1 | ADBE | 96.0 | 47.3% | **Strong Candidate** |
-| 2 | META | 93.9 | 23.4% | **Strong Candidate** |
-| 7 | MSFT | 74.8 | 11.1% | **Strong Candidate** |
-| 8 | KO | 73.6 | 10.2% | **Strong Candidate** |
-| 10 | UNP | 72.0 | 9.1% | **Strong Candidate** |
-| 3 | DIS | 81.9 | 42.7% | Watch |
-| 4 | AXP | 79.1 | 30.2% | Watch |
-| 6 | BAC | 75.0 | 51.9% | Watch |
+| 1 | META | 96.2 | 25.8% | **Strong Candidate** |
+| 2 | ADBE | 96.0 | 58.0% | **Strong Candidate** |
+| 3 | MSFT | 82.0 | 16.3% | **Strong Candidate** |
+| 8 | JPM | 72.8 | 42.8% | **Strong Candidate** |
+| 10 | UNP | 71.8 | 9.0% | **Strong Candidate** |
+| 4 | DIS | 81.8 | 42.5% | Watch |
+| 5 | COP | 78.7 | 28.4% | Watch |
+| 6 | AXP | 78.5 | 26.9% | Watch |
+| 7 | BAC | 75.0 | 49.9% | Watch |
 
 **Reading the results:**
-- **ADBE** screens best — elite returns (ROIC ~63%, 89% gross margin), low debt,
-  and an unusually low P/E (~15) after its 2025 sell-off give it a wide margin of
-  safety. Exactly the "wonderful business at a fair price" pattern.
+- **ADBE** screens best on value — elite returns (ROIC ~60%, 89% gross margin),
+  low debt, and an unusually low P/E (~12) after its 2025 sell-off give it a ~58%
+  margin of safety. The "wonderful business at a fair price" pattern.
 - **High quality is often expensive in 2026.** Many elite businesses (GOOGL, V,
-  AAPL, COST, NVDA, MA) clear the quality bar but trade at/above conservative
+  AAPL, KO, NVDA, MA) clear the quality bar but trade at/above conservative
   intrinsic value, so they land on *Watch* — the discipline of waiting for a fair
   price.
-- **Core gates gate the verdict.** DIS, AXP, BAC and MO post high scores and large
-  raw margins of safety but are held at *Watch*, not *Strong*, because a **core
-  gate fails**: sub-15% ROE (DIS, COP), or — for banks (BAC, AXP) and heavily
-  bought-back firms with negative book equity (MO, MCD, LOW) — ROE/leverage that
-  the industrial-style gates can't fairly judge. Buffett values banks on
-  ROE/ROTCE; treat those names with sector-specific judgment.
+- **Core gates gate the verdict.** DIS, COP and AXP post high scores and large raw
+  margins of safety but are held at *Watch* because a **core gate fails**: sub-15%
+  ROE (DIS, COP), or — for banks (AXP) and heavily bought-back firms with negative
+  book equity (MO, MCD, LOW) — ROE/leverage the industrial-style gates can't fairly
+  judge. **JPM and BAC** flip on this very point: the source reports them in a
+  *net-cash* position, so the leverage gate passes and JPM clears all core gates —
+  read banks with sector judgment (ROE/ROTCE), not these industrial gates.
 - **ABBV's** wildly negative margin of safety is an artifact of depressed trailing
   EPS (one-time IPR&D charges) — screens should be paired with a read of *why*
   earnings look the way they do.
 
 ## How the data was sourced (reproducibility)
 
-`data/fundamentals.csv` combines two sources, both as of **2026-06-07**:
-
-**1. Financial Modeling Prep MCP server** (17 names), per ticker:
-- `key-metrics-ttm` — ROE, ROIC, current ratio, FCF yield, Graham Number, net-debt/EBITDA, income quality
-- `metrics-ratios-ttm` — gross/net margin, debt-to-equity, interest coverage, P/E, P/B, EPS, dividend
-- `financial-statement-growth` — 5-year net-income-per-share growth → capped EPS CAGR
-
-**2. stockanalysis.com `/statistics/` pages** (23 names — used because FMP's data
-tier returns "requires a higher plan" for many symbols). One page yields ROE,
+All 40 names in `data/fundamentals.csv` were sourced from **stockanalysis.com
+`/statistics/` pages on 2026-06-14** (one consistent snapshot — an earlier
+version blended Financial Modeling Prep data, but FMP's data tier returns
+"requires a higher plan" for many symbols, so the whole universe was moved to a
+single source for freshness and comparability). One statistics page yields ROE,
 ROIC, margins, debt/equity, current ratio, interest coverage, P/E, P/B, EPS,
 book value, FCF yield, dividend/payout, plus the absolute figures from which
-`net-debt/EBITDA` (= net debt ÷ EBITDA) and `income quality` (= operating cash
-flow ÷ net income) are derived. Growth uses the published EPS-growth figure,
-capped to [0, 10%].
-
-For both sources, **price = P/E × EPS** (keeps the recorded P/E consistent with
-price ÷ EPS, which is what the valuation logic uses). Cross-checks against
-finance.yahoo.com quote pages matched to within ~0.1% (e.g. PG $146.58 vs $146.54).
+`net-debt/EBITDA` (= net debt ÷ EBITDA), `income quality` (= operating cash flow
+÷ net income), and the Graham Number (= √(22.5 × EPS × BVPS)) are derived. `price`
+is the live quoted price; growth uses the published EPS-growth estimate capped to
+[0, 10%].
 
 A few large, heavily-bought-back firms (MO, MCD, LOW) have **negative book equity**,
 so ROE/P/B are undefined and left blank — the engine reports those gates as
 "no data" rather than failing them silently, and ROIC carries the quality signal
-instead. Banks (BAC, AXP) lack a meaningful EBITDA/leverage ratio; their
-leverage gate is treated accordingly.
+instead. For **banks** (JPM, BAC, AXP) EBITDA, gross margin, and a clean leverage
+ratio aren't meaningful; where the source reports a net-cash position the leverage
+gate passes, and JPM's negative reported operating cash flow (a balance-sheet
+artifact) leaves income quality blank rather than failing. Judge banks on
+ROE/ROTCE, not the industrial-style gates.
 
 Anyone with a fundamentals provider can regenerate the CSV and re-run the engine;
 the scoring logic is entirely in `screener.py` + `config.json` with no hidden state.
@@ -146,7 +143,7 @@ the scoring logic is entirely in `screener.py` + `config.json` with no hidden st
 
 ## Limitations
 
-- Point-in-time snapshot (2026-06-07); fundamentals change.
+- Point-in-time snapshot (2026-06-14); fundamentals change.
 - TTM EPS is used as the owner-earnings base by default; true owner earnings
   (net income + D&A − *maintenance* capex) is more precise — supply an
   `owner_earnings_ps` column to use it.
