@@ -2,8 +2,6 @@
 
 > Educational screen, **not investment advice**. Buffett's real edge is qualitative (durable moat, honest management, circle of competence) and cannot be fully captured by ratios.
 
-_Live screen 2026-06-14; fundamentals/prices from stockanalysis.com. Forward-return columns are model estimates. Risk notes are fresh-news bear cases (dated/sourced) in data/risk_notes.json._
-
 ## Scoring model
 
 - **Quality pillar (60 pts):** ROE, ROIC, margins, leverage, interest coverage, liquidity, free cash flow, earnings quality.
