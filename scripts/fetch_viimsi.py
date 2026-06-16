@@ -17,7 +17,14 @@ INTERVAL = int(os.environ.get("CAM_INTERVAL", "8"))
 # Extra attempts beyond FRAMES so a single slow/timed-out AJAX call does not
 # fail the whole capture (important when FRAMES=1).
 RETRIES = int(os.environ.get("CAM_RETRIES", "8"))
+# Filenames are stamped in Estonian local time (EEST = UTC+3) so they match the
+# clock burned into the camera image. Override with TZ_OFFSET if needed.
+TZ_OFFSET = int(os.environ.get("TZ_OFFSET", "3"))
 UA = {"User-Agent": "Mozilla/5.0"}
+
+
+def local_stamp():
+    return time.strftime("%Y%m%d-%H%M%S", time.gmtime(time.time() + TZ_OFFSET * 3600))
 
 
 def fetch(url, data=None, timeout=30):
@@ -47,7 +54,7 @@ def main():
     attempt = 0
     while ok < need and attempt < max_attempts:
         attempt += 1
-        ts = time.strftime("%H%M%S", time.gmtime())
+        ts = local_stamp()  # Estonian local time (UTC+3), matches the on-image clock
         body = urllib.parse.urlencode({"action": action, "url": img, "id": cid}).encode()
         try:
             resp = fetch(AJAX, data=body, timeout=30).decode("utf-8", "ignore")
@@ -70,7 +77,7 @@ def main():
             else:
                 print("attempt %d -> unknown image format: %r" % (attempt, image[:60])); time.sleep(pause_on_fail); continue
             sz = os.path.getsize(out)
-            print("attempt %d -> %d bytes" % (attempt, sz))
+            print("attempt %d -> %d bytes (local %s)" % (attempt, sz, ts))
             if sz > 5000:
                 ok += 1
             else:
