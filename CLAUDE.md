@@ -24,14 +24,21 @@ from the sandbox network). So the wake mechanism must be a background timer
 that wakes ME to check via MCP:
 
 1. Trigger the run (`mcp__github__actions_run_trigger`) and note the run id.
-2. Start a background timer to wake me, e.g.
-   `Bash(run_in_background=true, command="sleep 160")`. Foreground sleep is
-   blocked; background sleep is allowed and its completion notifies me.
-3. When the timer fires, check the run via
-   `mcp__github__actions_list (list_workflow_jobs)`. scan-viimsi takes ~2.5 min.
-   - If still running, start another `sleep 60` timer and repeat.
+2. Poll TIGHTLY so delivery is within seconds of completion — do NOT use one
+   long fixed sleep (a flat `sleep 180` makes me wait the full 3 min even when
+   the frame is ready in ~60-90s). scan-viimsi is usually done < 2 min.
+   - First wake: `Bash(run_in_background=true, command="sleep 75")` (the run
+     can't realistically finish sooner, so this first wait is not wasted).
+   - Every wake after that: re-check via MCP, then `sleep 20` and repeat until
+     the run is completed. Foreground sleep is blocked; background sleep is
+     allowed and its completion notifies me.
+3. On each wake, check the run via
+   `mcp__github__actions_list (list_workflow_jobs)`.
+   - If still running: start another short `sleep 20` timer and repeat.
    - If completed: get the artifact, download via the temporary signed blob
      URL (that URL is NOT api.github.com, so `curl` works), unzip, and
-     `SendUserFile` the frame immediately.
+     `SendUserFile` the frame immediately. Stop any pending timer (TaskStop).
 
 NEVER `curl https://api.github.com/...` from the sandbox to poll — it is 403.
+NEVER make the user ask for the frame — a fixed long sleep that delays delivery
+counts as failing this; keep the poll interval short (~20s) after the first check.
