@@ -12,3 +12,26 @@ When I trigger any camera-capture run (scan-viimsi, cam-watch, etc.), I must
 **deliver the captured frame(s) to the user automatically** via `SendUserFile`
 as soon as the run finishes — download the artifact and send it immediately.
 Do NOT wait for the user to ask for the frame.
+
+### How to wait for a run WITHOUT stalling (root cause + fix)
+The sandbox CANNOT reach `api.github.com` — it returns HTTP 403. So a
+background `curl` poll loop against the GitHub API never matches "completed",
+spins forever, and never wakes me. That is why earlier runs looked like they
+were "waiting" for the user.
+
+Only **I** can reach GitHub, via the `mcp__github__*` tools (separate channel
+from the sandbox network). So the wake mechanism must be a background timer
+that wakes ME to check via MCP:
+
+1. Trigger the run (`mcp__github__actions_run_trigger`) and note the run id.
+2. Start a background timer to wake me, e.g.
+   `Bash(run_in_background=true, command="sleep 160")`. Foreground sleep is
+   blocked; background sleep is allowed and its completion notifies me.
+3. When the timer fires, check the run via
+   `mcp__github__actions_list (list_workflow_jobs)`. scan-viimsi takes ~2.5 min.
+   - If still running, start another `sleep 60` timer and repeat.
+   - If completed: get the artifact, download via the temporary signed blob
+     URL (that URL is NOT api.github.com, so `curl` works), unzip, and
+     `SendUserFile` the frame immediately.
+
+NEVER `curl https://api.github.com/...` from the sandbox to poll — it is 403.
