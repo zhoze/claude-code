@@ -48,13 +48,23 @@ jobs:
           sudo /opt/expressvpn/bin/expressvpnctl login code.txt -t 90; rc=$?
           rm -f code.txt
           if [ "$rc" -ne 0 ]; then echo "::error::login failed"; sudo tail -n 40 /tmp/xvd.log; exit 1; fi
-          sudo /opt/expressvpn/bin/expressvpnctl set region estonia -t 30 || true
-          sudo /opt/expressvpn/bin/expressvpnctl connect estonia -t 90 || true
-          sleep 8
-          sudo /opt/expressvpn/bin/expressvpnctl get connectionstate || true
-          CC=$(curl -s https://ipinfo.io/country | tr -d '[:space:]')
-          echo "Exit country: $CC"
-          [ "$CC" = "EE" ] || { echo "::error::exit IP not Estonian ($CC)"; exit 1; }
+          # Retry connect: after login the daemon may not have downloaded its
+          # location list yet, so "set region estonia" can fail with
+          # "Unknown region: estonia" and leave us on a non-EE exit IP.
+          ok=0
+          for attempt in 1 2 3 4 5 6; do
+            echo "--- connect attempt $attempt ---"
+            sudo /opt/expressvpn/bin/expressvpnctl set region estonia -t 30 || true
+            sudo /opt/expressvpn/bin/expressvpnctl connect estonia -t 90 || true
+            sleep 8
+            sudo /opt/expressvpn/bin/expressvpnctl get connectionstate || true
+            CC=$(curl -s https://ipinfo.io/country | tr -d '[:space:]')
+            echo "attempt $attempt exit country: $CC"
+            if [ "$CC" = "EE" ]; then ok=1; break; fi
+            sudo /opt/expressvpn/bin/expressvpnctl disconnect -t 30 || true
+            sleep 6
+          done
+          [ "$ok" = "1" ] || { echo "::error::could not obtain Estonian exit IP after retries"; sudo tail -n 40 /tmp/xvd.log; exit 1; }
           echo "Estonian exit IP confirmed"
 
       - name: Capture one Viimsi camera frame (viimsi-artiumi-ulekaigurada)
