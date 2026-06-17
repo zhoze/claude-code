@@ -12,9 +12,18 @@
         "Pending Semrush acquisition + $25B buyback raise capital-allocation questions"
       ],
       "sources": [
-        {"title": "Motley Fool - Is Adobe an undervalued stock to buy?", "url": "https://www.fool.com/investing/2026/05/26/is-adobe-stock-an-undervalued-stock-to-buy/"},
-        {"title": "TIKR - Adobe down 24% in 2026, $25B buyback", "url": "https://www.tikr.com/blog/adobe-stock-is-down-24-in-2026-does-the-25-billion-buyback-change-the-math"},
-        {"title": "Yahoo Finance - Assessing Adobe valuation, AI & CEO shift", "url": "https://finance.yahoo.com/markets/stocks/articles/assessing-adobe-adbe-valuation-earnings-140848800.html"}
+        {
+          "title": "Motley Fool - Is Adobe an undervalued stock to buy?",
+          "url": "https://www.fool.com/investing/2026/05/26/is-adobe-stock-an-undervalued-stock-to-buy/"
+        },
+        {
+          "title": "TIKR - Adobe down 24% in 2026, $25B buyback",
+          "url": "https://www.tikr.com/blog/adobe-stock-is-down-24-in-2026-does-the-25-billion-buyback-change-the-math"
+        },
+        {
+          "title": "Yahoo Finance - Assessing Adobe valuation, AI & CEO shift",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/assessing-adobe-adbe-valuation-earnings-140848800.html"
+        }
       ]
     },
     "META": {
@@ -27,8 +36,14 @@
         "Ongoing regulatory scrutiny"
       ],
       "sources": [
-        {"title": "Investing.com - Meta capex fears explain the lag", "url": "https://www.investing.com/analysis/meta-capex-fears-explain-why-the-stock-is-lagging-the-market-rally-200682088"},
-        {"title": "Cryptonomist - AI spending fears erase earnings beat", "url": "https://en.cryptonomist.ch/2026/06/09/meta-platforms-stock-drops-as-ai-spending-fears-erase-a-57-earnings-beat/"}
+        {
+          "title": "Investing.com - Meta capex fears explain the lag",
+          "url": "https://www.investing.com/analysis/meta-capex-fears-explain-why-the-stock-is-lagging-the-market-rally-200682088"
+        },
+        {
+          "title": "Cryptonomist - AI spending fears erase earnings beat",
+          "url": "https://en.cryptonomist.ch/2026/06/09/meta-platforms-stock-drops-as-ai-spending-fears-erase-a-57-earnings-beat/"
+        }
       ]
     },
     "MSFT": {
@@ -41,8 +56,14 @@
         "Regulatory scrutiny in the US and EU"
       ],
       "sources": [
-        {"title": "Investing.com - Microsoft's $190B AI bet, bull & bear", "url": "https://www.investing.com/analysis/microsofts-190-billion-ai-bet-is-both-the-bull-case-and-bear-case-200682005"},
-        {"title": "TIKR - MSFT AI ARR grew 123% to $37B", "url": "https://www.tikr.com/blog/microsoft-stock-is-down-8-over-the-past-year-while-ai-arr-grew-123-to-37-billion-heres-what-investors-need-to-know"}
+        {
+          "title": "Investing.com - Microsoft's $190B AI bet, bull & bear",
+          "url": "https://www.investing.com/analysis/microsofts-190-billion-ai-bet-is-both-the-bull-case-and-bear-case-200682005"
+        },
+        {
+          "title": "TIKR - MSFT AI ARR grew 123% to $37B",
+          "url": "https://www.tikr.com/blog/microsoft-stock-is-down-8-over-the-past-year-while-ai-arr-grew-123-to-37-billion-heres-what-investors-need-to-know"
+        }
       ]
     },
     "JPM": {
@@ -55,8 +76,14 @@
         "Dimon flags geopolitical tensions, fiscal deficits and elevated asset prices"
       ],
       "sources": [
-        {"title": "TIKR - JPM cuts NII guidance despite earnings beat", "url": "https://www.tikr.com/blog/jpmorgan-chase-nyse-stock-falls-as-bank-lowers-net-interest-income-guidance-despite-earnings-beat"},
-        {"title": "CNBC - JPMorgan Q1 2026 earnings", "url": "https://www.cnbc.com/2026/04/14/jpmorgan-chase-jpm-earnings-1q-2026.html"}
+        {
+          "title": "TIKR - JPM cuts NII guidance despite earnings beat",
+          "url": "https://www.tikr.com/blog/jpmorgan-chase-nyse-stock-falls-as-bank-lowers-net-interest-income-guidance-despite-earnings-beat"
+        },
+        {
+          "title": "CNBC - JPMorgan Q1 2026 earnings",
+          "url": "https://www.cnbc.com/2026/04/14/jpmorgan-chase-jpm-earnings-1q-2026.html"
+        }
       ]
     },
     "UNP": {
@@ -69,8 +96,14 @@
         "Freight-volume sensitivity to the economy"
       ],
       "sources": [
-        {"title": "Bloomberg - UNP/NSC tumble as regulator pauses review", "url": "https://www.bloomberg.com/news/articles/2026-05-28/union-pacific-norfolk-tumble-as-regulator-pauses-merger-review"},
-        {"title": "Globe and Mail - merger execution & credit risk", "url": "https://www.theglobeandmail.com/investing/markets/stocks/UNP/pressreleases/93833/union-pacificnorfolk-southern-merger-faces-high-execution-risk-potential-credit-pressure-and-cost-overruns/"}
+        {
+          "title": "Bloomberg - UNP/NSC tumble as regulator pauses review",
+          "url": "https://www.bloomberg.com/news/articles/2026-05-28/union-pacific-norfolk-tumble-as-regulator-pauses-merger-review"
+        },
+        {
+          "title": "Globe and Mail - merger execution & credit risk",
+          "url": "https://www.theglobeandmail.com/investing/markets/stocks/UNP/pressreleases/93833/union-pacificnorfolk-southern-merger-faces-high-execution-risk-potential-credit-pressure-and-cost-overruns/"
+        }
       ]
     },
     "DIS": {
@@ -82,8 +115,14 @@
         "Continued linear-TV decline; mixed recent share performance"
       ],
       "sources": [
-        {"title": "Investing.com - Disney SWOT, mixed signals", "url": "https://www.investing.com/news/swot-analysis/walt-disneys-swot-analysis-stock-faces-mixed-signals-amid-streaming-gains-93CH-4705706"},
-        {"title": "Yahoo Finance - Assessing Disney valuation & ESPN", "url": "https://finance.yahoo.com/markets/stocks/articles/assessing-walt-disney-dis-valuation-201054371.html"}
+        {
+          "title": "Investing.com - Disney SWOT, mixed signals",
+          "url": "https://www.investing.com/news/swot-analysis/walt-disneys-swot-analysis-stock-faces-mixed-signals-amid-streaming-gains-93CH-4705706"
+        },
+        {
+          "title": "Yahoo Finance - Assessing Disney valuation & ESPN",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/assessing-walt-disney-dis-valuation-201054371.html"
+        }
       ]
     },
     "MO": {
@@ -95,8 +134,14 @@
         "EPS growth guided to just ~2.5-5.5%; some analysts call it slightly overvalued vs that growth"
       ],
       "sources": [
-        {"title": "Motley Fool - Major long-term risk facing Altria", "url": "https://www.fool.com/investing/2026/03/31/the-major-long-term-risk-facing-altria-stock-in-20/"},
-        {"title": "TIKR - Is Altria overvalued at $72?", "url": "https://www.tikr.com/blog/is-altria-stock-overvalued-at-72-in-2026"}
+        {
+          "title": "Motley Fool - Major long-term risk facing Altria",
+          "url": "https://www.fool.com/investing/2026/03/31/the-major-long-term-risk-facing-altria-stock-in-20/"
+        },
+        {
+          "title": "TIKR - Is Altria overvalued at $72?",
+          "url": "https://www.tikr.com/blog/is-altria-stock-overvalued-at-72-in-2026"
+        }
       ]
     },
     "COP": {
@@ -108,8 +153,14 @@
         "Impairment risk on long-lived assets in prolonged low-price periods"
       ],
       "sources": [
-        {"title": "24/7 Wall St - COP a hold as target trails", "url": "https://247wallst.com/investing/2026/05/04/despite-soaring-46-conocophillips-is-a-hold-as-price-target-trails/"},
-        {"title": "ConocoPhillips Q1 2026 8-K (SEC)", "url": "https://www.sec.gov/Archives/edgar/data/0001163165/000116316526000016/cop-20260430x8kexx991.htm"}
+        {
+          "title": "24/7 Wall St - COP a hold as target trails",
+          "url": "https://247wallst.com/investing/2026/05/04/despite-soaring-46-conocophillips-is-a-hold-as-price-target-trails/"
+        },
+        {
+          "title": "ConocoPhillips Q1 2026 8-K (SEC)",
+          "url": "https://www.sec.gov/Archives/edgar/data/0001163165/000116316526000016/cop-20260430x8kexx991.htm"
+        }
       ]
     },
     "AXP": {
@@ -121,8 +172,14 @@
         "Premium-card competition (e.g. Robinhood's $695 Platinum); spend softens if labor market weakens"
       ],
       "sources": [
-        {"title": "TIKR - Why analysts flag AXP valuation risk", "url": "https://www.tikr.com/blog/american-express-stock-outlook-why-analysts-flag-valuation-risk-in-2026"},
-        {"title": "24/7 Wall St - V/MA/AXP down double digits: buy or trap?", "url": "https://247wallst.com/investing/2026/04/28/visa-mastercard-american-express-are-down-by-double-digits-in-2026-buying-opportunity-or-trap/"}
+        {
+          "title": "TIKR - Why analysts flag AXP valuation risk",
+          "url": "https://www.tikr.com/blog/american-express-stock-outlook-why-analysts-flag-valuation-risk-in-2026"
+        },
+        {
+          "title": "24/7 Wall St - V/MA/AXP down double digits: buy or trap?",
+          "url": "https://247wallst.com/investing/2026/04/28/visa-mastercard-american-express-are-down-by-double-digits-in-2026-buying-opportunity-or-trap/"
+        }
       ]
     },
     "BAC": {
@@ -134,8 +191,38 @@
         "Underperformance vs the S&P 500; high rate sensitivity"
       ],
       "sources": [
-        {"title": "Simply Wall St - Bank of America valuation after Q1", "url": "https://simplywall.st/stocks/us/banks/nyse-bac/bank-of-america"},
-        {"title": "Yahoo Finance - BAC valuation after strong Q1", "url": "https://finance.yahoo.com/markets/stocks/articles/bank-america-bac-stock-valuation-081619211.html"}
+        {
+          "title": "Simply Wall St - Bank of America valuation after Q1",
+          "url": "https://simplywall.st/stocks/us/banks/nyse-bac/bank-of-america"
+        },
+        {
+          "title": "Yahoo Finance - BAC valuation after strong Q1",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/bank-america-bac-stock-valuation-081619211.html"
+        }
+      ]
+    },
+    "AVGO": {
+      "as_of": "2026-06-14",
+      "summary": "Fortress-quality AI-chip leader priced for perfection — crashed -12.59% on June 4 despite record results. The debate is whether a >$100B AI-revenue path justifies a ~64x P/E.",
+      "key_risks": [
+        "Valuation: P/E ~64, P/B ~21, FCF yield 1.8% — no value margin of safety (screen intrinsic ~$167 vs price $382)",
+        "Sustainability of AI hyper-growth and margin pressure from a higher AI-semiconductor revenue mix",
+        "Rising competition for custom AI silicon (alternative suppliers for Google's TPU) threatens the durable-customer narrative",
+        "High beta (1.43) and a momentum break: ~-21% from the June 2 all-time high of $481.57"
+      ],
+      "sources": [
+        {
+          "title": "MEXC - Is Broadcom a buy after the 12.59% crash?",
+          "url": "https://www.mexc.com/learn/article/is-broadcom-a-buy-after-12-59-crash-broadcom-avgo-stock-price-target-and-analyst-consensus-explained/1"
+        },
+        {
+          "title": "Seeking Alpha - Goldman reinstates Buy on AI/VMware synergy",
+          "url": "https://seekingalpha.com/news/4056384-broadcom-gets-buy-rating-reinstated-at-goldman-on-ai-vmware-synergy"
+        },
+        {
+          "title": "Yahoo Finance - Broadcom up 51% YTD, Street still sees upside",
+          "url": "https://finance.yahoo.com/news/broadcom-inc-avgo-51-ytd-050027389.html"
+        }
       ]
     }
   }

@@ -209,3 +209,14 @@ Overhang from the ~$72B Norfolk Southern merger - regulators (STB) paused the re
 - Freight-volume sensitivity to the economy
 
 Sources: [Bloomberg - UNP/NSC tumble as regulator pauses review](https://www.bloomberg.com/news/articles/2026-05-28/union-pacific-norfolk-tumble-as-regulator-pauses-merger-review) · [Globe and Mail - merger execution & credit risk](https://www.theglobeandmail.com/investing/markets/stocks/UNP/pressreleases/93833/union-pacificnorfolk-southern-merger-faces-high-execution-risk-potential-credit-pressure-and-cost-overruns/)
+
+### 15. AVGO - Broadcom  (Watch, score 60) — _as of 2026-06-14_
+
+Fortress-quality AI-chip leader priced for perfection — crashed -12.59% on June 4 despite record results. The debate is whether a >$100B AI-revenue path justifies a ~64x P/E.
+
+- Valuation: P/E ~64, P/B ~21, FCF yield 1.8% — no value margin of safety (screen intrinsic ~$167 vs price $382)
+- Sustainability of AI hyper-growth and margin pressure from a higher AI-semiconductor revenue mix
+- Rising competition for custom AI silicon (alternative suppliers for Google's TPU) threatens the durable-customer narrative
+- High beta (1.43) and a momentum break: ~-21% from the June 2 all-time high of $481.57
+
+Sources: [MEXC - Is Broadcom a buy after the 12.59% crash?](https://www.mexc.com/learn/article/is-broadcom-a-buy-after-12-59-crash-broadcom-avgo-stock-price-target-and-analyst-consensus-explained/1) · [Seeking Alpha - Goldman reinstates Buy on AI/VMware synergy](https://seekingalpha.com/news/4056384-broadcom-gets-buy-rating-reinstated-at-goldman-on-ai-vmware-synergy) · [Yahoo Finance - Broadcom up 51% YTD, Street still sees upside](https://finance.yahoo.com/news/broadcom-inc-avgo-51-ytd-050027389.html)
