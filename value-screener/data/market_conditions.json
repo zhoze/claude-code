@@ -1,0 +1,61 @@
+{
+  "_comment": "Pre-screen input: fresh macro/pre-market conditions + per-stock news, from reliable sources. NEWS GOES STALE - refresh before relying on it. To refresh: web-search current futures/VIX/yields/oil + headlines and each stock's latest news, then rewrite this file with today's date, numbers, and source links. prescreen.py and overall.py read this; they do NOT fetch news themselves. Trigger keyword: Pre-screen.",
+  "as_of": "2026-06-15",
+  "session": "weekend / pre-market for next session",
+  "macro": {
+    "vix": 16.20,
+    "vix_change_pct": -8.37,
+    "sp500_futures_pct": 0.19,
+    "nasdaq_futures_pct": 0.64,
+    "dow_futures_pct": 0.26,
+    "ust10y": 4.46,
+    "ust10y_change_bps": -8,
+    "wti_oil_pct": -5.0,
+    "summary": "Risk-on rebound from the early-June selloff: VIX back to ~16, index futures green with the Dow at a fresh all-time high, 10y yield easing to ~4.46% and oil dropping after a US-Iran interim peace deal; resilient May retail sales (+0.9%). Lingering headwind: a hawkish Fed (SEP shows ~half the FOMC seeing at least one 2026 hike).",
+    "headlines": [
+      {"text": "US-Iran interim peace deal eases the war premium; oil drops sharply", "impact": "bullish", "weight": 8, "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-05-2026"},
+      {"text": "May retail sales +0.9% vs +0.5% expected - resilient consumer", "impact": "bullish", "weight": 5, "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-05-2026"},
+      {"text": "Chip stocks rebound after early-June SOX -10% crash; Dow at all-time high", "impact": "bullish", "weight": 4, "url": "https://www.cnbc.com/2026/06/06/wall-streets-fear-gauge-punches-back-as-the-crash-up-in-chip-stocks-finally-reverses.html"},
+      {"text": "Fed held rates; projections show ~half the FOMC sees at least one hike this year", "impact": "bearish", "weight": 6, "url": "https://www.cnn.com/2026/06/05/markets/stock-market-sell-off-fed"}
+    ]
+  },
+  "sectors": {
+    "Information Technology": {"bias": "bullish", "note": "Chipmakers leading the rebound after the early-June washout"},
+    "Communication Services": {"bias": "bullish", "note": "Mega-cap tech recovering with the tape"},
+    "Energy": {"bias": "bearish", "note": "Oil fell sharply on the US-Iran peace deal"},
+    "Financials": {"bias": "neutral", "note": "Hawkish-Fed crosswinds: higher-for-longer helps NII but raises credit risk"},
+    "Health Care": {"bias": "neutral", "note": "Defensive; no fresh sector catalyst"}
+  },
+  "stocks": {
+    "ADBE": {
+      "sector": "Information Technology",
+      "sentiment": "bearish",
+      "near_term_event": "Q2 FY26 reported Jun 11; multiple analyst price-target cuts followed",
+      "note": "AI-disruption overhang on the creative moat keeps a lid on it; deep downtrend but very oversold (RSI ~29), so a risk-on tape only cushions it.",
+      "catalysts": [
+        "AI-native rivals (OpenAI Sora, Canva, Figma, Google, Anthropic) pressuring core tools",
+        "Post-earnings analyst downgrades / target cuts"
+      ],
+      "technicals": {"sma50": 244.89, "sma200": 298.34, "rsi14": 29.38, "beta": 1.40, "perf_month": -18, "perf_ytd": -30, "volume": 6857428},
+      "sources": [
+        {"title": "TIKR - Adobe down in 2026, $25B buyback", "url": "https://www.tikr.com/blog/adobe-stock-is-down-24-in-2026-does-the-25-billion-buyback-change-the-math"},
+        {"title": "Yahoo Finance - Assessing Adobe valuation, AI & CEO shift", "url": "https://finance.yahoo.com/markets/stocks/articles/assessing-adobe-adbe-valuation-earnings-140848800.html"}
+      ]
+    },
+    "AVGO": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "near_term_event": "Q2 FY26 reported Jun 4 - record AI revenue (+143% YoY) but Q3 AI guidance (~$16B) light vs ~$17.2B hoped",
+      "note": "AI-chip leader ~-21% off its June 2 ATH on the guidance miss that triggered the sector selloff; now rebounding with chips on the risk-on turn, but priced for perfection.",
+      "catalysts": [
+        "Q3 AI revenue vs the >$16B guide; path to the >$100B FY27 AI target",
+        "Custom-silicon competition (alt suppliers for Google's TPU)"
+      ],
+      "technicals": {"sma50": 406.45, "sma200": 358.10, "rsi14": 41.40, "beta": 1.43, "perf_month": -15, "perf_ytd": 25, "volume": 31425913},
+      "sources": [
+        {"title": "MEXC - Is Broadcom a buy after the 12.59% crash?", "url": "https://www.mexc.com/learn/article/is-broadcom-a-buy-after-12-59-crash-broadcom-avgo-stock-price-target-and-analyst-consensus-explained/1"},
+        {"title": "CNBC - Fear gauge bites as chip 'crash up' reverses", "url": "https://www.cnbc.com/2026/06/06/wall-streets-fear-gauge-punches-back-as-the-crash-up-in-chip-stocks-finally-reverses.html"}
+      ]
+    }
+  }
+}

@@ -35,6 +35,39 @@ The full formula, every threshold, and the sourced rationale are in
 
 ---
 
+## The full pipeline — trigger: **Pre-screen**
+
+`overall.py` runs **three lenses in sequence** for one stock and blends them into
+a single near-term **directional** read (0-100, 50 = neutral) plus the
+**dominant driver** — the lens most likely to move the stock right now:
+
+```
+1. Pre-screen     fresh macro / news (VIX, futures, yields, oil, headlines,    -> news direction
+                  per-stock sentiment) — the near-term tide
+2. Warren Buffett quality + value (margin of safety -> upward room)            -> value direction
+3. Magic Elite    technical / trend (Magic score, ported to Python)           -> technical direction
+4. Overall        weighted blend (config: news 35% / technical 40% / value 25%) + dominant driver
+```
+
+```bash
+python3 overall.py                 # overall PRE-MARKET conditions only (no stock)
+python3 overall.py --ticker ADBE   # full Pre-screen → Buffett → Magic → Overall
+python3 prescreen.py --ticker AVGO # just the Pre-screen lens
+python3 overall.py --selftest      # built-in checks
+```
+
+> **Pre-screen is offline & deterministic** — it does not fetch news itself. When
+> you trigger **Pre-screen**, fresh macro + per-stock news is gathered from
+> reliable sources and stored, dated and sourced, in
+> [`data/market_conditions.json`](data/market_conditions.json); the engines read
+> that file. **Refresh it before relying on it.** Example (2026-06-15): risk-on
+> rebound (VIX ~16, Dow at an ATH, oil down on a US–Iran peace deal) → ADBE
+> Overall **40.6 (bearish lean), dominant driver = technical** (broken downtrend);
+> AVGO Overall **35.9 (bearish lean), dominant driver = value** (priced for
+> perfection). Educational only — not investment advice.
+
+---
+
 ## Files
 
 ```
@@ -42,12 +75,16 @@ value-screener/
 ├── README.md            # this file
 ├── buffett_formula.md   # the formula, thresholds, math, and sources
 ├── config.json          # every threshold & weight (tunable, documented)
-├── screener.py          # pure-Python scoring engine (stdlib only)
+├── screener.py          # Buffett scoring engine (stdlib only)
+├── prescreen.py         # Pre-screen: macro/news engine (offline, deterministic)
+├── magic_lite.py        # compact Python port of the Magic Elite directional score
+├── overall.py           # pipeline orchestrator (Pre-screen→Buffett→Magic→Overall)
 ├── requirements.txt     # (optional) deps; the engine itself needs none
 └── data/
     ├── universe_sp500.csv        # all 503 S&P 500 constituents (snapshot)
     ├── fundamentals.csv          # full-metric input (40 names, stockanalysis.com, 2026-06-14)
     ├── risk_notes.json           # fresh-news "why it's cheap" bear cases (dated + sourced)
+    ├── market_conditions.json    # Pre-screen input: macro + per-stock news (dated + sourced)
     └── results/
         ├── screen_results.csv         # full ranked output
         └── top_candidates.md          # human-readable ranked report
