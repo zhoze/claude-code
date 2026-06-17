@@ -25,7 +25,7 @@
 | 8 | JPM | JPMorgan Chase | Financials | 72.8 | $320.72 | $560.94 | 42.8% | 74.9% | 21.9% | 1.5 | ROIC >= 12% (no data); Gross margin >= 40% (moat) (no data); Current ratio > 1.5 (no data); Positive free cash flow (no data); Earnings backed by cash (no data) |
 | 10 | UNP | Union Pacific | Industrials | 71.8 | $272.70 | $299.64 | 9.0% | 9.9% | 11.1% | 2.9 | Current ratio > 1.5 |
 
-## Watch List (26)
+## Watch List (27)
 
 | Rank | Ticker | Company | Sector | Score | Price | Intrinsic (DCF) | Margin of Safety | Upside to value | Exp. return/yr | Yrs to +35% | Failed gates |
 |---:|:--|:--|:--|---:|---:|---:|---:|---:|---:|---:|:--|
@@ -53,8 +53,9 @@
 | 27 | HD | Home Depot | Consumer Discretionary | 56.0 | $328.39 | $294.86 | -11.4% | -10.2% | 6.7% | 4.6 | - |
 | 28 | HON | Honeywell International | Industrials | 55.5 | $220.31 | $159.65 | -38.0% | -27.5% | 2.2% | 13.8 | - |
 | 29 | CAT | Caterpillar | Industrials | 55.5 | $910.57 | $558.14 | -63.1% | -38.7% | -1.2% | n/a | - |
-| 30 | LMT | Lockheed Martin | Industrials | 54.4 | $540.33 | $573.15 | 5.7% | 6.1% | 10.3% | 3.1 | Net margin >= 10%; Gross margin >= 40% (moat) |
-| 31 | PFE | Pfizer | Health Care | 52.7 | $26.21 | $17.13 | -53.0% | -34.6% | 0.1% | 260.4 | ROE >= 15% |
+| 30 | GE | GE Aerospace | Industrials | 55.5 | $357.03 | $225.70 | -58.2% | -36.8% | -0.5% | n/a | - |
+| 31 | LMT | Lockheed Martin | Industrials | 54.4 | $540.33 | $573.15 | 5.7% | 6.1% | 10.3% | 3.1 | Net margin >= 10%; Gross margin >= 40% (moat) |
+| 32 | PFE | Pfizer | Health Care | 52.7 | $26.21 | $17.13 | -53.0% | -34.6% | 0.1% | 260.4 | ROE >= 15% |
 
 ## Full ranking
 
@@ -89,17 +90,18 @@
 | 27 | HD | 56.0 | -11.4% | 6.7% | 4.6 | Watch |
 | 28 | HON | 55.5 | -38.0% | 2.2% | 13.8 | Watch |
 | 29 | CAT | 55.5 | -63.1% | -1.2% | n/a | Watch |
-| 30 | LMT | 54.4 | 5.7% | 10.3% | 3.1 | Watch |
-| 31 | PFE | 52.7 | -53.0% | 0.1% | 260.4 | Watch |
-| 32 | NKE | 48.3 | -72.4% | -2.2% | n/a | Pass |
-| 33 | MCD | 47.5 | 1.0% | 9.2% | 3.4 | Pass |
-| 34 | XOM | 46.2 | 11.0% | 11.6% | 2.7 | Pass |
-| 35 | COST | 45.0 | -77.8% | -2.9% | n/a | Pass |
-| 36 | WMT | 43.0 | -53.3% | 0.1% | 433.7 | Pass |
-| 37 | ORCL | 42.5 | -13.6% | 6.2% | 4.9 | Pass |
-| 38 | ABBV | 36.0 | -303.6% | -17.5% | n/a | Pass |
-| 39 | UNH | 29.5 | -10.9% | 6.8% | 4.6 | Pass |
-| 40 | CVX | 28.0 | -17.1% | 5.6% | 5.5 | Pass |
+| 30 | GE | 55.5 | -58.2% | -0.5% | n/a | Watch |
+| 31 | LMT | 54.4 | 5.7% | 10.3% | 3.1 | Watch |
+| 32 | PFE | 52.7 | -53.0% | 0.1% | 260.4 | Watch |
+| 33 | NKE | 48.3 | -72.4% | -2.2% | n/a | Pass |
+| 34 | MCD | 47.5 | 1.0% | 9.2% | 3.4 | Pass |
+| 35 | XOM | 46.2 | 11.0% | 11.6% | 2.7 | Pass |
+| 36 | COST | 45.0 | -77.8% | -2.9% | n/a | Pass |
+| 37 | WMT | 43.0 | -53.3% | 0.1% | 433.7 | Pass |
+| 38 | ORCL | 42.5 | -13.6% | 6.2% | 4.9 | Pass |
+| 39 | ABBV | 36.0 | -303.6% | -17.5% | n/a | Pass |
+| 40 | UNH | 29.5 | -10.9% | 6.8% | 4.6 | Pass |
+| 41 | CVX | 28.0 | -17.1% | 5.6% | 5.5 | Pass |
 
 ## Why it's cheap - key risks (fresh news)
 

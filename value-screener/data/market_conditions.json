@@ -599,6 +599,18 @@
         "perf_month": -0.3,
         "perf_ytd": 1.3
       }
+    },
+    "GE": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 306.74,
+        "sma200": 305.02,
+        "rsi14": 71.22,
+        "beta": 1.38,
+        "perf_month": 16.4,
+        "perf_ytd": 17.1
+      }
     }
   },
   "_perf_note": "perf_month/perf_ytd are price-vs-50/200-day-MA distance proxies (stockanalysis statistics doesn't expose period returns via fetch); ADBE/AVGO carry actual returns."
