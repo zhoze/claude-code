@@ -48,11 +48,12 @@
   "_expected_return_note": "Forward-return estimates assume price converges to the DCF intrinsic value over horizon_years, while intrinsic value itself compounds at the discount rate. expected_return_annual = (1+discount_rate) * (intrinsic/price)^(1/horizon_years) - 1. years_to_target = ln(1+target_gain)/ln(1+expected_return_annual). These are MODEL ESTIMATES, not predictions of price or timing.",
 
   "overall_weights": {
-    "news": 0.35,
-    "technical": 0.40,
-    "value": 0.25
+    "news": 0.25,
+    "technical": 0.35,
+    "value": 0.20,
+    "sentiment": 0.20
   },
-  "_overall_weights_note": "How the Overall pipeline (overall.py) blends the three lenses into a single near-term directional score. Near-term moves are driven mostly by news/macro + technicals; value (Buffett) is the long-horizon anchor, so it carries the smallest near-term weight. Tune to taste; weights are renormalized over whichever lenses have data.",
+  "_overall_weights_note": "How the Overall pipeline (overall.py) blends the FOUR lenses (Pre-screen news, Magic technical, Buffett value, Sentiment) into one near-term directional score. Near-term moves lean on technicals + news/sentiment; value (Buffett) is the long-horizon anchor with the smallest weight. Sentiment = retail social + analyst consensus + insider buying (hype-tempered). Weights are renormalized over whichever lenses have data; tune to taste.",
 
   "verdict": {
     "strong_score": 70,

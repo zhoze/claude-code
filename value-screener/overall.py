@@ -30,11 +30,12 @@ import os
 import prescreen
 import magic_lite
 import screener
+import sentiment as sentiment_lens
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_WEIGHTS = {"news": 0.35, "technical": 0.40, "value": 0.25}
+DEFAULT_WEIGHTS = {"news": 0.25, "technical": 0.35, "value": 0.20, "sentiment": 0.20}
 LENS_LABEL = {"news": "Pre-screen (news/macro)", "value": "Warren Buffett (value)",
-              "technical": "Magic Elite (technical)"}
+              "technical": "Magic Elite (technical)", "sentiment": "Sentiment (social/analyst/insider)"}
 
 
 def clamp(v, lo, hi):
@@ -52,8 +53,9 @@ def direction_label(score):
     return "Bullish lean" if score >= 60 else ("Bearish lean" if score < 45 else "Neutral")
 
 
-def run(ticker, cfg, fundamentals, mc):
+def run(ticker, cfg, fundamentals, mc, sentiment_data=None):
     ticker = ticker.upper()
+    sentiment_data = sentiment_data or {}
     macro = prescreen.score_macro(mc)
     lenses = {}          # name -> directional 0-100
     detail = {"macro": macro}
@@ -84,7 +86,14 @@ def run(ticker, cfg, fundamentals, mc):
         detail["magic"] = mg
         lenses["technical"] = float(mg["magic_score"])
 
-    # 4. Overall blend + dominant driver ------------------------------------
+    # 4. Sentiment (social / analyst / insider, hype-tempered) --------------
+    beta = (tech or {}).get("beta") if tech else None
+    sd = sentiment_lens.compute_sentiment(sentiment_data.get(ticker), beta)
+    if sd:
+        detail["sentiment"] = sd
+        lenses["sentiment"] = sd["score"]
+
+    # 5. Overall blend + dominant driver ------------------------------------
     weights = cfg.get("overall_weights", DEFAULT_WEIGHTS)
     avail = {k: v for k, v in lenses.items() if k in weights}
     wsum = sum(weights[k] for k in avail) or 1.0
@@ -140,41 +149,54 @@ def report(ticker, d):
     else:
         L.append("3. MAGIC ELITE (technical)  n/a   (no technicals — add to market_conditions.json)")
 
-    # 4. Overall
+    # 4. Sentiment
+    if d.get("sentiment"):
+        sd = d["sentiment"]
+        comp = ", ".join(f"{k} {int(v)}" for k, v in sd["components"].items())
+        hype = "  ⚠ HYPE-RISK (tempered)" if sd["hype_risk"] else ""
+        L.append(f"4. SENTIMENT (social/anlyst/insider)  {_arrow(sd['score'])} {sd['score']}/100   "
+                 f"[{comp}]{hype}")
+    else:
+        L.append("4. SENTIMENT (social/anlyst/insider)  n/a   (no entry — refresh data/sentiment.json)")
+
+    # 5. Overall
     L.append("")
     if d["overall"] is not None:
-        L.append(f"4. OVERALL DIRECTION  {_arrow(d['overall'])} {d['overall']}/100  "
+        L.append(f"5. OVERALL DIRECTION  {_arrow(d['overall'])} {d['overall']}/100  "
                  f"→ {direction_label(d['overall'])}")
         L.append(f"   Dominant driver: {LENS_LABEL[d['dominant']]} "
                  f"(score {d['lenses'][d['dominant']]}, weight {d['weights'][d['dominant']]:.0%}) "
                  f"— the lens most influencing {ticker.upper()}'s near-term move.")
     else:
-        L.append("4. OVERALL DIRECTION  n/a (no lenses available)")
+        L.append("5. OVERALL DIRECTION  n/a (no lenses available)")
     L.append("\nDirectional 0-100: 50 = neutral, >60 upward lean, <45 downward lean. "
              "Educational only — not investment advice.")
     return "\n".join(L)
 
 
-def screen_all(cfg, fundamentals, mc):
+def screen_all(cfg, fundamentals, mc, sentiment_data=None):
     rows = []
     for r in fundamentals:
-        d = run(r["symbol"], cfg, fundamentals, mc)
+        d = run(r["symbol"], cfg, fundamentals, mc, sentiment_data)
         rows.append((r["symbol"], d))
     rows.sort(key=lambda x: (x[1]["overall"] if x[1]["overall"] is not None else -1), reverse=True)
     return rows
 
 
 def all_table(rows):
-    L = ["#### OVERALL SCREEN — all names (Pre-screen -> Buffett -> Magic -> Overall) ####",
-         "Directional 0-100 (50 neutral). News=Pre-screen, Value=Buffett MOS, Tech=Magic.\n"]
-    L.append(f"{'#':>2}  {'TICK':<5} {'NEWS':>5} {'VALUE':>6} {'TECH':>5} {'OVERALL':>8}  {'LEAN':<13} DOMINANT DRIVER")
+    L = ["#### OVERALL SCREEN — all names (Pre-screen -> Buffett -> Magic -> Sentiment -> Overall) ####",
+         "Directional 0-100 (50 neutral). News=Pre-screen · Value=Buffett MOS · "
+         "Tech=Magic · Sent=social/analyst/insider (⚠=hype-tempered). '-' = no data for that lens.\n"]
+    L.append(f"{'#':>2}  {'TICK':<5} {'NEWS':>5} {'VALUE':>6} {'TECH':>5} {'SENT':>5} {'OVERALL':>8}  {'LEAN':<13} DOMINANT DRIVER")
     fmt = lambda x: "  -  " if x is None else f"{x:5.1f}"
     for i, (sym, d) in enumerate(rows, 1):
         ln = d["lenses"]
         lean = direction_label(d["overall"]) if d["overall"] is not None else "n/a"
         dom = LENS_LABEL.get(d["dominant"], "-").split(" (")[0] if d["dominant"] else "-"
+        hype = " ⚠" if d.get("sentiment", {}).get("hype_risk") else ""
         L.append(f"{i:>2}  {sym:<5} {fmt(ln.get('news'))} {fmt(ln.get('value'))} "
-                 f"{fmt(ln.get('technical'))} {(fmt(d['overall'])).rjust(8)}  {lean:<13} {dom}")
+                 f"{fmt(ln.get('technical'))} {fmt(ln.get('sentiment'))} {(fmt(d['overall'])).rjust(8)}  "
+                 f"{lean:<13} {dom}{hype}")
     return "\n".join(L)
 
 
@@ -183,35 +205,44 @@ def write_all_outputs(rows, mc, csv_path, md_path):
     os.makedirs(os.path.dirname(csv_path), exist_ok=True)
     with open(csv_path, "w", newline="") as fh:
         w = _csv.writer(fh)
-        w.writerow(["rank", "symbol", "news_dir", "value_dir", "tech_dir", "overall", "lean", "dominant"])
+        w.writerow(["rank", "symbol", "news_dir", "value_dir", "tech_dir", "sentiment_dir",
+                    "hype_risk", "overall", "lean", "dominant"])
         for i, (sym, d) in enumerate(rows, 1):
             ln = d["lenses"]
-            w.writerow([i, sym, ln.get("news"), ln.get("value"), ln.get("technical"),
-                        d["overall"], direction_label(d["overall"]) if d["overall"] is not None else "n/a",
+            w.writerow([i, sym, ln.get("news"), ln.get("value"), ln.get("technical"), ln.get("sentiment"),
+                        bool(d.get("sentiment", {}).get("hype_risk")), d["overall"],
+                        direction_label(d["overall"]) if d["overall"] is not None else "n/a",
                         d["dominant"] or ""])
     with open(md_path, "w") as fh:
         fh.write(f"# Overall screen — Pre-screen → Buffett → Magic → Overall\n\n"
                  f"_Market snapshot {mc.get('as_of','n/a')} ({mc.get('session','')}); "
                  f"regime {prescreen.score_macro(mc)['regime']}. Directional 0-100, 50=neutral. "
                  f"Educational — not investment advice._\n\n")
-        fh.write("| # | Ticker | News | Value | Tech | Overall | Lean | Dominant driver |\n")
-        fh.write("|---:|:--|---:|---:|---:|---:|:--|:--|\n")
+        fh.write("| # | Ticker | News | Value | Tech | Sentiment | Overall | Lean | Dominant driver |\n")
+        fh.write("|---:|:--|---:|---:|---:|---:|---:|:--|:--|\n")
         for i, (sym, d) in enumerate(rows, 1):
             ln = d["lenses"]
             g = lambda x: "—" if x is None else f"{x:.0f}"
             dom = LENS_LABEL.get(d["dominant"], "—") if d["dominant"] else "—"
+            sent = g(ln.get("sentiment")) + (" ⚠" if d.get("sentiment", {}).get("hype_risk") else "")
             fh.write(f"| {i} | {sym} | {g(ln.get('news'))} | {g(ln.get('value'))} | {g(ln.get('technical'))} | "
-                     f"{g(d['overall'])} | {direction_label(d['overall']) if d['overall'] is not None else 'n/a'} | {dom} |\n")
+                     f"{sent} | {g(d['overall'])} | {direction_label(d['overall']) if d['overall'] is not None else 'n/a'} | {dom} |\n")
 
 
 def selftest():
     cfg = screener.load_config(screener.DEFAULT_CONFIG)
     fundamentals = screener.load_fundamentals(screener.DEFAULT_INPUT)
     mc = prescreen.load_market_conditions(prescreen.DEFAULT_MC)
-    d = run("ADBE", cfg, fundamentals, mc)
+    sd = sentiment_lens.load_sentiment(sentiment_lens.DEFAULT_SENTIMENT)
+    d = run("ADBE", cfg, fundamentals, mc, sd)
     assert d["lenses"].get("technical") == 0.0, d["lenses"]      # ADBE deep bear technically
     assert d["lenses"].get("value", 0) > 60, d["lenses"]          # cheap -> upward value room
+    assert "sentiment" in d["lenses"], d["lenses"]                # ADBE has a sentiment entry
     assert d["overall"] is not None and d["dominant"] in d["weights"], d
+    # hype temper: high-beta very-bullish name is discounted vs the same at beta 1
+    a = sentiment_lens.compute_sentiment({"social": "very_bullish", "analyst": "buy", "analyst_upside_pct": 20}, 1.0)
+    b = sentiment_lens.compute_sentiment({"social": "very_bullish", "analyst": "buy", "analyst_upside_pct": 20}, 3.0)
+    assert b["score"] < a["score"] and b["hype_risk"], (a, b)
     print("overall selftest: passed —", {k: round(v, 1) for k, v in d["lenses"].items()},
           "overall", d["overall"], "dominant", d["dominant"])
     return 0
@@ -231,10 +262,11 @@ def main(argv=None):
 
     cfg = screener.load_config(args.config)
     mc = prescreen.load_market_conditions(args.market_conditions)
+    sdata = sentiment_lens.load_sentiment(sentiment_lens.DEFAULT_SENTIMENT)
 
     if args.all:
         fundamentals = screener.load_fundamentals(args.input)
-        rows = screen_all(cfg, fundamentals, mc)
+        rows = screen_all(cfg, fundamentals, mc, sdata)
         print(prescreen.macro_report(mc, prescreen.score_macro(mc)).splitlines()[0])
         print(prescreen.score_macro(mc)["regime"], "regime |", mc.get("as_of"), "\n")
         print(all_table(rows))
@@ -252,7 +284,7 @@ def main(argv=None):
         return 0
 
     fundamentals = screener.load_fundamentals(args.input)
-    d = run(args.ticker, cfg, fundamentals, mc)
+    d = run(args.ticker, cfg, fundamentals, mc, sdata)
     print(report(args.ticker, d))
     return 0
 

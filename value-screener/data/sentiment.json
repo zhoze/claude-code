@@ -1,0 +1,54 @@
+{
+  "_comment": "Sentiment lens input: retail social buzz + analyst consensus + insider buying per ticker. STALE FAST - refresh before relying on it. social: very_bullish|bullish|neutral|bearish|very_bearish (Reddit most-mentioned + StockTwits bullish %). analyst: strong_buy|buy|hold|sell|strong_sell (+ analyst_upside_pct = avg price-target upside). insider: buying|neutral|selling. Names not listed get no sentiment lens (treated like missing data). sentiment.py/overall.py read this; they do NOT fetch it. Coverage below is the subset with fresh signal as of the date; expand by researching forums/portals/analyst data.",
+  "as_of": "2026-06-15",
+  "stocks": {
+    "NVDA": {
+      "social": "very_bullish", "analyst": "buy", "analyst_upside_pct": 15, "insider": "neutral",
+      "note": "Reddit's #1 most-mentioned with bullish AI score; high beta (~2.2) -> hype-tempered.",
+      "sources": [
+        {"title": "AltIndex - most-mentioned Reddit stocks", "url": "https://altindex.com/reddit-stocks"},
+        {"title": "StockTwits - sentiment", "url": "https://stocktwits.com/sentiment"}
+      ]
+    },
+    "JPM": {
+      "social": "bullish", "analyst": "hold", "analyst_upside_pct": 3, "insider": "neutral",
+      "note": "Trending bullish on StockTwits; strong technical uptrend.",
+      "sources": [{"title": "StockTwits - most active/bullish", "url": "https://stocktwits.com/sentiment/most-bullish"}]
+    },
+    "AAPL": {
+      "social": "bullish", "analyst": "hold", "analyst_upside_pct": 5,
+      "note": "Mega-cap 'safe haven' favored in Reddit portfolios.",
+      "sources": [{"title": "AltIndex - Reddit stocks", "url": "https://altindex.com/reddit-stocks"}]
+    },
+    "JNJ": {
+      "analyst": "strong_buy", "analyst_upside_pct": 13, "social": "neutral",
+      "note": "Top-analyst Strong Buy dividend aristocrat (avg target ~$267).",
+      "sources": [{"title": "TipRanks - Strong Buy dividend aristocrats", "url": "https://www.tipranks.com/news/3-strong-buy-dividend-aristocrat-stocks-according-to-top-analysts-june-16-2026"}]
+    },
+    "LOW": {
+      "analyst": "strong_buy", "analyst_upside_pct": 19, "social": "neutral",
+      "note": "Strong Buy from top 13 analysts (avg target ~$267).",
+      "sources": [{"title": "TipRanks - Strong Buy dividend aristocrats", "url": "https://www.tipranks.com/news/3-strong-buy-dividend-aristocrat-stocks-according-to-top-analysts-june-16-2026"}]
+    },
+    "META": {
+      "social": "bullish", "analyst": "strong_buy", "analyst_upside_pct": 45,
+      "note": "Consensus Strong Buy (~60 analysts, avg target ~$828) despite the AI-capex pullback.",
+      "sources": [{"title": "Yahoo Finance - buy Meta below $600?", "url": "https://finance.yahoo.com/markets/stocks/articles/buy-meta-platforms-stock-while-162000969.html"}]
+    },
+    "AVGO": {
+      "social": "bullish", "analyst": "buy", "analyst_upside_pct": 27,
+      "note": "Consensus Buy, zero Sells; targets ~$486-580 even after the guidance-miss crash.",
+      "sources": [{"title": "MEXC - AVGO after the crash", "url": "https://www.mexc.com/learn/article/is-broadcom-a-buy-after-12-59-crash-broadcom-avgo-stock-price-target-and-analyst-consensus-explained/1"}]
+    },
+    "ADBE": {
+      "social": "neutral", "analyst": "buy", "analyst_upside_pct": 30,
+      "note": "Net Buy with a high avg target (~$329) but post-earnings downgrades temper the tone.",
+      "sources": [{"title": "Public.com - ADBE forecast", "url": "https://public.com/stocks/adbe/forecast-price-target"}]
+    },
+    "MSFT": {
+      "social": "neutral", "analyst": "buy", "analyst_upside_pct": 15,
+      "note": "Buy consensus; AI capex is the swing factor.",
+      "sources": [{"title": "TIKR - Microsoft AI ARR", "url": "https://www.tikr.com/blog/microsoft-stock-is-down-8-over-the-past-year-while-ai-arr-grew-123-to-37-billion-heres-what-investors-need-to-know"}]
+    }
+  }
+}

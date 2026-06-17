@@ -37,17 +37,25 @@ The full formula, every threshold, and the sourced rationale are in
 
 ## The full pipeline — trigger: **Pre-screen**
 
-`overall.py` runs **three lenses in sequence** for one stock and blends them into
+`overall.py` runs **four lenses in sequence** for one stock and blends them into
 a single near-term **directional** read (0-100, 50 = neutral) plus the
 **dominant driver** — the lens most likely to move the stock right now:
 
 ```
-1. Pre-screen     fresh macro / news (VIX, futures, yields, oil, headlines,    -> news direction
-                  per-stock sentiment) — the near-term tide
+1. Pre-screen     fresh macro / news (VIX, futures, yields, oil, headlines)    -> news direction
 2. Warren Buffett quality + value (margin of safety -> upward room)            -> value direction
 3. Magic Elite    technical / trend (Magic score, ported to Python)           -> technical direction
-4. Overall        weighted blend (config: news 35% / technical 40% / value 25%) + dominant driver
+4. Sentiment      retail social + analyst consensus + insider buying (1/3      -> sentiment direction
+                  each), HYPE-TEMPERED for high-beta froth
+5. Overall        weighted blend (config: news 25 / technical 35 / value 20 /  + dominant driver
+                  sentiment 20) — renormalized over whichever lenses have data
 ```
+
+The **Sentiment** lens (`sentiment.py` + `data/sentiment.json`) reads "most-liked
+/ highly-rated" signals gathered from forums/portals/analyst data: Reddit &
+StockTwits buzz, Strong-Buy/upside consensus, and insider purchases. Extreme
+*bullish* social sentiment on a **high-beta** name is partly discounted and
+flagged ⚠ (contrarian-aware) so hype doesn't inflate the score.
 
 ```bash
 python3 overall.py                 # overall PRE-MARKET conditions only (no stock)
@@ -79,13 +87,15 @@ value-screener/
 ├── screener.py          # Buffett scoring engine (stdlib only)
 ├── prescreen.py         # Pre-screen: macro/news engine (offline, deterministic)
 ├── magic_lite.py        # compact Python port of the Magic Elite directional score
-├── overall.py           # pipeline orchestrator (Pre-screen→Buffett→Magic→Overall)
+├── sentiment.py         # Sentiment lens: social + analyst + insider (hype-tempered)
+├── overall.py           # pipeline orchestrator (Pre-screen→Buffett→Magic→Sentiment→Overall)
 ├── requirements.txt     # (optional) deps; the engine itself needs none
 └── data/
     ├── universe_sp500.csv        # all 503 S&P 500 constituents (snapshot)
     ├── fundamentals.csv          # full-metric input (40 names, stockanalysis.com, 2026-06-14)
     ├── risk_notes.json           # fresh-news "why it's cheap" bear cases (dated + sourced)
     ├── market_conditions.json    # Pre-screen input: macro + per-stock news (dated + sourced)
+    ├── sentiment.json            # Sentiment lens input: social/analyst/insider (dated + sourced)
     └── results/
         ├── screen_results.csv         # full ranked output
         └── top_candidates.md          # human-readable ranked report
