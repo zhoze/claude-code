@@ -1,0 +1,41 @@
+rank,symbol,news_dir,value_dir,tech_dir,overall,lean,dominant
+1,BAC,63.6,74.9,100.0,81.0,Bullish lean,technical
+2,JPM,63.6,71.4,93.0,77.3,Bullish lean,technical
+3,UNH,63.6,44.5,100.0,73.4,Bullish lean,technical
+4,KO,63.6,43.3,100.0,73.1,Bullish lean,technical
+5,JNJ,63.6,43.4,100.0,73.1,Bullish lean,technical
+6,LMT,63.6,52.9,89.0,71.1,Bullish lean,technical
+7,AAPL,71.6,36.5,90.0,70.2,Bullish lean,technical
+8,MO,63.6,57.5,84.0,70.2,Bullish lean,technical
+9,UNP,63.6,54.5,85.0,69.9,Bullish lean,technical
+10,AMGN,63.6,28.7,100.0,69.4,Bullish lean,technical
+11,CAT,63.6,18.4,100.0,66.9,Bullish lean,technical
+12,TXN,71.6,7.4,100.0,66.9,Bullish lean,technical
+13,PG,63.6,34.0,86.0,65.2,Bullish lean,technical
+14,MRK,63.6,23.3,92.0,64.9,Bullish lean,technical
+15,AXP,63.6,63.5,61.0,62.5,Bullish lean,news
+16,CL,63.6,12.7,92.0,62.2,Bullish lean,technical
+17,ABBV,63.6,0,99.0,61.9,Bullish lean,technical
+18,V,63.6,49.4,60.0,58.6,Neutral,news
+19,HD,63.6,44.3,61.0,57.7,Neutral,news
+20,GOOGL,71.6,50.6,39.0,53.3,Neutral,news
+21,NVDA,71.6,43.5,39.0,51.5,Neutral,news
+22,COP,55.6,64.2,39.0,51.1,Neutral,technical
+23,NKE,63.6,13.8,61.0,50.1,Neutral,value
+24,XOM,55.6,55.5,38.0,48.5,Neutral,technical
+25,CVX,55.6,41.4,41.0,46.2,Neutral,technical
+26,DIS,71.6,71.3,8.0,46.1,Neutral,technical
+27,HON,63.6,31.0,40.0,46.0,Neutral,news
+28,PFE,63.6,23.5,41.0,44.5,Bearish lean,value
+29,WMT,63.6,23.3,37.0,42.9,Bearish lean,value
+30,META,71.6,62.9,0.0,40.8,Bearish lean,technical
+31,COST,63.6,11.1,39.0,40.6,Bearish lean,value
+32,ADBE,59.6,79.0,0.0,40.6,Bearish lean,technical
+33,MSFT,71.6,58.1,0.0,39.6,Bearish lean,technical
+34,ORCL,71.6,43.2,9.0,39.5,Bearish lean,technical
+35,LOW,63.6,56.3,8.0,39.5,Bearish lean,technical
+36,MCD,63.6,50.5,10.0,38.9,Bearish lean,technical
+37,ABT,63.6,53.3,8.0,38.8,Bearish lean,technical
+38,MA,63.6,49.0,9.0,38.1,Bearish lean,technical
+39,AVGO,71.6,0,27.0,35.9,Bearish lean,value
+40,PEP,63.6,45.2,4.0,35.2,Bearish lean,technical

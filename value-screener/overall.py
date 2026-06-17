@@ -155,6 +155,55 @@ def report(ticker, d):
     return "\n".join(L)
 
 
+def screen_all(cfg, fundamentals, mc):
+    rows = []
+    for r in fundamentals:
+        d = run(r["symbol"], cfg, fundamentals, mc)
+        rows.append((r["symbol"], d))
+    rows.sort(key=lambda x: (x[1]["overall"] if x[1]["overall"] is not None else -1), reverse=True)
+    return rows
+
+
+def all_table(rows):
+    L = ["#### OVERALL SCREEN — all names (Pre-screen -> Buffett -> Magic -> Overall) ####",
+         "Directional 0-100 (50 neutral). News=Pre-screen, Value=Buffett MOS, Tech=Magic.\n"]
+    L.append(f"{'#':>2}  {'TICK':<5} {'NEWS':>5} {'VALUE':>6} {'TECH':>5} {'OVERALL':>8}  {'LEAN':<13} DOMINANT DRIVER")
+    fmt = lambda x: "  -  " if x is None else f"{x:5.1f}"
+    for i, (sym, d) in enumerate(rows, 1):
+        ln = d["lenses"]
+        lean = direction_label(d["overall"]) if d["overall"] is not None else "n/a"
+        dom = LENS_LABEL.get(d["dominant"], "-").split(" (")[0] if d["dominant"] else "-"
+        L.append(f"{i:>2}  {sym:<5} {fmt(ln.get('news'))} {fmt(ln.get('value'))} "
+                 f"{fmt(ln.get('technical'))} {(fmt(d['overall'])).rjust(8)}  {lean:<13} {dom}")
+    return "\n".join(L)
+
+
+def write_all_outputs(rows, mc, csv_path, md_path):
+    import csv as _csv
+    os.makedirs(os.path.dirname(csv_path), exist_ok=True)
+    with open(csv_path, "w", newline="") as fh:
+        w = _csv.writer(fh)
+        w.writerow(["rank", "symbol", "news_dir", "value_dir", "tech_dir", "overall", "lean", "dominant"])
+        for i, (sym, d) in enumerate(rows, 1):
+            ln = d["lenses"]
+            w.writerow([i, sym, ln.get("news"), ln.get("value"), ln.get("technical"),
+                        d["overall"], direction_label(d["overall"]) if d["overall"] is not None else "n/a",
+                        d["dominant"] or ""])
+    with open(md_path, "w") as fh:
+        fh.write(f"# Overall screen — Pre-screen → Buffett → Magic → Overall\n\n"
+                 f"_Market snapshot {mc.get('as_of','n/a')} ({mc.get('session','')}); "
+                 f"regime {prescreen.score_macro(mc)['regime']}. Directional 0-100, 50=neutral. "
+                 f"Educational — not investment advice._\n\n")
+        fh.write("| # | Ticker | News | Value | Tech | Overall | Lean | Dominant driver |\n")
+        fh.write("|---:|:--|---:|---:|---:|---:|:--|:--|\n")
+        for i, (sym, d) in enumerate(rows, 1):
+            ln = d["lenses"]
+            g = lambda x: "—" if x is None else f"{x:.0f}"
+            dom = LENS_LABEL.get(d["dominant"], "—") if d["dominant"] else "—"
+            fh.write(f"| {i} | {sym} | {g(ln.get('news'))} | {g(ln.get('value'))} | {g(ln.get('technical'))} | "
+                     f"{g(d['overall'])} | {direction_label(d['overall']) if d['overall'] is not None else 'n/a'} | {dom} |\n")
+
+
 def selftest():
     cfg = screener.load_config(screener.DEFAULT_CONFIG)
     fundamentals = screener.load_fundamentals(screener.DEFAULT_INPUT)
@@ -174,6 +223,7 @@ def main(argv=None):
     p.add_argument("--config", default=screener.DEFAULT_CONFIG)
     p.add_argument("--input", default=screener.DEFAULT_INPUT)
     p.add_argument("--market-conditions", default=prescreen.DEFAULT_MC)
+    p.add_argument("--all", action="store_true", help="Run every name in fundamentals.csv and print a ranked table")
     p.add_argument("--selftest", action="store_true")
     args = p.parse_args(argv)
     if args.selftest:
@@ -181,6 +231,18 @@ def main(argv=None):
 
     cfg = screener.load_config(args.config)
     mc = prescreen.load_market_conditions(args.market_conditions)
+
+    if args.all:
+        fundamentals = screener.load_fundamentals(args.input)
+        rows = screen_all(cfg, fundamentals, mc)
+        print(prescreen.macro_report(mc, prescreen.score_macro(mc)).splitlines()[0])
+        print(prescreen.score_macro(mc)["regime"], "regime |", mc.get("as_of"), "\n")
+        print(all_table(rows))
+        csv_path = os.path.join(HERE, "data", "results", "overall_screen.csv")
+        md_path = os.path.join(HERE, "data", "results", "overall_screen.md")
+        write_all_outputs(rows, mc, csv_path, md_path)
+        print(f"\nWrote {csv_path} and {md_path}")
+        return 0
 
     if not args.ticker:
         # Pre-market conditions only.

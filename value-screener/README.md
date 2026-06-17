@@ -52,6 +52,7 @@ a single near-term **directional** read (0-100, 50 = neutral) plus the
 ```bash
 python3 overall.py                 # overall PRE-MARKET conditions only (no stock)
 python3 overall.py --ticker ADBE   # full Pre-screen → Buffett → Magic → Overall
+python3 overall.py --all           # rank ALL names (writes data/results/overall_screen.{csv,md})
 python3 prescreen.py --ticker AVGO # just the Pre-screen lens
 python3 overall.py --selftest      # built-in checks
 ```

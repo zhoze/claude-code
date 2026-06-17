@@ -3,7 +3,7 @@
   "as_of": "2026-06-15",
   "session": "weekend / pre-market for next session",
   "macro": {
-    "vix": 16.20,
+    "vix": 16.2,
     "vix_change_pct": -8.37,
     "sp500_futures_pct": 0.19,
     "nasdaq_futures_pct": 0.64,
@@ -13,18 +13,77 @@
     "wti_oil_pct": -5.0,
     "summary": "Risk-on rebound from the early-June selloff: VIX back to ~16, index futures green with the Dow at a fresh all-time high, 10y yield easing to ~4.46% and oil dropping after a US-Iran interim peace deal; resilient May retail sales (+0.9%). Lingering headwind: a hawkish Fed (SEP shows ~half the FOMC seeing at least one 2026 hike).",
     "headlines": [
-      {"text": "US-Iran interim peace deal eases the war premium; oil drops sharply", "impact": "bullish", "weight": 8, "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-05-2026"},
-      {"text": "May retail sales +0.9% vs +0.5% expected - resilient consumer", "impact": "bullish", "weight": 5, "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-05-2026"},
-      {"text": "Chip stocks rebound after early-June SOX -10% crash; Dow at all-time high", "impact": "bullish", "weight": 4, "url": "https://www.cnbc.com/2026/06/06/wall-streets-fear-gauge-punches-back-as-the-crash-up-in-chip-stocks-finally-reverses.html"},
-      {"text": "Fed held rates; projections show ~half the FOMC sees at least one hike this year", "impact": "bearish", "weight": 6, "url": "https://www.cnn.com/2026/06/05/markets/stock-market-sell-off-fed"}
+      {
+        "text": "US-Iran interim peace deal eases the war premium; oil drops sharply",
+        "impact": "bullish",
+        "weight": 8,
+        "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-05-2026"
+      },
+      {
+        "text": "May retail sales +0.9% vs +0.5% expected - resilient consumer",
+        "impact": "bullish",
+        "weight": 5,
+        "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-05-2026"
+      },
+      {
+        "text": "Chip stocks rebound after early-June SOX -10% crash; Dow at all-time high",
+        "impact": "bullish",
+        "weight": 4,
+        "url": "https://www.cnbc.com/2026/06/06/wall-streets-fear-gauge-punches-back-as-the-crash-up-in-chip-stocks-finally-reverses.html"
+      },
+      {
+        "text": "Fed held rates; projections show ~half the FOMC sees at least one hike this year",
+        "impact": "bearish",
+        "weight": 6,
+        "url": "https://www.cnn.com/2026/06/05/markets/stock-market-sell-off-fed"
+      }
     ]
   },
   "sectors": {
-    "Information Technology": {"bias": "bullish", "note": "Chipmakers leading the rebound after the early-June washout"},
-    "Communication Services": {"bias": "bullish", "note": "Mega-cap tech recovering with the tape"},
-    "Energy": {"bias": "bearish", "note": "Oil fell sharply on the US-Iran peace deal"},
-    "Financials": {"bias": "neutral", "note": "Hawkish-Fed crosswinds: higher-for-longer helps NII but raises credit risk"},
-    "Health Care": {"bias": "neutral", "note": "Defensive; no fresh sector catalyst"}
+    "Information Technology": {
+      "bias": "bullish",
+      "note": "Chipmakers leading the rebound after the early-June washout"
+    },
+    "Communication Services": {
+      "bias": "bullish",
+      "note": "Mega-cap tech recovering with the tape"
+    },
+    "Energy": {
+      "bias": "bearish",
+      "note": "Oil fell sharply on the US-Iran peace deal"
+    },
+    "Financials": {
+      "bias": "neutral",
+      "note": "Hawkish-Fed crosswinds: higher-for-longer helps NII but raises credit risk"
+    },
+    "Health Care": {
+      "bias": "neutral",
+      "note": "Defensive; no fresh sector catalyst"
+    },
+    "Consumer Staples": {
+      "bias": "neutral",
+      "note": "no fresh sector catalyst"
+    },
+    "Consumer Discretionary": {
+      "bias": "neutral",
+      "note": "no fresh sector catalyst"
+    },
+    "Industrials": {
+      "bias": "neutral",
+      "note": "no fresh sector catalyst"
+    },
+    "Materials": {
+      "bias": "neutral",
+      "note": "no fresh sector catalyst"
+    },
+    "Utilities": {
+      "bias": "neutral",
+      "note": "no fresh sector catalyst"
+    },
+    "Real Estate": {
+      "bias": "neutral",
+      "note": "no fresh sector catalyst"
+    }
   },
   "stocks": {
     "ADBE": {
@@ -36,10 +95,24 @@
         "AI-native rivals (OpenAI Sora, Canva, Figma, Google, Anthropic) pressuring core tools",
         "Post-earnings analyst downgrades / target cuts"
       ],
-      "technicals": {"sma50": 244.89, "sma200": 298.34, "rsi14": 29.38, "beta": 1.40, "perf_month": -18, "perf_ytd": -30, "volume": 6857428},
+      "technicals": {
+        "sma50": 244.89,
+        "sma200": 298.34,
+        "rsi14": 29.38,
+        "beta": 1.4,
+        "perf_month": -18,
+        "perf_ytd": -30,
+        "volume": 6857428
+      },
       "sources": [
-        {"title": "TIKR - Adobe down in 2026, $25B buyback", "url": "https://www.tikr.com/blog/adobe-stock-is-down-24-in-2026-does-the-25-billion-buyback-change-the-math"},
-        {"title": "Yahoo Finance - Assessing Adobe valuation, AI & CEO shift", "url": "https://finance.yahoo.com/markets/stocks/articles/assessing-adobe-adbe-valuation-earnings-140848800.html"}
+        {
+          "title": "TIKR - Adobe down in 2026, $25B buyback",
+          "url": "https://www.tikr.com/blog/adobe-stock-is-down-24-in-2026-does-the-25-billion-buyback-change-the-math"
+        },
+        {
+          "title": "Yahoo Finance - Assessing Adobe valuation, AI & CEO shift",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/assessing-adobe-adbe-valuation-earnings-140848800.html"
+        }
       ]
     },
     "AVGO": {
@@ -51,11 +124,482 @@
         "Q3 AI revenue vs the >$16B guide; path to the >$100B FY27 AI target",
         "Custom-silicon competition (alt suppliers for Google's TPU)"
       ],
-      "technicals": {"sma50": 406.45, "sma200": 358.10, "rsi14": 41.40, "beta": 1.43, "perf_month": -15, "perf_ytd": 25, "volume": 31425913},
+      "technicals": {
+        "sma50": 406.45,
+        "sma200": 358.1,
+        "rsi14": 41.4,
+        "beta": 1.43,
+        "perf_month": -15,
+        "perf_ytd": 25,
+        "volume": 31425913
+      },
       "sources": [
-        {"title": "MEXC - Is Broadcom a buy after the 12.59% crash?", "url": "https://www.mexc.com/learn/article/is-broadcom-a-buy-after-12-59-crash-broadcom-avgo-stock-price-target-and-analyst-consensus-explained/1"},
-        {"title": "CNBC - Fear gauge bites as chip 'crash up' reverses", "url": "https://www.cnbc.com/2026/06/06/wall-streets-fear-gauge-punches-back-as-the-crash-up-in-chip-stocks-finally-reverses.html"}
+        {
+          "title": "MEXC - Is Broadcom a buy after the 12.59% crash?",
+          "url": "https://www.mexc.com/learn/article/is-broadcom-a-buy-after-12-59-crash-broadcom-avgo-stock-price-target-and-analyst-consensus-explained/1"
+        },
+        {
+          "title": "CNBC - Fear gauge bites as chip 'crash up' reverses",
+          "url": "https://www.cnbc.com/2026/06/06/wall-streets-fear-gauge-punches-back-as-the-crash-up-in-chip-stocks-finally-reverses.html"
+        }
       ]
+    },
+    "AAPL": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 287.96,
+        "sma200": 267.85,
+        "rsi14": 48.79,
+        "beta": 1.09,
+        "perf_month": 1.1,
+        "perf_ytd": 8.7
+      }
+    },
+    "MSFT": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 412.87,
+        "sma200": 451.98,
+        "rsi14": 34.58,
+        "beta": 1.1,
+        "perf_month": -5.4,
+        "perf_ytd": -13.5
+      }
+    },
+    "GOOGL": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 366.36,
+        "sma200": 310.32,
+        "rsi14": 46.14,
+        "beta": 1.24,
+        "perf_month": -1.8,
+        "perf_ytd": 15.9
+      }
+    },
+    "META": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 622.6,
+        "sma200": 655.71,
+        "rsi14": 39.27,
+        "beta": 1.23,
+        "perf_month": -8.9,
+        "perf_ytd": -13.5
+      }
+    },
+    "NVDA": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 208.74,
+        "sma200": 189.7,
+        "rsi14": 45.32,
+        "beta": 2.2,
+        "perf_month": -1.7,
+        "perf_ytd": 8.2
+      }
+    },
+    "V": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 320.67,
+        "sma200": 329.21,
+        "rsi14": 57.04,
+        "beta": 0.76,
+        "perf_month": 0.5,
+        "perf_ytd": -2.1
+      }
+    },
+    "KO": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 78.88,
+        "sma200": 73.65,
+        "rsi14": 49.19,
+        "beta": 0.35,
+        "perf_month": 4.7,
+        "perf_ytd": 12.2
+      }
+    },
+    "PEP": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 150.54,
+        "sma200": 150.28,
+        "rsi14": 38.36,
+        "beta": 0.36,
+        "perf_month": -4.2,
+        "perf_ytd": -4.0
+      }
+    },
+    "COST": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 1002.66,
+        "sma200": 957.88,
+        "rsi14": 41.45,
+        "beta": 0.87,
+        "perf_month": -2.0,
+        "perf_ytd": 2.6
+      }
+    },
+    "WMT": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 125.3,
+        "sma200": 116.37,
+        "rsi14": 40.47,
+        "beta": 0.6,
+        "perf_month": -3.4,
+        "perf_ytd": 4.0
+      }
+    },
+    "JNJ": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 230.63,
+        "sma200": 215.48,
+        "rsi14": 53.55,
+        "beta": 0.26,
+        "perf_month": 4.4,
+        "perf_ytd": 11.8
+      }
+    },
+    "UNH": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 370.81,
+        "sma200": 333.11,
+        "rsi14": 59.7,
+        "beta": 0.65,
+        "perf_month": 10.2,
+        "perf_ytd": 22.6
+      }
+    },
+    "ABBV": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 211.67,
+        "sma200": 220.54,
+        "rsi14": 54.38,
+        "beta": 0.31,
+        "perf_month": 7.6,
+        "perf_ytd": 3.3
+      }
+    },
+    "LMT": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 539.75,
+        "sma200": 538.13,
+        "rsi14": 49.62,
+        "beta": 0.11,
+        "perf_month": 0.1,
+        "perf_ytd": 0.4
+      }
+    },
+    "JPM": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 308.52,
+        "sma200": 306.97,
+        "rsi14": 72.08,
+        "beta": 1.0,
+        "perf_month": 4.0,
+        "perf_ytd": 4.5
+      }
+    },
+    "XOM": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 150.62,
+        "sma200": 134.4,
+        "rsi14": 36.15,
+        "beta": 0.15,
+        "perf_month": -2.4,
+        "perf_ytd": 9.4
+      }
+    },
+    "CVX": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 187.39,
+        "sma200": 171.74,
+        "rsi14": 36.52,
+        "beta": 0.47,
+        "perf_month": -0.1,
+        "perf_ytd": 9.0
+      }
+    },
+    "PG": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 145.19,
+        "sma200": 149.01,
+        "rsi14": 59.55,
+        "beta": 0.38,
+        "perf_month": 3.0,
+        "perf_ytd": 0.4
+      }
+    },
+    "MO": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 69.76,
+        "sma200": 64.6,
+        "rsi14": 43.29,
+        "beta": 0.5,
+        "perf_month": 3.1,
+        "perf_ytd": 11.4
+      }
+    },
+    "MRK": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 115.87,
+        "sma200": 105.25,
+        "rsi14": 46.57,
+        "beta": 0.22,
+        "perf_month": 2.7,
+        "perf_ytd": 13.1
+      }
+    },
+    "MA": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 499.29,
+        "sma200": 535.34,
+        "rsi14": 51.38,
+        "beta": 0.74,
+        "perf_month": -1.9,
+        "perf_ytd": -8.5
+      }
+    },
+    "HON": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 222.05,
+        "sma200": 215.84,
+        "rsi14": 57.17,
+        "beta": 0.84,
+        "perf_month": -0.8,
+        "perf_ytd": 2.1
+      }
+    },
+    "HD": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 322.95,
+        "sma200": 359.05,
+        "rsi14": 55.4,
+        "beta": 0.97,
+        "perf_month": 1.7,
+        "perf_ytd": -8.5
+      }
+    },
+    "CAT": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 868.66,
+        "sma200": 667.5,
+        "rsi14": 61.4,
+        "beta": 1.6,
+        "perf_month": 4.8,
+        "perf_ytd": 36.4
+      }
+    },
+    "TXN": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 279.33,
+        "sma200": 209.68,
+        "rsi14": 53.48,
+        "beta": 1.31,
+        "perf_month": 7.8,
+        "perf_ytd": 43.6
+      }
+    },
+    "MCD": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 287.67,
+        "sma200": 305.48,
+        "rsi14": 51.44,
+        "beta": 0.41,
+        "perf_month": -1.0,
+        "perf_ytd": -6.8
+      }
+    },
+    "AXP": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 318.35,
+        "sma200": 337.4,
+        "rsi14": 68.63,
+        "beta": 1.06,
+        "perf_month": 2.2,
+        "perf_ytd": -3.5
+      }
+    },
+    "BAC": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 52.77,
+        "sma200": 52.2,
+        "rsi14": 70.88,
+        "beta": 1.2,
+        "perf_month": 6.2,
+        "perf_ytd": 7.3
+      }
+    },
+    "ORCL": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 187.57,
+        "sma200": 205.15,
+        "rsi14": 42.48,
+        "beta": 1.65,
+        "perf_month": -1.8,
+        "perf_ytd": -10.2
+      }
+    },
+    "ABT": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 90.43,
+        "sma200": 113.85,
+        "rsi14": 47.31,
+        "beta": 0.62,
+        "perf_month": -2.5,
+        "perf_ytd": -22.5
+      }
+    },
+    "AMGN": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 340.49,
+        "sma200": 331.62,
+        "rsi14": 49.34,
+        "beta": 0.42,
+        "perf_month": 4.3,
+        "perf_ytd": 7.1
+      }
+    },
+    "CL": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 87.15,
+        "sma200": 84.38,
+        "rsi14": 56.1,
+        "beta": 0.32,
+        "perf_month": 2.6,
+        "perf_ytd": 6.0
+      }
+    },
+    "NKE": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 44.3,
+        "sma200": 58.9,
+        "rsi14": 47.66,
+        "beta": 1.12,
+        "perf_month": 1.4,
+        "perf_ytd": -23.7
+      }
+    },
+    "LOW": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 227.8,
+        "sma200": 245.73,
+        "rsi14": 47.46,
+        "beta": 0.86,
+        "perf_month": -3.1,
+        "perf_ytd": -10.2
+      }
+    },
+    "UNP": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 263.65,
+        "sma200": 241.94,
+        "rsi14": 40.52,
+        "beta": 0.97,
+        "perf_month": 3.4,
+        "perf_ytd": 12.7
+      }
+    },
+    "COP": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 119.41,
+        "sma200": 105.08,
+        "rsi14": 37.57,
+        "beta": 0.11,
+        "perf_month": -2.0,
+        "perf_ytd": 11.3
+      }
+    },
+    "DIS": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 102.66,
+        "sma200": 107.2,
+        "rsi14": 47.95,
+        "beta": 1.39,
+        "perf_month": -2.6,
+        "perf_ytd": -6.7
+      }
+    },
+    "PFE": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 26.29,
+        "sma200": 25.88,
+        "rsi14": 48.78,
+        "beta": 0.3,
+        "perf_month": -0.3,
+        "perf_ytd": 1.3
+      }
     }
-  }
+  },
+  "_perf_note": "perf_month/perf_ytd are price-vs-50/200-day-MA distance proxies (stockanalysis statistics doesn't expose period returns via fetch); ADBE/AVGO carry actual returns."
 }
