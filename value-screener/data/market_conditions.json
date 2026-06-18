@@ -1,41 +1,41 @@
 {
   "_comment": "Pre-screen input: fresh macro/pre-market conditions + per-stock news, from reliable sources. NEWS GOES STALE - refresh before relying on it. To refresh: web-search current futures/VIX/yields/oil + headlines and each stock's latest news, then rewrite this file with today's date, numbers, and source links. prescreen.py and overall.py read this; they do NOT fetch news themselves. Trigger keyword: Pre-screen.",
-  "as_of": "2026-06-15",
-  "session": "weekend / pre-market for next session",
+  "as_of": "2026-06-18",
+  "session": "regular-session close 2026-06-18",
   "macro": {
-    "vix": 16.2,
-    "vix_change_pct": -8.37,
-    "sp500_futures_pct": 0.19,
-    "nasdaq_futures_pct": 0.64,
-    "dow_futures_pct": 0.26,
-    "ust10y": 4.46,
-    "ust10y_change_bps": -8,
-    "wti_oil_pct": -5.0,
-    "summary": "Risk-on rebound from the early-June selloff: VIX back to ~16, index futures green with the Dow at a fresh all-time high, 10y yield easing to ~4.46% and oil dropping after a US-Iran interim peace deal; resilient May retail sales (+0.9%). Lingering headwind: a hawkish Fed (SEP shows ~half the FOMC seeing at least one 2026 hike).",
+    "vix": 17.18,
+    "vix_change_pct": -6.84,
+    "sp500_futures_pct": 1.08,
+    "nasdaq_futures_pct": 1.91,
+    "dow_futures_pct": 0.14,
+    "ust10y": 4.49,
+    "ust10y_change_bps": 3,
+    "wti_oil_pct": -0.33,
+    "summary": "Recovery rally after Thursday's FOMC-driven selloff: S&P +1.08%, Nasdaq +1.91%, Russell 2000 +2.1% leading as tech/cyclicals lift the tape; VIX easing to ~17.2. Oil near its lowest since early March on the signed US-Iran interim peace deal. Headwind: a hawkish Fed (held rates but ~half the FOMC now expects at least one 2026 hike); 10y back up to ~4.49%.",
     "headlines": [
       {
-        "text": "US-Iran interim peace deal eases the war premium; oil drops sharply",
+        "text": "Equities rally after Thursday's FOMC selloff; Russell 2000 +2.1%, tech/cyclicals lead",
         "impact": "bullish",
-        "weight": 8,
-        "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-05-2026"
+        "weight": 6,
+        "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-18-2026"
       },
       {
-        "text": "May retail sales +0.9% vs +0.5% expected - resilient consumer",
+        "text": "US-Iran interim peace deal signed; US ends Iran blockade; oil near lowest since early March",
         "impact": "bullish",
-        "weight": 5,
-        "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-05-2026"
+        "weight": 6,
+        "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-18-2026"
       },
       {
-        "text": "Chip stocks rebound after early-June SOX -10% crash; Dow at all-time high",
+        "text": "VIX eases ~7% to ~17 as the Fed scare fades",
         "impact": "bullish",
-        "weight": 4,
-        "url": "https://www.cnbc.com/2026/06/06/wall-streets-fear-gauge-punches-back-as-the-crash-up-in-chip-stocks-finally-reverses.html"
+        "weight": 3,
+        "url": "https://streetstats.finance/markets/volatility"
       },
       {
-        "text": "Fed held rates; projections show ~half the FOMC sees at least one hike this year",
+        "text": "Fed held rates but signaled growing support for a 2026 hike (~half of FOMC)",
         "impact": "bearish",
         "weight": 6,
-        "url": "https://www.cnn.com/2026/06/05/markets/stock-market-sell-off-fed"
+        "url": "https://www.cnbc.com/quotes/US10Y"
       }
     ]
   },
