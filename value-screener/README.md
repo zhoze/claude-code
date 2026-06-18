@@ -135,39 +135,34 @@ the ~491 with complete fundamentals, Magic on all 503, Sentiment on the 482 with
 analyst coverage, macro Pre-screen for all). Earlier examples in this README came
 from a curated 40-name run; see `data/results/` for the current full-index output.
 
-Top of the ranking (see [`data/results/top_candidates.md`](data/results/top_candidates.md)
-for the full 40-name table and per-name failed gates):
+**Buffett value screen — top Strong Candidates** (77 of 503; full list in
+[`data/results/top_candidates.md`](data/results/top_candidates.md)):
 
-| Rank | Ticker | Score | Margin of Safety | Verdict |
-|---:|:--|---:|---:|:--|
-| 1 | META | 96.2 | 25.8% | **Strong Candidate** |
-| 2 | ADBE | 96.0 | 58.0% | **Strong Candidate** |
-| 3 | MSFT | 82.0 | 16.3% | **Strong Candidate** |
-| 8 | JPM | 72.8 | 42.8% | **Strong Candidate** |
-| 10 | UNP | 71.8 | 9.0% | **Strong Candidate** |
-| 4 | DIS | 81.8 | 42.5% | Watch |
-| 5 | COP | 78.7 | 28.4% | Watch |
-| 6 | AXP | 78.5 | 26.9% | Watch |
-| 7 | BAC | 75.0 | 49.9% | Watch |
+| Ticker | Company | Score | Margin of Safety |
+|:--|:--|---:|---:|
+| HIG | Hartford Financial | 100 | 68.0% |
+| CF | CF Industries | 100 | 66.6% |
+| ZTS | Zoetis | 100 | 55.6% |
+| EOG | EOG Resources | 100 | 53.6% |
+| INCY | Incyte | 100 | 50.4% |
+| DECK | Deckers Outdoor | 100 | 47.6% |
 
-**Reading the results:**
-- **ADBE** screens best on value — elite returns (ROIC ~60%, 89% gross margin),
-  low debt, and an unusually low P/E (~12) after its 2025 sell-off give it a ~58%
-  margin of safety. The "wonderful business at a fair price" pattern.
-- **High quality is often expensive in 2026.** Many elite businesses (GOOGL, V,
-  AAPL, KO, NVDA, MA) clear the quality bar but trade at/above conservative
-  intrinsic value, so they land on *Watch* — the discipline of waiting for a fair
-  price.
-- **Core gates gate the verdict.** DIS, COP and AXP post high scores and large raw
-  margins of safety but are held at *Watch* because a **core gate fails**: sub-15%
-  ROE (DIS, COP), or — for banks (AXP) and heavily bought-back firms with negative
-  book equity (MO, MCD, LOW) — ROE/leverage the industrial-style gates can't fairly
-  judge. **JPM and BAC** flip on this very point: the source reports them in a
-  *net-cash* position, so the leverage gate passes and JPM clears all core gates —
-  read banks with sector judgment (ROE/ROTCE), not these industrial gates.
-- **ABBV's** wildly negative margin of safety is an artifact of depressed trailing
-  EPS (one-time IPR&D charges) — screens should be paired with a read of *why*
-  earnings look the way they do.
+**Overall 4-lens directional ranking — most bullish** (full 503 in
+[`data/results/overall_screen.md`](data/results/overall_screen.md)): CNC, GL,
+KLAC, MTB, CRWD, UAL, CINF, DAL, JPM, BAC — names pairing a strong uptrend
+(Magic) with decent value/sentiment. Most-bearish: HSY, KR, TSN, NRG, COIN,
+TSLA, PLTR — broken trends and/or stretched valuations.
+
+**Reading the results (still true at index scale):**
+- The **dominant driver** is usually **technical (Magic)** — it carries the
+  highest weight and saturates near 0/100 at trend extremes, so it sets most
+  near-term leans; **value** dominates for the most over/undervalued names and
+  **news/sentiment** for the rest.
+- **Quality is broadly expensive in 2026** — many elite compounders clear the
+  Buffett quality bar but fail on price (Watch), while the value Strong
+  Candidates skew toward insurers, energy, and out-of-favor cyclicals.
+- **Banks and negative-book-equity firms** need sector judgment (ROE/ROTCE), not
+  the industrial leverage/current-ratio gates — see the caveats in `buffett_formula.md`.
 
 ## How the data was sourced (reproducibility)
 
