@@ -213,6 +213,27 @@ screen flags the bargain; the note is the reason to dig deeper before buying.
 
 ---
 
+## Refreshing the data (FMP API key)
+
+`refresh_sp500.py` re-pulls the entire S&P 500 (fundamentals + technicals +
+analyst-consensus sentiment) from Financial Modeling Prep. **The key is read from
+the `FMP_KEY` environment variable and is never written to disk or committed.**
+
+```bash
+export FMP_KEY=your_key          # or: cp .env.example .env && edit, then load it
+python3 refresh_sp500.py         # rebuilds data/{fundamentals,market_conditions,sentiment}
+python3 screener.py && python3 overall.py --all
+python3 refresh_sp500.py --limit 5   # quick smoke test (a few symbols)
+```
+
+- **Secret hygiene:** never hardcode the key. Store it as a shell env var, a
+  gitignored `.env` (see `.env.example`), or a **GitHub Actions secret**
+  (`Settings → Secrets and variables → Actions → FMP_KEY`). `.gitignore` already
+  blocks `.env`/`*.key`.
+- **CI:** `.github/workflows/refresh-screener.yml` runs the refresh on demand
+  (manual `workflow_dispatch`) using `${{ secrets.FMP_KEY }}`, then commits the
+  updated data. It never runs automatically.
+
 ## Limitations
 
 - Point-in-time snapshot (2026-06-14); fundamentals change.
