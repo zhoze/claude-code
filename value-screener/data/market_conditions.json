@@ -92,10 +92,10 @@
       "technicals": {
         "sma50": 120.94,
         "sma200": 130.43,
-        "rsi14": 50.3,
+        "rsi14": 51.13,
         "beta": 1.256,
-        "perf_month": 4.9,
-        "perf_ytd": -2.7
+        "perf_month": 5.1,
+        "perf_ytd": -2.6
       }
     },
     "AAPL": {
@@ -104,10 +104,10 @@
       "technicals": {
         "sma50": 287.96,
         "sma200": 267.85,
-        "rsi14": 50.51,
+        "rsi14": 50.94,
         "beta": 1.086,
-        "perf_month": 3.2,
-        "perf_ytd": 10.9
+        "perf_month": 3.5,
+        "perf_ytd": 11.3
       }
     },
     "ABBV": {
@@ -116,9 +116,9 @@
       "technicals": {
         "sma50": 211.67,
         "sma200": 220.54,
-        "rsi14": 48.2,
+        "rsi14": 47.88,
         "beta": 0.309,
-        "perf_month": 2.4,
+        "perf_month": 2.3,
         "perf_ytd": -1.8
       }
     },
@@ -128,10 +128,10 @@
       "technicals": {
         "sma50": 136.25,
         "sma200": 129.08,
-        "rsi14": 63.83,
+        "rsi14": 63.03,
         "beta": 1.159,
-        "perf_month": 4.8,
-        "perf_ytd": 10.6
+        "perf_month": 4.5,
+        "perf_ytd": 10.3
       }
     },
     "ABT": {
@@ -140,7 +140,7 @@
       "technicals": {
         "sma50": 90.43,
         "sma200": 113.85,
-        "rsi14": 47.78,
+        "rsi14": 47.55,
         "beta": 0.62,
         "perf_month": -2.3,
         "perf_ytd": -22.4
@@ -152,7 +152,7 @@
       "technicals": {
         "sma50": 94.06,
         "sma200": 93.39,
-        "rsi14": 46.22,
+        "rsi14": 46.16,
         "beta": 0.306,
         "perf_month": -3.1,
         "perf_ytd": -2.4
@@ -164,10 +164,10 @@
       "technicals": {
         "sma50": 179.12,
         "sma200": 226.75,
-        "rsi14": 20.64,
+        "rsi14": 20.86,
         "beta": 1.069,
-        "perf_month": -28.9,
-        "perf_ytd": -43.8
+        "perf_month": -27.1,
+        "perf_ytd": -42.4
       }
     },
     "ADBE": {
@@ -176,10 +176,10 @@
       "technicals": {
         "sma50": 242.54,
         "sma200": 296.05,
-        "rsi14": 28.24,
+        "rsi14": 27.79,
         "beta": 1.404,
-        "perf_month": -19.1,
-        "perf_ytd": -33.7
+        "perf_month": -19.5,
+        "perf_ytd": -34.1
       },
       "near_term_event": "Q2 FY26 reported Jun 11; multiple analyst price-target cuts followed",
       "note": "AI-disruption overhang on the creative moat keeps a lid on it; deep downtrend but very oversold (RSI ~29), so a risk-on tape only cushions it.",
@@ -204,10 +204,10 @@
       "technicals": {
         "sma50": 399.04,
         "sma200": 309.58,
-        "rsi14": 57.59,
+        "rsi14": 58.85,
         "beta": 1.183,
-        "perf_month": 7.6,
-        "perf_ytd": 38.6
+        "perf_month": 8.9,
+        "perf_ytd": 40.3
       }
     },
     "ADM": {
@@ -216,10 +216,10 @@
       "technicals": {
         "sma50": 76.38,
         "sma200": 66.71,
-        "rsi14": 37.7,
+        "rsi14": 38.57,
         "beta": 0.603,
-        "perf_month": -1.9,
-        "perf_ytd": 12.3
+        "perf_month": -1.7,
+        "perf_ytd": 12.6
       }
     },
     "ADP": {
@@ -228,10 +228,10 @@
       "technicals": {
         "sma50": 213.54,
         "sma200": 243.41,
-        "rsi14": 46.06,
+        "rsi14": 45.23,
         "beta": 0.845,
-        "perf_month": 2.4,
-        "perf_ytd": -10.2
+        "perf_month": 2.3,
+        "perf_ytd": -10.3
       }
     },
     "ADSK": {
@@ -240,10 +240,10 @@
       "technicals": {
         "sma50": 233.46,
         "sma200": 270.4,
-        "rsi14": 28.06,
+        "rsi14": 28.45,
         "beta": 1.295,
-        "perf_month": -17.1,
-        "perf_ytd": -28.4
+        "perf_month": -17.0,
+        "perf_ytd": -28.3
       }
     },
     "AEE": {
@@ -252,10 +252,10 @@
       "technicals": {
         "sma50": 110.04,
         "sma200": 105.7,
-        "rsi14": 50.08,
+        "rsi14": 48.99,
         "beta": 0.49,
-        "perf_month": -1.0,
-        "perf_ytd": 3.0
+        "perf_month": -1.2,
+        "perf_ytd": 2.8
       }
     },
     "AEP": {
@@ -264,10 +264,10 @@
       "technicals": {
         "sma50": 131.21,
         "sma200": 122.8,
-        "rsi14": 46.72,
+        "rsi14": 45.89,
         "beta": 0.518,
-        "perf_month": -2.6,
-        "perf_ytd": 4.1
+        "perf_month": -2.7,
+        "perf_ytd": 4.0
       }
     },
     "AES": {
@@ -276,9 +276,9 @@
       "technicals": {
         "sma50": 14.53,
         "sma200": 14.33,
-        "rsi14": 50.93,
+        "rsi14": 50.38,
         "beta": 0.946,
-        "perf_month": 0.7,
+        "perf_month": 0.6,
         "perf_ytd": 2.0
       }
     },
@@ -288,10 +288,10 @@
       "technicals": {
         "sma50": 115.05,
         "sma200": 111.4,
-        "rsi14": 47.54,
+        "rsi14": 49.14,
         "beta": 0.61,
-        "perf_month": -0.1,
-        "perf_ytd": 3.2
+        "perf_month": 0.4,
+        "perf_ytd": 3.7
       }
     },
     "AIG": {
@@ -300,7 +300,7 @@
       "technicals": {
         "sma50": 76.11,
         "sma200": 77.7,
-        "rsi14": 44.63,
+        "rsi14": 44.1,
         "beta": 0.541,
         "perf_month": -2.7,
         "perf_ytd": -4.7
@@ -312,7 +312,7 @@
       "technicals": {
         "sma50": 242.34,
         "sma200": 228.25,
-        "rsi14": 62.37,
+        "rsi14": 62.13,
         "beta": 0.569,
         "perf_month": 7.2,
         "perf_ytd": 13.8
@@ -324,10 +324,10 @@
       "technicals": {
         "sma50": 210.68,
         "sma200": 243.67,
-        "rsi14": 53.03,
+        "rsi14": 53.75,
         "beta": 0.533,
-        "perf_month": 1.2,
-        "perf_ytd": -12.5
+        "perf_month": 1.6,
+        "perf_ytd": -12.1
       }
     },
     "AKAM": {
@@ -336,10 +336,10 @@
       "technicals": {
         "sma50": 126.28,
         "sma200": 98.85,
-        "rsi14": 39.25,
+        "rsi14": 38.62,
         "beta": 0.598,
-        "perf_month": -0.3,
-        "perf_ytd": 27.3
+        "perf_month": -1.1,
+        "perf_ytd": 26.4
       }
     },
     "ALB": {
@@ -348,10 +348,10 @@
       "technicals": {
         "sma50": 181.54,
         "sma200": 145.73,
-        "rsi14": 39.51,
+        "rsi14": 42.45,
         "beta": 1.309,
-        "perf_month": -13.0,
-        "perf_ytd": 8.3
+        "perf_month": -11.7,
+        "perf_ytd": 10.0
       }
     },
     "ALGN": {
@@ -360,10 +360,10 @@
       "technicals": {
         "sma50": 173.75,
         "sma200": 159.95,
-        "rsi14": 56.53,
+        "rsi14": 58.85,
         "beta": 1.671,
-        "perf_month": 2.9,
-        "perf_ytd": 11.8
+        "perf_month": 4.8,
+        "perf_ytd": 13.8
       }
     },
     "ALL": {
@@ -372,10 +372,10 @@
       "technicals": {
         "sma50": 215.71,
         "sma200": 207.59,
-        "rsi14": 53.82,
+        "rsi14": 56.06,
         "beta": 0.192,
-        "perf_month": 1.8,
-        "perf_ytd": 5.7
+        "perf_month": 2.5,
+        "perf_ytd": 6.5
       }
     },
     "ALLE": {
@@ -384,10 +384,10 @@
       "technicals": {
         "sma50": 135.55,
         "sma200": 157.01,
-        "rsi14": 53.25,
+        "rsi14": 52.22,
         "beta": 0.875,
-        "perf_month": -1.1,
-        "perf_ytd": -14.6
+        "perf_month": -1.5,
+        "perf_ytd": -14.9
       }
     },
     "AMAT": {
@@ -396,10 +396,10 @@
       "technicals": {
         "sma50": 441.04,
         "sma200": 315.52,
-        "rsi14": 75.56,
+        "rsi14": 76.01,
         "beta": 1.672,
-        "perf_month": 39.2,
-        "perf_ytd": 94.6
+        "perf_month": 39.9,
+        "perf_ytd": 95.6
       }
     },
     "AMCR": {
@@ -408,10 +408,10 @@
       "technicals": {
         "sma50": 39.3,
         "sma200": 41.63,
-        "rsi14": 60.85,
+        "rsi14": 59.82,
         "beta": 0.636,
-        "perf_month": 5.0,
-        "perf_ytd": -0.9
+        "perf_month": 4.5,
+        "perf_ytd": -1.3
       }
     },
     "AMD": {
@@ -420,10 +420,10 @@
       "technicals": {
         "sma50": 404.94,
         "sma200": 259.27,
-        "rsi14": 60.56,
+        "rsi14": 61.19,
         "beta": 2.492,
-        "perf_month": 31.7,
-        "perf_ytd": 105.6
+        "perf_month": 32.7,
+        "perf_ytd": 107.3
       }
     },
     "AME": {
@@ -432,10 +432,10 @@
       "technicals": {
         "sma50": 230.05,
         "sma200": 211.6,
-        "rsi14": 61.6,
+        "rsi14": 61.93,
         "beta": 1.004,
-        "perf_month": 3.0,
-        "perf_ytd": 12.0
+        "perf_month": 3.2,
+        "perf_ytd": 12.2
       }
     },
     "AMGN": {
@@ -444,10 +444,10 @@
       "technicals": {
         "sma50": 340.5,
         "sma200": 331.62,
-        "rsi14": 45.3,
+        "rsi14": 46.61,
         "beta": 0.416,
-        "perf_month": -1.5,
-        "perf_ytd": 1.2
+        "perf_month": -0.9,
+        "perf_ytd": 1.8
       }
     },
     "AMP": {
@@ -456,10 +456,10 @@
       "technicals": {
         "sma50": 460.12,
         "sma200": 474.53,
-        "rsi14": 56.83,
+        "rsi14": 58.22,
         "beta": 1.166,
-        "perf_month": 1.2,
-        "perf_ytd": -1.9
+        "perf_month": 1.6,
+        "perf_ytd": -1.5
       }
     },
     "AMT": {
@@ -468,10 +468,10 @@
       "technicals": {
         "sma50": 181.65,
         "sma200": 182.45,
-        "rsi14": 38.81,
+        "rsi14": 37.89,
         "beta": 0.891,
-        "perf_month": -2.9,
-        "perf_ytd": -3.4
+        "perf_month": -3.1,
+        "perf_ytd": -3.5
       }
     },
     "AMZN": {
@@ -480,10 +480,10 @@
       "technicals": {
         "sma50": 256.64,
         "sma200": 232.71,
-        "rsi14": 42.66,
+        "rsi14": 44.03,
         "beta": 1.444,
-        "perf_month": -5.3,
-        "perf_ytd": 4.4
+        "perf_month": -4.8,
+        "perf_ytd": 5.0
       }
     },
     "ANET": {
@@ -492,10 +492,10 @@
       "technicals": {
         "sma50": 158.04,
         "sma200": 142.0,
-        "rsi14": 58.35,
+        "rsi14": 58.89,
         "beta": 1.611,
-        "perf_month": 6.8,
-        "perf_ytd": 18.9
+        "perf_month": 7.4,
+        "perf_ytd": 19.5
       }
     },
     "AON": {
@@ -504,10 +504,10 @@
       "technicals": {
         "sma50": 322.53,
         "sma200": 338.16,
-        "rsi14": 44.2,
+        "rsi14": 43.24,
         "beta": 0.714,
-        "perf_month": -1.2,
-        "perf_ytd": -5.8
+        "perf_month": -1.5,
+        "perf_ytd": -6.0
       }
     },
     "AOS": {
@@ -516,10 +516,10 @@
       "technicals": {
         "sma50": 60.35,
         "sma200": 67.61,
-        "rsi14": 51.92,
+        "rsi14": 48.14,
         "beta": 1.175,
-        "perf_month": -2.1,
-        "perf_ytd": -12.6
+        "perf_month": -3.5,
+        "perf_ytd": -13.9
       }
     },
     "APA": {
@@ -528,10 +528,10 @@
       "technicals": {
         "sma50": 37.84,
         "sma200": 29.74,
-        "rsi14": 33.82,
+        "rsi14": 34.2,
         "beta": 0.327,
-        "perf_month": -12.9,
-        "perf_ytd": 10.8
+        "perf_month": -12.7,
+        "perf_ytd": 11.1
       }
     },
     "APD": {
@@ -540,10 +540,10 @@
       "technicals": {
         "sma50": 292.32,
         "sma200": 274.01,
-        "rsi14": 42.37,
+        "rsi14": 43.06,
         "beta": 0.747,
-        "perf_month": -4.6,
-        "perf_ytd": 1.8
+        "perf_month": -4.1,
+        "perf_ytd": 2.3
       }
     },
     "APH": {
@@ -552,10 +552,10 @@
       "technicals": {
         "sma50": 142.09,
         "sma200": 136.27,
-        "rsi14": 69.11,
+        "rsi14": 68.31,
         "beta": 1.275,
-        "perf_month": 16.5,
-        "perf_ytd": 21.5
+        "perf_month": 15.4,
+        "perf_ytd": 20.3
       }
     },
     "APO": {
@@ -564,10 +564,10 @@
       "technicals": {
         "sma50": 127.37,
         "sma200": 128.74,
-        "rsi14": 62.94,
+        "rsi14": 62.9,
         "beta": 1.488,
         "perf_month": 7.9,
-        "perf_ytd": 6.7
+        "perf_ytd": 6.8
       }
     },
     "APP": {
@@ -576,7 +576,7 @@
       "technicals": {
         "sma50": 490.34,
         "sma200": 542.31,
-        "rsi14": 41.28,
+        "rsi14": 41.08,
         "beta": 2.455,
         "perf_month": -4.2,
         "perf_ytd": -13.4
@@ -588,10 +588,10 @@
       "technicals": {
         "sma50": 61.18,
         "sma200": 74.45,
-        "rsi14": 49.87,
+        "rsi14": 48.45,
         "beta": 1.334,
-        "perf_month": 5.3,
-        "perf_ytd": -13.5
+        "perf_month": 4.1,
+        "perf_ytd": -14.5
       }
     },
     "ARE": {
@@ -600,10 +600,10 @@
       "technicals": {
         "sma50": 47.42,
         "sma200": 56.54,
-        "rsi14": 53.89,
+        "rsi14": 53.22,
         "beta": 1.202,
-        "perf_month": 7.8,
-        "perf_ytd": -9.6
+        "perf_month": 7.6,
+        "perf_ytd": -9.7
       }
     },
     "ARES": {
@@ -612,10 +612,10 @@
       "technicals": {
         "sma50": 121.89,
         "sma200": 141.34,
-        "rsi14": 52.09,
+        "rsi14": 53.0,
         "beta": 1.516,
-        "perf_month": 5.4,
-        "perf_ytd": -9.1
+        "perf_month": 6.1,
+        "perf_ytd": -8.5
       }
     },
     "ATO": {
@@ -624,10 +624,10 @@
       "technicals": {
         "sma50": 179.45,
         "sma200": 175.22,
-        "rsi14": 40.63,
+        "rsi14": 41.24,
         "beta": 0.601,
-        "perf_month": -5.3,
-        "perf_ytd": -3.0
+        "perf_month": -5.2,
+        "perf_ytd": -2.9
       }
     },
     "AVB": {
@@ -636,10 +636,10 @@
       "technicals": {
         "sma50": 181.21,
         "sma200": 180.29,
-        "rsi14": 40.68,
+        "rsi14": 37.54,
         "beta": 0.789,
-        "perf_month": -1.3,
-        "perf_ytd": -0.8
+        "perf_month": -2.1,
+        "perf_ytd": -1.6
       }
     },
     "AVGO": {
@@ -648,10 +648,10 @@
       "technicals": {
         "sma50": 410.46,
         "sma200": 359.39,
-        "rsi14": 50.3,
+        "rsi14": 51.33,
         "beta": 1.433,
-        "perf_month": -0.8,
-        "perf_ytd": 13.3
+        "perf_month": 0.2,
+        "perf_ytd": 14.5
       },
       "near_term_event": "Q2 FY26 reported Jun 4 - record AI revenue (+143% YoY) but Q3 AI guidance (~$16B) light vs ~$17.2B hoped",
       "note": "AI-chip leader ~-21% off its June 2 ATH on the guidance miss that triggered the sector selloff; now rebounding with chips on the risk-on turn, but priced for perfection.",
@@ -676,10 +676,10 @@
       "technicals": {
         "sma50": 162.41,
         "sma200": 172.66,
-        "rsi14": 51.65,
+        "rsi14": 48.69,
         "beta": 0.833,
-        "perf_month": -1.4,
-        "perf_ytd": -7.3
+        "perf_month": -2.3,
+        "perf_ytd": -8.1
       }
     },
     "AWK": {
@@ -688,10 +688,10 @@
       "technicals": {
         "sma50": 127.71,
         "sma200": 132.24,
-        "rsi14": 50.97,
+        "rsi14": 48.49,
         "beta": 0.613,
-        "perf_month": -1.4,
-        "perf_ytd": -4.7
+        "perf_month": -2.1,
+        "perf_ytd": -5.4
       }
     },
     "AXON": {
@@ -700,10 +700,10 @@
       "technicals": {
         "sma50": 412.34,
         "sma200": 546.09,
-        "rsi14": 44.08,
+        "rsi14": 45.73,
         "beta": 1.422,
-        "perf_month": 1.3,
-        "perf_ytd": -23.5
+        "perf_month": 2.7,
+        "perf_ytd": -22.5
       }
     },
     "AXP": {
@@ -712,10 +712,10 @@
       "technicals": {
         "sma50": 318.36,
         "sma200": 337.4,
-        "rsi14": 66.94,
+        "rsi14": 66.22,
         "beta": 1.058,
-        "perf_month": 6.3,
-        "perf_ytd": 0.3
+        "perf_month": 6.2,
+        "perf_ytd": 0.2
       }
     },
     "AZO": {
@@ -724,10 +724,10 @@
       "technicals": {
         "sma50": 3353.13,
         "sma200": 3652.71,
-        "rsi14": 39.82,
+        "rsi14": 39.74,
         "beta": 0.349,
-        "perf_month": -8.9,
-        "perf_ytd": -16.3
+        "perf_month": -8.6,
+        "perf_ytd": -16.1
       }
     },
     "BA": {
@@ -736,10 +736,10 @@
       "technicals": {
         "sma50": 224.18,
         "sma200": 218.71,
-        "rsi14": 49.82,
+        "rsi14": 50.71,
         "beta": 1.198,
-        "perf_month": -1.3,
-        "perf_ytd": 1.1
+        "perf_month": -0.7,
+        "perf_ytd": 1.8
       }
     },
     "BAC": {
@@ -748,9 +748,9 @@
       "technicals": {
         "sma50": 52.77,
         "sma200": 52.2,
-        "rsi14": 68.45,
+        "rsi14": 67.76,
         "beta": 1.196,
-        "perf_month": 6.6,
+        "perf_month": 6.5,
         "perf_ytd": 7.7
       }
     },
@@ -760,10 +760,10 @@
       "technicals": {
         "sma50": 58.42,
         "sma200": 55.33,
-        "rsi14": 58.47,
+        "rsi14": 57.49,
         "beta": 1.014,
-        "perf_month": -1.0,
-        "perf_ytd": 4.5
+        "perf_month": -1.2,
+        "perf_ytd": 4.3
       }
     },
     "BAX": {
@@ -772,7 +772,7 @@
       "technicals": {
         "sma50": 18.42,
         "sma200": 19.7,
-        "rsi14": 56.45,
+        "rsi14": 56.01,
         "beta": 0.642,
         "perf_month": 8.0,
         "perf_ytd": 1.0
@@ -784,10 +784,10 @@
       "technicals": {
         "sma50": 64.99,
         "sma200": 69.86,
-        "rsi14": 59.02,
+        "rsi14": 59.8,
         "beta": 1.33,
-        "perf_month": 14.3,
-        "perf_ytd": 6.4
+        "perf_month": 15.0,
+        "perf_ytd": 7.0
       }
     },
     "BDX": {
@@ -796,7 +796,7 @@
       "technicals": {
         "sma50": 149.23,
         "sma200": 154.09,
-        "rsi14": 43.65,
+        "rsi14": 43.25,
         "beta": 0.278,
         "perf_month": -3.5,
         "perf_ytd": -6.6
@@ -808,10 +808,10 @@
       "technicals": {
         "sma50": 29.94,
         "sma200": 25.71,
-        "rsi14": 63.01,
+        "rsi14": 64.07,
         "beta": 1.593,
-        "perf_month": 10.1,
-        "perf_ytd": 28.2
+        "perf_month": 10.4,
+        "perf_ytd": 28.6
       }
     },
     "BF-B": {
@@ -820,10 +820,10 @@
       "technicals": {
         "sma50": 26.9,
         "sma200": 27.34,
-        "rsi14": 52.38,
+        "rsi14": 52.81,
         "beta": 0.354,
-        "perf_month": -0.8,
-        "perf_ytd": -2.4
+        "perf_month": -1.0,
+        "perf_ytd": -2.6
       }
     },
     "BG": {
@@ -832,10 +832,10 @@
       "technicals": {
         "sma50": 124.53,
         "sma200": 107.13,
-        "rsi14": 31.37,
+        "rsi14": 31.83,
         "beta": 0.617,
-        "perf_month": -9.8,
-        "perf_ytd": 4.8
+        "perf_month": -9.6,
+        "perf_ytd": 5.1
       }
     },
     "BIIB": {
@@ -844,10 +844,10 @@
       "technicals": {
         "sma50": 190.15,
         "sma200": 174.41,
-        "rsi14": 50.97,
+        "rsi14": 52.43,
         "beta": 0.177,
-        "perf_month": 2.7,
-        "perf_ytd": 12.0
+        "perf_month": 3.4,
+        "perf_ytd": 12.7
       }
     },
     "BKNG": {
@@ -856,10 +856,10 @@
       "technicals": {
         "sma50": 169.66,
         "sma200": 190.96,
-        "rsi14": 57.87,
+        "rsi14": 56.18,
         "beta": 1.088,
-        "perf_month": 2.1,
-        "perf_ytd": -9.3
+        "perf_month": 1.3,
+        "perf_ytd": -10.0
       }
     },
     "BKR": {
@@ -868,10 +868,10 @@
       "technicals": {
         "sma50": 64.38,
         "sma200": 55.09,
-        "rsi14": 34.51,
+        "rsi14": 34.19,
         "beta": 0.938,
-        "perf_month": -8.9,
-        "perf_ytd": 6.5
+        "perf_month": -9.3,
+        "perf_ytd": 6.0
       }
     },
     "BLDR": {
@@ -880,10 +880,10 @@
       "technicals": {
         "sma50": 79.05,
         "sma200": 103.81,
-        "rsi14": 58.47,
+        "rsi14": 57.23,
         "beta": 1.45,
-        "perf_month": 2.7,
-        "perf_ytd": -21.8
+        "perf_month": 1.9,
+        "perf_ytd": -22.4
       }
     },
     "BLK": {
@@ -892,10 +892,10 @@
       "technicals": {
         "sma50": 1046.64,
         "sma200": 1069.99,
-        "rsi14": 53.78,
+        "rsi14": 53.67,
         "beta": 1.434,
-        "perf_month": 0.2,
-        "perf_ytd": -2.0
+        "perf_month": 0.3,
+        "perf_ytd": -1.9
       }
     },
     "BMY": {
@@ -904,7 +904,7 @@
       "technicals": {
         "sma50": 57.47,
         "sma200": 53.55,
-        "rsi14": 38.4,
+        "rsi14": 38.26,
         "beta": 0.238,
         "perf_month": -6.0,
         "perf_ytd": 0.8
@@ -916,10 +916,10 @@
       "technicals": {
         "sma50": 136.55,
         "sma200": 119.49,
-        "rsi14": 58.61,
+        "rsi14": 57.68,
         "beta": 1.065,
-        "perf_month": 5.4,
-        "perf_ytd": 20.5
+        "perf_month": 5.2,
+        "perf_ytd": 20.2
       }
     },
     "BR": {
@@ -928,10 +928,10 @@
       "technicals": {
         "sma50": 152.47,
         "sma200": 198.03,
-        "rsi14": 31.61,
+        "rsi14": 31.7,
         "beta": 0.888,
-        "perf_month": -9.9,
-        "perf_ytd": -30.6
+        "perf_month": -9.8,
+        "perf_ytd": -30.5
       }
     },
     "BRK-B": {
@@ -940,10 +940,10 @@
       "technicals": {
         "sma50": 478.95,
         "sma200": 490.31,
-        "rsi14": 53.91,
+        "rsi14": 56.56,
         "beta": 0.617,
-        "perf_month": 1.6,
-        "perf_ytd": -0.7
+        "perf_month": 2.2,
+        "perf_ytd": -0.2
       }
     },
     "BRO": {
@@ -952,10 +952,10 @@
       "technicals": {
         "sma50": 60.52,
         "sma200": 74.93,
-        "rsi14": 48.48,
+        "rsi14": 50.96,
         "beta": 0.624,
-        "perf_month": -3.4,
-        "perf_ytd": -22.0
+        "perf_month": -2.3,
+        "perf_ytd": -21.1
       }
     },
     "BSX": {
@@ -964,10 +964,10 @@
       "technicals": {
         "sma50": 55.26,
         "sma200": 81.51,
-        "rsi14": 27.19,
+        "rsi14": 27.22,
         "beta": 0.559,
-        "perf_month": -18.1,
-        "perf_ytd": -44.5
+        "perf_month": -18.0,
+        "perf_ytd": -44.4
       }
     },
     "BX": {
@@ -976,10 +976,10 @@
       "technicals": {
         "sma50": 121.1,
         "sma200": 139.55,
-        "rsi14": 55.42,
+        "rsi14": 55.49,
         "beta": 1.585,
-        "perf_month": 2.1,
-        "perf_ytd": -11.4
+        "perf_month": 2.2,
+        "perf_ytd": -11.3
       }
     },
     "BXP": {
@@ -988,10 +988,10 @@
       "technicals": {
         "sma50": 59.6,
         "sma200": 64.97,
-        "rsi14": 60.83,
+        "rsi14": 59.36,
         "beta": 1.062,
-        "perf_month": 9.3,
-        "perf_ytd": 0.3
+        "perf_month": 8.6,
+        "perf_ytd": -0.4
       }
     },
     "C": {
@@ -1000,10 +1000,10 @@
       "technicals": {
         "sma50": 129.19,
         "sma200": 113.07,
-        "rsi14": 74.27,
+        "rsi14": 71.66,
         "beta": 1.115,
-        "perf_month": 11.7,
-        "perf_ytd": 27.7
+        "perf_month": 10.8,
+        "perf_ytd": 26.6
       }
     },
     "CAG": {
@@ -1012,10 +1012,10 @@
       "technicals": {
         "sma50": 13.9,
         "sma200": 16.83,
-        "rsi14": 42.69,
+        "rsi14": 43.82,
         "beta": -0.042,
-        "perf_month": -5.5,
-        "perf_ytd": -21.9
+        "perf_month": -5.0,
+        "perf_ytd": -21.5
       }
     },
     "CAH": {
@@ -1024,10 +1024,10 @@
       "technicals": {
         "sma50": 203.6,
         "sma200": 196.92,
-        "rsi14": 66.74,
+        "rsi14": 66.65,
         "beta": 0.526,
-        "perf_month": 9.1,
-        "perf_ytd": 12.8
+        "perf_month": 8.9,
+        "perf_ytd": 12.6
       }
     },
     "CARR": {
@@ -1036,10 +1036,10 @@
       "technicals": {
         "sma50": 64.88,
         "sma200": 59.63,
-        "rsi14": 62.94,
+        "rsi14": 62.44,
         "beta": 1.337,
-        "perf_month": 11.0,
-        "perf_ytd": 20.7
+        "perf_month": 10.7,
+        "perf_ytd": 20.4
       }
     },
     "CASY": {
@@ -1048,10 +1048,10 @@
       "technicals": {
         "sma50": 810.74,
         "sma200": 649.01,
-        "rsi14": 52.15,
+        "rsi14": 53.5,
         "beta": 0.624,
-        "perf_month": 3.0,
-        "perf_ytd": 28.6
+        "perf_month": 3.9,
+        "perf_ytd": 29.8
       }
     },
     "CAT": {
@@ -1060,10 +1060,10 @@
       "technicals": {
         "sma50": 868.66,
         "sma200": 667.5,
-        "rsi14": 65.7,
+        "rsi14": 65.45,
         "beta": 1.603,
-        "perf_month": 13.8,
-        "perf_ytd": 48.1
+        "perf_month": 13.5,
+        "perf_ytd": 47.7
       }
     },
     "CB": {
@@ -1072,10 +1072,10 @@
       "technicals": {
         "sma50": 324.81,
         "sma200": 308.27,
-        "rsi14": 49.31,
+        "rsi14": 49.25,
         "beta": 0.421,
-        "perf_month": -0.5,
-        "perf_ytd": 4.8
+        "perf_month": -0.4,
+        "perf_ytd": 4.9
       }
     },
     "CBOE": {
@@ -1084,10 +1084,10 @@
       "technicals": {
         "sma50": 316.77,
         "sma200": 274.4,
-        "rsi14": 25.89,
+        "rsi14": 26.3,
         "beta": 0.395,
-        "perf_month": -21.9,
-        "perf_ytd": -9.9
+        "perf_month": -21.4,
+        "perf_ytd": -9.2
       }
     },
     "CBRE": {
@@ -1096,10 +1096,10 @@
       "technicals": {
         "sma50": 138.5,
         "sma200": 151.0,
-        "rsi14": 45.21,
+        "rsi14": 46.57,
         "beta": 1.221,
-        "perf_month": -5.7,
-        "perf_ytd": -13.5
+        "perf_month": -5.0,
+        "perf_ytd": -12.9
       }
     },
     "CCI": {
@@ -1108,10 +1108,10 @@
       "technicals": {
         "sma50": 89.21,
         "sma200": 89.64,
-        "rsi14": 32.91,
+        "rsi14": 31.39,
         "beta": 0.948,
-        "perf_month": -7.1,
-        "perf_ytd": -7.5
+        "perf_month": -8.0,
+        "perf_ytd": -8.5
       }
     },
     "CCL": {
@@ -1120,10 +1120,10 @@
       "technicals": {
         "sma50": 27.13,
         "sma200": 28.37,
-        "rsi14": 64.28,
+        "rsi14": 63.75,
         "beta": 2.331,
-        "perf_month": 14.3,
-        "perf_ytd": 9.3
+        "perf_month": 13.8,
+        "perf_ytd": 8.8
       }
     },
     "CDNS": {
@@ -1132,10 +1132,10 @@
       "technicals": {
         "sma50": 351.76,
         "sma200": 326.1,
-        "rsi14": 57.88,
+        "rsi14": 55.26,
         "beta": 1.149,
-        "perf_month": 11.7,
-        "perf_ytd": 20.5
+        "perf_month": 10.1,
+        "perf_ytd": 18.8
       }
     },
     "CDW": {
@@ -1144,10 +1144,10 @@
       "technicals": {
         "sma50": 124.83,
         "sma200": 136.64,
-        "rsi14": 53.51,
+        "rsi14": 52.74,
         "beta": 0.987,
-        "perf_month": 3.2,
-        "perf_ytd": -5.7
+        "perf_month": 2.8,
+        "perf_ytd": -6.1
       }
     },
     "CEG": {
@@ -1156,10 +1156,10 @@
       "technicals": {
         "sma50": 284.65,
         "sma200": 319.44,
-        "rsi14": 52.59,
+        "rsi14": 51.68,
         "beta": 1.091,
-        "perf_month": -3.2,
-        "perf_ytd": -13.7
+        "perf_month": -3.7,
+        "perf_ytd": -14.2
       }
     },
     "CF": {
@@ -1168,10 +1168,10 @@
       "technicals": {
         "sma50": 118.95,
         "sma200": 98.85,
-        "rsi14": 32.47,
+        "rsi14": 33.09,
         "beta": 0.382,
-        "perf_month": -13.8,
-        "perf_ytd": 3.7
+        "perf_month": -13.5,
+        "perf_ytd": 4.1
       }
     },
     "CFG": {
@@ -1180,10 +1180,10 @@
       "technicals": {
         "sma50": 63.96,
         "sma200": 58.65,
-        "rsi14": 62.15,
+        "rsi14": 62.08,
         "beta": 1.021,
-        "perf_month": 5.0,
-        "perf_ytd": 14.5
+        "perf_month": 4.9,
+        "perf_ytd": 14.4
       }
     },
     "CHD": {
@@ -1192,10 +1192,10 @@
       "technicals": {
         "sma50": 95.52,
         "sma200": 91.95,
-        "rsi14": 50.92,
+        "rsi14": 47.83,
         "beta": 0.47,
-        "perf_month": 1.0,
-        "perf_ytd": 4.9
+        "perf_month": 0.1,
+        "perf_ytd": 4.0
       }
     },
     "CHRW": {
@@ -1204,10 +1204,10 @@
       "technicals": {
         "sma50": 177.6,
         "sma200": 163.4,
-        "rsi14": 52.41,
+        "rsi14": 53.35,
         "beta": 0.925,
-        "perf_month": 3.8,
-        "perf_ytd": 12.9
+        "perf_month": 4.2,
+        "perf_ytd": 13.2
       }
     },
     "CHTR": {
@@ -1216,10 +1216,10 @@
       "technicals": {
         "sma50": 168.02,
         "sma200": 212.31,
-        "rsi14": 34.42,
+        "rsi14": 32.07,
         "beta": 0.707,
-        "perf_month": -22.6,
-        "perf_ytd": -38.8
+        "perf_month": -24.9,
+        "perf_ytd": -40.5
       }
     },
     "CI": {
@@ -1228,10 +1228,10 @@
       "technicals": {
         "sma50": 283.71,
         "sma200": 281.52,
-        "rsi14": 44.69,
+        "rsi14": 43.53,
         "beta": 0.302,
-        "perf_month": -1.1,
-        "perf_ytd": -0.3
+        "perf_month": -1.6,
+        "perf_ytd": -0.8
       }
     },
     "CIEN": {
@@ -1240,10 +1240,10 @@
       "technicals": {
         "sma50": 522.51,
         "sma200": 308.37,
-        "rsi14": 36.27,
+        "rsi14": 36.37,
         "beta": 1.244,
-        "perf_month": -18.2,
-        "perf_ytd": 38.6
+        "perf_month": -18.0,
+        "perf_ytd": 38.9
       }
     },
     "CINF": {
@@ -1252,10 +1252,10 @@
       "technicals": {
         "sma50": 164.29,
         "sma200": 161.94,
-        "rsi14": 61.21,
+        "rsi14": 61.47,
         "beta": 0.584,
-        "perf_month": 3.5,
-        "perf_ytd": 5.0
+        "perf_month": 3.6,
+        "perf_ytd": 5.1
       }
     },
     "CL": {
@@ -1264,10 +1264,10 @@
       "technicals": {
         "sma50": 87.16,
         "sma200": 84.38,
-        "rsi14": 54.74,
+        "rsi14": 52.68,
         "beta": 0.322,
-        "perf_month": 3.2,
-        "perf_ytd": 6.6
+        "perf_month": 2.7,
+        "perf_ytd": 6.0
       }
     },
     "CLX": {
@@ -1276,10 +1276,10 @@
       "technicals": {
         "sma50": 95.57,
         "sma200": 108.24,
-        "rsi14": 54.34,
+        "rsi14": 51.67,
         "beta": 0.545,
-        "perf_month": 1.4,
-        "perf_ytd": -10.5
+        "perf_month": 0.2,
+        "perf_ytd": -11.5
       }
     },
     "CMCSA": {
@@ -1288,10 +1288,10 @@
       "technicals": {
         "sma50": 26.08,
         "sma200": 27.96,
-        "rsi14": 29.54,
+        "rsi14": 27.34,
         "beta": 0.658,
-        "perf_month": -13.0,
-        "perf_ytd": -18.9
+        "perf_month": -14.0,
+        "perf_ytd": -19.8
       }
     },
     "CME": {
@@ -1300,10 +1300,10 @@
       "technicals": {
         "sma50": 281.58,
         "sma200": 281.78,
-        "rsi14": 32.92,
+        "rsi14": 32.46,
         "beta": 0.244,
-        "perf_month": -12.2,
-        "perf_ytd": -12.3
+        "perf_month": -12.5,
+        "perf_ytd": -12.6
       }
     },
     "CMG": {
@@ -1312,10 +1312,10 @@
       "technicals": {
         "sma50": 32.69,
         "sma200": 35.87,
-        "rsi14": 55.98,
+        "rsi14": 55.06,
         "beta": 0.978,
-        "perf_month": -0.5,
-        "perf_ytd": -9.3
+        "perf_month": -0.6,
+        "perf_ytd": -9.4
       }
     },
     "CMI": {
@@ -1324,10 +1324,10 @@
       "technicals": {
         "sma50": 659.77,
         "sma200": 541.36,
-        "rsi14": 62.4,
+        "rsi14": 61.67,
         "beta": 1.24,
-        "perf_month": 9.1,
-        "perf_ytd": 33.0
+        "perf_month": 8.7,
+        "perf_ytd": 32.4
       }
     },
     "CMS": {
@@ -1336,10 +1336,10 @@
       "technicals": {
         "sma50": 74.49,
         "sma200": 73.58,
-        "rsi14": 51.63,
+        "rsi14": 50.85,
         "beta": 0.352,
-        "perf_month": -1.3,
-        "perf_ytd": -0.1
+        "perf_month": -1.5,
+        "perf_ytd": -0.3
       }
     },
     "CNC": {
@@ -1348,10 +1348,10 @@
       "technicals": {
         "sma50": 53.27,
         "sma200": 41.89,
-        "rsi14": 55.84,
+        "rsi14": 54.04,
         "beta": 1.093,
-        "perf_month": 15.9,
-        "perf_ytd": 47.4
+        "perf_month": 14.5,
+        "perf_ytd": 45.7
       }
     },
     "CNP": {
@@ -1360,7 +1360,7 @@
       "technicals": {
         "sma50": 42.61,
         "sma200": 40.59,
-        "rsi14": 53.27,
+        "rsi14": 52.66,
         "beta": 0.461,
         "perf_month": 0.5,
         "perf_ytd": 5.5
@@ -1372,10 +1372,10 @@
       "technicals": {
         "sma50": 190.32,
         "sma200": 209.76,
-        "rsi14": 66.68,
+        "rsi14": 65.54,
         "beta": 1.037,
-        "perf_month": 6.7,
-        "perf_ytd": -3.2
+        "perf_month": 5.9,
+        "perf_ytd": -3.9
       }
     },
     "COHR": {
@@ -1384,10 +1384,10 @@
       "technicals": {
         "sma50": 355.08,
         "sma200": 222.39,
-        "rsi14": 53.11,
+        "rsi14": 53.34,
         "beta": 2.054,
-        "perf_month": 9.8,
-        "perf_ytd": 75.3
+        "perf_month": 9.7,
+        "perf_ytd": 75.2
       }
     },
     "COIN": {
@@ -1396,10 +1396,10 @@
       "technicals": {
         "sma50": 185.44,
         "sma200": 238.82,
-        "rsi14": 42.2,
+        "rsi14": 43.16,
         "beta": 3.32,
-        "perf_month": -12.9,
-        "perf_ytd": -32.4
+        "perf_month": -12.0,
+        "perf_ytd": -31.6
       }
     },
     "COO": {
@@ -1408,10 +1408,10 @@
       "technicals": {
         "sma50": 64.41,
         "sma200": 72.66,
-        "rsi14": 55.0,
+        "rsi14": 54.46,
         "beta": 0.873,
-        "perf_month": 2.5,
-        "perf_ytd": -9.1
+        "perf_month": 2.3,
+        "perf_ytd": -9.3
       }
     },
     "COP": {
@@ -1420,10 +1420,10 @@
       "technicals": {
         "sma50": 119.42,
         "sma200": 105.08,
-        "rsi14": 34.29,
+        "rsi14": 33.84,
         "beta": 0.106,
-        "perf_month": -9.3,
-        "perf_ytd": 3.1
+        "perf_month": -9.8,
+        "perf_ytd": 2.5
       }
     },
     "COR": {
@@ -1432,10 +1432,10 @@
       "technicals": {
         "sma50": 286.85,
         "sma200": 324.96,
-        "rsi14": 42.66,
+        "rsi14": 43.4,
         "beta": 0.588,
-        "perf_month": -5.6,
-        "perf_ytd": -16.7
+        "perf_month": -5.2,
+        "perf_ytd": -16.3
       }
     },
     "COST": {
@@ -1444,10 +1444,10 @@
       "technicals": {
         "sma50": 1002.66,
         "sma200": 957.88,
-        "rsi14": 37.3,
+        "rsi14": 37.71,
         "beta": 0.868,
-        "perf_month": -5.3,
-        "perf_ytd": -0.8
+        "perf_month": -5.1,
+        "perf_ytd": -0.7
       }
     },
     "CPAY": {
@@ -1456,10 +1456,10 @@
       "technicals": {
         "sma50": 334.24,
         "sma200": 312.13,
-        "rsi14": 50.99,
+        "rsi14": 48.89,
         "beta": 0.869,
-        "perf_month": 4.5,
-        "perf_ytd": 11.9
+        "perf_month": 3.3,
+        "perf_ytd": 10.6
       }
     },
     "CPB": {
@@ -1468,10 +1468,10 @@
       "technicals": {
         "sma50": 20.91,
         "sma200": 26.59,
-        "rsi14": 46.89,
+        "rsi14": 46.83,
         "beta": 0.01,
-        "perf_month": 1.0,
-        "perf_ytd": -20.5
+        "perf_month": 1.2,
+        "perf_ytd": -20.4
       }
     },
     "CPRT": {
@@ -1480,10 +1480,10 @@
       "technicals": {
         "sma50": 32.66,
         "sma200": 38.48,
-        "rsi14": 37.74,
+        "rsi14": 38.89,
         "beta": 1.002,
-        "perf_month": -8.1,
-        "perf_ytd": -22.0
+        "perf_month": -7.5,
+        "perf_ytd": -21.4
       }
     },
     "CPT": {
@@ -1492,10 +1492,10 @@
       "technicals": {
         "sma50": 106.11,
         "sma200": 105.54,
-        "rsi14": 51.49,
+        "rsi14": 48.26,
         "beta": 0.814,
-        "perf_month": 3.4,
-        "perf_ytd": 4.0
+        "perf_month": 2.7,
+        "perf_ytd": 3.3
       }
     },
     "CRH": {
@@ -1504,10 +1504,10 @@
       "technicals": {
         "sma50": 110.22,
         "sma200": 115.48,
-        "rsi14": 57.98,
+        "rsi14": 56.36,
         "beta": 1.187,
-        "perf_month": 2.0,
-        "perf_ytd": -2.6
+        "perf_month": 0.9,
+        "perf_ytd": -3.7
       }
     },
     "CRL": {
@@ -1516,10 +1516,10 @@
       "technicals": {
         "sma50": 174.36,
         "sma200": 177.89,
-        "rsi14": 56.45,
+        "rsi14": 56.55,
         "beta": 1.449,
-        "perf_month": 6.2,
-        "perf_ytd": 4.1
+        "perf_month": 6.1,
+        "perf_ytd": 4.0
       }
     },
     "CRM": {
@@ -1528,10 +1528,10 @@
       "technicals": {
         "sma50": 178.59,
         "sma200": 216.88,
-        "rsi14": 31.83,
+        "rsi14": 30.69,
         "beta": 1.151,
-        "perf_month": -13.9,
-        "perf_ytd": -29.1
+        "perf_month": -15.0,
+        "perf_ytd": -30.0
       }
     },
     "CRWD": {
@@ -1540,10 +1540,10 @@
       "technicals": {
         "sma50": 560.39,
         "sma200": 488.05,
-        "rsi14": 57.0,
+        "rsi14": 58.16,
         "beta": 1.244,
-        "perf_month": 21.5,
-        "perf_ytd": 39.5
+        "perf_month": 22.2,
+        "perf_ytd": 40.3
       }
     },
     "CSCO": {
@@ -1552,10 +1552,10 @@
       "technicals": {
         "sma50": 104.32,
         "sma200": 82.39,
-        "rsi14": 56.2,
+        "rsi14": 55.83,
         "beta": 1.004,
-        "perf_month": 14.9,
-        "perf_ytd": 45.4
+        "perf_month": 14.6,
+        "perf_ytd": 45.1
       }
     },
     "CSGP": {
@@ -1564,10 +1564,10 @@
       "technicals": {
         "sma50": 34.73,
         "sma200": 57.15,
-        "rsi14": 28.99,
+        "rsi14": 29.74,
         "beta": 0.72,
-        "perf_month": -14.1,
-        "perf_ytd": -47.8
+        "perf_month": -13.3,
+        "perf_ytd": -47.3
       }
     },
     "CSX": {
@@ -1576,7 +1576,7 @@
       "technicals": {
         "sma50": 45.18,
         "sma200": 39.01,
-        "rsi14": 47.08,
+        "rsi14": 46.61,
         "beta": 1.222,
         "perf_month": 1.0,
         "perf_ytd": 17.0
@@ -1588,10 +1588,10 @@
       "technicals": {
         "sma50": 173.43,
         "sma200": 186.81,
-        "rsi14": 46.23,
+        "rsi14": 44.93,
         "beta": 0.934,
-        "perf_month": -1.1,
-        "perf_ytd": -8.2
+        "perf_month": -1.5,
+        "perf_ytd": -8.5
       }
     },
     "CTSH": {
@@ -1600,10 +1600,10 @@
       "technicals": {
         "sma50": 53.85,
         "sma200": 67.74,
-        "rsi14": 26.66,
+        "rsi14": 25.68,
         "beta": 0.81,
-        "perf_month": -17.5,
-        "perf_ytd": -34.4
+        "perf_month": -18.9,
+        "perf_ytd": -35.5
       }
     },
     "CTVA": {
@@ -1612,10 +1612,10 @@
       "technicals": {
         "sma50": 79.81,
         "sma200": 72.75,
-        "rsi14": 46.79,
+        "rsi14": 52.91,
         "beta": 0.572,
-        "perf_month": -3.1,
-        "perf_ytd": 6.3
+        "perf_month": -1.6,
+        "perf_ytd": 8.0
       }
     },
     "CVNA": {
@@ -1624,10 +1624,10 @@
       "technicals": {
         "sma50": 72.17,
         "sma200": 73.56,
-        "rsi14": 48.11,
+        "rsi14": 46.88,
         "beta": 3.449,
-        "perf_month": -6.5,
-        "perf_ytd": -8.2
+        "perf_month": -7.8,
+        "perf_ytd": -9.5
       }
     },
     "CVS": {
@@ -1636,10 +1636,10 @@
       "technicals": {
         "sma50": 88.35,
         "sma200": 80.1,
-        "rsi14": 61.73,
+        "rsi14": 61.05,
         "beta": 0.623,
-        "perf_month": 11.5,
-        "perf_ytd": 22.9
+        "perf_month": 11.3,
+        "perf_ytd": 22.7
       }
     },
     "CVX": {
@@ -1648,10 +1648,10 @@
       "technicals": {
         "sma50": 187.39,
         "sma200": 171.74,
-        "rsi14": 32.41,
+        "rsi14": 32.53,
         "beta": 0.472,
         "perf_month": -7.3,
-        "perf_ytd": 1.2
+        "perf_ytd": 1.1
       }
     },
     "D": {
@@ -1660,10 +1660,10 @@
       "technicals": {
         "sma50": 64.62,
         "sma200": 61.79,
-        "rsi14": 61.59,
+        "rsi14": 60.81,
         "beta": 0.642,
-        "perf_month": 6.1,
-        "perf_ytd": 10.9
+        "perf_month": 5.8,
+        "perf_ytd": 10.7
       }
     },
     "DAL": {
@@ -1672,10 +1672,10 @@
       "technicals": {
         "sma50": 73.89,
         "sma200": 66.57,
-        "rsi14": 62.62,
+        "rsi14": 62.75,
         "beta": 1.313,
-        "perf_month": 13.8,
-        "perf_ytd": 26.3
+        "perf_month": 13.9,
+        "perf_ytd": 26.5
       }
     },
     "DASH": {
@@ -1684,10 +1684,10 @@
       "technicals": {
         "sma50": 164.1,
         "sma200": 202.75,
-        "rsi14": 59.07,
+        "rsi14": 59.41,
         "beta": 1.811,
-        "perf_month": 5.3,
-        "perf_ytd": -14.8
+        "perf_month": 5.7,
+        "perf_ytd": -14.4
       }
     },
     "DD": {
@@ -1696,10 +1696,10 @@
       "technicals": {
         "sma50": 47.62,
         "sma200": 42.23,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": -0.0,
-        "perf_ytd": 12.7
+        "rsi14": 50.07,
+        "beta": 1.076,
+        "perf_month": 0.2,
+        "perf_ytd": 12.9
       }
     },
     "DDOG": {
@@ -1708,10 +1708,10 @@
       "technicals": {
         "sma50": 183.93,
         "sma200": 151.0,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": 20.9,
-        "perf_ytd": 47.3
+        "rsi14": 52.42,
+        "beta": 1.553,
+        "perf_month": 21.2,
+        "perf_ytd": 47.7
       }
     },
     "DE": {
@@ -1720,10 +1720,10 @@
       "technicals": {
         "sma50": 574.58,
         "sma200": 526.8,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": 3.0,
-        "perf_ytd": 12.4
+        "rsi14": 58.42,
+        "beta": 0.928,
+        "perf_month": 2.6,
+        "perf_ytd": 11.9
       }
     },
     "DECK": {
@@ -1732,10 +1732,10 @@
       "technicals": {
         "sma50": 105.92,
         "sma200": 103.24,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": 3.4,
-        "perf_ytd": 6.1
+        "rsi14": 51.73,
+        "beta": 1.146,
+        "perf_month": 3.0,
+        "perf_ytd": 5.7
       }
     },
     "DELL": {
@@ -1744,10 +1744,10 @@
       "technicals": {
         "sma50": 277.85,
         "sma200": 172.17,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": 52.2,
-        "perf_ytd": 145.7
+        "rsi14": 64.41,
+        "beta": 1.378,
+        "perf_month": 47.6,
+        "perf_ytd": 138.1
       }
     },
     "DG": {
@@ -1756,10 +1756,10 @@
       "technicals": {
         "sma50": 112.68,
         "sma200": 120.83,
-        "rsi14": 54.4,
+        "rsi14": 54.58,
         "beta": 0.256,
-        "perf_month": 0.8,
-        "perf_ytd": -6.0
+        "perf_month": 0.7,
+        "perf_ytd": -6.1
       }
     },
     "DGX": {
@@ -1768,10 +1768,10 @@
       "technicals": {
         "sma50": 194.94,
         "sma200": 189.5,
-        "rsi14": 44.76,
+        "rsi14": 46.05,
         "beta": 0.587,
-        "perf_month": -0.4,
-        "perf_ytd": 2.5
+        "perf_month": 0.0,
+        "perf_ytd": 2.9
       }
     },
     "DHI": {
@@ -1780,10 +1780,10 @@
       "technicals": {
         "sma50": 147.99,
         "sma200": 152.67,
-        "rsi14": 62.98,
+        "rsi14": 61.77,
         "beta": 1.382,
-        "perf_month": 7.5,
-        "perf_ytd": 4.2
+        "perf_month": 6.6,
+        "perf_ytd": 3.4
       }
     },
     "DHR": {
@@ -1792,10 +1792,10 @@
       "technicals": {
         "sma50": 179.92,
         "sma200": 204.36,
-        "rsi14": 47.12,
+        "rsi14": 46.77,
         "beta": 0.834,
-        "perf_month": -1.3,
-        "perf_ytd": -13.1
+        "perf_month": -1.5,
+        "perf_ytd": -13.3
       }
     },
     "DIS": {
@@ -1804,10 +1804,10 @@
       "technicals": {
         "sma50": 102.66,
         "sma200": 107.2,
-        "rsi14": 57.16,
+        "rsi14": 57.4,
         "beta": 1.394,
-        "perf_month": 1.1,
-        "perf_ytd": -3.2
+        "perf_month": 1.2,
+        "perf_ytd": -3.1
       }
     },
     "DLR": {
@@ -1816,7 +1816,7 @@
       "technicals": {
         "sma50": 192.4,
         "sma200": 174.25,
-        "rsi14": 50.81,
+        "rsi14": 50.13,
         "beta": 1.046,
         "perf_month": -2.2,
         "perf_ytd": 8.0
@@ -1828,10 +1828,10 @@
       "technicals": {
         "sma50": 101.33,
         "sma200": 109.32,
-        "rsi14": 56.47,
+        "rsi14": 56.78,
         "beta": 0.659,
-        "perf_month": 10.0,
-        "perf_ytd": 2.0
+        "perf_month": 10.2,
+        "perf_ytd": 2.1
       }
     },
     "DOC": {
@@ -1840,10 +1840,10 @@
       "technicals": {
         "sma50": 18.47,
         "sma200": 17.75,
-        "rsi14": 50.82,
+        "rsi14": 50.63,
         "beta": 1.029,
-        "perf_month": 6.0,
-        "perf_ytd": 10.3
+        "perf_month": 5.9,
+        "perf_ytd": 10.2
       }
     },
     "DOV": {
@@ -1852,10 +1852,10 @@
       "technicals": {
         "sma50": 217.5,
         "sma200": 200.1,
-        "rsi14": 59.18,
+        "rsi14": 59.24,
         "beta": 1.173,
-        "perf_month": 2.6,
-        "perf_ytd": 11.5
+        "perf_month": 2.8,
+        "perf_ytd": 11.7
       }
     },
     "DOW": {
@@ -1864,9 +1864,9 @@
       "technicals": {
         "sma50": 37.01,
         "sma200": 29.6,
-        "rsi14": 31.19,
+        "rsi14": 31.26,
         "beta": 0.405,
-        "perf_month": -14.2,
+        "perf_month": -14.3,
         "perf_ytd": 7.2
       }
     },
@@ -1876,9 +1876,9 @@
       "technicals": {
         "sma50": 331.39,
         "sma200": 390.72,
-        "rsi14": 45.05,
+        "rsi14": 44.61,
         "beta": 0.971,
-        "perf_month": -5.6,
+        "perf_month": -5.7,
         "perf_ytd": -20.0
       }
     },
@@ -1888,10 +1888,10 @@
       "technicals": {
         "sma50": 199.16,
         "sma200": 195.82,
-        "rsi14": 66.11,
+        "rsi14": 65.35,
         "beta": 0.587,
-        "perf_month": 7.5,
-        "perf_ytd": 9.3
+        "perf_month": 7.2,
+        "perf_ytd": 9.0
       }
     },
     "DTE": {
@@ -1900,10 +1900,10 @@
       "technicals": {
         "sma50": 145.17,
         "sma200": 139.95,
-        "rsi14": 56.33,
+        "rsi14": 56.44,
         "beta": 0.393,
-        "perf_month": 1.4,
-        "perf_ytd": 5.2
+        "perf_month": 1.6,
+        "perf_ytd": 5.4
       }
     },
     "DUK": {
@@ -1912,10 +1912,10 @@
       "technicals": {
         "sma50": 125.7,
         "sma200": 124.05,
-        "rsi14": 48.81,
+        "rsi14": 48.41,
         "beta": 0.379,
         "perf_month": -1.5,
-        "perf_ytd": -0.2
+        "perf_ytd": -0.1
       }
     },
     "DVA": {
@@ -1924,10 +1924,10 @@
       "technicals": {
         "sma50": 179.12,
         "sma200": 141.98,
-        "rsi14": 69.7,
+        "rsi14": 66.97,
         "beta": 0.908,
-        "perf_month": 16.9,
-        "perf_ytd": 47.5
+        "perf_month": 16.1,
+        "perf_ytd": 46.4
       }
     },
     "DVN": {
@@ -1936,10 +1936,10 @@
       "technicals": {
         "sma50": 46.73,
         "sma200": 40.6,
-        "rsi14": 36.82,
+        "rsi14": 36.92,
         "beta": 0.419,
-        "perf_month": -9.7,
-        "perf_ytd": 3.9
+        "perf_month": -9.9,
+        "perf_ytd": 3.7
       }
     },
     "DXCM": {
@@ -1948,7 +1948,7 @@
       "technicals": {
         "sma50": 66.47,
         "sma200": 67.53,
-        "rsi14": 53.65,
+        "rsi14": 53.54,
         "beta": 1.443,
         "perf_month": 9.0,
         "perf_ytd": 7.3
@@ -1960,10 +1960,10 @@
       "technicals": {
         "sma50": 202.17,
         "sma200": 199.11,
-        "rsi14": 56.58,
+        "rsi14": 47.89,
         "beta": 0.645,
-        "perf_month": 0.4,
-        "perf_ytd": 2.0
+        "perf_month": -0.0,
+        "perf_ytd": 1.5
       }
     },
     "EBAY": {
@@ -1972,7 +1972,7 @@
       "technicals": {
         "sma50": 107.29,
         "sma200": 93.42,
-        "rsi14": 48.44,
+        "rsi14": 48.14,
         "beta": 1.372,
         "perf_month": 0.9,
         "perf_ytd": 15.9
@@ -1984,10 +1984,10 @@
       "technicals": {
         "sma50": 261.21,
         "sma200": 270.29,
-        "rsi14": 59.54,
+        "rsi14": 58.5,
         "beta": 0.913,
-        "perf_month": 3.3,
-        "perf_ytd": -0.1
+        "perf_month": 3.0,
+        "perf_ytd": -0.4
       }
     },
     "ED": {
@@ -1996,10 +1996,10 @@
       "technicals": {
         "sma50": 108.06,
         "sma200": 104.35,
-        "rsi14": 49.12,
+        "rsi14": 47.91,
         "beta": 0.272,
-        "perf_month": -1.4,
-        "perf_ytd": 2.1
+        "perf_month": -1.6,
+        "perf_ytd": 1.9
       }
     },
     "EFX": {
@@ -2008,10 +2008,10 @@
       "technicals": {
         "sma50": 171.93,
         "sma200": 203.85,
-        "rsi14": 36.37,
+        "rsi14": 35.92,
         "beta": 1.314,
-        "perf_month": -10.2,
-        "perf_ytd": -24.3
+        "perf_month": -10.5,
+        "perf_ytd": -24.5
       }
     },
     "EG": {
@@ -2020,10 +2020,10 @@
       "technicals": {
         "sma50": 342.83,
         "sma200": 334.2,
-        "rsi14": 47.47,
+        "rsi14": 47.3,
         "beta": 0.305,
-        "perf_month": -2.2,
-        "perf_ytd": 0.3
+        "perf_month": -2.1,
+        "perf_ytd": 0.4
       }
     },
     "EIX": {
@@ -2032,10 +2032,10 @@
       "technicals": {
         "sma50": 70.74,
         "sma200": 63.87,
-        "rsi14": 52.19,
+        "rsi14": 53.21,
         "beta": 0.661,
-        "perf_month": 1.3,
-        "perf_ytd": 12.2
+        "perf_month": 1.6,
+        "perf_ytd": 12.6
       }
     },
     "EL": {
@@ -2046,8 +2046,8 @@
         "sma200": 93.19,
         "rsi14": 50.13,
         "beta": 1.249,
-        "perf_month": 4.0,
-        "perf_ytd": -9.1
+        "perf_month": 4.2,
+        "perf_ytd": -9.0
       }
     },
     "ELV": {
@@ -2056,10 +2056,10 @@
       "technicals": {
         "sma50": 373.2,
         "sma200": 340.86,
-        "rsi14": 48.14,
+        "rsi14": 47.35,
         "beta": 0.682,
-        "perf_month": 4.4,
-        "perf_ytd": 14.3
+        "perf_month": 4.1,
+        "perf_ytd": 14.0
       }
     },
     "EME": {
@@ -2068,10 +2068,10 @@
       "technicals": {
         "sma50": 854.57,
         "sma200": 724.32,
-        "rsi14": 51.41,
+        "rsi14": 49.22,
         "beta": 1.124,
-        "perf_month": -1.1,
-        "perf_ytd": 16.6
+        "perf_month": -2.1,
+        "perf_ytd": 15.5
       }
     },
     "EMR": {
@@ -2080,10 +2080,10 @@
       "technicals": {
         "sma50": 140.71,
         "sma200": 138.01,
-        "rsi14": 65.08,
+        "rsi14": 64.34,
         "beta": 1.246,
-        "perf_month": 7.5,
-        "perf_ytd": 9.6
+        "perf_month": 7.1,
+        "perf_ytd": 9.2
       }
     },
     "EOG": {
@@ -2092,10 +2092,10 @@
       "technicals": {
         "sma50": 136.31,
         "sma200": 120.72,
-        "rsi14": 39.86,
+        "rsi14": 39.27,
         "beta": 0.256,
-        "perf_month": -4.2,
-        "perf_ytd": 8.2
+        "perf_month": -4.6,
+        "perf_ytd": 7.7
       }
     },
     "EQIX": {
@@ -2104,10 +2104,10 @@
       "technicals": {
         "sma50": 1072.45,
         "sma200": 892.42,
-        "rsi14": 60.42,
+        "rsi14": 58.3,
         "beta": 0.97,
-        "perf_month": 2.4,
-        "perf_ytd": 23.0
+        "perf_month": 1.8,
+        "perf_ytd": 22.4
       }
     },
     "EQR": {
@@ -2116,10 +2116,10 @@
       "technicals": {
         "sma50": 64.85,
         "sma200": 62.71,
-        "rsi14": 41.49,
+        "rsi14": 39.77,
         "beta": 0.764,
-        "perf_month": -0.8,
-        "perf_ytd": 2.6
+        "perf_month": -1.2,
+        "perf_ytd": 2.2
       }
     },
     "EQT": {
@@ -2128,10 +2128,10 @@
       "technicals": {
         "sma50": 56.43,
         "sma200": 56.57,
-        "rsi14": 32.63,
+        "rsi14": 31.37,
         "beta": 0.543,
-        "perf_month": -9.5,
-        "perf_ytd": -9.7
+        "perf_month": -10.1,
+        "perf_ytd": -10.3
       }
     },
     "ERIE": {
@@ -2140,10 +2140,10 @@
       "technicals": {
         "sma50": 227.71,
         "sma200": 273.44,
-        "rsi14": 46.32,
+        "rsi14": 47.65,
         "beta": 0.307,
-        "perf_month": -3.4,
-        "perf_ytd": -19.5
+        "perf_month": -2.9,
+        "perf_ytd": -19.1
       }
     },
     "ES": {
@@ -2152,10 +2152,10 @@
       "technicals": {
         "sma50": 68.83,
         "sma200": 69.54,
-        "rsi14": 51.73,
+        "rsi14": 50,
         "beta": 0.727,
-        "perf_month": 0.6,
-        "perf_ytd": -0.4
+        "perf_month": 1.1,
+        "perf_ytd": 0.1
       }
     },
     "ESS": {
@@ -2164,10 +2164,10 @@
       "technicals": {
         "sma50": 268.0,
         "sma200": 259.62,
-        "rsi14": 51.18,
+        "rsi14": 50,
         "beta": 0.729,
-        "perf_month": 3.2,
-        "perf_ytd": 6.5
+        "perf_month": 2.1,
+        "perf_ytd": 5.4
       }
     },
     "ETN": {
@@ -2176,10 +2176,10 @@
       "technicals": {
         "sma50": 404.38,
         "sma200": 368.42,
-        "rsi14": 59.0,
-        "beta": 1.192,
-        "perf_month": 4.7,
-        "perf_ytd": 14.9
+        "rsi14": 58.44,
+        "beta": 1.0,
+        "perf_month": 4.3,
+        "perf_ytd": 14.5
       }
     },
     "ETR": {
@@ -2188,10 +2188,10 @@
       "technicals": {
         "sma50": 112.36,
         "sma200": 100.8,
-        "rsi14": 52.26,
-        "beta": 0.497,
-        "perf_month": -1.0,
-        "perf_ytd": 10.4
+        "rsi14": 50,
+        "beta": 1.0,
+        "perf_month": -1.1,
+        "perf_ytd": 10.2
       }
     },
     "EVRG": {
@@ -2200,10 +2200,10 @@
       "technicals": {
         "sma50": 82.38,
         "sma200": 78.23,
-        "rsi14": 49.33,
-        "beta": 0.534,
+        "rsi14": 49.34,
+        "beta": 1.0,
         "perf_month": 0.1,
-        "perf_ytd": 5.4
+        "perf_ytd": 5.5
       }
     },
     "EW": {
@@ -2212,10 +2212,10 @@
       "technicals": {
         "sma50": 83.15,
         "sma200": 81.93,
-        "rsi14": 56.54,
+        "rsi14": 56.17,
         "beta": 0.866,
-        "perf_month": 5.0,
-        "perf_ytd": 6.5
+        "perf_month": 5.1,
+        "perf_ytd": 6.6
       }
     },
     "EXC": {
@@ -2224,10 +2224,10 @@
       "technicals": {
         "sma50": 45.97,
         "sma200": 45.84,
-        "rsi14": 51.59,
+        "rsi14": 51.31,
         "beta": 0.41,
-        "perf_month": -0.3,
-        "perf_ytd": -0.0
+        "perf_month": -0.4,
+        "perf_ytd": -0.1
       }
     },
     "EXE": {
@@ -2236,10 +2236,10 @@
       "technicals": {
         "sma50": 95.29,
         "sma200": 104.35,
-        "rsi14": 35.81,
+        "rsi14": 33.09,
         "beta": 0.322,
-        "perf_month": -7.8,
-        "perf_ytd": -15.8
+        "perf_month": -8.7,
+        "perf_ytd": -16.6
       }
     },
     "EXPD": {
@@ -2248,10 +2248,10 @@
       "technicals": {
         "sma50": 154.29,
         "sma200": 144.19,
-        "rsi14": 52.61,
+        "rsi14": 53.29,
         "beta": 1.047,
-        "perf_month": 4.3,
-        "perf_ytd": 11.6
+        "perf_month": 4.6,
+        "perf_ytd": 11.9
       }
     },
     "EXPE": {
@@ -2260,10 +2260,10 @@
       "technicals": {
         "sma50": 235.96,
         "sma200": 240.54,
-        "rsi14": 59.36,
+        "rsi14": 58.84,
         "beta": 1.257,
-        "perf_month": 2.3,
-        "perf_ytd": 0.3
+        "perf_month": 2.1,
+        "perf_ytd": 0.1
       }
     },
     "EXR": {
@@ -2272,10 +2272,10 @@
       "technicals": {
         "sma50": 143.07,
         "sma200": 140.03,
-        "rsi14": 52.18,
+        "rsi14": 51.18,
         "beta": 1.206,
-        "perf_month": 1.8,
-        "perf_ytd": 4.0
+        "perf_month": 1.6,
+        "perf_ytd": 3.8
       }
     },
     "F": {
@@ -2284,10 +2284,10 @@
       "technicals": {
         "sma50": 13.56,
         "sma200": 12.99,
-        "rsi14": 45.93,
+        "rsi14": 46.19,
         "beta": 1.798,
-        "perf_month": 3.7,
-        "perf_ytd": 8.2
+        "perf_month": 3.6,
+        "perf_ytd": 8.1
       }
     },
     "FANG": {
@@ -2296,10 +2296,10 @@
       "technicals": {
         "sma50": 195.84,
         "sma200": 166.68,
-        "rsi14": 37.86,
+        "rsi14": 38.32,
         "beta": 0.391,
-        "perf_month": -6.4,
-        "perf_ytd": 10.0
+        "perf_month": -6.3,
+        "perf_ytd": 10.1
       }
     },
     "FAST": {
@@ -2308,10 +2308,10 @@
       "technicals": {
         "sma50": 45.12,
         "sma200": 44.41,
-        "rsi14": 53.0,
+        "rsi14": 53.16,
         "beta": 0.729,
-        "perf_month": 1.6,
-        "perf_ytd": 3.2
+        "perf_month": 1.7,
+        "perf_ytd": 3.3
       }
     },
     "FCX": {
@@ -2320,7 +2320,7 @@
       "technicals": {
         "sma50": 64.55,
         "sma200": 54.21,
-        "rsi14": 55.96,
+        "rsi14": 56.27,
         "beta": 1.359,
         "perf_month": 6.4,
         "perf_ytd": 26.7
@@ -2332,10 +2332,10 @@
       "technicals": {
         "sma50": 230.99,
         "sma200": 258.11,
-        "rsi14": 38.76,
+        "rsi14": 40.44,
         "beta": 0.707,
-        "perf_month": -5.7,
-        "perf_ytd": -15.6
+        "perf_month": -4.2,
+        "perf_ytd": -14.3
       }
     },
     "FDX": {
@@ -2344,10 +2344,10 @@
       "technicals": {
         "sma50": 315.12,
         "sma200": 257.02,
-        "rsi14": 51.3,
+        "rsi14": 51.59,
         "beta": 1.299,
-        "perf_month": 3.3,
-        "perf_ytd": 26.7
+        "perf_month": 3.5,
+        "perf_ytd": 26.9
       }
     },
     "FDXF": {
@@ -2356,10 +2356,10 @@
       "technicals": {
         "sma50": 166.69,
         "sma200": 166.69,
-        "rsi14": 54.38,
+        "rsi14": 53.87,
         "beta": -7.34,
-        "perf_month": -1.3,
-        "perf_ytd": -1.3
+        "perf_month": -2.3,
+        "perf_ytd": -2.3
       }
     },
     "FE": {
@@ -2368,10 +2368,10 @@
       "technicals": {
         "sma50": 47.18,
         "sma200": 46.9,
-        "rsi14": 50.74,
+        "rsi14": 49.97,
         "beta": 0.458,
-        "perf_month": -1.5,
-        "perf_ytd": -0.9
+        "perf_month": -1.6,
+        "perf_ytd": -1.0
       }
     },
     "FFIV": {
@@ -2380,10 +2380,10 @@
       "technicals": {
         "sma50": 353.18,
         "sma200": 298.95,
-        "rsi14": 49.29,
+        "rsi14": 53.53,
         "beta": 1.046,
-        "perf_month": 7.6,
-        "perf_ytd": 27.1
+        "perf_month": 9.1,
+        "perf_ytd": 28.9
       }
     },
     "FICO": {
@@ -2392,10 +2392,10 @@
       "technicals": {
         "sma50": 1119.93,
         "sma200": 1431.8,
-        "rsi14": 39.79,
+        "rsi14": 39.33,
         "beta": 1.283,
-        "perf_month": -1.7,
-        "perf_ytd": -23.1
+        "perf_month": -2.1,
+        "perf_ytd": -23.4
       }
     },
     "FIS": {
@@ -2404,10 +2404,10 @@
       "technicals": {
         "sma50": 43.84,
         "sma200": 56.37,
-        "rsi14": 34.37,
+        "rsi14": 33.86,
         "beta": 0.802,
-        "perf_month": -12.5,
-        "perf_ytd": -31.9
+        "perf_month": -12.8,
+        "perf_ytd": -32.2
       }
     },
     "FISV": {
@@ -2416,10 +2416,10 @@
       "technicals": {
         "sma50": 114.45,
         "sma200": 166.21,
-        "rsi14": 34.44,
+        "rsi14": 33.86,
         "beta": 0.7931675,
-        "perf_month": -57.9,
-        "perf_ytd": -71.0
+        "perf_month": -58.2,
+        "perf_ytd": -71.2
       }
     },
     "FITB": {
@@ -2428,10 +2428,10 @@
       "technicals": {
         "sma50": 50.23,
         "sma200": 47.39,
-        "rsi14": 58.98,
+        "rsi14": 57.96,
         "beta": 0.947,
-        "perf_month": 5.4,
-        "perf_ytd": 11.7
+        "perf_month": 5.0,
+        "perf_ytd": 11.3
       }
     },
     "FIX": {
@@ -2440,10 +2440,10 @@
       "technicals": {
         "sma50": 1821.97,
         "sma200": 1247.07,
-        "rsi14": 58.29,
+        "rsi14": 58.51,
         "beta": 1.67,
-        "perf_month": 7.7,
-        "perf_ytd": 57.4
+        "perf_month": 8.0,
+        "perf_ytd": 57.8
       }
     },
     "FOX": {
@@ -2452,10 +2452,10 @@
       "technicals": {
         "sma50": 57.33,
         "sma200": 57.42,
-        "rsi14": 27.75,
+        "rsi14": 26.02,
         "beta": 0.519,
-        "perf_month": -17.4,
-        "perf_ytd": -17.5
+        "perf_month": -18.1,
+        "perf_ytd": -18.2
       }
     },
     "FOXA": {
@@ -2464,10 +2464,10 @@
       "technicals": {
         "sma50": 63.87,
         "sma200": 63.84,
-        "rsi14": 27.01,
+        "rsi14": 27.16,
         "beta": 0.519,
-        "perf_month": -18.5,
-        "perf_ytd": -18.5
+        "perf_month": -18.2,
+        "perf_ytd": -18.2
       }
     },
     "FRT": {
@@ -2476,10 +2476,10 @@
       "technicals": {
         "sma50": 115.97,
         "sma200": 105.05,
-        "rsi14": 51.68,
+        "rsi14": 51.41,
         "beta": 0.94,
-        "perf_month": 4.0,
-        "perf_ytd": 14.8
+        "perf_month": 3.8,
+        "perf_ytd": 14.6
       }
     },
     "FSLR": {
@@ -2488,10 +2488,10 @@
       "technicals": {
         "sma50": 235.54,
         "sma200": 232.99,
-        "rsi14": 48.25,
+        "rsi14": 48.5,
         "beta": 1.692,
-        "perf_month": 9.2,
-        "perf_ytd": 10.4
+        "perf_month": 9.4,
+        "perf_ytd": 10.6
       }
     },
     "FTNT": {
@@ -2500,10 +2500,10 @@
       "technicals": {
         "sma50": 112.83,
         "sma200": 89.56,
-        "rsi14": 65.42,
+        "rsi14": 63.74,
         "beta": 1.109,
-        "perf_month": 30.1,
-        "perf_ytd": 63.9
+        "perf_month": 28.3,
+        "perf_ytd": 61.6
       }
     },
     "FTV": {
@@ -2512,10 +2512,10 @@
       "technicals": {
         "sma50": 60.15,
         "sma200": 54.94,
-        "rsi14": 53.01,
+        "rsi14": 54.36,
         "beta": 0.989,
-        "perf_month": 1.0,
-        "perf_ytd": 10.6
+        "perf_month": 1.5,
+        "perf_ytd": 11.1
       }
     },
     "GD": {
@@ -2524,10 +2524,10 @@
       "technicals": {
         "sma50": 341.09,
         "sma200": 343.78,
-        "rsi14": 52.0,
+        "rsi14": 51.7,
         "beta": 0.341,
-        "perf_month": 2.8,
-        "perf_ytd": 2.0
+        "perf_month": 2.6,
+        "perf_ytd": 1.8
       }
     },
     "GDDY": {
@@ -2536,10 +2536,10 @@
       "technicals": {
         "sma50": 85.17,
         "sma200": 108.46,
-        "rsi14": 37.71,
+        "rsi14": 39.09,
         "beta": 0.889,
-        "perf_month": -10.3,
-        "perf_ytd": -29.5
+        "perf_month": -9.5,
+        "perf_ytd": -29.0
       }
     },
     "GE": {
@@ -2548,10 +2548,10 @@
       "technicals": {
         "sma50": 306.74,
         "sma200": 305.02,
-        "rsi14": 71.68,
+        "rsi14": 71.44,
         "beta": 1.375,
-        "perf_month": 16.8,
-        "perf_ytd": 17.5
+        "perf_month": 16.6,
+        "perf_ytd": 17.3
       }
     },
     "GEHC": {
@@ -2560,10 +2560,10 @@
       "technicals": {
         "sma50": 65.64,
         "sma200": 74.69,
-        "rsi14": 40.26,
+        "rsi14": 41.09,
         "beta": 0.862,
-        "perf_month": -6.6,
-        "perf_ytd": -17.9
+        "perf_month": -6.2,
+        "perf_ytd": -17.5
       }
     },
     "GEN": {
@@ -2572,10 +2572,10 @@
       "technicals": {
         "sma50": 22.34,
         "sma200": 24.69,
-        "rsi14": 47.28,
+        "rsi14": 49.48,
         "beta": 1.205,
-        "perf_month": 6.9,
-        "perf_ytd": -3.3
+        "perf_month": 8.2,
+        "perf_ytd": -2.1
       }
     },
     "GEV": {
@@ -2584,10 +2584,10 @@
       "technicals": {
         "sma50": 1018.84,
         "sma200": 769.99,
-        "rsi14": 64.68,
+        "rsi14": 65.51,
         "beta": 1.045,
-        "perf_month": 8.0,
-        "perf_ytd": 42.9
+        "perf_month": 8.9,
+        "perf_ytd": 44.1
       }
     },
     "GILD": {
@@ -2596,10 +2596,10 @@
       "technicals": {
         "sma50": 132.14,
         "sma200": 129.35,
-        "rsi14": 38.22,
+        "rsi14": 39.38,
         "beta": 0.331,
-        "perf_month": -7.0,
-        "perf_ytd": -4.9
+        "perf_month": -6.3,
+        "perf_ytd": -4.3
       }
     },
     "GIS": {
@@ -2608,10 +2608,10 @@
       "technicals": {
         "sma50": 34.27,
         "sma200": 43.01,
-        "rsi14": 45.3,
+        "rsi14": 45.51,
         "beta": -0.041,
-        "perf_month": -2.6,
-        "perf_ytd": -22.4
+        "perf_month": -2.5,
+        "perf_ytd": -22.3
       }
     },
     "GL": {
@@ -2620,10 +2620,10 @@
       "technicals": {
         "sma50": 154.54,
         "sma200": 142.85,
-        "rsi14": 73.34,
+        "rsi14": 74.02,
         "beta": 0.499,
-        "perf_month": 10.4,
-        "perf_ytd": 19.4
+        "perf_month": 10.5,
+        "perf_ytd": 19.5
       }
     },
     "GLW": {
@@ -2632,10 +2632,10 @@
       "technicals": {
         "sma50": 178.6,
         "sma200": 119.94,
-        "rsi14": 54.87,
+        "rsi14": 55.84,
         "beta": 1.155,
-        "perf_month": 7.7,
-        "perf_ytd": 60.3
+        "perf_month": 9.2,
+        "perf_ytd": 62.6
       }
     },
     "GM": {
@@ -2644,10 +2644,10 @@
       "technicals": {
         "sma50": 78.98,
         "sma200": 74.21,
-        "rsi14": 48.81,
+        "rsi14": 47.0,
         "beta": 1.3,
-        "perf_month": 1.4,
-        "perf_ytd": 7.9
+        "perf_month": 0.4,
+        "perf_ytd": 6.8
       }
     },
     "GNRC": {
@@ -2656,10 +2656,10 @@
       "technicals": {
         "sma50": 249.31,
         "sma200": 195.13,
-        "rsi14": 60.06,
+        "rsi14": 58.05,
         "beta": 1.91,
-        "perf_month": 14.2,
-        "perf_ytd": 45.9
+        "perf_month": 12.0,
+        "perf_ytd": 43.1
       }
     },
     "GOOG": {
@@ -2668,10 +2668,10 @@
       "technicals": {
         "sma50": 363.57,
         "sma200": 309.84,
-        "rsi14": 49.7,
+        "rsi14": 50.48,
         "beta": 1.237,
-        "perf_month": 0.8,
-        "perf_ytd": 18.2
+        "perf_month": 1.1,
+        "perf_ytd": 18.6
       }
     },
     "GOOGL": {
@@ -2680,10 +2680,10 @@
       "technicals": {
         "sma50": 366.36,
         "sma200": 310.32,
-        "rsi14": 48.94,
+        "rsi14": 49.1,
         "beta": 1.237,
-        "perf_month": 0.4,
-        "perf_ytd": 18.5
+        "perf_month": 0.5,
+        "perf_ytd": 18.6
       }
     },
     "GPC": {
@@ -2692,10 +2692,10 @@
       "technicals": {
         "sma50": 103.17,
         "sma200": 121.63,
-        "rsi14": 68.44,
+        "rsi14": 66.3,
         "beta": 0.679,
-        "perf_month": 6.8,
-        "perf_ytd": -9.4
+        "perf_month": 5.4,
+        "perf_ytd": -10.6
       }
     },
     "GPN": {
@@ -2704,10 +2704,10 @@
       "technicals": {
         "sma50": 69.33,
         "sma200": 75.9,
-        "rsi14": 46.05,
+        "rsi14": 45.54,
         "beta": 0.767,
-        "perf_month": -3.2,
-        "perf_ytd": -11.6
+        "perf_month": -3.5,
+        "perf_ytd": -11.9
       }
     },
     "GRMN": {
@@ -2716,10 +2716,10 @@
       "technicals": {
         "sma50": 244.64,
         "sma200": 228.8,
-        "rsi14": 47.69,
+        "rsi14": 45.9,
         "beta": 0.918,
-        "perf_month": -3.7,
-        "perf_ytd": 3.0
+        "perf_month": -4.3,
+        "perf_ytd": 2.4
       }
     },
     "GS": {
@@ -2728,10 +2728,10 @@
       "technicals": {
         "sma50": 970.05,
         "sma200": 874.81,
-        "rsi14": 66.69,
+        "rsi14": 65.48,
         "beta": 1.291,
-        "perf_month": 13.7,
-        "perf_ytd": 26.1
+        "perf_month": 13.0,
+        "perf_ytd": 25.3
       }
     },
     "GWW": {
@@ -2740,10 +2740,10 @@
       "technicals": {
         "sma50": 1222.79,
         "sma200": 1075.43,
-        "rsi14": 73.76,
+        "rsi14": 75.83,
         "beta": 1.052,
-        "perf_month": 10.5,
-        "perf_ytd": 25.6
+        "perf_month": 11.7,
+        "perf_ytd": 27.0
       }
     },
     "HAL": {
@@ -2752,10 +2752,10 @@
       "technicals": {
         "sma50": 39.88,
         "sma200": 32.14,
-        "rsi14": 28.4,
+        "rsi14": 28.64,
         "beta": 0.704,
-        "perf_month": -12.7,
-        "perf_ytd": 8.3
+        "perf_month": -12.4,
+        "perf_ytd": 8.7
       }
     },
     "HAS": {
@@ -2764,10 +2764,10 @@
       "technicals": {
         "sma50": 90.95,
         "sma200": 86.18,
-        "rsi14": 45.45,
+        "rsi14": 42.69,
         "beta": 0.476,
-        "perf_month": -5.9,
-        "perf_ytd": -0.7
+        "perf_month": -6.8,
+        "perf_ytd": -1.7
       }
     },
     "HBAN": {
@@ -2776,10 +2776,10 @@
       "technicals": {
         "sma50": 16.39,
         "sma200": 16.72,
-        "rsi14": 55.53,
+        "rsi14": 55.11,
         "beta": 0.969,
-        "perf_month": 3.1,
-        "perf_ytd": 1.1
+        "perf_month": 2.9,
+        "perf_ytd": 0.8
       }
     },
     "HCA": {
@@ -2788,10 +2788,10 @@
       "technicals": {
         "sma50": 424.07,
         "sma200": 460.73,
-        "rsi14": 40.75,
+        "rsi14": 39.48,
         "beta": 1.134,
-        "perf_month": -10.8,
-        "perf_ytd": -17.9
+        "perf_month": -11.5,
+        "perf_ytd": -18.6
       }
     },
     "HD": {
@@ -2800,10 +2800,10 @@
       "technicals": {
         "sma50": 322.96,
         "sma200": 359.05,
-        "rsi14": 60.42,
+        "rsi14": 60.57,
         "beta": 0.974,
-        "perf_month": 3.4,
-        "perf_ytd": -7.0
+        "perf_month": 3.5,
+        "perf_ytd": -6.9
       }
     },
     "HIG": {
@@ -2812,10 +2812,10 @@
       "technicals": {
         "sma50": 133.91,
         "sma200": 133.89,
-        "rsi14": 42.86,
+        "rsi14": 43.18,
         "beta": 0.475,
-        "perf_month": -4.4,
-        "perf_ytd": -4.4
+        "perf_month": -4.2,
+        "perf_ytd": -4.2
       }
     },
     "HII": {
@@ -2824,10 +2824,10 @@
       "technicals": {
         "sma50": 337.45,
         "sma200": 346.11,
-        "rsi14": 31.89,
+        "rsi14": 32.59,
         "beta": 0.232,
-        "perf_month": -15.9,
-        "perf_ytd": -18.0
+        "perf_month": -15.4,
+        "perf_ytd": -17.5
       }
     },
     "HLT": {
@@ -2836,10 +2836,10 @@
       "technicals": {
         "sma50": 328.77,
         "sma200": 296.23,
-        "rsi14": 66.82,
+        "rsi14": 65.1,
         "beta": 1.053,
-        "perf_month": 6.7,
-        "perf_ytd": 18.4
+        "perf_month": 6.1,
+        "perf_ytd": 17.8
       }
     },
     "HON": {
@@ -2848,10 +2848,10 @@
       "technicals": {
         "sma50": 222.02,
         "sma200": 213.29,
-        "rsi14": 56.25,
+        "rsi14": 56.21,
         "beta": 0.843,
-        "perf_month": 3.3,
-        "perf_ytd": 7.5
+        "perf_month": 3.1,
+        "perf_ytd": 7.4
       }
     },
     "HOOD": {
@@ -2860,10 +2860,10 @@
       "technicals": {
         "sma50": 82.08,
         "sma200": 102.75,
-        "rsi14": 69.99,
+        "rsi14": 71.2,
         "beta": 2.348,
-        "perf_month": 29.5,
-        "perf_ytd": 3.5
+        "perf_month": 31.8,
+        "perf_ytd": 5.3
       }
     },
     "HPE": {
@@ -2872,10 +2872,10 @@
       "technicals": {
         "sma50": 35.35,
         "sma200": 26.17,
-        "rsi14": 60.11,
+        "rsi14": 60.21,
         "beta": 1.448,
-        "perf_month": 33.9,
-        "perf_ytd": 80.9
+        "perf_month": 34.1,
+        "perf_ytd": 81.2
       }
     },
     "HPQ": {
@@ -2884,10 +2884,10 @@
       "technicals": {
         "sma50": 22.22,
         "sma200": 22.98,
-        "rsi14": 47.77,
+        "rsi14": 47.25,
         "beta": 1.184,
-        "perf_month": 6.0,
-        "perf_ytd": 2.5
+        "perf_month": 5.7,
+        "perf_ytd": 2.3
       }
     },
     "HRL": {
@@ -2896,10 +2896,10 @@
       "technicals": {
         "sma50": 21.78,
         "sma200": 23.26,
-        "rsi14": 66.32,
+        "rsi14": 64.87,
         "beta": 0.343,
-        "perf_month": 11.3,
-        "perf_ytd": 4.2
+        "perf_month": 10.9,
+        "perf_ytd": 3.9
       }
     },
     "HSIC": {
@@ -2908,10 +2908,10 @@
       "technicals": {
         "sma50": 75.71,
         "sma200": 73.6,
-        "rsi14": 62.96,
+        "rsi14": 62.65,
         "beta": 0.824,
         "perf_month": 5.6,
-        "perf_ytd": 8.7
+        "perf_ytd": 8.6
       }
     },
     "HST": {
@@ -2920,10 +2920,10 @@
       "technicals": {
         "sma50": 22.19,
         "sma200": 19.1,
-        "rsi14": 71.08,
+        "rsi14": 69.78,
         "beta": 1.127,
-        "perf_month": 13.4,
-        "perf_ytd": 31.7
+        "perf_month": 12.7,
+        "perf_ytd": 30.9
       }
     },
     "HSY": {
@@ -2932,10 +2932,10 @@
       "technicals": {
         "sma50": 188.98,
         "sma200": 193.89,
-        "rsi14": 33.64,
+        "rsi14": 34.05,
         "beta": 0.081,
-        "perf_month": -9.0,
-        "perf_ytd": -11.3
+        "perf_month": -8.7,
+        "perf_ytd": -11.0
       }
     },
     "HUBB": {
@@ -2944,10 +2944,10 @@
       "technicals": {
         "sma50": 501.72,
         "sma200": 472.66,
-        "rsi14": 66.17,
+        "rsi14": 66.0,
         "beta": 0.911,
-        "perf_month": 4.5,
-        "perf_ytd": 10.9
+        "perf_month": 4.4,
+        "perf_ytd": 10.8
       }
     },
     "HUM": {
@@ -2956,10 +2956,10 @@
       "technicals": {
         "sma50": 278.59,
         "sma200": 248.68,
-        "rsi14": 71.85,
+        "rsi14": 68.96,
         "beta": 0.771,
-        "perf_month": 32.0,
-        "perf_ytd": 47.9
+        "perf_month": 29.5,
+        "perf_ytd": 45.0
       }
     },
     "HWM": {
@@ -2968,10 +2968,10 @@
       "technicals": {
         "sma50": 255.78,
         "sma200": 222.99,
-        "rsi14": 50,
+        "rsi14": 62.1,
         "beta": 1.193,
-        "perf_month": 8.8,
-        "perf_ytd": 24.8
+        "perf_month": 8.6,
+        "perf_ytd": 24.5
       }
     },
     "IBKR": {
@@ -2980,10 +2980,10 @@
       "technicals": {
         "sma50": 83.01,
         "sma200": 72.03,
-        "rsi14": 70.39,
+        "rsi14": 70.81,
         "beta": 1.329,
-        "perf_month": 15.2,
-        "perf_ytd": 32.8
+        "perf_month": 15.7,
+        "perf_ytd": 33.3
       }
     },
     "IBM": {
@@ -2992,10 +2992,10 @@
       "technicals": {
         "sma50": 250.39,
         "sma200": 273.41,
-        "rsi14": 42.47,
+        "rsi14": 41.79,
         "beta": 0.665,
-        "perf_month": 0.2,
-        "perf_ytd": -8.3
+        "perf_month": -0.5,
+        "perf_ytd": -8.9
       }
     },
     "ICE": {
@@ -3004,10 +3004,10 @@
       "technicals": {
         "sma50": 152.54,
         "sma200": 159.28,
-        "rsi14": 28.28,
+        "rsi14": 28.79,
         "beta": 0.922,
-        "perf_month": -12.6,
-        "perf_ytd": -16.3
+        "perf_month": -12.2,
+        "perf_ytd": -15.9
       }
     },
     "IDXX": {
@@ -3016,10 +3016,10 @@
       "technicals": {
         "sma50": 562.44,
         "sma200": 632.91,
-        "rsi14": 48.54,
+        "rsi14": 50.51,
         "beta": 1.543,
-        "perf_month": -1.0,
-        "perf_ytd": -12.0
+        "perf_month": -0.1,
+        "perf_ytd": -11.2
       }
     },
     "IEX": {
@@ -3028,10 +3028,10 @@
       "technicals": {
         "sma50": 211.0,
         "sma200": 188.45,
-        "rsi14": 65.36,
+        "rsi14": 64.93,
         "beta": 0.991,
-        "perf_month": 6.8,
-        "perf_ytd": 19.6
+        "perf_month": 6.6,
+        "perf_ytd": 19.4
       }
     },
     "IFF": {
@@ -3040,10 +3040,10 @@
       "technicals": {
         "sma50": 74.35,
         "sma200": 69.83,
-        "rsi14": 54.04,
+        "rsi14": 53.69,
         "beta": 0.956,
-        "perf_month": 3.3,
-        "perf_ytd": 10.0
+        "perf_month": 3.2,
+        "perf_ytd": 9.9
       }
     },
     "INCY": {
@@ -3052,10 +3052,10 @@
       "technicals": {
         "sma50": 98.12,
         "sma200": 96.74,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": -0.6,
-        "perf_ytd": 0.8
+        "rsi14": 46.67,
+        "beta": 0.79,
+        "perf_month": 0.1,
+        "perf_ytd": 1.5
       }
     },
     "INTC": {
@@ -3064,10 +3064,10 @@
       "technicals": {
         "sma50": 99.92,
         "sma200": 54.96,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": 35.1,
-        "perf_ytd": 145.6
+        "rsi14": 64.21,
+        "beta": 2.228,
+        "perf_month": 34.1,
+        "perf_ytd": 143.8
       }
     },
     "INTU": {
@@ -3076,10 +3076,10 @@
       "technicals": {
         "sma50": 356.51,
         "sma200": 525.3,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": -25.6,
-        "perf_ytd": -49.5
+        "rsi14": 31.34,
+        "beta": 0.964,
+        "perf_month": -25.1,
+        "perf_ytd": -49.2
       }
     },
     "INVH": {
@@ -3088,10 +3088,10 @@
       "technicals": {
         "sma50": 28.31,
         "sma200": 27.63,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": 0.6,
-        "perf_ytd": 3.1
+        "rsi14": 43.09,
+        "beta": 0.853,
+        "perf_month": 0.4,
+        "perf_ytd": 2.8
       }
     },
     "IP": {
@@ -3100,10 +3100,10 @@
       "technicals": {
         "sma50": 33.62,
         "sma200": 39.85,
-        "rsi14": 65.07,
-        "beta": 1.0,
-        "perf_month": 11.3,
-        "perf_ytd": -6.1
+        "rsi14": 63.27,
+        "beta": 0.927,
+        "perf_month": 9.5,
+        "perf_ytd": -7.6
       }
     },
     "IQV": {
@@ -3112,10 +3112,10 @@
       "technicals": {
         "sma50": 173.36,
         "sma200": 195.4,
-        "rsi14": 38.71,
+        "rsi14": 39.78,
         "beta": 1.215,
-        "perf_month": -3.9,
-        "perf_ytd": -14.7
+        "perf_month": -3.2,
+        "perf_ytd": -14.1
       }
     },
     "IR": {
@@ -3124,10 +3124,10 @@
       "technicals": {
         "sma50": 76.88,
         "sma200": 81.43,
-        "rsi14": 60.16,
+        "rsi14": 59.25,
         "beta": 1.195,
-        "perf_month": 1.9,
-        "perf_ytd": -3.8
+        "perf_month": 1.3,
+        "perf_ytd": -4.3
       }
     },
     "IRM": {
@@ -3136,10 +3136,10 @@
       "technicals": {
         "sma50": 122.89,
         "sma200": 103.36,
-        "rsi14": 54.1,
+        "rsi14": 54.43,
         "beta": 1.218,
-        "perf_month": 3.9,
-        "perf_ytd": 23.6
+        "perf_month": 4.0,
+        "perf_ytd": 23.7
       }
     },
     "ISRG": {
@@ -3148,10 +3148,10 @@
       "technicals": {
         "sma50": 440.84,
         "sma200": 491.0,
-        "rsi14": 39.77,
+        "rsi14": 40.46,
         "beta": 1.453,
-        "perf_month": -7.9,
-        "perf_ytd": -17.3
+        "perf_month": -7.7,
+        "perf_ytd": -17.2
       }
     },
     "IT": {
@@ -3160,10 +3160,10 @@
       "technicals": {
         "sma50": 153.68,
         "sma200": 201.08,
-        "rsi14": 27.05,
+        "rsi14": 27.0,
         "beta": 0.932,
-        "perf_month": -17.1,
-        "perf_ytd": -36.7
+        "perf_month": -17.0,
+        "perf_ytd": -36.6
       }
     },
     "ITW": {
@@ -3172,10 +3172,10 @@
       "technicals": {
         "sma50": 258.38,
         "sma200": 260.05,
-        "rsi14": 62.36,
+        "rsi14": 60.94,
         "beta": 1.03,
-        "perf_month": 2.8,
-        "perf_ytd": 2.1
+        "perf_month": 2.2,
+        "perf_ytd": 1.6
       }
     },
     "IVZ": {
@@ -3184,10 +3184,10 @@
       "technicals": {
         "sma50": 26.7,
         "sma200": 25.28,
-        "rsi14": 51.74,
+        "rsi14": 53.29,
         "beta": 1.589,
-        "perf_month": 4.4,
-        "perf_ytd": 10.3
+        "perf_month": 5.4,
+        "perf_ytd": 11.3
       }
     },
     "J": {
@@ -3196,10 +3196,10 @@
       "technicals": {
         "sma50": 122.64,
         "sma200": 137.03,
-        "rsi14": 46.42,
+        "rsi14": 48.16,
         "beta": 0.683,
-        "perf_month": -2.2,
-        "perf_ytd": -12.5
+        "perf_month": -1.4,
+        "perf_ytd": -11.7
       }
     },
     "JBHT": {
@@ -3208,10 +3208,10 @@
       "technicals": {
         "sma50": 256.87,
         "sma200": 202.89,
-        "rsi14": 49.7,
+        "rsi14": 50.19,
         "beta": 1.305,
-        "perf_month": 5.4,
-        "perf_ytd": 33.4
+        "perf_month": 5.6,
+        "perf_ytd": 33.7
       }
     },
     "JBL": {
@@ -3220,10 +3220,10 @@
       "technicals": {
         "sma50": 346.95,
         "sma200": 259.87,
-        "rsi14": 53.77,
+        "rsi14": 54.54,
         "beta": 1.287,
-        "perf_month": 6.8,
-        "perf_ytd": 42.5
+        "perf_month": 7.2,
+        "perf_ytd": 43.1
       }
     },
     "JCI": {
@@ -3232,10 +3232,10 @@
       "technicals": {
         "sma50": 141.46,
         "sma200": 125.45,
-        "rsi14": 54.53,
+        "rsi14": 53.9,
         "beta": 1.337,
-        "perf_month": 2.7,
-        "perf_ytd": 15.9
+        "perf_month": 2.4,
+        "perf_ytd": 15.4
       }
     },
     "JKHY": {
@@ -3244,10 +3244,10 @@
       "technicals": {
         "sma50": 142.55,
         "sma200": 160.77,
-        "rsi14": 34.51,
+        "rsi14": 35.6,
         "beta": 0.575,
-        "perf_month": -11.8,
-        "perf_ytd": -21.8
+        "perf_month": -11.4,
+        "perf_ytd": -21.5
       }
     },
     "JNJ": {
@@ -3256,10 +3256,10 @@
       "technicals": {
         "sma50": 230.63,
         "sma200": 215.48,
-        "rsi14": 45.72,
+        "rsi14": 44.59,
         "beta": 0.256,
-        "perf_month": -0.6,
-        "perf_ytd": 6.3
+        "perf_month": -1.0,
+        "perf_ytd": 6.0
       }
     },
     "JPM": {
@@ -3268,10 +3268,10 @@
       "technicals": {
         "sma50": 308.52,
         "sma200": 306.97,
-        "rsi14": 64.98,
+        "rsi14": 62.0,
         "beta": 1,
-        "perf_month": 6.4,
-        "perf_ytd": 6.9
+        "perf_month": 5.4,
+        "perf_ytd": 5.9
       }
     },
     "KDP": {
@@ -3280,10 +3280,10 @@
       "technicals": {
         "sma50": 28.96,
         "sma200": 27.94,
-        "rsi14": 56.87,
+        "rsi14": 54.93,
         "beta": 0.424,
-        "perf_month": 6.9,
-        "perf_ytd": 10.8
+        "perf_month": 6.2,
+        "perf_ytd": 10.1
       }
     },
     "KEY": {
@@ -3292,7 +3292,7 @@
       "technicals": {
         "sma50": 21.68,
         "sma200": 20.17,
-        "rsi14": 62.32,
+        "rsi14": 61.68,
         "beta": 1.041,
         "perf_month": 4.2,
         "perf_ytd": 12.0
@@ -3304,10 +3304,10 @@
       "technicals": {
         "sma50": 343.01,
         "sma200": 245.47,
-        "rsi14": 60.87,
+        "rsi14": 60.55,
         "beta": 1.221,
-        "perf_month": 6.3,
-        "perf_ytd": 48.5
+        "perf_month": 6.0,
+        "perf_ytd": 48.2
       }
     },
     "KHC": {
@@ -3316,10 +3316,10 @@
       "technicals": {
         "sma50": 23.08,
         "sma200": 24.13,
-        "rsi14": 43.57,
+        "rsi14": 42.83,
         "beta": 0.076,
-        "perf_month": -0.8,
-        "perf_ytd": -5.1
+        "perf_month": -1.1,
+        "perf_ytd": -5.4
       }
     },
     "KIM": {
@@ -3328,10 +3328,10 @@
       "technicals": {
         "sma50": 23.9,
         "sma200": 22.12,
-        "rsi14": 49.77,
+        "rsi14": 49.83,
         "beta": 0.981,
-        "perf_month": 2.1,
-        "perf_ytd": 10.3
+        "perf_month": 2.0,
+        "perf_ytd": 10.2
       }
     },
     "KKR": {
@@ -3340,10 +3340,10 @@
       "technicals": {
         "sma50": 98.12,
         "sma200": 113.04,
-        "rsi14": 51.1,
+        "rsi14": 51.84,
         "beta": 1.791,
-        "perf_month": -1.5,
-        "perf_ytd": -14.5
+        "perf_month": -1.1,
+        "perf_ytd": -14.2
       }
     },
     "KLAC": {
@@ -3352,10 +3352,10 @@
       "technicals": {
         "sma50": 191.88,
         "sma200": 143.53,
-        "rsi14": 69.85,
+        "rsi14": 70.21,
         "beta": 1.504,
-        "perf_month": 34.4,
-        "perf_ytd": 79.7
+        "perf_month": 35.3,
+        "perf_ytd": 80.8
       }
     },
     "KMB": {
@@ -3364,10 +3364,10 @@
       "technicals": {
         "sma50": 98.2,
         "sma200": 105.94,
-        "rsi14": 58.64,
+        "rsi14": 58.44,
         "beta": 0.302,
-        "perf_month": 4.5,
-        "perf_ytd": -3.1
+        "perf_month": 4.4,
+        "perf_ytd": -3.2
       }
     },
     "KMI": {
@@ -3376,7 +3376,7 @@
       "technicals": {
         "sma50": 32.13,
         "sma200": 29.75,
-        "rsi14": 46.86,
+        "rsi14": 46.63,
         "beta": 0.539,
         "perf_month": -1.7,
         "perf_ytd": 6.2
@@ -3388,10 +3388,10 @@
       "technicals": {
         "sma50": 78.88,
         "sma200": 73.65,
-        "rsi14": 46.26,
+        "rsi14": 47.09,
         "beta": 0.354,
-        "perf_month": 0.4,
-        "perf_ytd": 7.5
+        "perf_month": 0.7,
+        "perf_ytd": 7.8
       }
     },
     "KR": {
@@ -3400,10 +3400,10 @@
       "technicals": {
         "sma50": 66.03,
         "sma200": 66.53,
-        "rsi14": 27.14,
+        "rsi14": 26.8,
         "beta": 0.416,
-        "perf_month": -13.8,
-        "perf_ytd": -14.4
+        "perf_month": -14.3,
+        "perf_ytd": -14.9
       }
     },
     "KVUE": {
@@ -3412,10 +3412,10 @@
       "technicals": {
         "sma50": 17.49,
         "sma200": 17.29,
-        "rsi14": 59.73,
+        "rsi14": 58.17,
         "beta": 0.504,
-        "perf_month": 4.2,
-        "perf_ytd": 5.4
+        "perf_month": 3.6,
+        "perf_ytd": 4.8
       }
     },
     "L": {
@@ -3424,10 +3424,10 @@
       "technicals": {
         "sma50": 108.0,
         "sma200": 105.08,
-        "rsi14": 49.24,
+        "rsi14": 50.53,
         "beta": 0.535,
-        "perf_month": -0.9,
-        "perf_ytd": 1.8
+        "perf_month": -0.7,
+        "perf_ytd": 2.1
       }
     },
     "LDOS": {
@@ -3436,10 +3436,10 @@
       "technicals": {
         "sma50": 135.44,
         "sma200": 171.66,
-        "rsi14": 17.25,
+        "rsi14": 17.72,
         "beta": 0.515,
-        "perf_month": -21.4,
-        "perf_ytd": -38.0
+        "perf_month": -20.9,
+        "perf_ytd": -37.6
       }
     },
     "LEN": {
@@ -3448,10 +3448,10 @@
       "technicals": {
         "sma50": 89.43,
         "sma200": 109.57,
-        "rsi14": 50.64,
+        "rsi14": 49.98,
         "beta": 1.4,
-        "perf_month": 0.8,
-        "perf_ytd": -17.7
+        "perf_month": 0.3,
+        "perf_ytd": -18.1
       }
     },
     "LH": {
@@ -3460,7 +3460,7 @@
       "technicals": {
         "sma50": 261.54,
         "sma200": 267.57,
-        "rsi14": 42.14,
+        "rsi14": 42.26,
         "beta": 0.877,
         "perf_month": -2.2,
         "perf_ytd": -4.4
@@ -3472,10 +3472,10 @@
       "technicals": {
         "sma50": 319.13,
         "sma200": 315.63,
-        "rsi14": 38.19,
+        "rsi14": 39.34,
         "beta": 0.746,
-        "perf_month": -8.2,
-        "perf_ytd": -7.1
+        "perf_month": -7.6,
+        "perf_ytd": -6.6
       }
     },
     "LII": {
@@ -3484,10 +3484,10 @@
       "technicals": {
         "sma50": 506.48,
         "sma200": 510.29,
-        "rsi14": 58.34,
+        "rsi14": 57.68,
         "beta": 1.19,
-        "perf_month": 5.5,
-        "perf_ytd": 4.8
+        "perf_month": 5.1,
+        "perf_ytd": 4.3
       }
     },
     "LIN": {
@@ -3496,10 +3496,10 @@
       "technicals": {
         "sma50": 505.66,
         "sma200": 467.3,
-        "rsi14": 54.42,
-        "beta": 0.732,
-        "perf_month": 1.9,
-        "perf_ytd": 10.2
+        "rsi14": 51.95,
+        "beta": 1.0,
+        "perf_month": 1.3,
+        "perf_ytd": 9.6
       }
     },
     "LITE": {
@@ -3508,10 +3508,10 @@
       "technicals": {
         "sma50": 906.49,
         "sma200": 508.87,
-        "rsi14": 44.92,
-        "beta": 1.479,
-        "perf_month": -7.7,
-        "perf_ytd": 64.5
+        "rsi14": 45.78,
+        "beta": 1.0,
+        "perf_month": -6.2,
+        "perf_ytd": 67.0
       }
     },
     "LLY": {
@@ -3520,10 +3520,10 @@
       "technicals": {
         "sma50": 1008.19,
         "sma200": 964.27,
-        "rsi14": 54.84,
-        "beta": 0.517,
-        "perf_month": 9.4,
-        "perf_ytd": 14.3
+        "rsi14": 53.98,
+        "beta": 1.0,
+        "perf_month": 8.9,
+        "perf_ytd": 13.9
       }
     },
     "LMT": {
@@ -3532,10 +3532,10 @@
       "technicals": {
         "sma50": 539.78,
         "sma200": 538.14,
-        "rsi14": 39.11,
+        "rsi14": 40.72,
         "beta": 0.106,
-        "perf_month": -6.2,
-        "perf_ytd": -5.9
+        "perf_month": -5.3,
+        "perf_ytd": -5.1
       }
     },
     "LNT": {
@@ -3544,10 +3544,10 @@
       "technicals": {
         "sma50": 72.48,
         "sma200": 68.86,
-        "rsi14": 51.87,
+        "rsi14": 52.68,
         "beta": 0.552,
-        "perf_month": 0.5,
-        "perf_ytd": 5.8
+        "perf_month": 0.7,
+        "perf_ytd": 6.0
       }
     },
     "LOW": {
@@ -3556,10 +3556,10 @@
       "technicals": {
         "sma50": 227.8,
         "sma200": 245.73,
-        "rsi14": 52.7,
+        "rsi14": 53.02,
         "beta": 0.857,
-        "perf_month": -2.6,
-        "perf_ytd": -9.7
+        "perf_month": -2.5,
+        "perf_ytd": -9.6
       }
     },
     "LRCX": {
@@ -3568,10 +3568,10 @@
       "technicals": {
         "sma50": 295.31,
         "sma200": 208.61,
-        "rsi14": 69.32,
+        "rsi14": 68.59,
         "beta": 1.868,
-        "perf_month": 33.1,
-        "perf_ytd": 88.4
+        "perf_month": 31.7,
+        "perf_ytd": 86.5
       }
     },
     "LULU": {
@@ -3580,9 +3580,9 @@
       "technicals": {
         "sma50": 135.21,
         "sma200": 167.83,
-        "rsi14": 32.03,
+        "rsi14": 32.2,
         "beta": 0.861,
-        "perf_month": -17.4,
+        "perf_month": -17.3,
         "perf_ytd": -33.4
       }
     },
@@ -3592,10 +3592,10 @@
       "technicals": {
         "sma50": 40.96,
         "sma200": 39.31,
-        "rsi14": 68.23,
+        "rsi14": 68.12,
         "beta": 1.156,
-        "perf_month": 17.4,
-        "perf_ytd": 22.3
+        "perf_month": 17.1,
+        "perf_ytd": 22.0
       }
     },
     "LVS": {
@@ -3604,10 +3604,10 @@
       "technicals": {
         "sma50": 52.41,
         "sma200": 56.81,
-        "rsi14": 36.65,
+        "rsi14": 38.92,
         "beta": 0.811,
-        "perf_month": -7.7,
-        "perf_ytd": -14.8
+        "perf_month": -7.0,
+        "perf_ytd": -14.2
       }
     },
     "LYB": {
@@ -3616,10 +3616,10 @@
       "technicals": {
         "sma50": 70.27,
         "sma200": 57.26,
-        "rsi14": 28.2,
+        "rsi14": 28.19,
         "beta": 0.328,
-        "perf_month": -14.7,
-        "perf_ytd": 4.7
+        "perf_month": -14.5,
+        "perf_ytd": 4.9
       }
     },
     "LYV": {
@@ -3628,10 +3628,10 @@
       "technicals": {
         "sma50": 163.39,
         "sma200": 153.64,
-        "rsi14": 59.16,
+        "rsi14": 57.45,
         "beta": 1.124,
-        "perf_month": 5.5,
-        "perf_ytd": 12.2
+        "perf_month": 4.8,
+        "perf_ytd": 11.5
       }
     },
     "MA": {
@@ -3640,7 +3640,7 @@
       "technicals": {
         "sma50": 499.24,
         "sma200": 535.33,
-        "rsi14": 48.0,
+        "rsi14": 47.86,
         "beta": 0.738,
         "perf_month": -1.9,
         "perf_ytd": -8.5
@@ -3652,10 +3652,10 @@
       "technicals": {
         "sma50": 130.07,
         "sma200": 132.76,
-        "rsi14": 49.09,
+        "rsi14": 47.72,
         "beta": 0.744,
-        "perf_month": 2.3,
-        "perf_ytd": 0.2
+        "perf_month": 1.9,
+        "perf_ytd": -0.2
       }
     },
     "MAR": {
@@ -3664,10 +3664,10 @@
       "technicals": {
         "sma50": 369.55,
         "sma200": 318.59,
-        "rsi14": 63.48,
+        "rsi14": 62.46,
         "beta": 1.105,
-        "perf_month": 7.7,
-        "perf_ytd": 25.0
+        "perf_month": 7.2,
+        "perf_ytd": 24.4
       }
     },
     "MAS": {
@@ -3676,10 +3676,10 @@
       "technicals": {
         "sma50": 69.33,
         "sma200": 67.54,
-        "rsi14": 63.09,
+        "rsi14": 61.32,
         "beta": 1.313,
-        "perf_month": 8.4,
-        "perf_ytd": 11.3
+        "perf_month": 7.3,
+        "perf_ytd": 10.1
       }
     },
     "MCD": {
@@ -3688,10 +3688,10 @@
       "technicals": {
         "sma50": 287.66,
         "sma200": 305.48,
-        "rsi14": 44.06,
+        "rsi14": 43.67,
         "beta": 0.414,
-        "perf_month": -3.0,
-        "perf_ytd": -8.7
+        "perf_month": -3.1,
+        "perf_ytd": -8.8
       }
     },
     "MCHP": {
@@ -3700,10 +3700,10 @@
       "technicals": {
         "sma50": 90.26,
         "sma200": 72.37,
-        "rsi14": 57.8,
+        "rsi14": 57.96,
         "beta": 1.725,
-        "perf_month": 10.4,
-        "perf_ytd": 37.6
+        "perf_month": 10.5,
+        "perf_ytd": 37.9
       }
     },
     "MCK": {
@@ -3712,10 +3712,10 @@
       "technicals": {
         "sma50": 792.59,
         "sma200": 823.9,
-        "rsi14": 40.52,
+        "rsi14": 40.75,
         "beta": 0.315,
-        "perf_month": -5.4,
-        "perf_ytd": -9.0
+        "perf_month": -5.3,
+        "perf_ytd": -8.9
       }
     },
     "MCO": {
@@ -3724,10 +3724,10 @@
       "technicals": {
         "sma50": 449.93,
         "sma200": 473.62,
-        "rsi14": 49.58,
+        "rsi14": 49.92,
         "beta": 1.339,
-        "perf_month": 0.1,
-        "perf_ytd": -4.9
+        "perf_month": 0.2,
+        "perf_ytd": -4.8
       }
     },
     "MDLZ": {
@@ -3736,10 +3736,10 @@
       "technicals": {
         "sma50": 60.45,
         "sma200": 58.92,
-        "rsi14": 43.08,
+        "rsi14": 42.76,
         "beta": 0.4,
-        "perf_month": -0.4,
-        "perf_ytd": 2.2
+        "perf_month": -0.5,
+        "perf_ytd": 2.0
       }
     },
     "MDT": {
@@ -3748,10 +3748,10 @@
       "technicals": {
         "sma50": 80.32,
         "sma200": 91.98,
-        "rsi14": 48.72,
+        "rsi14": 49.89,
         "beta": 0.597,
-        "perf_month": -1.8,
-        "perf_ytd": -14.2
+        "perf_month": -1.2,
+        "perf_ytd": -13.7
       }
     },
     "MET": {
@@ -3760,10 +3760,10 @@
       "technicals": {
         "sma50": 80.58,
         "sma200": 78.16,
-        "rsi14": 58.3,
+        "rsi14": 57.69,
         "beta": 0.783,
-        "perf_month": 6.4,
-        "perf_ytd": 9.7
+        "perf_month": 6.2,
+        "perf_ytd": 9.5
       }
     },
     "META": {
@@ -3772,10 +3772,10 @@
       "technicals": {
         "sma50": 622.6,
         "sma200": 655.71,
-        "rsi14": 41.44,
+        "rsi14": 42.82,
         "beta": 1.229,
-        "perf_month": -7.9,
-        "perf_ytd": -12.5
+        "perf_month": -7.3,
+        "perf_ytd": -12.0
       }
     },
     "MGM": {
@@ -3784,10 +3784,10 @@
       "technicals": {
         "sma50": 40.93,
         "sma200": 36.46,
-        "rsi14": 61.92,
+        "rsi14": 60.45,
         "beta": 1.311,
-        "perf_month": 15.4,
-        "perf_ytd": 29.5
+        "perf_month": 14.4,
+        "perf_ytd": 28.5
       }
     },
     "MKC": {
@@ -3796,10 +3796,10 @@
       "technicals": {
         "sma50": 49.07,
         "sma200": 61.03,
-        "rsi14": 42.4,
+        "rsi14": 42.14,
         "beta": 0.641,
-        "perf_month": -4.8,
-        "perf_ytd": -23.5
+        "perf_month": -5.0,
+        "perf_ytd": -23.6
       }
     },
     "MLM": {
@@ -3808,10 +3808,10 @@
       "technicals": {
         "sma50": 590.7,
         "sma200": 618.07,
-        "rsi14": 59.84,
+        "rsi14": 59.64,
         "beta": 1.102,
-        "perf_month": 3.3,
-        "perf_ytd": -1.3
+        "perf_month": 3.1,
+        "perf_ytd": -1.4
       }
     },
     "MMM": {
@@ -3820,10 +3820,10 @@
       "technicals": {
         "sma50": 150.22,
         "sma200": 157.62,
-        "rsi14": 67.05,
+        "rsi14": 65.83,
         "beta": 1.095,
-        "perf_month": 7.5,
-        "perf_ytd": 2.4
+        "perf_month": 6.9,
+        "perf_ytd": 1.9
       }
     },
     "MNST": {
@@ -3832,10 +3832,10 @@
       "technicals": {
         "sma50": 83.2,
         "sma200": 76.0,
-        "rsi14": 63.99,
+        "rsi14": 62.48,
         "beta": 0.542,
-        "perf_month": 10.3,
-        "perf_ytd": 20.7
+        "perf_month": 9.8,
+        "perf_ytd": 20.2
       }
     },
     "MO": {
@@ -3844,10 +3844,10 @@
       "technicals": {
         "sma50": 69.76,
         "sma200": 64.6,
-        "rsi14": 43.85,
+        "rsi14": 44.08,
         "beta": 0.501,
-        "perf_month": -1.0,
-        "perf_ytd": 6.9
+        "perf_month": -0.9,
+        "perf_ytd": 7.0
       }
     },
     "MOS": {
@@ -3856,10 +3856,10 @@
       "technicals": {
         "sma50": 23.06,
         "sma200": 26.82,
-        "rsi14": 53.34,
+        "rsi14": 52.48,
         "beta": 0.808,
-        "perf_month": -0.0,
-        "perf_ytd": -14.1
+        "perf_month": -0.7,
+        "perf_ytd": -14.6
       }
     },
     "MPC": {
@@ -3868,10 +3868,10 @@
       "technicals": {
         "sma50": 244.93,
         "sma200": 206.97,
-        "rsi14": 41.71,
+        "rsi14": 41.65,
         "beta": 0.522,
-        "perf_month": -0.9,
-        "perf_ytd": 17.2
+        "perf_month": -0.8,
+        "perf_ytd": 17.4
       }
     },
     "MPWR": {
@@ -3880,10 +3880,10 @@
       "technicals": {
         "sma50": 1541.41,
         "sma200": 1141.4,
-        "rsi14": 50.14,
+        "rsi14": 50.71,
         "beta": 1.691,
-        "perf_month": 1.0,
-        "perf_ytd": 36.4
+        "perf_month": 1.4,
+        "perf_ytd": 37.0
       }
     },
     "MRK": {
@@ -3892,10 +3892,10 @@
       "technicals": {
         "sma50": 115.87,
         "sma200": 105.25,
-        "rsi14": 43.53,
+        "rsi14": 42.98,
         "beta": 0.218,
-        "perf_month": -1.5,
-        "perf_ytd": 8.4
+        "perf_month": -1.7,
+        "perf_ytd": 8.2
       }
     },
     "MRNA": {
@@ -3904,10 +3904,10 @@
       "technicals": {
         "sma50": 49.96,
         "sma200": 39.02,
-        "rsi14": 74.88,
+        "rsi14": 74.9,
         "beta": 1.03,
-        "perf_month": 27.6,
-        "perf_ytd": 63.4
+        "perf_month": 28.0,
+        "perf_ytd": 63.9
       }
     },
     "MRSH": {
@@ -3916,10 +3916,10 @@
       "technicals": {
         "sma50": 167.06,
         "sma200": 180.93,
-        "rsi14": 44.31,
+        "rsi14": 45.46,
         "beta": 0.611,
-        "perf_month": -3.3,
-        "perf_ytd": -10.7
+        "perf_month": -2.8,
+        "perf_ytd": -10.2
       }
     },
     "MS": {
@@ -3928,10 +3928,10 @@
       "technicals": {
         "sma50": 197.21,
         "sma200": 175.18,
-        "rsi14": 71.85,
+        "rsi14": 68.7,
         "beta": 1.221,
-        "perf_month": 14.2,
-        "perf_ytd": 28.5
+        "perf_month": 13.2,
+        "perf_ytd": 27.4
       }
     },
     "MSCI": {
@@ -3940,10 +3940,10 @@
       "technicals": {
         "sma50": 589.22,
         "sma200": 569.15,
-        "rsi14": 42.76,
+        "rsi14": 41.99,
         "beta": 1.226,
-        "perf_month": -1.0,
-        "perf_ytd": 2.5
+        "perf_month": -1.4,
+        "perf_ytd": 2.1
       }
     },
     "MSFT": {
@@ -3952,10 +3952,10 @@
       "technicals": {
         "sma50": 412.87,
         "sma200": 451.98,
-        "rsi14": 34.47,
+        "rsi14": 34.91,
         "beta": 1.103,
-        "perf_month": -8.4,
-        "perf_ytd": -16.4
+        "perf_month": -8.1,
+        "perf_ytd": -16.1
       }
     },
     "MSI": {
@@ -3964,10 +3964,10 @@
       "technicals": {
         "sma50": 419.78,
         "sma200": 424.03,
-        "rsi14": 39.93,
+        "rsi14": 37.74,
         "beta": 0.89,
-        "perf_month": -4.9,
-        "perf_ytd": -5.9
+        "perf_month": -5.9,
+        "perf_ytd": -6.8
       }
     },
     "MTB": {
@@ -3976,10 +3976,10 @@
       "technicals": {
         "sma50": 216.91,
         "sma200": 206.13,
-        "rsi14": 58.75,
+        "rsi14": 57.23,
         "beta": 0.587,
-        "perf_month": 4.2,
-        "perf_ytd": 9.7
+        "perf_month": 3.8,
+        "perf_ytd": 9.2
       }
     },
     "MTD": {
@@ -3988,10 +3988,10 @@
       "technicals": {
         "sma50": 1199.4,
         "sma200": 1315.96,
-        "rsi14": 49.23,
+        "rsi14": 48.26,
         "beta": 1.263,
-        "perf_month": -4.2,
-        "perf_ytd": -12.7
+        "perf_month": -4.5,
+        "perf_ytd": -13.0
       }
     },
     "MU": {
@@ -4000,10 +4000,10 @@
       "technicals": {
         "sma50": 718.25,
         "sma200": 395.67,
-        "rsi14": 66.72,
+        "rsi14": 66.39,
         "beta": 2.173,
-        "perf_month": 59.3,
-        "perf_ytd": 189.2
+        "perf_month": 57.9,
+        "perf_ytd": 186.6
       }
     },
     "NCLH": {
@@ -4012,10 +4012,10 @@
       "technicals": {
         "sma50": 18.27,
         "sma200": 21.04,
-        "rsi14": 64.42,
+        "rsi14": 63.54,
         "beta": 1.908,
-        "perf_month": 12.9,
-        "perf_ytd": -2.0
+        "perf_month": 11.9,
+        "perf_ytd": -2.8
       }
     },
     "NDAQ": {
@@ -4024,10 +4024,10 @@
       "technicals": {
         "sma50": 89.03,
         "sma200": 89.71,
-        "rsi14": 33.7,
+        "rsi14": 34.43,
         "beta": 0.974,
-        "perf_month": -8.1,
-        "perf_ytd": -8.8
+        "perf_month": -7.6,
+        "perf_ytd": -8.3
       }
     },
     "NDSN": {
@@ -4036,10 +4036,10 @@
       "technicals": {
         "sma50": 282.83,
         "sma200": 258.77,
-        "rsi14": 57.91,
+        "rsi14": 59.69,
         "beta": 0.98,
-        "perf_month": 3.8,
-        "perf_ytd": 13.4
+        "perf_month": 4.6,
+        "perf_ytd": 14.4
       }
     },
     "NEE": {
@@ -4048,10 +4048,10 @@
       "technicals": {
         "sma50": 90.73,
         "sma200": 85.73,
-        "rsi14": 46.39,
+        "rsi14": 46.75,
         "beta": 0.671,
-        "perf_month": -4.5,
-        "perf_ytd": 1.0
+        "perf_month": -4.4,
+        "perf_ytd": 1.2
       }
     },
     "NEM": {
@@ -4060,10 +4060,10 @@
       "technicals": {
         "sma50": 110.43,
         "sma200": 102.35,
-        "rsi14": 46.79,
+        "rsi14": 47.19,
         "beta": 0.455,
-        "perf_month": -6.2,
-        "perf_ytd": 1.2
+        "perf_month": -6.0,
+        "perf_ytd": 1.4
       }
     },
     "NFLX": {
@@ -4072,10 +4072,10 @@
       "technicals": {
         "sma50": 89.67,
         "sma200": 98.57,
-        "rsi14": 28.37,
+        "rsi14": 28.03,
         "beta": 1.491,
-        "perf_month": -13.8,
-        "perf_ytd": -21.6
+        "perf_month": -13.7,
+        "perf_ytd": -21.5
       }
     },
     "NI": {
@@ -4084,10 +4084,10 @@
       "technicals": {
         "sma50": 47.25,
         "sma200": 44.49,
-        "rsi14": 51.71,
+        "rsi14": 53.05,
         "beta": 0.547,
-        "perf_month": -0.4,
-        "perf_ytd": 5.8
+        "perf_month": 0.0,
+        "perf_ytd": 6.2
       }
     },
     "NKE": {
@@ -4096,7 +4096,7 @@
       "technicals": {
         "sma50": 44.3,
         "sma200": 58.9,
-        "rsi14": 52.44,
+        "rsi14": 52.67,
         "beta": 1.116,
         "perf_month": 2.0,
         "perf_ytd": -23.3
@@ -4108,10 +4108,10 @@
       "technicals": {
         "sma50": 578.54,
         "sma200": 616.28,
-        "rsi14": 33.26,
+        "rsi14": 34.56,
         "beta": -0.121,
-        "perf_month": -10.7,
-        "perf_ytd": -16.2
+        "perf_month": -9.9,
+        "perf_ytd": -15.4
       }
     },
     "NOW": {
@@ -4120,10 +4120,10 @@
       "technicals": {
         "sma50": 99.29,
         "sma200": 137.21,
-        "rsi14": 41.53,
+        "rsi14": 40.81,
         "beta": 0.927,
-        "perf_month": -3.4,
-        "perf_ytd": -30.1
+        "perf_month": -4.3,
+        "perf_ytd": -30.7
       }
     },
     "NRG": {
@@ -4132,10 +4132,10 @@
       "technicals": {
         "sma50": 143.53,
         "sma200": 156.63,
-        "rsi14": 53.43,
+        "rsi14": 51.41,
         "beta": 1.216,
-        "perf_month": -4.7,
-        "perf_ytd": -12.7
+        "perf_month": -5.9,
+        "perf_ytd": -13.8
       }
     },
     "NSC": {
@@ -4144,10 +4144,10 @@
       "technicals": {
         "sma50": 309.94,
         "sma200": 296.21,
-        "rsi14": 39.96,
+        "rsi14": 40.06,
         "beta": 1.272,
         "perf_month": -3.2,
-        "perf_ytd": 1.2
+        "perf_ytd": 1.3
       }
     },
     "NTAP": {
@@ -4156,10 +4156,10 @@
       "technicals": {
         "sma50": 129.04,
         "sma200": 114.57,
-        "rsi14": 59.23,
+        "rsi14": 58.74,
         "beta": 1.434,
-        "perf_month": 24.3,
-        "perf_ytd": 40.0
+        "perf_month": 23.8,
+        "perf_ytd": 39.4
       }
     },
     "NTRS": {
@@ -4168,7 +4168,7 @@
       "technicals": {
         "sma50": 164.88,
         "sma200": 143.66,
-        "rsi14": 56.26,
+        "rsi14": 56.16,
         "beta": 1.272,
         "perf_month": 4.4,
         "perf_ytd": 19.8
@@ -4180,10 +4180,10 @@
       "technicals": {
         "sma50": 228.69,
         "sma200": 176.57,
-        "rsi14": 49.03,
+        "rsi14": 48.83,
         "beta": 1.906,
-        "perf_month": 6.7,
-        "perf_ytd": 38.2
+        "perf_month": 6.6,
+        "perf_ytd": 38.1
       }
     },
     "NVDA": {
@@ -4192,10 +4192,10 @@
       "technicals": {
         "sma50": 208.74,
         "sma200": 189.7,
-        "rsi14": 49.72,
+        "rsi14": 50.37,
         "beta": 2.202,
-        "perf_month": 0.8,
-        "perf_ytd": 10.9
+        "perf_month": 0.9,
+        "perf_ytd": 11.1
       }
     },
     "NVR": {
@@ -4204,10 +4204,10 @@
       "technicals": {
         "sma50": 6281.14,
         "sma200": 7179.76,
-        "rsi14": 59.8,
+        "rsi14": 59.29,
         "beta": 0.924,
-        "perf_month": 3.6,
-        "perf_ytd": -9.3
+        "perf_month": 3.3,
+        "perf_ytd": -9.6
       }
     },
     "NWS": {
@@ -4216,10 +4216,10 @@
       "technicals": {
         "sma50": 30.06,
         "sma200": 29.71,
-        "rsi14": 40.34,
+        "rsi14": 38.45,
         "beta": 0.893,
-        "perf_month": -3.4,
-        "perf_ytd": -2.3
+        "perf_month": -4.3,
+        "perf_ytd": -3.2
       }
     },
     "NWSA": {
@@ -4228,10 +4228,10 @@
       "technicals": {
         "sma50": 26.16,
         "sma200": 26.13,
-        "rsi14": 42.27,
+        "rsi14": 39.88,
         "beta": 0.893,
-        "perf_month": -2.2,
-        "perf_ytd": -2.1
+        "perf_month": -3.4,
+        "perf_ytd": -3.2
       }
     },
     "NXPI": {
@@ -4240,10 +4240,10 @@
       "technicals": {
         "sma50": 278.77,
         "sma200": 233.38,
-        "rsi14": 56.09,
+        "rsi14": 55.47,
         "beta": 1.788,
-        "perf_month": 12.9,
-        "perf_ytd": 34.9
+        "perf_month": 12.4,
+        "perf_ytd": 34.2
       }
     },
     "O": {
@@ -4252,10 +4252,10 @@
       "technicals": {
         "sma50": 62.45,
         "sma200": 60.72,
-        "rsi14": 44.24,
+        "rsi14": 41.76,
         "beta": 0.734,
-        "perf_month": -2.8,
-        "perf_ytd": -0.0
+        "perf_month": -3.5,
+        "perf_ytd": -0.8
       }
     },
     "ODFL": {
@@ -4264,10 +4264,10 @@
       "technicals": {
         "sma50": 216.72,
         "sma200": 176.1,
-        "rsi14": 46.29,
+        "rsi14": 46.54,
         "beta": 1.18,
-        "perf_month": 1.8,
-        "perf_ytd": 25.2
+        "perf_month": 2.0,
+        "perf_ytd": 25.5
       }
     },
     "OKE": {
@@ -4276,10 +4276,10 @@
       "technicals": {
         "sma50": 88.11,
         "sma200": 79.25,
-        "rsi14": 41.33,
+        "rsi14": 41.55,
         "beta": 0.714,
-        "perf_month": -3.6,
-        "perf_ytd": 7.2
+        "perf_month": -3.5,
+        "perf_ytd": 7.3
       }
     },
     "OMC": {
@@ -4288,10 +4288,10 @@
       "technicals": {
         "sma50": 75.62,
         "sma200": 76.64,
-        "rsi14": 43.98,
+        "rsi14": 39.11,
         "beta": 0.659,
-        "perf_month": -2.9,
-        "perf_ytd": -4.2
+        "perf_month": -5.7,
+        "perf_ytd": -6.9
       }
     },
     "ON": {
@@ -4300,10 +4300,10 @@
       "technicals": {
         "sma50": 104.53,
         "sma200": 68.14,
-        "rsi14": 54.03,
+        "rsi14": 54.73,
         "beta": 1.977,
-        "perf_month": 15.3,
-        "perf_ytd": 76.9
+        "perf_month": 16.3,
+        "perf_ytd": 78.5
       }
     },
     "ORCL": {
@@ -4312,10 +4312,10 @@
       "technicals": {
         "sma50": 187.57,
         "sma200": 205.15,
-        "rsi14": 44.02,
+        "rsi14": 43.09,
         "beta": 1.655,
-        "perf_month": -1.1,
-        "perf_ytd": -9.6
+        "perf_month": -1.7,
+        "perf_ytd": -10.2
       }
     },
     "ORLY": {
@@ -4324,10 +4324,10 @@
       "technicals": {
         "sma50": 91.64,
         "sma200": 95.67,
-        "rsi14": 40.76,
+        "rsi14": 39.1,
         "beta": 0.523,
-        "perf_month": -4.5,
-        "perf_ytd": -8.6
+        "perf_month": -5.2,
+        "perf_ytd": -9.2
       }
     },
     "OTIS": {
@@ -4336,10 +4336,10 @@
       "technicals": {
         "sma50": 74.77,
         "sma200": 84.88,
-        "rsi14": 56.34,
+        "rsi14": 54.36,
         "beta": 0.896,
-        "perf_month": -1.3,
-        "perf_ytd": -13.0
+        "perf_month": -2.0,
+        "perf_ytd": -13.7
       }
     },
     "OXY": {
@@ -4348,7 +4348,7 @@
       "technicals": {
         "sma50": 57.27,
         "sma200": 49.16,
-        "rsi14": 33.35,
+        "rsi14": 33.31,
         "beta": 0.124,
         "perf_month": -9.5,
         "perf_ytd": 5.4
@@ -4360,10 +4360,10 @@
       "technicals": {
         "sma50": 222.31,
         "sma200": 195.65,
-        "rsi14": 66.04,
+        "rsi14": 66.49,
         "beta": 0.942,
-        "perf_month": 29.0,
-        "perf_ytd": 46.5
+        "perf_month": 29.5,
+        "perf_ytd": 47.1
       }
     },
     "PAYX": {
@@ -4372,10 +4372,10 @@
       "technicals": {
         "sma50": 94.35,
         "sma200": 106.92,
-        "rsi14": 52.23,
+        "rsi14": 51.77,
         "beta": 0.8296729,
-        "perf_month": 4.3,
-        "perf_ytd": -7.9
+        "perf_month": 4.1,
+        "perf_ytd": -8.1
       }
     },
     "PCAR": {
@@ -4384,10 +4384,10 @@
       "technicals": {
         "sma50": 117.79,
         "sma200": 111.9,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": 1.5,
-        "perf_ytd": 6.9
+        "rsi14": 54.94,
+        "beta": 0.992,
+        "perf_month": 1.0,
+        "perf_ytd": 6.3
       }
     },
     "PCG": {
@@ -4396,10 +4396,10 @@
       "technicals": {
         "sma50": 16.74,
         "sma200": 16.42,
-        "rsi14": 50,
+        "rsi14": 47.39,
         "beta": 0.272,
         "perf_month": -1.6,
-        "perf_ytd": 0.3
+        "perf_ytd": 0.4
       }
     },
     "PEG": {
@@ -4408,8 +4408,8 @@
       "technicals": {
         "sma50": 79.46,
         "sma200": 81.18,
-        "rsi14": 50,
-        "beta": 1.0,
+        "rsi14": 53.6,
+        "beta": 0.533,
         "perf_month": 0.5,
         "perf_ytd": -1.6
       }
@@ -4420,10 +4420,10 @@
       "technicals": {
         "sma50": 150.54,
         "sma200": 150.28,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": -6.0,
-        "perf_ytd": -5.8
+        "rsi14": 39.66,
+        "beta": 0.359,
+        "perf_month": -5.7,
+        "perf_ytd": -5.5
       }
     },
     "PFE": {
@@ -4432,9 +4432,9 @@
       "technicals": {
         "sma50": 26.29,
         "sma200": 25.88,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": -4.0,
+        "rsi14": 38.7,
+        "beta": 0.295,
+        "perf_month": -4.1,
         "perf_ytd": -2.5
       }
     },
@@ -4444,10 +4444,10 @@
       "technicals": {
         "sma50": 101.27,
         "sma200": 90.56,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": 8.5,
-        "perf_ytd": 21.4
+        "rsi14": 65.89,
+        "beta": 0.896,
+        "perf_month": 8.2,
+        "perf_ytd": 21.0
       }
     },
     "PG": {
@@ -4456,10 +4456,10 @@
       "technicals": {
         "sma50": 145.19,
         "sma200": 149.01,
-        "rsi14": 60.37,
+        "rsi14": 59.06,
         "beta": 0.385,
-        "perf_month": 4.0,
-        "perf_ytd": 1.3
+        "perf_month": 3.6,
+        "perf_ytd": 0.9
       }
     },
     "PGR": {
@@ -4468,10 +4468,10 @@
       "technicals": {
         "sma50": 199.74,
         "sma200": 214.73,
-        "rsi14": 55.09,
+        "rsi14": 58.0,
         "beta": 0.27,
-        "perf_month": 1.8,
-        "perf_ytd": -5.3
+        "perf_month": 2.6,
+        "perf_ytd": -4.6
       }
     },
     "PH": {
@@ -4480,7 +4480,7 @@
       "technicals": {
         "sma50": 908.35,
         "sma200": 875.25,
-        "rsi14": 67.09,
+        "rsi14": 67.15,
         "beta": 1.138,
         "perf_month": 4.9,
         "perf_ytd": 8.9
@@ -4492,10 +4492,10 @@
       "technicals": {
         "sma50": 119.94,
         "sma200": 124.73,
-        "rsi14": 63.19,
+        "rsi14": 62.04,
         "beta": 1.216,
-        "perf_month": 6.7,
-        "perf_ytd": 2.6
+        "perf_month": 5.9,
+        "perf_ytd": 1.8
       }
     },
     "PKG": {
@@ -4504,10 +4504,10 @@
       "technicals": {
         "sma50": 217.49,
         "sma200": 214.12,
-        "rsi14": 61.12,
+        "rsi14": 58.41,
         "beta": 0.835,
-        "perf_month": 6.6,
-        "perf_ytd": 8.3
+        "perf_month": 5.3,
+        "perf_ytd": 7.0
       }
     },
     "PLD": {
@@ -4516,10 +4516,10 @@
       "technicals": {
         "sma50": 142.66,
         "sma200": 130.89,
-        "rsi14": 41.84,
+        "rsi14": 43.07,
         "beta": 1.334,
-        "perf_month": -1.9,
-        "perf_ytd": 6.9
+        "perf_month": -1.5,
+        "perf_ytd": 7.4
       }
     },
     "PLTR": {
@@ -4528,10 +4528,10 @@
       "technicals": {
         "sma50": 138.68,
         "sma200": 160.05,
-        "rsi14": 40.83,
+        "rsi14": 41.25,
         "beta": 1.515,
-        "perf_month": -7.7,
-        "perf_ytd": -20.0
+        "perf_month": -7.4,
+        "perf_ytd": -19.7
       }
     },
     "PM": {
@@ -4540,10 +4540,10 @@
       "technicals": {
         "sma50": 173.74,
         "sma200": 166.37,
-        "rsi14": 49.43,
+        "rsi14": 49.06,
         "beta": 0.408,
-        "perf_month": 2.8,
-        "perf_ytd": 7.3
+        "perf_month": 2.7,
+        "perf_ytd": 7.2
       }
     },
     "PNC": {
@@ -4552,10 +4552,10 @@
       "technicals": {
         "sma50": 222.14,
         "sma200": 209.31,
-        "rsi14": 59.79,
+        "rsi14": 58.52,
         "beta": 0.918,
-        "perf_month": 4.9,
-        "perf_ytd": 11.3
+        "perf_month": 4.5,
+        "perf_ytd": 10.9
       }
     },
     "PNR": {
@@ -4564,10 +4564,10 @@
       "technicals": {
         "sma50": 79.13,
         "sma200": 97.11,
-        "rsi14": 50.33,
+        "rsi14": 48.72,
         "beta": 1.046,
-        "perf_month": -5.4,
-        "perf_ytd": -22.9
+        "perf_month": -6.1,
+        "perf_ytd": -23.5
       }
     },
     "PNW": {
@@ -4576,10 +4576,10 @@
       "technicals": {
         "sma50": 101.74,
         "sma200": 94.75,
-        "rsi14": 52.49,
+        "rsi14": 52.17,
         "beta": 0.438,
         "perf_month": 0.6,
-        "perf_ytd": 8.1
+        "perf_ytd": 8.0
       }
     },
     "PODD": {
@@ -4588,10 +4588,10 @@
       "technicals": {
         "sma50": 166.25,
         "sma200": 257.41,
-        "rsi14": 39.32,
+        "rsi14": 41.35,
         "beta": 1.125,
-        "perf_month": -13.2,
-        "perf_ytd": -43.9
+        "perf_month": -12.3,
+        "perf_ytd": -43.4
       }
     },
     "POOL": {
@@ -4600,10 +4600,10 @@
       "technicals": {
         "sma50": 198.44,
         "sma200": 242.17,
-        "rsi14": 59.9,
+        "rsi14": 58.4,
         "beta": 1.089,
-        "perf_month": 1.2,
-        "perf_ytd": -17.0
+        "perf_month": 0.3,
+        "perf_ytd": -17.8
       }
     },
     "PPG": {
@@ -4612,10 +4612,10 @@
       "technicals": {
         "sma50": 110.51,
         "sma200": 107.79,
-        "rsi14": 60.37,
+        "rsi14": 58.92,
         "beta": 1.062,
-        "perf_month": 8.0,
-        "perf_ytd": 10.8
+        "perf_month": 7.0,
+        "perf_ytd": 9.7
       }
     },
     "PPL": {
@@ -4624,10 +4624,10 @@
       "technicals": {
         "sma50": 36.89,
         "sma200": 36.58,
-        "rsi14": 44.04,
+        "rsi14": 44.55,
         "beta": 0.596,
-        "perf_month": -4.2,
-        "perf_ytd": -3.4
+        "perf_month": -4.1,
+        "perf_ytd": -3.3
       }
     },
     "PRU": {
@@ -4636,10 +4636,10 @@
       "technicals": {
         "sma50": 101.04,
         "sma200": 104.13,
-        "rsi14": 60.54,
+        "rsi14": 58.8,
         "beta": 0.855,
-        "perf_month": 5.9,
-        "perf_ytd": 2.8
+        "perf_month": 5.4,
+        "perf_ytd": 2.3
       }
     },
     "PSA": {
@@ -4648,10 +4648,10 @@
       "technicals": {
         "sma50": 305.73,
         "sma200": 289.19,
-        "rsi14": 57.18,
+        "rsi14": 57.11,
         "beta": 0.963,
-        "perf_month": 4.2,
-        "perf_ytd": 10.1
+        "perf_month": 4.1,
+        "perf_ytd": 10.0
       }
     },
     "PSKY": {
@@ -4660,10 +4660,10 @@
       "technicals": {
         "sma50": 10.7,
         "sma200": 13.03,
-        "rsi14": 43.58,
+        "rsi14": 40.51,
         "beta": 1.442,
-        "perf_month": -5.6,
-        "perf_ytd": -22.5
+        "perf_month": -7.1,
+        "perf_ytd": -23.7
       }
     },
     "PSX": {
@@ -4672,10 +4672,10 @@
       "technicals": {
         "sma50": 172.17,
         "sma200": 151.4,
-        "rsi14": 37.08,
+        "rsi14": 36.77,
         "beta": 0.674,
         "perf_month": -3.5,
-        "perf_ytd": 9.8
+        "perf_ytd": 9.7
       }
     },
     "PTC": {
@@ -4684,10 +4684,10 @@
       "technicals": {
         "sma50": 137.74,
         "sma200": 166.65,
-        "rsi14": 27.71,
+        "rsi14": 27.48,
         "beta": 0.966,
-        "perf_month": -16.3,
-        "perf_ytd": -30.8
+        "perf_month": -16.7,
+        "perf_ytd": -31.1
       }
     },
     "PWR": {
@@ -4696,10 +4696,10 @@
       "technicals": {
         "sma50": 689.21,
         "sma200": 521.86,
-        "rsi14": 51.4,
+        "rsi14": 49.45,
         "beta": 1.215,
-        "perf_month": 3.1,
-        "perf_ytd": 36.2
+        "perf_month": 1.9,
+        "perf_ytd": 34.6
       }
     },
     "PYPL": {
@@ -4708,10 +4708,10 @@
       "technicals": {
         "sma50": 45.93,
         "sma200": 55.0,
-        "rsi14": 44.84,
+        "rsi14": 44.4,
         "beta": 1.336,
-        "perf_month": -7.3,
-        "perf_ytd": -22.6
+        "perf_month": -7.4,
+        "perf_ytd": -22.7
       }
     },
     "Q": {
@@ -4720,10 +4720,10 @@
       "technicals": {
         "sma50": 146.94,
         "sma200": 113.06,
-        "rsi14": 61.56,
+        "rsi14": 62.12,
         "beta": 1.5802284,
-        "perf_month": 14.4,
-        "perf_ytd": 48.7
+        "perf_month": 15.0,
+        "perf_ytd": 49.5
       }
     },
     "QCOM": {
@@ -4732,10 +4732,10 @@
       "technicals": {
         "sma50": 189.46,
         "sma200": 166.48,
-        "rsi14": 56.22,
+        "rsi14": 55.29,
         "beta": 1.596,
-        "perf_month": 20.8,
-        "perf_ytd": 37.5
+        "perf_month": 19.3,
+        "perf_ytd": 35.8
       }
     },
     "RCL": {
@@ -4744,10 +4744,10 @@
       "technicals": {
         "sma50": 274.07,
         "sma200": 290.55,
-        "rsi14": 62.7,
+        "rsi14": 62.11,
         "beta": 1.784,
-        "perf_month": 14.6,
-        "perf_ytd": 8.1
+        "perf_month": 14.0,
+        "perf_ytd": 7.6
       }
     },
     "REG": {
@@ -4756,10 +4756,10 @@
       "technicals": {
         "sma50": 78.54,
         "sma200": 73.86,
-        "rsi14": 42.98,
+        "rsi14": 42.27,
         "beta": 0.832,
-        "perf_month": -1.9,
-        "perf_ytd": 4.3
+        "perf_month": -2.1,
+        "perf_ytd": 4.1
       }
     },
     "REGN": {
@@ -4768,10 +4768,10 @@
       "technicals": {
         "sma50": 683.35,
         "sma200": 696.91,
-        "rsi14": 34.55,
+        "rsi14": 37.92,
         "beta": 0.238,
-        "perf_month": -12.2,
-        "perf_ytd": -13.9
+        "perf_month": -10.7,
+        "perf_ytd": -12.5
       }
     },
     "RF": {
@@ -4780,10 +4780,10 @@
       "technicals": {
         "sma50": 27.95,
         "sma200": 27.03,
-        "rsi14": 55.26,
+        "rsi14": 54.61,
         "beta": 1.027,
-        "perf_month": 2.6,
-        "perf_ytd": 6.1
+        "perf_month": 2.4,
+        "perf_ytd": 5.9
       }
     },
     "RJF": {
@@ -4792,10 +4792,10 @@
       "technicals": {
         "sma50": 152.31,
         "sma200": 158.9,
-        "rsi14": 58.16,
+        "rsi14": 57.61,
         "beta": 0.951,
-        "perf_month": 2.4,
-        "perf_ytd": -1.8
+        "perf_month": 2.3,
+        "perf_ytd": -1.9
       }
     },
     "RL": {
@@ -4804,10 +4804,10 @@
       "technicals": {
         "sma50": 368.07,
         "sma200": 349.27,
-        "rsi14": 65.73,
+        "rsi14": 50,
         "beta": 1.371,
-        "perf_month": 12.1,
-        "perf_ytd": 18.1
+        "perf_month": 12.2,
+        "perf_ytd": 18.3
       }
     },
     "RMD": {
@@ -4816,10 +4816,10 @@
       "technicals": {
         "sma50": 207.91,
         "sma200": 242.98,
-        "rsi14": 37.81,
+        "rsi14": 50,
         "beta": 0.782,
-        "perf_month": -9.7,
-        "perf_ytd": -22.8
+        "perf_month": -9.3,
+        "perf_ytd": -22.4
       }
     },
     "ROK": {
@@ -4828,10 +4828,10 @@
       "technicals": {
         "sma50": 433.99,
         "sma200": 392.59,
-        "rsi14": 61.6,
-        "beta": 1.561,
-        "perf_month": 9.3,
-        "perf_ytd": 20.9
+        "rsi14": 50,
+        "beta": 1.0,
+        "perf_month": 9.2,
+        "perf_ytd": 20.7
       }
     },
     "ROL": {
@@ -4840,10 +4840,10 @@
       "technicals": {
         "sma50": 52.09,
         "sma200": 57.0,
-        "rsi14": 27.73,
+        "rsi14": 27.95,
         "beta": 0.727,
-        "perf_month": -13.9,
-        "perf_ytd": -21.3
+        "perf_month": -13.7,
+        "perf_ytd": -21.1
       }
     },
     "ROP": {
@@ -4852,10 +4852,10 @@
       "technicals": {
         "sma50": 341.02,
         "sma200": 406.74,
-        "rsi14": 47.64,
+        "rsi14": 46.39,
         "beta": 0.762,
-        "perf_month": -2.8,
-        "perf_ytd": -18.5
+        "perf_month": -3.2,
+        "perf_ytd": -18.8
       }
     },
     "ROST": {
@@ -4864,10 +4864,10 @@
       "technicals": {
         "sma50": 225.91,
         "sma200": 190.68,
-        "rsi14": 55.81,
+        "rsi14": 54.27,
         "beta": 0.866,
-        "perf_month": 3.7,
-        "perf_ytd": 22.8
+        "perf_month": 3.1,
+        "perf_ytd": 22.1
       }
     },
     "RSG": {
@@ -4876,10 +4876,10 @@
       "technicals": {
         "sma50": 207.71,
         "sma200": 216.15,
-        "rsi14": 44.81,
+        "rsi14": 45.94,
         "beta": 0.415,
-        "perf_month": -1.7,
-        "perf_ytd": -5.6
+        "perf_month": -1.3,
+        "perf_ytd": -5.2
       }
     },
     "RTX": {
@@ -4888,10 +4888,10 @@
       "technicals": {
         "sma50": 181.85,
         "sma200": 182.3,
-        "rsi14": 54.01,
+        "rsi14": 55.27,
         "beta": 0.306,
-        "perf_month": 1.5,
-        "perf_ytd": 1.2
+        "perf_month": 2.1,
+        "perf_ytd": 1.8
       }
     },
     "RVTY": {
@@ -4900,10 +4900,10 @@
       "technicals": {
         "sma50": 95.29,
         "sma200": 95.47,
-        "rsi14": 51.95,
+        "rsi14": 52.54,
         "beta": 1.107,
-        "perf_month": 4.6,
-        "perf_ytd": 4.5
+        "perf_month": 4.9,
+        "perf_ytd": 4.7
       }
     },
     "SATS": {
@@ -4912,10 +4912,10 @@
       "technicals": {
         "sma50": 125.22,
         "sma200": 102.54,
-        "rsi14": 39.56,
+        "rsi14": 39.9,
         "beta": 0.963,
-        "perf_month": -13.3,
-        "perf_ytd": 5.9
+        "perf_month": -12.8,
+        "perf_ytd": 6.5
       }
     },
     "SBAC": {
@@ -4924,10 +4924,10 @@
       "technicals": {
         "sma50": 210.39,
         "sma200": 196.22,
-        "rsi14": 34.74,
+        "rsi14": 33.99,
         "beta": 0.978,
-        "perf_month": -10.7,
-        "perf_ytd": -4.2
+        "perf_month": -11.2,
+        "perf_ytd": -4.8
       }
     },
     "SBUX": {
@@ -4936,10 +4936,10 @@
       "technicals": {
         "sma50": 101.07,
         "sma200": 91.85,
-        "rsi14": 52.27,
+        "rsi14": 50.97,
         "beta": 0.977,
-        "perf_month": 0.1,
-        "perf_ytd": 10.1
+        "perf_month": -0.4,
+        "perf_ytd": 9.6
       }
     },
     "SCHW": {
@@ -4948,10 +4948,10 @@
       "technicals": {
         "sma50": 91.01,
         "sma200": 94.76,
-        "rsi14": 52.83,
+        "rsi14": 54.2,
         "beta": 0.773,
-        "perf_month": 0.2,
-        "perf_ytd": -3.8
+        "perf_month": 0.8,
+        "perf_ytd": -3.2
       }
     },
     "SHW": {
@@ -4960,10 +4960,10 @@
       "technicals": {
         "sma50": 317.32,
         "sma200": 334.97,
-        "rsi14": 57.16,
+        "rsi14": 56.74,
         "beta": 1.126,
-        "perf_month": 1.3,
-        "perf_ytd": -4.0
+        "perf_month": 1.1,
+        "perf_ytd": -4.2
       }
     },
     "SJM": {
@@ -4972,10 +4972,10 @@
       "technicals": {
         "sma50": 100.76,
         "sma200": 103.53,
-        "rsi14": 59.95,
+        "rsi14": 58.53,
         "beta": 0.264,
-        "perf_month": 10.6,
-        "perf_ytd": 7.6
+        "perf_month": 10.0,
+        "perf_ytd": 7.1
       }
     },
     "SLB": {
@@ -4984,10 +4984,10 @@
       "technicals": {
         "sma50": 54.91,
         "sma200": 44.82,
-        "rsi14": 28.99,
+        "rsi14": 28.69,
         "beta": 0.708,
-        "perf_month": -12.2,
-        "perf_ytd": 7.6
+        "perf_month": -12.4,
+        "perf_ytd": 7.3
       }
     },
     "SMCI": {
@@ -4996,10 +4996,10 @@
       "technicals": {
         "sma50": 32.66,
         "sma200": 35.6,
-        "rsi14": 42.98,
+        "rsi14": 43.36,
         "beta": 1.869,
-        "perf_month": -6.8,
-        "perf_ytd": -14.5
+        "perf_month": -6.1,
+        "perf_ytd": -13.9
       }
     },
     "SNA": {
@@ -5008,10 +5008,10 @@
       "technicals": {
         "sma50": 376.31,
         "sma200": 358.88,
-        "rsi14": 58.01,
+        "rsi14": 57.77,
         "beta": 0.736,
-        "perf_month": 3.0,
-        "perf_ytd": 8.0
+        "perf_month": 2.9,
+        "perf_ytd": 7.9
       }
     },
     "SNDK": {
@@ -5020,10 +5020,10 @@
       "technicals": {
         "sma50": 1371.78,
         "sma200": 602.59,
-        "rsi14": 70.98,
+        "rsi14": 70.93,
         "beta": 4.8812504,
-        "perf_month": 59.4,
-        "perf_ytd": 262.8
+        "perf_month": 59.3,
+        "perf_ytd": 262.6
       }
     },
     "SNPS": {
@@ -5032,10 +5032,10 @@
       "technicals": {
         "sma50": 478.35,
         "sma200": 460.15,
-        "rsi14": 41.73,
+        "rsi14": 41.53,
         "beta": 1.214,
-        "perf_month": -4.5,
-        "perf_ytd": -0.8
+        "perf_month": -4.8,
+        "perf_ytd": -1.0
       }
     },
     "SO": {
@@ -5044,10 +5044,10 @@
       "technicals": {
         "sma50": 93.73,
         "sma200": 92.51,
-        "rsi14": 50.51,
+        "rsi14": 49.84,
         "beta": 0.339,
-        "perf_month": -0.5,
-        "perf_ytd": 0.8
+        "perf_month": -0.7,
+        "perf_ytd": 0.6
       }
     },
     "SOLV": {
@@ -5056,10 +5056,10 @@
       "technicals": {
         "sma50": 73.12,
         "sma200": 74.36,
-        "rsi14": 45.01,
+        "rsi14": 47.37,
         "beta": 0.746,
-        "perf_month": 2.1,
-        "perf_ytd": 0.4
+        "perf_month": 3.2,
+        "perf_ytd": 1.4
       }
     },
     "SPG": {
@@ -5068,10 +5068,10 @@
       "technicals": {
         "sma50": 204.63,
         "sma200": 190.38,
-        "rsi14": 56.4,
+        "rsi14": 55.16,
         "beta": 1.346,
-        "perf_month": 3.9,
-        "perf_ytd": 11.6
+        "perf_month": 3.3,
+        "perf_ytd": 11.0
       }
     },
     "SPGI": {
@@ -5080,10 +5080,10 @@
       "technicals": {
         "sma50": 424.44,
         "sma200": 469.51,
-        "rsi14": 43.57,
+        "rsi14": 44.47,
         "beta": 1.076,
-        "perf_month": -3.6,
-        "perf_ytd": -12.9
+        "perf_month": -3.2,
+        "perf_ytd": -12.5
       }
     },
     "SRE": {
@@ -5092,10 +5092,10 @@
       "technicals": {
         "sma50": 92.63,
         "sma200": 90.98,
-        "rsi14": 46.03,
+        "rsi14": 47.5,
         "beta": 0.576,
-        "perf_month": -2.5,
-        "perf_ytd": -0.7
+        "perf_month": -2.1,
+        "perf_ytd": -0.3
       }
     },
     "STE": {
@@ -5104,10 +5104,10 @@
       "technicals": {
         "sma50": 215.03,
         "sma200": 239.07,
-        "rsi14": 37.02,
+        "rsi14": 38.02,
         "beta": 0.923,
-        "perf_month": -6.1,
-        "perf_ytd": -15.5
+        "perf_month": -5.8,
+        "perf_ytd": -15.3
       }
     },
     "STLD": {
@@ -5116,10 +5116,10 @@
       "technicals": {
         "sma50": 237.17,
         "sma200": 183.43,
-        "rsi14": 45.86,
+        "rsi14": 45.34,
         "beta": 1.522,
-        "perf_month": 5.7,
-        "perf_ytd": 36.6
+        "perf_month": 5.4,
+        "perf_ytd": 36.2
       }
     },
     "STT": {
@@ -5128,10 +5128,10 @@
       "technicals": {
         "sma50": 153.6,
         "sma200": 130.2,
-        "rsi14": 69.57,
+        "rsi14": 66.59,
         "beta": 1.451,
-        "perf_month": 10.1,
-        "perf_ytd": 29.9
+        "perf_month": 9.6,
+        "perf_ytd": 29.3
       }
     },
     "STX": {
@@ -5140,10 +5140,10 @@
       "technicals": {
         "sma50": 749.3,
         "sma200": 417.34,
-        "rsi14": 73.57,
+        "rsi14": 74.05,
         "beta": 2.083,
-        "perf_month": 42.1,
-        "perf_ytd": 155.2
+        "perf_month": 42.8,
+        "perf_ytd": 156.4
       }
     },
     "STZ": {
@@ -5152,10 +5152,10 @@
       "technicals": {
         "sma50": 149.33,
         "sma200": 145.98,
-        "rsi14": 44.1,
+        "rsi14": 45.54,
         "beta": 0.384,
-        "perf_month": -6.0,
-        "perf_ytd": -3.9
+        "perf_month": -5.5,
+        "perf_ytd": -3.3
       }
     },
     "SW": {
@@ -5164,10 +5164,10 @@
       "technicals": {
         "sma50": 40.7,
         "sma200": 41.0,
-        "rsi14": 61.89,
+        "rsi14": 60.56,
         "beta": 0.96,
-        "perf_month": 9.9,
-        "perf_ytd": 9.0
+        "perf_month": 8.6,
+        "perf_ytd": 7.8
       }
     },
     "SWK": {
@@ -5176,7 +5176,7 @@
       "technicals": {
         "sma50": 77.27,
         "sma200": 75.72,
-        "rsi14": 66.03,
+        "rsi14": 66.0,
         "beta": 1.202,
         "perf_month": 12.3,
         "perf_ytd": 14.6
@@ -5188,10 +5188,10 @@
       "technicals": {
         "sma50": 68.66,
         "sma200": 66.41,
-        "rsi14": 49.04,
+        "rsi14": 49.52,
         "beta": 1.483,
-        "perf_month": 4.9,
-        "perf_ytd": 8.5
+        "perf_month": 5.5,
+        "perf_ytd": 9.1
       }
     },
     "SYF": {
@@ -5200,10 +5200,10 @@
       "technicals": {
         "sma50": 73.3,
         "sma200": 74.23,
-        "rsi14": 60.24,
+        "rsi14": 59.38,
         "beta": 1.321,
-        "perf_month": 3.0,
-        "perf_ytd": 1.8
+        "perf_month": 2.7,
+        "perf_ytd": 1.4
       }
     },
     "SYK": {
@@ -5212,10 +5212,10 @@
       "technicals": {
         "sma50": 313.64,
         "sma200": 351.09,
-        "rsi14": 51.37,
+        "rsi14": 49.89,
         "beta": 0.785,
-        "perf_month": -1.1,
-        "perf_ytd": -11.7
+        "perf_month": -1.9,
+        "perf_ytd": -12.3
       }
     },
     "SYY": {
@@ -5224,9 +5224,9 @@
       "technicals": {
         "sma50": 75.13,
         "sma200": 78.35,
-        "rsi14": 59.68,
+        "rsi14": 59.94,
         "beta": 0.66,
-        "perf_month": 4.7,
+        "perf_month": 4.8,
         "perf_ytd": 0.4
       }
     },
@@ -5236,10 +5236,10 @@
       "technicals": {
         "sma50": 24.98,
         "sma200": 26.11,
-        "rsi14": 30.87,
+        "rsi14": 29.64,
         "beta": 0.395,
-        "perf_month": -11.1,
-        "perf_ytd": -15.0
+        "perf_month": -11.9,
+        "perf_ytd": -15.7
       }
     },
     "TAP": {
@@ -5248,10 +5248,10 @@
       "technicals": {
         "sma50": 41.86,
         "sma200": 45.58,
-        "rsi14": 42.4,
+        "rsi14": 41.49,
         "beta": 0.419,
-        "perf_month": -5.6,
-        "perf_ytd": -13.3
+        "perf_month": -5.9,
+        "perf_ytd": -13.6
       }
     },
     "TDG": {
@@ -5260,10 +5260,10 @@
       "technicals": {
         "sma50": 1217.49,
         "sma200": 1282.6,
-        "rsi14": 64.06,
+        "rsi14": 64.98,
         "beta": 0.895,
-        "perf_month": 8.5,
-        "perf_ytd": 3.0
+        "perf_month": 9.1,
+        "perf_ytd": 3.6
       }
     },
     "TDY": {
@@ -5272,10 +5272,10 @@
       "technicals": {
         "sma50": 630.72,
         "sma200": 587.86,
-        "rsi14": 49.12,
+        "rsi14": 49.1,
         "beta": 0.939,
-        "perf_month": -1.7,
-        "perf_ytd": 5.5
+        "perf_month": -1.8,
+        "perf_ytd": 5.4
       }
     },
     "TECH": {
@@ -5284,10 +5284,10 @@
       "technicals": {
         "sma50": 52.43,
         "sma200": 57.46,
-        "rsi14": 63.57,
+        "rsi14": 64.79,
         "beta": 1.358,
-        "perf_month": 9.4,
-        "perf_ytd": -0.2
+        "perf_month": 10.5,
+        "perf_ytd": 0.8
       }
     },
     "TEL": {
@@ -5296,10 +5296,10 @@
       "technicals": {
         "sma50": 214.8,
         "sma200": 221.57,
-        "rsi14": 56.35,
+        "rsi14": 55.33,
         "beta": 1.163,
-        "perf_month": 2.0,
-        "perf_ytd": -1.2
+        "perf_month": 1.3,
+        "perf_ytd": -1.8
       }
     },
     "TER": {
@@ -5308,10 +5308,10 @@
       "technicals": {
         "sma50": 370.63,
         "sma200": 251.81,
-        "rsi14": 60.0,
+        "rsi14": 61.73,
         "beta": 1.794,
-        "perf_month": 15.1,
-        "perf_ytd": 69.4
+        "perf_month": 18.2,
+        "perf_ytd": 73.9
       }
     },
     "TFC": {
@@ -5320,10 +5320,10 @@
       "technicals": {
         "sma50": 49.25,
         "sma200": 47.87,
-        "rsi14": 47.35,
+        "rsi14": 47.54,
         "beta": 0.884,
-        "perf_month": -2.0,
-        "perf_ytd": 0.9
+        "perf_month": -1.9,
+        "perf_ytd": 1.0
       }
     },
     "TGT": {
@@ -5332,10 +5332,10 @@
       "technicals": {
         "sma50": 126.28,
         "sma200": 107.29,
-        "rsi14": 55.37,
+        "rsi14": 55.46,
         "beta": 0.991,
         "perf_month": 3.5,
-        "perf_ytd": 21.8
+        "perf_ytd": 21.9
       }
     },
     "TJX": {
@@ -5344,10 +5344,10 @@
       "technicals": {
         "sma50": 157.78,
         "sma200": 152.25,
-        "rsi14": 58.76,
+        "rsi14": 57.77,
         "beta": 0.619,
-        "perf_month": 4.1,
-        "perf_ytd": 7.9
+        "perf_month": 3.8,
+        "perf_ytd": 7.6
       }
     },
     "TKO": {
@@ -5356,10 +5356,10 @@
       "technicals": {
         "sma50": 193.22,
         "sma200": 197.66,
-        "rsi14": 53.47,
+        "rsi14": 50.16,
         "beta": 0.616,
-        "perf_month": 4.8,
-        "perf_ytd": 2.4
+        "perf_month": 2.9,
+        "perf_ytd": 0.6
       }
     },
     "TMO": {
@@ -5368,10 +5368,10 @@
       "technicals": {
         "sma50": 477.65,
         "sma200": 525.93,
-        "rsi14": 47.06,
+        "rsi14": 46.29,
         "beta": 0.874,
-        "perf_month": -2.4,
-        "perf_ytd": -11.3
+        "perf_month": -2.7,
+        "perf_ytd": -11.7
       }
     },
     "TMUS": {
@@ -5380,10 +5380,10 @@
       "technicals": {
         "sma50": 190.03,
         "sma200": 207.44,
-        "rsi14": 41.13,
+        "rsi14": 41.86,
         "beta": 0.301,
-        "perf_month": -4.6,
-        "perf_ytd": -12.6
+        "perf_month": -4.4,
+        "perf_ytd": -12.4
       }
     },
     "TPL": {
@@ -5392,10 +5392,10 @@
       "technicals": {
         "sma50": 404.94,
         "sma200": 371.17,
-        "rsi14": 36.6,
+        "rsi14": 35.46,
         "beta": 0.611,
-        "perf_month": -12.0,
-        "perf_ytd": -4.0
+        "perf_month": -12.3,
+        "perf_ytd": -4.3
       }
     },
     "TPR": {
@@ -5404,10 +5404,10 @@
       "technicals": {
         "sma50": 142.73,
         "sma200": 129.78,
-        "rsi14": 54.24,
+        "rsi14": 51.21,
         "beta": 1.446,
-        "perf_month": 2.3,
-        "perf_ytd": 12.5
+        "perf_month": 0.5,
+        "perf_ytd": 10.6
       }
     },
     "TRGP": {
@@ -5416,10 +5416,10 @@
       "technicals": {
         "sma50": 256.05,
         "sma200": 206.45,
-        "rsi14": 46.61,
+        "rsi14": 46.06,
         "beta": 0.71,
-        "perf_month": 1.2,
-        "perf_ytd": 25.5
+        "perf_month": 1.0,
+        "perf_ytd": 25.3
       }
     },
     "TRMB": {
@@ -5428,10 +5428,10 @@
       "technicals": {
         "sma50": 60.09,
         "sma200": 71.5,
-        "rsi14": 25.54,
+        "rsi14": 27.42,
         "beta": 1.373,
-        "perf_month": -18.9,
-        "perf_ytd": -31.8
+        "perf_month": -18.2,
+        "perf_ytd": -31.2
       }
     },
     "TROW": {
@@ -5440,10 +5440,10 @@
       "technicals": {
         "sma50": 102.22,
         "sma200": 100.99,
-        "rsi14": 57.94,
+        "rsi14": 60.54,
         "beta": 1.519,
-        "perf_month": 4.8,
-        "perf_ytd": 6.1
+        "perf_month": 5.3,
+        "perf_ytd": 6.6
       }
     },
     "TRV": {
@@ -5452,10 +5452,10 @@
       "technicals": {
         "sma50": 301.02,
         "sma200": 289.53,
-        "rsi14": 52.87,
+        "rsi14": 59.27,
         "beta": 0.495,
-        "perf_month": 0.7,
-        "perf_ytd": 4.7
+        "perf_month": 2.3,
+        "perf_ytd": 6.3
       }
     },
     "TSCO": {
@@ -5464,9 +5464,9 @@
       "technicals": {
         "sma50": 34.42,
         "sma200": 48.47,
-        "rsi14": 41.44,
+        "rsi14": 41.37,
         "beta": 0.459,
-        "perf_month": -12.1,
+        "perf_month": -12.2,
         "perf_ytd": -37.6
       }
     },
@@ -5476,10 +5476,10 @@
       "technicals": {
         "sma50": 401.34,
         "sma200": 416.61,
-        "rsi14": 44.79,
+        "rsi14": 47.03,
         "beta": 1.798,
-        "perf_month": -1.7,
-        "perf_ytd": -5.3
+        "perf_month": -0.2,
+        "perf_ytd": -3.9
       }
     },
     "TSN": {
@@ -5488,10 +5488,10 @@
       "technicals": {
         "sma50": 63.29,
         "sma200": 59.38,
-        "rsi14": 30.58,
+        "rsi14": 30.78,
         "beta": 0.382,
-        "perf_month": -12.5,
-        "perf_ytd": -6.8
+        "perf_month": -12.4,
+        "perf_ytd": -6.6
       }
     },
     "TT": {
@@ -5500,10 +5500,10 @@
       "technicals": {
         "sma50": 467.85,
         "sma200": 430.33,
-        "rsi14": 59.21,
+        "rsi14": 59.79,
         "beta": 1.212,
-        "perf_month": 3.1,
-        "perf_ytd": 12.0
+        "perf_month": 3.3,
+        "perf_ytd": 12.3
       }
     },
     "TTD": {
@@ -5512,10 +5512,10 @@
       "technicals": {
         "sma50": 21.7,
         "sma200": 33.9,
-        "rsi14": 35.86,
+        "rsi14": 37.63,
         "beta": 1.018,
-        "perf_month": -15.8,
-        "perf_ytd": -46.1
+        "perf_month": -14.7,
+        "perf_ytd": -45.4
       }
     },
     "TTWO": {
@@ -5524,10 +5524,10 @@
       "technicals": {
         "sma50": 219.11,
         "sma200": 230.89,
-        "rsi14": 67.43,
+        "rsi14": 66.61,
         "beta": 0.982,
-        "perf_month": 9.9,
-        "perf_ytd": 4.3
+        "perf_month": 9.2,
+        "perf_ytd": 3.6
       }
     },
     "TXN": {
@@ -5536,10 +5536,10 @@
       "technicals": {
         "sma50": 279.33,
         "sma200": 209.69,
-        "rsi14": 61.42,
+        "rsi14": 61.96,
         "beta": 1.309,
-        "perf_month": 15.0,
-        "perf_ytd": 53.2
+        "perf_month": 15.6,
+        "perf_ytd": 54.0
       }
     },
     "TXT": {
@@ -5548,10 +5548,10 @@
       "technicals": {
         "sma50": 91.36,
         "sma200": 88.51,
-        "rsi14": 39.1,
+        "rsi14": 42.97,
         "beta": 0.907,
-        "perf_month": -4.2,
-        "perf_ytd": -1.1
+        "perf_month": -2.1,
+        "perf_ytd": 1.1
       }
     },
     "TYL": {
@@ -5560,10 +5560,10 @@
       "technicals": {
         "sma50": 319.64,
         "sma200": 409.4,
-        "rsi14": 35.27,
+        "rsi14": 35.98,
         "beta": 0.814,
-        "perf_month": -13.4,
-        "perf_ytd": -32.4
+        "perf_month": -12.7,
+        "perf_ytd": -31.9
       }
     },
     "UAL": {
@@ -5572,10 +5572,10 @@
       "technicals": {
         "sma50": 100.47,
         "sma200": 102.19,
-        "rsi14": 63.17,
+        "rsi14": 62.89,
         "beta": 1.291,
-        "perf_month": 18.1,
-        "perf_ytd": 16.1
+        "perf_month": 17.8,
+        "perf_ytd": 15.8
       }
     },
     "UBER": {
@@ -5584,10 +5584,10 @@
       "technicals": {
         "sma50": 73.52,
         "sma200": 82.18,
-        "rsi14": 49.32,
+        "rsi14": 48.93,
         "beta": 1.12,
-        "perf_month": -2.4,
-        "perf_ytd": -12.7
+        "perf_month": -2.6,
+        "perf_ytd": -12.8
       }
     },
     "UDR": {
@@ -5596,10 +5596,10 @@
       "technicals": {
         "sma50": 36.87,
         "sma200": 36.47,
-        "rsi14": 47.89,
+        "rsi14": 46.6,
         "beta": 0.712,
-        "perf_month": 2.3,
-        "perf_ytd": 3.5
+        "perf_month": 1.9,
+        "perf_ytd": 3.0
       }
     },
     "UHS": {
@@ -5608,10 +5608,10 @@
       "technicals": {
         "sma50": 164.0,
         "sma200": 198.03,
-        "rsi14": 31.25,
+        "rsi14": 31.08,
         "beta": 1.081,
-        "perf_month": -13.8,
-        "perf_ytd": -28.6
+        "perf_month": -13.9,
+        "perf_ytd": -28.7
       }
     },
     "ULTA": {
@@ -5620,10 +5620,10 @@
       "technicals": {
         "sma50": 511.69,
         "sma200": 564.07,
-        "rsi14": 37.26,
+        "rsi14": 36.57,
         "beta": 0.86,
-        "perf_month": -10.6,
-        "perf_ytd": -18.9
+        "perf_month": -10.9,
+        "perf_ytd": -19.1
       }
     },
     "UNH": {
@@ -5632,10 +5632,10 @@
       "technicals": {
         "sma50": 370.77,
         "sma200": 333.09,
-        "rsi14": 59.69,
+        "rsi14": 58.66,
         "beta": 0.65,
-        "perf_month": 8.6,
-        "perf_ytd": 20.8
+        "perf_month": 8.1,
+        "perf_ytd": 20.4
       }
     },
     "UNP": {
@@ -5644,10 +5644,10 @@
       "technicals": {
         "sma50": 263.69,
         "sma200": 241.95,
-        "rsi14": 41.2,
+        "rsi14": 40.96,
         "beta": 0.974,
-        "perf_month": -2.5,
-        "perf_ytd": 6.3
+        "perf_month": -2.6,
+        "perf_ytd": 6.2
       }
     },
     "UPS": {
@@ -5656,10 +5656,10 @@
       "technicals": {
         "sma50": 103.95,
         "sma200": 99.44,
-        "rsi14": 49.65,
+        "rsi14": 48.57,
         "beta": 1.037,
-        "perf_month": 1.3,
-        "perf_ytd": 5.9
+        "perf_month": 1.0,
+        "perf_ytd": 5.6
       }
     },
     "URI": {
@@ -5668,10 +5668,10 @@
       "technicals": {
         "sma50": 944.4,
         "sma200": 884.37,
-        "rsi14": 64.23,
+        "rsi14": 62.98,
         "beta": 1.82,
-        "perf_month": 14.9,
-        "perf_ytd": 22.7
+        "perf_month": 14.0,
+        "perf_ytd": 21.8
       }
     },
     "USB": {
@@ -5680,10 +5680,10 @@
       "technicals": {
         "sma50": 55.61,
         "sma200": 52.63,
-        "rsi14": 58.56,
+        "rsi14": 60.0,
         "beta": 0.999,
-        "perf_month": 3.9,
-        "perf_ytd": 9.8
+        "perf_month": 4.6,
+        "perf_ytd": 10.5
       }
     },
     "V": {
@@ -5692,10 +5692,10 @@
       "technicals": {
         "sma50": 320.67,
         "sma200": 329.21,
-        "rsi14": 54.88,
+        "rsi14": 53.62,
         "beta": 0.765,
-        "perf_month": 2.4,
-        "perf_ytd": -0.3
+        "perf_month": 2.0,
+        "perf_ytd": -0.6
       }
     },
     "VEEV": {
@@ -5704,9 +5704,9 @@
       "technicals": {
         "sma50": 164.38,
         "sma200": 218.71,
-        "rsi14": 37.8,
+        "rsi14": 37.9,
         "beta": 0.949,
-        "perf_month": -6.8,
+        "perf_month": -6.7,
         "perf_ytd": -29.9
       }
     },
@@ -5716,10 +5716,10 @@
       "technicals": {
         "sma50": 28.27,
         "sma200": 29.29,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": -5.7,
-        "perf_ytd": -9.0
+        "rsi14": 33.19,
+        "beta": 0.676,
+        "perf_month": -7.0,
+        "perf_ytd": -10.3
       }
     },
     "VLO": {
@@ -5728,10 +5728,10 @@
       "technicals": {
         "sma50": 245.51,
         "sma200": 200.5,
-        "rsi14": 40.42,
+        "rsi14": 39.54,
         "beta": 0.553,
-        "perf_month": -3.3,
-        "perf_ytd": 18.4
+        "perf_month": -3.8,
+        "perf_ytd": 17.9
       }
     },
     "VLTO": {
@@ -5740,10 +5740,10 @@
       "technicals": {
         "sma50": 86.76,
         "sma200": 95.97,
-        "rsi14": 50,
+        "rsi14": 47.4,
         "beta": 0.848,
-        "perf_month": -3.6,
-        "perf_ytd": -12.8
+        "perf_month": -3.2,
+        "perf_ytd": -12.5
       }
     },
     "VMC": {
@@ -5752,10 +5752,10 @@
       "technicals": {
         "sma50": 284.31,
         "sma200": 291.39,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": 6.8,
-        "perf_ytd": 4.2
+        "rsi14": 63.55,
+        "beta": 1.06,
+        "perf_month": 6.5,
+        "perf_ytd": 3.9
       }
     },
     "VRSK": {
@@ -5764,10 +5764,10 @@
       "technicals": {
         "sma50": 175.39,
         "sma200": 208.5,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": 1.3,
-        "perf_ytd": -14.8
+        "rsi14": 44.44,
+        "beta": 0.695,
+        "perf_month": -0.9,
+        "perf_ytd": -16.6
       }
     },
     "VRSN": {
@@ -5776,10 +5776,10 @@
       "technicals": {
         "sma50": 282.89,
         "sma200": 258.75,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": -6.3,
-        "perf_ytd": 2.4
+        "rsi14": 33.18,
+        "beta": 0.688,
+        "perf_month": -6.5,
+        "perf_ytd": 2.3
       }
     },
     "VRT": {
@@ -5788,10 +5788,10 @@
       "technicals": {
         "sma50": 320.5,
         "sma200": 222.9,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": 3.6,
-        "perf_ytd": 49.0
+        "rsi14": 56.65,
+        "beta": 2.037,
+        "perf_month": 3.9,
+        "perf_ytd": 49.4
       }
     },
     "VRTX": {
@@ -5800,10 +5800,10 @@
       "technicals": {
         "sma50": 437.91,
         "sma200": 439.38,
-        "rsi14": 50,
-        "beta": 1.0,
-        "perf_month": 3.7,
-        "perf_ytd": 3.4
+        "rsi14": 55.98,
+        "beta": 0.31,
+        "perf_month": 3.1,
+        "perf_ytd": 2.8
       }
     },
     "VST": {
@@ -5812,10 +5812,10 @@
       "technicals": {
         "sma50": 154.0,
         "sma200": 170.39,
-        "rsi14": 60.89,
+        "rsi14": 60.74,
         "beta": 1.405,
-        "perf_month": 6.4,
-        "perf_ytd": -3.8
+        "perf_month": 6.3,
+        "perf_ytd": -3.9
       }
     },
     "VTR": {
@@ -5824,10 +5824,10 @@
       "technicals": {
         "sma50": 85.23,
         "sma200": 79.25,
-        "rsi14": 44.15,
+        "rsi14": 42.33,
         "beta": 0.734,
-        "perf_month": -3.5,
-        "perf_ytd": 3.8
+        "perf_month": -4.2,
+        "perf_ytd": 3.0
       }
     },
     "VTRS": {
@@ -5836,10 +5836,10 @@
       "technicals": {
         "sma50": 15.61,
         "sma200": 12.94,
-        "rsi14": 40.87,
+        "rsi14": 41.59,
         "beta": 0.901,
-        "perf_month": -2.0,
-        "perf_ytd": 18.3
+        "perf_month": -1.5,
+        "perf_ytd": 18.8
       }
     },
     "VZ": {
@@ -5848,10 +5848,10 @@
       "technicals": {
         "sma50": 47.0,
         "sma200": 44.43,
-        "rsi14": 40.56,
+        "rsi14": 39.76,
         "beta": 0.22,
-        "perf_month": -3.1,
-        "perf_ytd": 2.5
+        "perf_month": -3.5,
+        "perf_ytd": 2.1
       }
     },
     "WAB": {
@@ -5860,10 +5860,10 @@
       "technicals": {
         "sma50": 263.8,
         "sma200": 230.72,
-        "rsi14": 62.25,
+        "rsi14": 61.05,
         "beta": 0.942,
-        "perf_month": 4.4,
-        "perf_ytd": 19.3
+        "perf_month": 3.8,
+        "perf_ytd": 18.7
       }
     },
     "WAT": {
@@ -5872,10 +5872,10 @@
       "technicals": {
         "sma50": 339.97,
         "sma200": 344.52,
-        "rsi14": 51.18,
+        "rsi14": 50.81,
         "beta": 1.202,
         "perf_month": 4.5,
-        "perf_ytd": 3.1
+        "perf_ytd": 3.2
       }
     },
     "WBD": {
@@ -5884,10 +5884,10 @@
       "technicals": {
         "sma50": 27.06,
         "sma200": 25.08,
-        "rsi14": 42.27,
+        "rsi14": 38.11,
         "beta": 1.55,
-        "perf_month": -2.4,
-        "perf_ytd": 5.3
+        "perf_month": -3.2,
+        "perf_ytd": 4.5
       }
     },
     "WDAY": {
@@ -5896,10 +5896,10 @@
       "technicals": {
         "sma50": 127.77,
         "sma200": 180.2,
-        "rsi14": 37.11,
+        "rsi14": 35.82,
         "beta": 1.081,
-        "perf_month": -6.9,
-        "perf_ytd": -34.0
+        "perf_month": -8.5,
+        "perf_ytd": -35.1
       }
     },
     "WDC": {
@@ -5908,10 +5908,10 @@
       "technicals": {
         "sma50": 471.83,
         "sma200": 262.79,
-        "rsi14": 77.74,
+        "rsi14": 77.96,
         "beta": 2.2,
-        "perf_month": 57.1,
-        "perf_ytd": 182.1
+        "perf_month": 58.2,
+        "perf_ytd": 184.0
       }
     },
     "WEC": {
@@ -5920,10 +5920,10 @@
       "technicals": {
         "sma50": 113.6,
         "sma200": 111.98,
-        "rsi14": 47.42,
+        "rsi14": 48.08,
         "beta": 0.47,
-        "perf_month": -1.5,
-        "perf_ytd": -0.0
+        "perf_month": -1.3,
+        "perf_ytd": 0.2
       }
     },
     "WELL": {
@@ -5932,10 +5932,10 @@
       "technicals": {
         "sma50": 210.82,
         "sma200": 194.56,
-        "rsi14": 48.0,
+        "rsi14": 46.89,
         "beta": 0.78,
-        "perf_month": -1.6,
-        "perf_ytd": 6.7
+        "perf_month": -2.0,
+        "perf_ytd": 6.2
       }
     },
     "WFC": {
@@ -5944,10 +5944,10 @@
       "technicals": {
         "sma50": 79.77,
         "sma200": 84.2,
-        "rsi14": 59.4,
+        "rsi14": 56.05,
         "beta": 0.93,
-        "perf_month": 4.2,
-        "perf_ytd": -1.3
+        "perf_month": 3.1,
+        "perf_ytd": -2.4
       }
     },
     "WM": {
@@ -5956,10 +5956,10 @@
       "technicals": {
         "sma50": 221.82,
         "sma200": 221.4,
-        "rsi14": 41.48,
+        "rsi14": 43.32,
         "beta": 0.457,
-        "perf_month": -3.9,
-        "perf_ytd": -3.7
+        "perf_month": -3.3,
+        "perf_ytd": -3.1
       }
     },
     "WMB": {
@@ -5968,10 +5968,10 @@
       "technicals": {
         "sma50": 73.35,
         "sma200": 66.54,
-        "rsi14": 50.52,
+        "rsi14": 51.12,
         "beta": 0.601,
-        "perf_month": -0.5,
-        "perf_ytd": 9.7
+        "perf_month": -0.3,
+        "perf_ytd": 9.9
       }
     },
     "WMT": {
@@ -5980,10 +5980,10 @@
       "technicals": {
         "sma50": 125.3,
         "sma200": 116.37,
-        "rsi14": 38.43,
+        "rsi14": 38.49,
         "beta": 0.599,
-        "perf_month": -6.6,
-        "perf_ytd": 0.6
+        "perf_month": -6.5,
+        "perf_ytd": 0.7
       }
     },
     "WRB": {
@@ -5992,10 +5992,10 @@
       "technicals": {
         "sma50": 66.7,
         "sma200": 70.3,
-        "rsi14": 50.43,
+        "rsi14": 50.72,
         "beta": 0.311,
-        "perf_month": 0.6,
-        "perf_ytd": -4.5
+        "perf_month": 0.7,
+        "perf_ytd": -4.4
       }
     },
     "WSM": {
@@ -6004,10 +6004,10 @@
       "technicals": {
         "sma50": 193.95,
         "sma200": 193.85,
-        "rsi14": 68.47,
+        "rsi14": 68.33,
         "beta": 1.512,
-        "perf_month": 17.3,
-        "perf_ytd": 17.3
+        "perf_month": 17.0,
+        "perf_ytd": 17.1
       }
     },
     "WST": {
@@ -6016,10 +6016,10 @@
       "technicals": {
         "sma50": 303.72,
         "sma200": 271.23,
-        "rsi14": 58.91,
+        "rsi14": 59.38,
         "beta": 1.182,
-        "perf_month": 7.7,
-        "perf_ytd": 20.6
+        "perf_month": 8.0,
+        "perf_ytd": 20.9
       }
     },
     "WTW": {
@@ -6028,10 +6028,10 @@
       "technicals": {
         "sma50": 267.15,
         "sma200": 306.08,
-        "rsi14": 43.69,
+        "rsi14": 44.8,
         "beta": 0.45,
-        "perf_month": -4.9,
-        "perf_ytd": -17.0
+        "perf_month": -4.5,
+        "perf_ytd": -16.6
       }
     },
     "WY": {
@@ -6040,10 +6040,10 @@
       "technicals": {
         "sma50": 24.22,
         "sma200": 24.23,
-        "rsi14": 53.86,
+        "rsi14": 50.84,
         "beta": 0.912,
-        "perf_month": 1.5,
-        "perf_ytd": 1.5
+        "perf_month": 0.4,
+        "perf_ytd": 0.4
       }
     },
     "WYNN": {
@@ -6052,10 +6052,10 @@
       "technicals": {
         "sma50": 103.48,
         "sma200": 114.0,
-        "rsi14": 54.86,
+        "rsi14": 54.27,
         "beta": 0.984,
-        "perf_month": 2.3,
-        "perf_ytd": -7.1
+        "perf_month": 2.0,
+        "perf_ytd": -7.4
       }
     },
     "XEL": {
@@ -6064,10 +6064,10 @@
       "technicals": {
         "sma50": 79.67,
         "sma200": 78.45,
-        "rsi14": 42.25,
+        "rsi14": 42.74,
         "beta": 0.408,
-        "perf_month": -3.0,
-        "perf_ytd": -1.5
+        "perf_month": -2.8,
+        "perf_ytd": -1.3
       }
     },
     "XOM": {
@@ -6076,10 +6076,10 @@
       "technicals": {
         "sma50": 150.62,
         "sma200": 134.4,
-        "rsi14": 32.76,
+        "rsi14": 32.88,
         "beta": 0.149,
-        "perf_month": -8.6,
-        "perf_ytd": 2.4
+        "perf_month": -8.5,
+        "perf_ytd": 2.5
       }
     },
     "XYL": {
@@ -6088,10 +6088,10 @@
       "technicals": {
         "sma50": 115.02,
         "sma200": 132.11,
-        "rsi14": 50.71,
+        "rsi14": 50.6,
         "beta": 1.04,
         "perf_month": -3.1,
-        "perf_ytd": -15.6
+        "perf_ytd": -15.7
       }
     },
     "XYZ": {
@@ -6100,10 +6100,10 @@
       "technicals": {
         "sma50": 70.33,
         "sma200": 67.31,
-        "rsi14": 57.58,
+        "rsi14": 57.82,
         "beta": 2.552,
-        "perf_month": 6.2,
-        "perf_ytd": 10.9
+        "perf_month": 6.3,
+        "perf_ytd": 11.1
       }
     },
     "YUM": {
@@ -6112,10 +6112,10 @@
       "technicals": {
         "sma50": 154.9,
         "sma200": 153.1,
-        "rsi14": 49.48,
+        "rsi14": 48.61,
         "beta": 0.574,
-        "perf_month": -1.6,
-        "perf_ytd": -0.4
+        "perf_month": -1.9,
+        "perf_ytd": -0.7
       }
     },
     "ZBH": {
@@ -6124,10 +6124,10 @@
       "technicals": {
         "sma50": 87.15,
         "sma200": 92.6,
-        "rsi14": 55.31,
+        "rsi14": 54.51,
         "beta": 0.472,
-        "perf_month": 1.3,
-        "perf_ytd": -4.7
+        "perf_month": 0.9,
+        "perf_ytd": -5.0
       }
     },
     "ZBRA": {
@@ -6136,10 +6136,10 @@
       "technicals": {
         "sma50": 235.32,
         "sma200": 252.86,
-        "rsi14": 50.53,
+        "rsi14": 50,
         "beta": 1.626,
-        "perf_month": 1.0,
-        "perf_ytd": -6.0
+        "perf_month": 0.3,
+        "perf_ytd": -6.7
       }
     },
     "ZTS": {
@@ -6148,10 +6148,10 @@
       "technicals": {
         "sma50": 95.16,
         "sma200": 121.09,
-        "rsi14": 35.68,
-        "beta": 0.741,
-        "perf_month": -18.1,
-        "perf_ytd": -35.6
+        "rsi14": 50,
+        "beta": 1.0,
+        "perf_month": -17.3,
+        "perf_ytd": -35.0
       }
     }
   },
