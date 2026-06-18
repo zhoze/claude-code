@@ -89,21 +89,20 @@
     "ADBE": {
       "sector": "Information Technology",
       "sentiment": "bearish",
+      "technicals": {
+        "sma50": 242.54,
+        "sma200": 296.05,
+        "rsi14": 28.14,
+        "beta": 1.404,
+        "perf_month": -19.1,
+        "perf_ytd": -33.7
+      },
       "near_term_event": "Q2 FY26 reported Jun 11; multiple analyst price-target cuts followed",
       "note": "AI-disruption overhang on the creative moat keeps a lid on it; deep downtrend but very oversold (RSI ~29), so a risk-on tape only cushions it.",
       "catalysts": [
         "AI-native rivals (OpenAI Sora, Canva, Figma, Google, Anthropic) pressuring core tools",
         "Post-earnings analyst downgrades / target cuts"
       ],
-      "technicals": {
-        "sma50": 244.89,
-        "sma200": 298.34,
-        "rsi14": 29.38,
-        "beta": 1.4,
-        "perf_month": -18,
-        "perf_ytd": -30,
-        "volume": 6857428
-      },
       "sources": [
         {
           "title": "TIKR - Adobe down in 2026, $25B buyback",
@@ -115,24 +114,539 @@
         }
       ]
     },
+    "ABNB": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 136.25,
+        "sma200": 129.08,
+        "rsi14": 60.39,
+        "beta": 1.159,
+        "perf_month": 3.1,
+        "perf_ytd": 8.9
+      }
+    },
+    "ADP": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 213.54,
+        "sma200": 243.41,
+        "rsi14": 45.65,
+        "beta": 0.845,
+        "perf_month": 2.4,
+        "perf_ytd": -10.1
+      }
+    },
+    "AAPL": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 287.96,
+        "sma200": 267.85,
+        "rsi14": 48.89,
+        "beta": 1.086,
+        "perf_month": 2.8,
+        "perf_ytd": 10.5
+      }
+    },
+    "ABT": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 90.7,
+        "sma200": 114.07,
+        "rsi14": 47.7,
+        "beta": 0.62,
+        "perf_month": -2.5,
+        "perf_ytd": -22.5
+      }
+    },
+    "ACGL": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 94.06,
+        "sma200": 93.39,
+        "rsi14": 51.06,
+        "beta": 0.306,
+        "perf_month": -1.8,
+        "perf_ytd": -1.1
+      }
+    },
+    "ABBV": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 211.67,
+        "sma200": 220.54,
+        "rsi14": 54.59,
+        "beta": 0.309,
+        "perf_month": 4.5,
+        "perf_ytd": 0.3
+      }
+    },
+    "ACN": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 179.12,
+        "sma200": 226.75,
+        "rsi14": 32.11,
+        "beta": 1.069,
+        "perf_month": -12.9,
+        "perf_ytd": -31.2
+      }
+    },
+    "A": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 120.73,
+        "sma200": 130.44,
+        "rsi14": 46.74,
+        "beta": 1.256,
+        "perf_month": 3.0,
+        "perf_ytd": -4.7
+      }
+    },
+    "ADSK": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 233.46,
+        "sma200": 270.4,
+        "rsi14": 27.67,
+        "beta": 1.295,
+        "perf_month": -17.3,
+        "perf_ytd": -28.6
+      }
+    },
+    "ADI": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 399.04,
+        "sma200": 309.58,
+        "rsi14": 52.2,
+        "beta": 1.183,
+        "perf_month": 3.9,
+        "perf_ytd": 33.9
+      }
+    },
+    "ADM": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 76.38,
+        "sma200": 66.71,
+        "rsi14": 42.04,
+        "beta": 0.603,
+        "perf_month": 0.2,
+        "perf_ytd": 14.7
+      }
+    },
+    "AEP": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 131.21,
+        "sma200": 122.8,
+        "rsi14": 47.53,
+        "beta": 0.518,
+        "perf_month": -2.2,
+        "perf_ytd": 4.5
+      }
+    },
+    "AEE": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 110.04,
+        "sma200": 105.7,
+        "rsi14": 49.83,
+        "beta": 0.49,
+        "perf_month": -1.0,
+        "perf_ytd": 3.0
+      }
+    },
+    "AIZ": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 242.34,
+        "sma200": 228.25,
+        "rsi14": 66.61,
+        "beta": 0.569,
+        "perf_month": 8.2,
+        "perf_ytd": 14.8
+      }
+    },
+    "AIG": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 76.11,
+        "sma200": 77.7,
+        "rsi14": 47.37,
+        "beta": 0.541,
+        "perf_month": -1.8,
+        "perf_ytd": -3.8
+      }
+    },
+    "AES": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 14.53,
+        "sma200": 14.33,
+        "rsi14": 49.25,
+        "beta": 0.946,
+        "perf_month": 0.6,
+        "perf_ytd": 1.9
+      }
+    },
+    "AKAM": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 126.28,
+        "sma200": 98.85,
+        "rsi14": 40.8,
+        "beta": 0.598,
+        "perf_month": 1.2,
+        "perf_ytd": 29.3
+      }
+    },
+    "AFL": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 115.05,
+        "sma200": 111.4,
+        "rsi14": 51.79,
+        "beta": 0.61,
+        "perf_month": 1.0,
+        "perf_ytd": 4.3
+      }
+    },
+    "ALB": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 181.54,
+        "sma200": 145.73,
+        "rsi14": 46.81,
+        "beta": 1.309,
+        "perf_month": -8.2,
+        "perf_ytd": 14.3
+      }
+    },
+    "ALGN": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 173.75,
+        "sma200": 159.95,
+        "rsi14": 51.88,
+        "beta": 1.671,
+        "perf_month": -0.1,
+        "perf_ytd": 8.5
+      }
+    },
+    "AJG": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 210.68,
+        "sma200": 243.67,
+        "rsi14": 56.9,
+        "beta": 0.533,
+        "perf_month": 2.6,
+        "perf_ytd": -11.3
+      }
+    },
+    "ALLE": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 135.55,
+        "sma200": 157.01,
+        "rsi14": 44.96,
+        "beta": 0.875,
+        "perf_month": -4.0,
+        "perf_ytd": -17.1
+      }
+    },
+    "ALL": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 215.71,
+        "sma200": 207.59,
+        "rsi14": 56.83,
+        "beta": 0.192,
+        "perf_month": 2.8,
+        "perf_ytd": 6.8
+      }
+    },
+    "AMD": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 404.94,
+        "sma200": 259.27,
+        "rsi14": 57.68,
+        "beta": 2.492,
+        "perf_month": 26.6,
+        "perf_ytd": 97.7
+      }
+    },
+    "AMAT": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 441.04,
+        "sma200": 315.52,
+        "rsi14": 73.38,
+        "beta": 1.672,
+        "perf_month": 34.4,
+        "perf_ytd": 87.9
+      }
+    },
+    "AMCR": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 39.3,
+        "sma200": 41.63,
+        "rsi14": 58.42,
+        "beta": 0.636,
+        "perf_month": 3.7,
+        "perf_ytd": -2.1
+      }
+    },
+    "AME": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 230.05,
+        "sma200": 211.6,
+        "rsi14": 54.86,
+        "beta": 1.004,
+        "perf_month": 0.5,
+        "perf_ytd": 9.3
+      }
+    },
+    "AMT": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 181.65,
+        "sma200": 182.45,
+        "rsi14": 43.93,
+        "beta": 0.891,
+        "perf_month": -0.3,
+        "perf_ytd": -0.7
+      }
+    },
+    "AMGN": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 340.5,
+        "sma200": 331.62,
+        "rsi14": 49.76,
+        "beta": 0.416,
+        "perf_month": 0.3,
+        "perf_ytd": 3.0
+      }
+    },
+    "AMP": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 460.12,
+        "sma200": 474.53,
+        "rsi14": 62.82,
+        "beta": 1.166,
+        "perf_month": 2.6,
+        "perf_ytd": -0.5
+      }
+    },
+    "AMZN": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 256.64,
+        "sma200": 232.71,
+        "rsi14": 36.89,
+        "beta": 1.444,
+        "perf_month": -7.5,
+        "perf_ytd": 2.1
+      }
+    },
+    "ANET": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 158.04,
+        "sma200": 142.0,
+        "rsi14": 55.5,
+        "beta": 1.611,
+        "perf_month": 4.4,
+        "perf_ytd": 16.1
+      }
+    },
+    "AON": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 322.53,
+        "sma200": 338.16,
+        "rsi14": 51.67,
+        "beta": 0.714,
+        "perf_month": 1.3,
+        "perf_ytd": -3.4
+      }
+    },
+    "APA": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 37.84,
+        "sma200": 29.74,
+        "rsi14": 36.81,
+        "beta": 0.327,
+        "perf_month": -10.3,
+        "perf_ytd": 14.1
+      }
+    },
+    "AOS": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 60.35,
+        "sma200": 67.61,
+        "rsi14": 46.67,
+        "beta": 1.175,
+        "perf_month": -4.1,
+        "perf_ytd": -14.4
+      }
+    },
+    "APD": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 292.32,
+        "sma200": 274.01,
+        "rsi14": 44.96,
+        "beta": 0.747,
+        "perf_month": -3.6,
+        "perf_ytd": 2.8
+      }
+    },
+    "APO": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 127.37,
+        "sma200": 128.74,
+        "rsi14": 66.57,
+        "beta": 1.488,
+        "perf_month": 9.1,
+        "perf_ytd": 7.9
+      }
+    },
+    "APH": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 142.09,
+        "sma200": 136.27,
+        "rsi14": 66.38,
+        "beta": 1.275,
+        "perf_month": 13.4,
+        "perf_ytd": 18.2
+      }
+    },
+    "ARES": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 121.89,
+        "sma200": 141.34,
+        "rsi14": 51.64,
+        "beta": 1.516,
+        "perf_month": 5.3,
+        "perf_ytd": -9.2
+      }
+    },
+    "APTV": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 61.18,
+        "sma200": 74.45,
+        "rsi14": 46.84,
+        "beta": 1.334,
+        "perf_month": 2.8,
+        "perf_ytd": -15.5
+      }
+    },
+    "APP": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 490.34,
+        "sma200": 542.31,
+        "rsi14": 42.71,
+        "beta": 2.455,
+        "perf_month": -2.2,
+        "perf_ytd": -11.6
+      }
+    },
+    "ARE": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 47.42,
+        "sma200": 56.54,
+        "rsi14": 47.81,
+        "beta": 1.202,
+        "perf_month": 3.8,
+        "perf_ytd": -13.0
+      }
+    },
+    "AVB": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 181.21,
+        "sma200": 180.29,
+        "rsi14": 41.06,
+        "beta": 0.789,
+        "perf_month": -0.9,
+        "perf_ytd": -0.4
+      }
+    },
     "AVGO": {
       "sector": "Information Technology",
       "sentiment": "neutral",
+      "technicals": {
+        "sma50": 410.46,
+        "sma200": 359.39,
+        "rsi14": 46.15,
+        "beta": 1.433,
+        "perf_month": -4.3,
+        "perf_ytd": 9.3
+      },
       "near_term_event": "Q2 FY26 reported Jun 4 - record AI revenue (+143% YoY) but Q3 AI guidance (~$16B) light vs ~$17.2B hoped",
       "note": "AI-chip leader ~-21% off its June 2 ATH on the guidance miss that triggered the sector selloff; now rebounding with chips on the risk-on turn, but priced for perfection.",
       "catalysts": [
         "Q3 AI revenue vs the >$16B guide; path to the >$100B FY27 AI target",
         "Custom-silicon competition (alt suppliers for Google's TPU)"
       ],
-      "technicals": {
-        "sma50": 406.45,
-        "sma200": 358.1,
-        "rsi14": 41.4,
-        "beta": 1.43,
-        "perf_month": -15,
-        "perf_ytd": 25,
-        "volume": 31425913
-      },
       "sources": [
         {
           "title": "MEXC - Is Broadcom a buy after the 12.59% crash?",
@@ -144,328 +658,64 @@
         }
       ]
     },
-    "AAPL": {
-      "sector": "Information Technology",
+    "ATO": {
+      "sector": "Utilities",
       "sentiment": "neutral",
       "technicals": {
-        "sma50": 287.96,
-        "sma200": 267.85,
-        "rsi14": 48.79,
-        "beta": 1.09,
-        "perf_month": 1.1,
-        "perf_ytd": 8.7
+        "sma50": 179.45,
+        "sma200": 175.22,
+        "rsi14": 39.58,
+        "beta": 0.601,
+        "perf_month": -5.5,
+        "perf_ytd": -3.2
       }
     },
-    "MSFT": {
-      "sector": "Information Technology",
+    "AVY": {
+      "sector": "Industrials",
       "sentiment": "neutral",
       "technicals": {
-        "sma50": 412.87,
-        "sma200": 451.98,
-        "rsi14": 34.58,
-        "beta": 1.1,
-        "perf_month": -5.4,
-        "perf_ytd": -13.5
-      }
-    },
-    "GOOGL": {
-      "sector": "Communication Services",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 366.36,
-        "sma200": 310.32,
-        "rsi14": 46.14,
-        "beta": 1.24,
+        "sma50": 162.41,
+        "sma200": 172.66,
+        "rsi14": 50.28,
+        "beta": 0.833,
         "perf_month": -1.8,
-        "perf_ytd": 15.9
+        "perf_ytd": -7.6
       }
     },
-    "META": {
-      "sector": "Communication Services",
+    "AWK": {
+      "sector": "Utilities",
       "sentiment": "neutral",
       "technicals": {
-        "sma50": 622.6,
-        "sma200": 655.71,
-        "rsi14": 39.27,
-        "beta": 1.23,
-        "perf_month": -8.9,
-        "perf_ytd": -13.5
+        "sma50": 127.71,
+        "sma200": 132.24,
+        "rsi14": 49.29,
+        "beta": 0.613,
+        "perf_month": -1.8,
+        "perf_ytd": -5.2
       }
     },
-    "NVDA": {
-      "sector": "Information Technology",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 208.74,
-        "sma200": 189.7,
-        "rsi14": 45.32,
-        "beta": 2.2,
-        "perf_month": -1.7,
-        "perf_ytd": 8.2
-      }
-    },
-    "V": {
-      "sector": "Financials",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 320.67,
-        "sma200": 329.21,
-        "rsi14": 57.04,
-        "beta": 0.76,
-        "perf_month": 0.5,
-        "perf_ytd": -2.1
-      }
-    },
-    "KO": {
-      "sector": "Consumer Staples",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 78.88,
-        "sma200": 73.65,
-        "rsi14": 49.19,
-        "beta": 0.35,
-        "perf_month": 4.7,
-        "perf_ytd": 12.2
-      }
-    },
-    "PEP": {
-      "sector": "Consumer Staples",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 150.54,
-        "sma200": 150.28,
-        "rsi14": 38.36,
-        "beta": 0.36,
-        "perf_month": -4.2,
-        "perf_ytd": -4.0
-      }
-    },
-    "COST": {
-      "sector": "Consumer Staples",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 1002.66,
-        "sma200": 957.88,
-        "rsi14": 41.45,
-        "beta": 0.87,
-        "perf_month": -2.0,
-        "perf_ytd": 2.6
-      }
-    },
-    "WMT": {
-      "sector": "Consumer Staples",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 125.3,
-        "sma200": 116.37,
-        "rsi14": 40.47,
-        "beta": 0.6,
-        "perf_month": -3.4,
-        "perf_ytd": 4.0
-      }
-    },
-    "JNJ": {
-      "sector": "Health Care",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 230.63,
-        "sma200": 215.48,
-        "rsi14": 53.55,
-        "beta": 0.26,
-        "perf_month": 4.4,
-        "perf_ytd": 11.8
-      }
-    },
-    "UNH": {
-      "sector": "Health Care",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 370.81,
-        "sma200": 333.11,
-        "rsi14": 59.7,
-        "beta": 0.65,
-        "perf_month": 10.2,
-        "perf_ytd": 22.6
-      }
-    },
-    "ABBV": {
-      "sector": "Health Care",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 211.67,
-        "sma200": 220.54,
-        "rsi14": 54.38,
-        "beta": 0.31,
-        "perf_month": 7.6,
-        "perf_ytd": 3.3
-      }
-    },
-    "LMT": {
+    "AXON": {
       "sector": "Industrials",
       "sentiment": "neutral",
       "technicals": {
-        "sma50": 539.75,
-        "sma200": 538.13,
-        "rsi14": 49.62,
-        "beta": 0.11,
-        "perf_month": 0.1,
-        "perf_ytd": 0.4
+        "sma50": 412.34,
+        "sma200": 546.09,
+        "rsi14": 45.59,
+        "beta": 1.422,
+        "perf_month": 2.6,
+        "perf_ytd": -22.5
       }
     },
-    "JPM": {
-      "sector": "Financials",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 308.52,
-        "sma200": 306.97,
-        "rsi14": 72.08,
-        "beta": 1.0,
-        "perf_month": 4.0,
-        "perf_ytd": 4.5
-      }
-    },
-    "XOM": {
-      "sector": "Energy",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 150.62,
-        "sma200": 134.4,
-        "rsi14": 36.15,
-        "beta": 0.15,
-        "perf_month": -2.4,
-        "perf_ytd": 9.4
-      }
-    },
-    "CVX": {
-      "sector": "Energy",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 187.39,
-        "sma200": 171.74,
-        "rsi14": 36.52,
-        "beta": 0.47,
-        "perf_month": -0.1,
-        "perf_ytd": 9.0
-      }
-    },
-    "PG": {
-      "sector": "Consumer Staples",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 145.19,
-        "sma200": 149.01,
-        "rsi14": 59.55,
-        "beta": 0.38,
-        "perf_month": 3.0,
-        "perf_ytd": 0.4
-      }
-    },
-    "MO": {
-      "sector": "Consumer Staples",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 69.76,
-        "sma200": 64.6,
-        "rsi14": 43.29,
-        "beta": 0.5,
-        "perf_month": 3.1,
-        "perf_ytd": 11.4
-      }
-    },
-    "MRK": {
-      "sector": "Health Care",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 115.87,
-        "sma200": 105.25,
-        "rsi14": 46.57,
-        "beta": 0.22,
-        "perf_month": 2.7,
-        "perf_ytd": 13.1
-      }
-    },
-    "MA": {
-      "sector": "Financials",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 499.29,
-        "sma200": 535.34,
-        "rsi14": 51.38,
-        "beta": 0.74,
-        "perf_month": -1.9,
-        "perf_ytd": -8.5
-      }
-    },
-    "HON": {
-      "sector": "Industrials",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 222.05,
-        "sma200": 215.84,
-        "rsi14": 57.17,
-        "beta": 0.84,
-        "perf_month": -0.8,
-        "perf_ytd": 2.1
-      }
-    },
-    "HD": {
+    "AZO": {
       "sector": "Consumer Discretionary",
       "sentiment": "neutral",
       "technicals": {
-        "sma50": 322.95,
-        "sma200": 359.05,
-        "rsi14": 55.4,
-        "beta": 0.97,
-        "perf_month": 1.7,
-        "perf_ytd": -8.5
-      }
-    },
-    "CAT": {
-      "sector": "Industrials",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 868.66,
-        "sma200": 667.5,
-        "rsi14": 61.4,
-        "beta": 1.6,
-        "perf_month": 4.8,
-        "perf_ytd": 36.4
-      }
-    },
-    "TXN": {
-      "sector": "Information Technology",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 279.33,
-        "sma200": 209.68,
-        "rsi14": 53.48,
-        "beta": 1.31,
-        "perf_month": 7.8,
-        "perf_ytd": 43.6
-      }
-    },
-    "MCD": {
-      "sector": "Consumer Discretionary",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 287.67,
-        "sma200": 305.48,
-        "rsi14": 51.44,
-        "beta": 0.41,
-        "perf_month": -1.0,
-        "perf_ytd": -6.8
-      }
-    },
-    "AXP": {
-      "sector": "Financials",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 318.35,
-        "sma200": 337.4,
-        "rsi14": 68.63,
-        "beta": 1.06,
-        "perf_month": 2.2,
-        "perf_ytd": -3.5
+        "sma50": 3353.13,
+        "sma200": 3652.71,
+        "rsi14": 39.25,
+        "beta": 0.349,
+        "perf_month": -8.8,
+        "perf_ytd": -16.2
       }
     },
     "BAC": {
@@ -475,57 +725,3357 @@
         "sma50": 52.77,
         "sma200": 52.2,
         "rsi14": 70.88,
-        "beta": 1.2,
-        "perf_month": 6.2,
-        "perf_ytd": 7.3
+        "beta": 1.196,
+        "perf_month": 7.1,
+        "perf_ytd": 8.3
       }
     },
-    "ORCL": {
+    "AXP": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 317.69,
+        "sma200": 337.35,
+        "rsi14": 69.08,
+        "beta": 1.058,
+        "perf_month": 7.2,
+        "perf_ytd": 0.9
+      }
+    },
+    "BA": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 224.18,
+        "sma200": 218.71,
+        "rsi14": 53.26,
+        "beta": 1.198,
+        "perf_month": 0.6,
+        "perf_ytd": 3.2
+      }
+    },
+    "BALL": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 58.42,
+        "sma200": 55.33,
+        "rsi14": 57.49,
+        "beta": 1.014,
+        "perf_month": -1.2,
+        "perf_ytd": 4.3
+      }
+    },
+    "BAX": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 18.42,
+        "sma200": 19.7,
+        "rsi14": 51.54,
+        "beta": 0.642,
+        "perf_month": 5.3,
+        "perf_ytd": -1.6
+      }
+    },
+    "BDX": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 149.23,
+        "sma200": 154.09,
+        "rsi14": 37.47,
+        "beta": 0.278,
+        "perf_month": -5.1,
+        "perf_ytd": -8.1
+      }
+    },
+    "BBY": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 64.99,
+        "sma200": 69.86,
+        "rsi14": 56.75,
+        "beta": 1.33,
+        "perf_month": 12.5,
+        "perf_ytd": 4.6
+      }
+    },
+    "BEN": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 29.94,
+        "sma200": 25.71,
+        "rsi14": 66.65,
+        "beta": 1.593,
+        "perf_month": 11.2,
+        "perf_ytd": 29.5
+      }
+    },
+    "BF-B": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 26.9,
+        "sma200": 27.34,
+        "rsi14": 43.05,
+        "beta": 0.354,
+        "perf_month": -5.2,
+        "perf_ytd": -6.7
+      }
+    },
+    "BIIB": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 190.15,
+        "sma200": 174.41,
+        "rsi14": 55.18,
+        "beta": 0.177,
+        "perf_month": 4.5,
+        "perf_ytd": 13.9
+      }
+    },
+    "BG": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 124.53,
+        "sma200": 107.13,
+        "rsi14": 35.75,
+        "beta": 0.617,
+        "perf_month": -6.7,
+        "perf_ytd": 8.4
+      }
+    },
+    "BKNG": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 169.66,
+        "sma200": 190.96,
+        "rsi14": 56.02,
+        "beta": 1.088,
+        "perf_month": 1.2,
+        "perf_ytd": -10.1
+      }
+    },
+    "BKR": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 64.38,
+        "sma200": 55.09,
+        "rsi14": 37.94,
+        "beta": 0.938,
+        "perf_month": -6.7,
+        "perf_ytd": 9.0
+      }
+    },
+    "BLDR": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 79.05,
+        "sma200": 103.81,
+        "rsi14": 48.87,
+        "beta": 1.45,
+        "perf_month": -3.7,
+        "perf_ytd": -26.7
+      }
+    },
+    "BLK": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 1046.64,
+        "sma200": 1069.99,
+        "rsi14": 56.07,
+        "beta": 1.434,
+        "perf_month": 1.0,
+        "perf_ytd": -1.2
+      }
+    },
+    "BR": {
       "sector": "Information Technology",
       "sentiment": "neutral",
       "technicals": {
-        "sma50": 187.57,
-        "sma200": 205.15,
-        "rsi14": 42.48,
-        "beta": 1.65,
-        "perf_month": -1.8,
-        "perf_ytd": -10.2
+        "sma50": 152.47,
+        "sma200": 198.03,
+        "rsi14": 33.86,
+        "beta": 0.888,
+        "perf_month": -8.4,
+        "perf_ytd": -29.5
       }
     },
-    "ABT": {
+    "BRO": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 60.52,
+        "sma200": 74.93,
+        "rsi14": 50.69,
+        "beta": 0.624,
+        "perf_month": -2.4,
+        "perf_ytd": -21.2
+      }
+    },
+    "BMY": {
       "sector": "Health Care",
       "sentiment": "neutral",
       "technicals": {
-        "sma50": 90.43,
-        "sma200": 113.85,
-        "rsi14": 47.31,
-        "beta": 0.62,
-        "perf_month": -2.5,
-        "perf_ytd": -22.5
+        "sma50": 57.47,
+        "sma200": 53.55,
+        "rsi14": 43.05,
+        "beta": 0.238,
+        "perf_month": -3.8,
+        "perf_ytd": 3.2
       }
     },
-    "AMGN": {
+    "BNY": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 136.55,
+        "sma200": 119.49,
+        "rsi14": 64.28,
+        "beta": 1.065,
+        "perf_month": 7.0,
+        "perf_ytd": 22.2
+      }
+    },
+    "BSX": {
       "sector": "Health Care",
       "sentiment": "neutral",
       "technicals": {
-        "sma50": 340.49,
-        "sma200": 331.62,
-        "rsi14": 49.34,
-        "beta": 0.42,
+        "sma50": 55.26,
+        "sma200": 81.51,
+        "rsi14": 25.1,
+        "beta": 0.559,
+        "perf_month": -18.7,
+        "perf_ytd": -44.9
+      }
+    },
+    "BRK-B": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 478.69,
+        "sma200": 490.37,
+        "rsi14": 58.9,
+        "beta": 0.617,
+        "perf_month": 2.6,
+        "perf_ytd": 0.2
+      }
+    },
+    "C": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 128.66,
+        "sma200": 112.83,
+        "rsi14": 73.72,
+        "beta": 1.115,
+        "perf_month": 11.8,
+        "perf_ytd": 27.5
+      }
+    },
+    "BX": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 121.1,
+        "sma200": 139.55,
+        "rsi14": 57.55,
+        "beta": 1.585,
+        "perf_month": 3.2,
+        "perf_ytd": -10.4
+      }
+    },
+    "BXP": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 59.6,
+        "sma200": 64.97,
+        "rsi14": 53.61,
+        "beta": 1.062,
+        "perf_month": 5.8,
+        "perf_ytd": -2.9
+      }
+    },
+    "CAH": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 203.6,
+        "sma200": 196.92,
+        "rsi14": 75.36,
+        "beta": 0.526,
+        "perf_month": 11.1,
+        "perf_ytd": 14.9
+      }
+    },
+    "CAG": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 13.9,
+        "sma200": 16.83,
+        "rsi14": 42.94,
+        "beta": -0.042,
+        "perf_month": -5.3,
+        "perf_ytd": -21.8
+      }
+    },
+    "CASY": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 810.74,
+        "sma200": 649.01,
+        "rsi14": 55.34,
+        "beta": 0.624,
+        "perf_month": 4.9,
+        "perf_ytd": 31.1
+      }
+    },
+    "CARR": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 64.88,
+        "sma200": 59.63,
+        "rsi14": 57.29,
+        "beta": 1.337,
+        "perf_month": 7.1,
+        "perf_ytd": 16.5
+      }
+    },
+    "CBRE": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 138.5,
+        "sma200": 151.0,
+        "rsi14": 45.08,
+        "beta": 1.221,
+        "perf_month": -5.6,
+        "perf_ytd": -13.4
+      }
+    },
+    "CAT": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 868.66,
+        "sma200": 667.5,
+        "rsi14": 61.4,
+        "beta": 1.603,
+        "perf_month": 10.0,
+        "perf_ytd": 43.2
+      }
+    },
+    "CBOE": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 316.77,
+        "sma200": 274.4,
+        "rsi14": 27.62,
+        "beta": 0.395,
+        "perf_month": -19.6,
+        "perf_ytd": -7.2
+      }
+    },
+    "CB": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 324.81,
+        "sma200": 308.27,
+        "rsi14": 55.31,
+        "beta": 0.421,
+        "perf_month": 1.0,
+        "perf_ytd": 6.4
+      }
+    },
+    "CCL": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 27.13,
+        "sma200": 28.37,
+        "rsi14": 60.45,
+        "beta": 2.331,
+        "perf_month": 10.3,
+        "perf_ytd": 5.4
+      }
+    },
+    "CDW": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 124.83,
+        "sma200": 136.64,
+        "rsi14": 50.75,
+        "beta": 0.987,
+        "perf_month": 1.5,
+        "perf_ytd": -7.3
+      }
+    },
+    "CDNS": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 351.76,
+        "sma200": 326.1,
+        "rsi14": 56.45,
+        "beta": 1.149,
+        "perf_month": 10.8,
+        "perf_ytd": 19.5
+      }
+    },
+    "CEG": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 284.65,
+        "sma200": 319.44,
+        "rsi14": 47.79,
+        "beta": 1.091,
+        "perf_month": -6.1,
+        "perf_ytd": -16.4
+      }
+    },
+    "CCI": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 89.21,
+        "sma200": 89.64,
+        "rsi14": 37.8,
+        "beta": 0.948,
+        "perf_month": -3.9,
+        "perf_ytd": -4.3
+      }
+    },
+    "CF": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 119.51,
+        "sma200": 98.75,
+        "rsi14": 36.29,
+        "beta": 0.382,
+        "perf_month": -11.4,
+        "perf_ytd": 7.2
+      }
+    },
+    "CFG": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 63.96,
+        "sma200": 58.65,
+        "rsi14": 61.05,
+        "beta": 1.021,
+        "perf_month": 4.4,
+        "perf_ytd": 13.9
+      }
+    },
+    "CHRW": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 177.6,
+        "sma200": 163.4,
+        "rsi14": 53.55,
+        "beta": 0.925,
         "perf_month": 4.3,
-        "perf_ytd": 7.1
+        "perf_ytd": 13.3
+      }
+    },
+    "CHD": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 95.52,
+        "sma200": 91.95,
+        "rsi14": 53.62,
+        "beta": 0.47,
+        "perf_month": 2.0,
+        "perf_ytd": 5.9
+      }
+    },
+    "CIEN": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 522.51,
+        "sma200": 308.37,
+        "rsi14": 37.52,
+        "beta": 1.244,
+        "perf_month": -16.4,
+        "perf_ytd": 41.6
+      }
+    },
+    "CI": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 283.71,
+        "sma200": 281.52,
+        "rsi14": 48.37,
+        "beta": 0.302,
+        "perf_month": 0.5,
+        "perf_ytd": 1.3
+      }
+    },
+    "CHTR": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 168.02,
+        "sma200": 212.31,
+        "rsi14": 35.67,
+        "beta": 0.707,
+        "perf_month": -21.4,
+        "perf_ytd": -37.8
       }
     },
     "CL": {
       "sector": "Consumer Staples",
       "sentiment": "neutral",
       "technicals": {
-        "sma50": 87.15,
+        "sma50": 87.16,
         "sma200": 84.38,
-        "rsi14": 56.1,
-        "beta": 0.32,
+        "rsi14": 56.89,
+        "beta": 0.322,
+        "perf_month": 3.9,
+        "perf_ytd": 7.4
+      }
+    },
+    "CINF": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 164.29,
+        "sma200": 161.94,
+        "rsi14": 65.3,
+        "beta": 0.584,
+        "perf_month": 4.4,
+        "perf_ytd": 5.9
+      }
+    },
+    "CMCSA": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 26.08,
+        "sma200": 27.96,
+        "rsi14": 28.86,
+        "beta": 0.658,
+        "perf_month": -13.0,
+        "perf_ytd": -18.9
+      }
+    },
+    "CLX": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 95.57,
+        "sma200": 108.24,
+        "rsi14": 49.85,
+        "beta": 0.545,
+        "perf_month": -0.6,
+        "perf_ytd": -12.3
+      }
+    },
+    "CMI": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 659.77,
+        "sma200": 541.36,
+        "rsi14": 61.94,
+        "beta": 1.24,
+        "perf_month": 8.8,
+        "perf_ytd": 32.6
+      }
+    },
+    "CMG": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 32.69,
+        "sma200": 35.87,
+        "rsi14": 51.44,
+        "beta": 0.978,
+        "perf_month": -2.5,
+        "perf_ytd": -11.2
+      }
+    },
+    "COIN": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 185.44,
+        "sma200": 238.82,
+        "rsi14": 50,
+        "beta": 3.32,
+        "perf_month": -11.1,
+        "perf_ytd": -30.9
+      }
+    },
+    "CNP": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 42.61,
+        "sma200": 40.59,
+        "rsi14": 50,
+        "beta": 0.461,
+        "perf_month": 0.0,
+        "perf_ytd": 5.0
+      }
+    },
+    "CME": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 281.58,
+        "sma200": 281.78,
+        "rsi14": 35.66,
+        "beta": 0.244,
+        "perf_month": -10.3,
+        "perf_ytd": -10.4
+      }
+    },
+    "COHR": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 355.08,
+        "sma200": 222.39,
+        "rsi14": 51.15,
+        "beta": 2.054,
+        "perf_month": 6.7,
+        "perf_ytd": 70.4
+      }
+    },
+    "CNC": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 52.79,
+        "sma200": 41.73,
+        "rsi14": 53.05,
+        "beta": 1.093,
+        "perf_month": 14.9,
+        "perf_ytd": 45.3
+      }
+    },
+    "COF": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 190.32,
+        "sma200": 209.76,
+        "rsi14": 65.02,
+        "beta": 1.037,
+        "perf_month": 5.5,
+        "perf_ytd": -4.2
+      }
+    },
+    "CMS": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 74.49,
+        "sma200": 73.58,
+        "rsi14": 50.52,
+        "beta": 0.352,
+        "perf_month": -1.6,
+        "perf_ytd": -0.4
+      }
+    },
+    "COR": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 286.85,
+        "sma200": 324.96,
+        "rsi14": 49.18,
+        "beta": 0.588,
+        "perf_month": -3.4,
+        "perf_ytd": -14.7
+      }
+    },
+    "COO": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 64.41,
+        "sma200": 72.66,
+        "rsi14": 51.46,
+        "beta": 0.873,
+        "perf_month": 1.0,
+        "perf_ytd": -10.5
+      }
+    },
+    "COP": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 119.42,
+        "sma200": 105.08,
+        "rsi14": 38.4,
+        "beta": 0.106,
+        "perf_month": -6.9,
+        "perf_ytd": 5.8
+      }
+    },
+    "CPAY": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 334.24,
+        "sma200": 312.13,
+        "rsi14": 54.44,
+        "beta": 0.869,
+        "perf_month": 5.7,
+        "perf_ytd": 13.2
+      }
+    },
+    "CPT": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 106.11,
+        "sma200": 105.54,
+        "rsi14": 49.42,
+        "beta": 0.814,
+        "perf_month": 3.0,
+        "perf_ytd": 3.6
+      }
+    },
+    "CPB": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 20.91,
+        "sma200": 26.59,
+        "rsi14": 46.34,
+        "beta": 0.01,
+        "perf_month": 1.0,
+        "perf_ytd": -20.6
+      }
+    },
+    "COST": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 1002.66,
+        "sma200": 957.88,
+        "rsi14": 41.46,
+        "beta": 0.868,
+        "perf_month": -3.7,
+        "perf_ytd": 0.8
+      }
+    },
+    "CSCO": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 104.32,
+        "sma200": 82.39,
+        "rsi14": 52.68,
+        "beta": 1.004,
+        "perf_month": 12.5,
+        "perf_ytd": 42.4
+      }
+    },
+    "CRWD": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 560.39,
+        "sma200": 488.05,
+        "rsi14": 57.83,
+        "beta": 1.244,
+        "perf_month": 21.9,
+        "perf_ytd": 39.9
+      }
+    },
+    "CRH": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 110.22,
+        "sma200": 115.48,
+        "rsi14": 53.79,
+        "beta": 1.187,
+        "perf_month": -0.7,
+        "perf_ytd": -5.3
+      }
+    },
+    "CPRT": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 32.66,
+        "sma200": 38.48,
+        "rsi14": 31.76,
+        "beta": 1.002,
+        "perf_month": -9.6,
+        "perf_ytd": -23.3
+      }
+    },
+    "CSGP": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 34.73,
+        "sma200": 57.15,
+        "rsi14": 31.02,
+        "beta": 0.72,
+        "perf_month": -12.3,
+        "perf_ytd": -46.7
+      }
+    },
+    "CRM": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 178.59,
+        "sma200": 216.88,
+        "rsi14": 32.34,
+        "beta": 1.151,
+        "perf_month": -13.2,
+        "perf_ytd": -28.5
+      }
+    },
+    "CRL": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 174.36,
+        "sma200": 177.89,
+        "rsi14": 54.2,
+        "beta": 1.449,
+        "perf_month": 4.6,
+        "perf_ytd": 2.5
+      }
+    },
+    "CSX": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 45.18,
+        "sma200": 39.01,
+        "rsi14": 46.15,
+        "beta": 1.222,
+        "perf_month": 0.9,
+        "perf_ytd": 16.8
+      }
+    },
+    "CTAS": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 173.43,
+        "sma200": 186.81,
+        "rsi14": 43.06,
+        "beta": 0.934,
+        "perf_month": -2.2,
+        "perf_ytd": -9.2
+      }
+    },
+    "CVNA": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 72.19,
+        "sma200": 73.61,
+        "rsi14": 40.71,
+        "beta": 3.449,
+        "perf_month": -13.0,
+        "perf_ytd": -14.6
+      }
+    },
+    "CVX": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 187.87,
+        "sma200": 171.65,
+        "rsi14": 36.53,
+        "beta": 0.472,
+        "perf_month": -5.5,
+        "perf_ytd": 3.5
+      }
+    },
+    "CVS": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 88.35,
+        "sma200": 80.1,
+        "rsi14": 64.02,
+        "beta": 0.623,
+        "perf_month": 12.2,
+        "perf_ytd": 23.8
+      }
+    },
+    "D": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 64.52,
+        "sma200": 61.75,
+        "rsi14": 59.24,
+        "beta": 0.642,
+        "perf_month": 5.4,
+        "perf_ytd": 10.1
+      }
+    },
+    "CTVA": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 79.81,
+        "sma200": 72.75,
+        "rsi14": 47.25,
+        "beta": 0.572,
+        "perf_month": -3.1,
+        "perf_ytd": 6.4
+      }
+    },
+    "DAL": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 73.89,
+        "sma200": 66.57,
+        "rsi14": 59.42,
+        "beta": 1.313,
+        "perf_month": 11.3,
+        "perf_ytd": 23.6
+      }
+    },
+    "CTSH": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 53.85,
+        "sma200": 67.74,
+        "rsi14": 35.76,
+        "beta": 0.81,
+        "perf_month": -9.3,
+        "perf_ytd": -27.9
+      }
+    },
+    "DASH": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 164.1,
+        "sma200": 202.75,
+        "rsi14": 54.35,
+        "beta": 1.811,
+        "perf_month": 0.9,
+        "perf_ytd": -18.3
+      }
+    },
+    "DD": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 47.57,
+        "sma200": 42.15,
+        "rsi14": 51.26,
+        "beta": 1.076,
+        "perf_month": 0.8,
+        "perf_ytd": 13.8
+      }
+    },
+    "DDOG": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 183.93,
+        "sma200": 151.0,
+        "rsi14": 54.78,
+        "beta": 1.553,
+        "perf_month": 23.2,
+        "perf_ytd": 50.1
+      }
+    },
+    "DE": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 574.58,
+        "sma200": 526.8,
+        "rsi14": 58.12,
+        "beta": 0.928,
+        "perf_month": 2.4,
+        "perf_ytd": 11.7
+      }
+    },
+    "DECK": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 105.92,
+        "sma200": 103.24,
+        "rsi14": 45.83,
+        "beta": 1.146,
+        "perf_month": -0.2,
+        "perf_ytd": 2.4
+      }
+    },
+    "DGX": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 194.94,
+        "sma200": 189.5,
+        "rsi14": 50.89,
+        "beta": 0.587,
+        "perf_month": 1.4,
+        "perf_ytd": 4.4
+      }
+    },
+    "DHR": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 180.19,
+        "sma200": 204.5,
+        "rsi14": 47.7,
+        "beta": 0.834,
+        "perf_month": -1.3,
+        "perf_ytd": -13.0
+      }
+    },
+    "DG": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 112.68,
+        "sma200": 120.83,
+        "rsi14": 47.12,
+        "beta": 0.256,
+        "perf_month": -3.5,
+        "perf_ytd": -10.0
+      }
+    },
+    "DHI": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 147.99,
+        "sma200": 152.67,
+        "rsi14": 55.78,
+        "beta": 1.382,
+        "perf_month": 3.0,
+        "perf_ytd": -0.1
+      }
+    },
+    "DLTR": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 101.33,
+        "sma200": 109.32,
+        "rsi14": 50.44,
+        "beta": 0.659,
+        "perf_month": 5.0,
+        "perf_ytd": -2.7
+      }
+    },
+    "DELL": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 273.02,
+        "sma200": 170.68,
+        "rsi14": 67.58,
+        "beta": 1.378,
+        "perf_month": 53.6,
+        "perf_ytd": 145.7
+      }
+    },
+    "DOC": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 18.47,
+        "sma200": 17.75,
+        "rsi14": 48.55,
+        "beta": 1.029,
+        "perf_month": 5.0,
+        "perf_ytd": 9.3
+      }
+    },
+    "DLR": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 192.4,
+        "sma200": 174.25,
+        "rsi14": 48.63,
+        "beta": 1.046,
+        "perf_month": -2.8,
+        "perf_ytd": 7.4
+      }
+    },
+    "DIS": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 102.55,
+        "sma200": 107.29,
+        "rsi14": 47.57,
+        "beta": 1.394,
+        "perf_month": -1.7,
+        "perf_ytd": -6.0
+      }
+    },
+    "DOV": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 217.5,
+        "sma200": 200.1,
+        "rsi14": 56.07,
+        "beta": 1.173,
+        "perf_month": 1.5,
+        "perf_ytd": 10.3
+      }
+    },
+    "DOW": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 37.01,
+        "sma200": 29.6,
+        "rsi14": 34.23,
+        "beta": 0.405,
+        "perf_month": -12.2,
+        "perf_ytd": 9.8
+      }
+    },
+    "DPZ": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 331.39,
+        "sma200": 390.72,
+        "rsi14": 46.07,
+        "beta": 0.971,
+        "perf_month": -5.1,
+        "perf_ytd": -19.5
+      }
+    },
+    "DUK": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 125.7,
+        "sma200": 124.05,
+        "rsi14": 47.99,
+        "beta": 0.379,
+        "perf_month": -1.6,
+        "perf_ytd": -0.3
+      }
+    },
+    "DRI": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 199.16,
+        "sma200": 195.82,
+        "rsi14": 63.17,
+        "beta": 0.587,
+        "perf_month": 6.1,
+        "perf_ytd": 7.9
+      }
+    },
+    "DTE": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 145.17,
+        "sma200": 139.95,
+        "rsi14": 55.58,
+        "beta": 0.393,
+        "perf_month": 1.4,
+        "perf_ytd": 5.2
+      }
+    },
+    "DVN": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 46.73,
+        "sma200": 40.6,
+        "rsi14": 38.26,
+        "beta": 0.419,
+        "perf_month": -8.9,
+        "perf_ytd": 4.9
+      }
+    },
+    "DVA": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 179.12,
+        "sma200": 141.98,
+        "rsi14": 71.85,
+        "beta": 0.908,
+        "perf_month": 17.6,
+        "perf_ytd": 48.3
+      }
+    },
+    "DXCM": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 66.47,
+        "sma200": 67.53,
+        "rsi14": 50.39,
+        "beta": 1.443,
+        "perf_month": 7.2,
+        "perf_ytd": 5.5
+      }
+    },
+    "EA": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 202.17,
+        "sma200": 199.11,
+        "rsi14": 57.5,
+        "beta": 0.645,
+        "perf_month": 0.4,
+        "perf_ytd": 2.0
+      }
+    },
+    "EBAY": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 107.29,
+        "sma200": 93.42,
+        "rsi14": 47.17,
+        "beta": 1.372,
+        "perf_month": 0.6,
+        "perf_ytd": 15.5
+      }
+    },
+    "ECL": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 261.21,
+        "sma200": 270.29,
+        "rsi14": 58.45,
+        "beta": 0.913,
+        "perf_month": 3.0,
+        "perf_ytd": -0.5
+      }
+    },
+    "ED": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 108.06,
+        "sma200": 104.35,
+        "rsi14": 50.31,
+        "beta": 0.272,
+        "perf_month": -0.9,
+        "perf_ytd": 2.6
+      }
+    },
+    "EFX": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 171.93,
+        "sma200": 203.85,
+        "rsi14": 36.63,
+        "beta": 1.314,
+        "perf_month": -9.9,
+        "perf_ytd": -24.0
+      }
+    },
+    "EG": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 342.83,
+        "sma200": 334.2,
+        "rsi14": 49.49,
+        "beta": 0.305,
+        "perf_month": -1.5,
+        "perf_ytd": 1.0
+      }
+    },
+    "ELV": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 373.2,
+        "sma200": 340.86,
+        "rsi14": 48.95,
+        "beta": 0.682,
+        "perf_month": 4.8,
+        "perf_ytd": 14.8
+      }
+    },
+    "EIX": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 70.74,
+        "sma200": 63.87,
+        "rsi14": 48.88,
+        "beta": 0.661,
+        "perf_month": 0.2,
+        "perf_ytd": 11.0
+      }
+    },
+    "EL": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 81.43,
+        "sma200": 93.19,
+        "rsi14": 45.83,
+        "beta": 1.249,
+        "perf_month": 1.3,
+        "perf_ytd": -11.5
+      }
+    },
+    "EME": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 854.57,
+        "sma200": 724.32,
+        "rsi14": 46.79,
+        "beta": 1.124,
+        "perf_month": -3.2,
+        "perf_ytd": 14.2
+      }
+    },
+    "EOG": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 136.31,
+        "sma200": 120.72,
+        "rsi14": 43.89,
+        "beta": 0.256,
+        "perf_month": -2.2,
+        "perf_ytd": 10.4
+      }
+    },
+    "EQIX": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 1072.45,
+        "sma200": 892.42,
+        "rsi14": 57.24,
+        "beta": 0.97,
+        "perf_month": 1.5,
+        "perf_ytd": 22.0
+      }
+    },
+    "EQR": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 64.85,
+        "sma200": 62.71,
+        "rsi14": 42.16,
+        "beta": 0.764,
+        "perf_month": -0.3,
+        "perf_ytd": 3.1
+      }
+    },
+    "EMR": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 140.71,
+        "sma200": 138.01,
+        "rsi14": 62.41,
+        "beta": 1.246,
+        "perf_month": 5.9,
+        "perf_ytd": 8.0
+      }
+    },
+    "EQT": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 56.43,
+        "sma200": 56.57,
+        "rsi14": 32.73,
+        "beta": 0.543,
+        "perf_month": -9.4,
+        "perf_ytd": -9.6
+      }
+    },
+    "ERIE": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 227.71,
+        "sma200": 273.44,
+        "rsi14": 48.15,
+        "beta": 0.307,
+        "perf_month": -2.7,
+        "perf_ytd": -18.9
+      }
+    },
+    "ES": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 68.83,
+        "sma200": 69.54,
+        "rsi14": 50.43,
+        "beta": 0.727,
+        "perf_month": 0.3,
+        "perf_ytd": -0.7
+      }
+    },
+    "ESS": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 268.0,
+        "sma200": 259.62,
+        "rsi14": 47.47,
+        "beta": 0.729,
+        "perf_month": 2.4,
+        "perf_ytd": 5.7
+      }
+    },
+    "ETN": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 404.38,
+        "sma200": 368.42,
+        "rsi14": 53.88,
+        "beta": 1.192,
+        "perf_month": 1.3,
+        "perf_ytd": 11.2
+      }
+    },
+    "EVRG": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 82.38,
+        "sma200": 78.23,
+        "rsi14": 51.04,
+        "beta": 0.534,
+        "perf_month": 0.6,
+        "perf_ytd": 5.9
+      }
+    },
+    "EW": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 83.15,
+        "sma200": 81.93,
+        "rsi14": 54.29,
+        "beta": 0.866,
+        "perf_month": 4.2,
+        "perf_ytd": 5.8
+      }
+    },
+    "ETR": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 112.36,
+        "sma200": 100.8,
+        "rsi14": 50.49,
+        "beta": 0.497,
+        "perf_month": -1.3,
+        "perf_ytd": 10.0
+      }
+    },
+    "EXPD": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 154.29,
+        "sma200": 144.19,
+        "rsi14": 51.93,
+        "beta": 1.047,
+        "perf_month": 4.1,
+        "perf_ytd": 11.4
+      }
+    },
+    "EXC": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 45.97,
+        "sma200": 45.84,
+        "rsi14": 49.46,
+        "beta": 0.41,
+        "perf_month": -0.9,
+        "perf_ytd": -0.6
+      }
+    },
+    "F": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 13.51,
+        "sma200": 12.98,
+        "rsi14": 45.22,
+        "beta": 1.798,
+        "perf_month": 3.4,
+        "perf_ytd": 7.6
+      }
+    },
+    "EXPE": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 235.96,
+        "sma200": 240.54,
+        "rsi14": 57.85,
+        "beta": 1.257,
+        "perf_month": 1.5,
+        "perf_ytd": -0.4
+      }
+    },
+    "EXR": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 143.07,
+        "sma200": 140.03,
+        "rsi14": 47.91,
+        "beta": 1.206,
+        "perf_month": 0.6,
+        "perf_ytd": 2.8
+      }
+    },
+    "FANG": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 195.84,
+        "sma200": 166.68,
+        "rsi14": 39.88,
+        "beta": 0.391,
+        "perf_month": -5.3,
+        "perf_ytd": 11.3
+      }
+    },
+    "EXE": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 95.29,
+        "sma200": 104.35,
+        "rsi14": 34.11,
+        "beta": 0.322,
+        "perf_month": -8.2,
+        "perf_ytd": -16.2
+      }
+    },
+    "FCX": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 64.38,
+        "sma200": 54.09,
+        "rsi14": 57.16,
+        "beta": 1.359,
+        "perf_month": 7.3,
+        "perf_ytd": 27.7
+      }
+    },
+    "FDX": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 315.12,
+        "sma200": 257.02,
+        "rsi14": 51.4,
+        "beta": 1.299,
+        "perf_month": 3.4,
+        "perf_ytd": 26.8
+      }
+    },
+    "FAST": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 45.12,
+        "sma200": 44.41,
+        "rsi14": 46.35,
+        "beta": 0.729,
+        "perf_month": -0.5,
+        "perf_ytd": 1.1
+      }
+    },
+    "FE": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 47.28,
+        "sma200": 46.89,
+        "rsi14": 47.62,
+        "beta": 0.458,
+        "perf_month": -2.4,
+        "perf_ytd": -1.6
+      }
+    },
+    "FDS": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 230.99,
+        "sma200": 258.11,
+        "rsi14": 44.16,
+        "beta": 0.707,
+        "perf_month": -1.2,
+        "perf_ytd": -11.6
+      }
+    },
+    "FDXF": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 166.69,
+        "sma200": 166.69,
+        "rsi14": 53.5,
+        "beta": -7.34,
+        "perf_month": -2.9,
+        "perf_ytd": -2.9
+      }
+    },
+    "FFIV": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 353.18,
+        "sma200": 298.95,
+        "rsi14": 53.11,
+        "beta": 1.046,
+        "perf_month": 9.0,
+        "perf_ytd": 28.7
+      }
+    },
+    "FICO": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 1119.93,
+        "sma200": 1431.8,
+        "rsi14": 42.79,
+        "beta": 1.283,
+        "perf_month": 0.6,
+        "perf_ytd": -21.3
+      }
+    },
+    "FISV": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 114.45,
+        "sma200": 166.21,
+        "rsi14": 35.46,
+        "beta": 0.7931675,
+        "perf_month": -57.4,
+        "perf_ytd": -70.7
+      }
+    },
+    "FIS": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 43.99,
+        "sma200": 56.52,
+        "rsi14": 35.17,
+        "beta": 0.802,
+        "perf_month": -12.3,
+        "perf_ytd": -31.7
+      }
+    },
+    "FIX": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 1821.97,
+        "sma200": 1247.07,
+        "rsi14": 56.13,
+        "beta": 1.67,
+        "perf_month": 6.0,
+        "perf_ytd": 54.9
+      }
+    },
+    "FITB": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 50.23,
+        "sma200": 47.39,
+        "rsi14": 57.28,
+        "beta": 0.947,
+        "perf_month": 4.7,
+        "perf_ytd": 10.9
+      }
+    },
+    "FRT": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 115.97,
+        "sma200": 105.05,
+        "rsi14": 51.71,
+        "beta": 0.94,
+        "perf_month": 3.9,
+        "perf_ytd": 14.7
+      }
+    },
+    "FTV": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 60.15,
+        "sma200": 54.94,
+        "rsi14": 52.63,
+        "beta": 0.989,
+        "perf_month": 0.9,
+        "perf_ytd": 10.4
+      }
+    },
+    "FOX": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 57.33,
+        "sma200": 57.42,
+        "rsi14": 25.2,
+        "beta": 0.519,
+        "perf_month": -18.5,
+        "perf_ytd": -18.6
+      }
+    },
+    "FSLR": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 235.54,
+        "sma200": 232.99,
+        "rsi14": 47.31,
+        "beta": 1.692,
+        "perf_month": 8.2,
+        "perf_ytd": 9.4
+      }
+    },
+    "GD": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 341.09,
+        "sma200": 343.78,
+        "rsi14": 64.11,
+        "beta": 0.341,
+        "perf_month": 6.4,
+        "perf_ytd": 5.5
+      }
+    },
+    "FTNT": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 112.83,
+        "sma200": 89.56,
+        "rsi14": 63.22,
+        "beta": 1.109,
+        "perf_month": 27.8,
+        "perf_ytd": 60.9
+      }
+    },
+    "FOXA": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 63.87,
+        "sma200": 63.84,
+        "rsi14": 24.23,
+        "beta": 0.519,
+        "perf_month": -19.6,
+        "perf_ytd": -19.6
+      }
+    },
+    "GEHC": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 65.64,
+        "sma200": 74.69,
+        "rsi14": 39.14,
+        "beta": 0.862,
+        "perf_month": -6.8,
+        "perf_ytd": -18.1
+      }
+    },
+    "GDDY": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 85.17,
+        "sma200": 108.46,
+        "rsi14": 37.0,
+        "beta": 0.889,
+        "perf_month": -10.6,
+        "perf_ytd": -29.8
+      }
+    },
+    "GEN": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 22.34,
+        "sma200": 24.69,
+        "rsi14": 47.35,
+        "beta": 1.205,
+        "perf_month": 7.1,
+        "perf_ytd": -3.1
+      }
+    },
+    "GE": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 306.74,
+        "sma200": 305.02,
+        "rsi14": 71.23,
+        "beta": 1.375,
+        "perf_month": 16.4,
+        "perf_ytd": 17.1
+      }
+    },
+    "GEV": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 1018.84,
+        "sma200": 769.99,
+        "rsi14": 59.46,
+        "beta": 1.045,
+        "perf_month": 2.9,
+        "perf_ytd": 36.2
+      }
+    },
+    "GILD": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 132.14,
+        "sma200": 129.35,
+        "rsi14": 42.17,
+        "beta": 0.331,
+        "perf_month": -5.1,
+        "perf_ytd": -3.0
+      }
+    },
+    "GIS": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 34.27,
+        "sma200": 43.01,
+        "rsi14": 44.89,
+        "beta": -0.041,
+        "perf_month": -2.6,
+        "perf_ytd": -22.4
+      }
+    },
+    "GRMN": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 244.64,
+        "sma200": 228.8,
+        "rsi14": 42.93,
+        "beta": 1.0,
+        "perf_month": -5.2,
+        "perf_ytd": 1.3
+      }
+    },
+    "GPC": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 103.17,
+        "sma200": 121.63,
+        "rsi14": 50,
+        "beta": 0.679,
+        "perf_month": 2.9,
+        "perf_ytd": -12.8
+      }
+    },
+    "GPN": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 69.33,
+        "sma200": 75.9,
+        "rsi14": 43.97,
+        "beta": 0.767,
+        "perf_month": -4.3,
+        "perf_ytd": -12.6
+      }
+    },
+    "GNRC": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 249.31,
+        "sma200": 195.13,
+        "rsi14": 53.37,
+        "beta": 1.91,
+        "perf_month": 7.6,
+        "perf_ytd": 37.4
+      }
+    },
+    "GLW": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 178.06,
+        "sma200": 119.4,
+        "rsi14": 47.02,
+        "beta": 1.155,
+        "perf_month": -1.5,
+        "perf_ytd": 46.9
+      }
+    },
+    "GOOGL": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 366.36,
+        "sma200": 310.32,
+        "rsi14": 46.1,
+        "beta": 1.237,
+        "perf_month": -0.7,
+        "perf_ytd": 17.2
+      }
+    },
+    "GM": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 78.98,
+        "sma200": 74.21,
+        "rsi14": 47.66,
+        "beta": 1.3,
+        "perf_month": 0.8,
+        "perf_ytd": 7.2
+      }
+    },
+    "GL": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 154.54,
+        "sma200": 142.85,
+        "rsi14": 75.5,
+        "beta": 0.499,
+        "perf_month": 10.8,
+        "perf_ytd": 19.9
+      }
+    },
+    "GOOG": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 363.57,
+        "sma200": 309.84,
+        "rsi14": 50,
+        "beta": 1.237,
+        "perf_month": -0.4,
+        "perf_ytd": 16.9
+      }
+    },
+    "GS": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 970.05,
+        "sma200": 874.81,
+        "rsi14": 66.16,
+        "beta": 1.291,
+        "perf_month": 13.3,
+        "perf_ytd": 25.6
+      }
+    },
+    "HAS": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 90.95,
+        "sma200": 86.18,
+        "rsi14": 37.73,
+        "beta": 0.476,
+        "perf_month": -8.2,
+        "perf_ytd": -3.1
+      }
+    },
+    "HAL": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 39.88,
+        "sma200": 32.14,
+        "rsi14": 32.53,
+        "beta": 0.704,
+        "perf_month": -9.1,
+        "perf_ytd": 12.7
+      }
+    },
+    "GWW": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 1222.79,
+        "sma200": 1075.43,
+        "rsi14": 65.61,
+        "beta": 1.052,
+        "perf_month": 7.2,
+        "perf_ytd": 21.9
+      }
+    },
+    "HBAN": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 16.39,
+        "sma200": 16.72,
+        "rsi14": 54.97,
+        "beta": 0.969,
+        "perf_month": 2.8,
+        "perf_ytd": 0.8
+      }
+    },
+    "HD": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 322.96,
+        "sma200": 359.05,
+        "rsi14": 56.04,
+        "beta": 0.974,
+        "perf_month": 1.4,
+        "perf_ytd": -8.8
+      }
+    },
+    "HCA": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 424.07,
+        "sma200": 460.73,
+        "rsi14": 45.79,
+        "beta": 1.134,
+        "perf_month": -8.5,
+        "perf_ytd": -15.8
+      }
+    },
+    "HLT": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 328.77,
+        "sma200": 296.23,
+        "rsi14": 65.75,
+        "beta": 1.053,
+        "perf_month": 6.2,
+        "perf_ytd": 17.9
+      }
+    },
+    "HIG": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 133.91,
+        "sma200": 133.89,
+        "rsi14": 46.39,
+        "beta": 0.475,
+        "perf_month": -3.2,
+        "perf_ytd": -3.2
+      }
+    },
+    "HON": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 222.02,
+        "sma200": 213.29,
+        "rsi14": 55.88,
+        "beta": 0.843,
+        "perf_month": 3.0,
+        "perf_ytd": 7.2
+      }
+    },
+    "HOOD": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 82.08,
+        "sma200": 102.75,
+        "rsi14": 69.41,
+        "beta": 2.348,
+        "perf_month": 28.2,
+        "perf_ytd": 2.4
+      }
+    },
+    "HII": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 337.45,
+        "sma200": 346.11,
+        "rsi14": 38.43,
+        "beta": 0.232,
+        "perf_month": -12.0,
+        "perf_ytd": -14.2
+      }
+    },
+    "HPE": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 34.88,
+        "sma200": 26.04,
+        "rsi14": 62.5,
+        "beta": 1.448,
+        "perf_month": 38.2,
+        "perf_ytd": 85.1
+      }
+    },
+    "HPQ": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 22.22,
+        "sma200": 22.98,
+        "rsi14": 45.42,
+        "beta": 1.184,
+        "perf_month": 4.3,
+        "perf_ytd": 0.9
+      }
+    },
+    "HSIC": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 75.71,
+        "sma200": 73.6,
+        "rsi14": 62.94,
+        "beta": 0.824,
+        "perf_month": 5.6,
+        "perf_ytd": 8.7
+      }
+    },
+    "HRL": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 21.78,
+        "sma200": 23.26,
+        "rsi14": 67.84,
+        "beta": 0.343,
+        "perf_month": 11.7,
+        "perf_ytd": 4.6
+      }
+    },
+    "HST": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 22.19,
+        "sma200": 19.1,
+        "rsi14": 66.48,
+        "beta": 1.127,
+        "perf_month": 11.0,
+        "perf_ytd": 28.9
+      }
+    },
+    "HWM": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 255.78,
+        "sma200": 222.99,
+        "rsi14": 67.2,
+        "beta": 1.193,
+        "perf_month": 10.7,
+        "perf_ytd": 27.0
+      }
+    },
+    "HUM": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 275.29,
+        "sma200": 248.39,
+        "rsi14": 69.98,
+        "beta": 0.771,
+        "perf_month": 31.5,
+        "perf_ytd": 45.7
+      }
+    },
+    "HSY": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 188.98,
+        "sma200": 193.89,
+        "rsi14": 36.53,
+        "beta": 0.081,
+        "perf_month": -7.2,
+        "perf_ytd": -9.6
+      }
+    },
+    "ICE": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 152.54,
+        "sma200": 159.28,
+        "rsi14": 29.56,
+        "beta": 0.922,
+        "perf_month": -11.8,
+        "perf_ytd": -15.5
+      }
+    },
+    "IDXX": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 562.44,
+        "sma200": 632.91,
+        "rsi14": 43.75,
+        "beta": 1.543,
+        "perf_month": -2.9,
+        "perf_ytd": -13.7
+      }
+    },
+    "IBKR": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 83.01,
+        "sma200": 72.03,
+        "rsi14": 69.58,
+        "beta": 1.329,
+        "perf_month": 14.6,
+        "perf_ytd": 32.0
+      }
+    },
+    "HUBB": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 501.72,
+        "sma200": 472.66,
+        "rsi14": 60.96,
+        "beta": 0.911,
+        "perf_month": 1.4,
+        "perf_ytd": 7.7
+      }
+    },
+    "IBM": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 250.39,
+        "sma200": 273.41,
+        "rsi14": 47.79,
+        "beta": 0.665,
+        "perf_month": 4.8,
+        "perf_ytd": -4.0
+      }
+    },
+    "IEX": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 211.0,
+        "sma200": 188.45,
+        "rsi14": 63.59,
+        "beta": 0.991,
+        "perf_month": 6.0,
+        "perf_ytd": 18.7
+      }
+    },
+    "IFF": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 74.35,
+        "sma200": 69.83,
+        "rsi14": 51.9,
+        "beta": 0.956,
+        "perf_month": 2.3,
+        "perf_ytd": 8.9
+      }
+    },
+    "INCY": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 98.12,
+        "sma200": 96.74,
+        "rsi14": 48.11,
+        "beta": 0.79,
+        "perf_month": 0.9,
+        "perf_ytd": 2.3
+      }
+    },
+    "INTU": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 356.51,
+        "sma200": 525.3,
+        "rsi14": 31.8,
+        "beta": 0.964,
+        "perf_month": -24.5,
+        "perf_ytd": -48.8
+      }
+    },
+    "INTC": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 99.92,
+        "sma200": 54.96,
+        "rsi14": 57.34,
+        "beta": 2.228,
+        "perf_month": 21.2,
+        "perf_ytd": 120.3
+      }
+    },
+    "INVH": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 28.31,
+        "sma200": 27.63,
+        "rsi14": 43.97,
+        "beta": 0.853,
+        "perf_month": 0.6,
+        "perf_ytd": 3.1
+      }
+    },
+    "IQV": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 173.36,
+        "sma200": 195.4,
+        "rsi14": 42.45,
+        "beta": 1.215,
+        "perf_month": -1.6,
+        "perf_ytd": -12.7
+      }
+    },
+    "IP": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 33.62,
+        "sma200": 39.85,
+        "rsi14": 60.91,
+        "beta": 0.927,
+        "perf_month": 7.5,
+        "perf_ytd": -9.2
+      }
+    },
+    "IR": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 76.88,
+        "sma200": 81.43,
+        "rsi14": 57.46,
+        "beta": 1.195,
+        "perf_month": 0.2,
+        "perf_ytd": -5.4
+      }
+    },
+    "IRM": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 122.89,
+        "sma200": 103.36,
+        "rsi14": 50.25,
+        "beta": 1.218,
+        "perf_month": 2.1,
+        "perf_ytd": 21.4
+      }
+    },
+    "IT": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 153.68,
+        "sma200": 201.08,
+        "rsi14": 30.22,
+        "beta": 0.932,
+        "perf_month": -13.1,
+        "perf_ytd": -33.6
+      }
+    },
+    "ISRG": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 440.84,
+        "sma200": 491.0,
+        "rsi14": 37.39,
+        "beta": 1.453,
+        "perf_month": -8.8,
+        "perf_ytd": -18.1
+      }
+    },
+    "IVZ": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 26.7,
+        "sma200": 25.28,
+        "rsi14": 59.2,
+        "beta": 1.589,
+        "perf_month": 7.8,
+        "perf_ytd": 13.9
+      }
+    },
+    "ITW": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 258.38,
+        "sma200": 260.05,
+        "rsi14": 58.87,
+        "beta": 1.03,
+        "perf_month": 1.4,
+        "perf_ytd": 0.8
+      }
+    },
+    "J": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 122.64,
+        "sma200": 137.03,
+        "rsi14": 51.31,
+        "beta": 0.683,
+        "perf_month": 0.2,
+        "perf_ytd": -10.4
+      }
+    },
+    "JCI": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 141.46,
+        "sma200": 125.45,
+        "rsi14": 52.21,
+        "beta": 1.337,
+        "perf_month": 1.5,
+        "perf_ytd": 14.5
+      }
+    },
+    "JBHT": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 256.87,
+        "sma200": 202.89,
+        "rsi14": 46.95,
+        "beta": 1.305,
+        "perf_month": 4.0,
+        "perf_ytd": 31.7
+      }
+    },
+    "JKHY": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 142.55,
+        "sma200": 160.77,
+        "rsi14": 30.85,
+        "beta": 0.575,
+        "perf_month": -12.9,
+        "perf_ytd": -22.7
+      }
+    },
+    "JBL": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 346.95,
+        "sma200": 259.87,
+        "rsi14": 56.08,
+        "beta": 1.287,
+        "perf_month": 8.1,
+        "perf_ytd": 44.3
+      }
+    },
+    "JNJ": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 230.63,
+        "sma200": 215.48,
+        "rsi14": 53.55,
+        "beta": 0.256,
+        "perf_month": 1.5,
+        "perf_ytd": 8.7
+      }
+    },
+    "JPM": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 308.52,
+        "sma200": 306.97,
+        "rsi14": 72.08,
+        "beta": 1,
+        "perf_month": 8.1,
+        "perf_ytd": 8.6
+      }
+    },
+    "KEY": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 21.68,
+        "sma200": 20.17,
+        "rsi14": 61.86,
+        "beta": 1.041,
+        "perf_month": 4.2,
+        "perf_ytd": 12.1
+      }
+    },
+    "KEYS": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 342.01,
+        "sma200": 244.53,
+        "rsi14": 54.72,
+        "beta": 1.221,
         "perf_month": 2.6,
-        "perf_ytd": 6.0
+        "perf_ytd": 43.5
+      }
+    },
+    "KDP": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 28.96,
+        "sma200": 27.94,
+        "rsi14": 56.41,
+        "beta": 0.424,
+        "perf_month": 6.7,
+        "perf_ytd": 10.6
+      }
+    },
+    "KIM": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 23.87,
+        "sma200": 22.11,
+        "rsi14": 51.42,
+        "beta": 0.981,
+        "perf_month": 2.7,
+        "perf_ytd": 10.8
+      }
+    },
+    "KHC": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 23.08,
+        "sma200": 24.13,
+        "rsi14": 46.72,
+        "beta": 0.076,
+        "perf_month": 0.5,
+        "perf_ytd": -3.9
+      }
+    },
+    "KKR": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 98.12,
+        "sma200": 113.04,
+        "rsi14": 52.25,
+        "beta": 1.791,
+        "perf_month": -1.0,
+        "perf_ytd": -14.0
+      }
+    },
+    "KLAC": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 191.88,
+        "sma200": 143.53,
+        "rsi14": 64.15,
+        "beta": 1.504,
+        "perf_month": 24.4,
+        "perf_ytd": 66.3
+      }
+    },
+    "KMB": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 98.2,
+        "sma200": 105.94,
+        "rsi14": 55.78,
+        "beta": 0.302,
+        "perf_month": 3.3,
+        "perf_ytd": -4.2
+      }
+    },
+    "KVUE": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 17.49,
+        "sma200": 17.29,
+        "rsi14": 56.38,
+        "beta": 0.504,
+        "perf_month": 3.0,
+        "perf_ytd": 4.2
+      }
+    },
+    "L": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 108.0,
+        "sma200": 105.08,
+        "rsi14": 52.18,
+        "beta": 0.535,
+        "perf_month": -0.3,
+        "perf_ytd": 2.5
+      }
+    },
+    "KO": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 78.88,
+        "sma200": 73.65,
+        "rsi14": 49.25,
+        "beta": 0.354,
+        "perf_month": 1.3,
+        "perf_ytd": 8.5
+      }
+    },
+    "KMI": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 32.13,
+        "sma200": 29.75,
+        "rsi14": 43.55,
+        "beta": 0.539,
+        "perf_month": -2.5,
+        "perf_ytd": 5.3
+      }
+    },
+    "LDOS": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 135.44,
+        "sma200": 171.66,
+        "rsi14": 18.74,
+        "beta": 0.515,
+        "perf_month": -19.8,
+        "perf_ytd": -36.7
+      }
+    },
+    "LEN": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 89.43,
+        "sma200": 109.57,
+        "rsi14": 43.09,
+        "beta": 1.4,
+        "perf_month": -3.3,
+        "perf_ytd": -21.1
+      }
+    },
+    "KR": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 66.03,
+        "sma200": 66.53,
+        "rsi14": 38.6,
+        "beta": 0.416,
+        "perf_month": -6.4,
+        "perf_ytd": -7.1
+      }
+    },
+    "LH": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 261.54,
+        "sma200": 267.57,
+        "rsi14": 46.63,
+        "beta": 0.877,
+        "perf_month": -0.8,
+        "perf_ytd": -3.0
+      }
+    },
+    "LHX": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 319.13,
+        "sma200": 315.63,
+        "rsi14": 51.75,
+        "beta": 0.746,
+        "perf_month": -1.9,
+        "perf_ytd": -0.8
+      }
+    },
+    "LIN": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 505.66,
+        "sma200": 467.3,
+        "rsi14": 55.01,
+        "beta": 0.732,
+        "perf_month": 2.0,
+        "perf_ytd": 10.4
+      }
+    },
+    "LII": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 506.48,
+        "sma200": 510.29,
+        "rsi14": 52.17,
+        "beta": 1.19,
+        "perf_month": 1.9,
+        "perf_ytd": 1.1
+      }
+    },
+    "LLY": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 1004.57,
+        "sma200": 962.37,
+        "rsi14": 57.3,
+        "beta": 0.517,
+        "perf_month": 10.7,
+        "perf_ytd": 15.5
+      }
+    },
+    "LITE": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 906.49,
+        "sma200": 508.87,
+        "rsi14": 47.35,
+        "beta": 1.479,
+        "perf_month": -4.0,
+        "perf_ytd": 71.0
+      }
+    },
+    "LNT": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 72.48,
+        "sma200": 68.86,
+        "rsi14": 51.75,
+        "beta": 0.552,
+        "perf_month": 0.5,
+        "perf_ytd": 5.8
+      }
+    },
+    "LMT": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 539.78,
+        "sma200": 538.14,
+        "rsi14": 50.3,
+        "beta": 0.106,
+        "perf_month": -1.4,
+        "perf_ytd": -1.1
+      }
+    },
+    "LRCX": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 295.31,
+        "sma200": 208.61,
+        "rsi14": 65.59,
+        "beta": 1.868,
+        "perf_month": 26.7,
+        "perf_ytd": 79.4
+      }
+    },
+    "LOW": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 227.8,
+        "sma200": 245.73,
+        "rsi14": 47.6,
+        "beta": 0.857,
+        "perf_month": -4.6,
+        "perf_ytd": -11.6
+      }
+    },
+    "LULU": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 135.21,
+        "sma200": 167.83,
+        "rsi14": 32.18,
+        "beta": 0.861,
+        "perf_month": -17.3,
+        "perf_ytd": -33.4
+      }
+    },
+    "LUV": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 40.96,
+        "sma200": 39.31,
+        "rsi14": 64.99,
+        "beta": 1.156,
+        "perf_month": 13.9,
+        "perf_ytd": 18.7
+      }
+    },
+    "LYB": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 70.64,
+        "sma200": 57.23,
+        "rsi14": 31.61,
+        "beta": 0.328,
+        "perf_month": -12.5,
+        "perf_ytd": 8.0
+      }
+    },
+    "LVS": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 52.41,
+        "sma200": 56.81,
+        "rsi14": 34.99,
+        "beta": 0.811,
+        "perf_month": -8.2,
+        "perf_ytd": -15.3
+      }
+    },
+    "MA": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 499.24,
+        "sma200": 535.33,
+        "rsi14": 49.85,
+        "beta": 0.738,
+        "perf_month": -1.3,
+        "perf_ytd": -7.9
+      }
+    },
+    "MAA": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 130.07,
+        "sma200": 132.76,
+        "rsi14": 49.31,
+        "beta": 0.744,
+        "perf_month": 2.3,
+        "perf_ytd": 0.3
+      }
+    },
+    "LYV": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 163.39,
+        "sma200": 153.64,
+        "rsi14": 57.99,
+        "beta": 1.124,
+        "perf_month": 5.0,
+        "perf_ytd": 11.6
+      }
+    },
+    "MAR": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 369.55,
+        "sma200": 318.59,
+        "rsi14": 61.46,
+        "beta": 1.105,
+        "perf_month": 6.8,
+        "perf_ytd": 23.9
+      }
+    },
+    "MCO": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 449.93,
+        "sma200": 473.62,
+        "rsi14": 53.18,
+        "beta": 1.339,
+        "perf_month": 1.4,
+        "perf_ytd": -3.7
+      }
+    },
+    "MAS": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 69.33,
+        "sma200": 67.54,
+        "rsi14": 56.76,
+        "beta": 1.313,
+        "perf_month": 4.8,
+        "perf_ytd": 7.5
+      }
+    },
+    "MCD": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 287.66,
+        "sma200": 305.48,
+        "rsi14": 51.06,
+        "beta": 0.414,
+        "perf_month": -1.3,
+        "perf_ytd": -7.1
+      }
+    },
+    "MCHP": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 90.26,
+        "sma200": 72.37,
+        "rsi14": 51.39,
+        "beta": 1.725,
+        "perf_month": 4.3,
+        "perf_ytd": 30.0
+      }
+    },
+    "MCK": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 792.59,
+        "sma200": 823.9,
+        "rsi14": 51.77,
+        "beta": 0.315,
+        "perf_month": -1.6,
+        "perf_ytd": -5.4
+      }
+    },
+    "MDLZ": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 60.45,
+        "sma200": 58.92,
+        "rsi14": 46.17,
+        "beta": 0.4,
+        "perf_month": 0.7,
+        "perf_ytd": 3.3
+      }
+    },
+    "MET": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 80.58,
+        "sma200": 78.16,
+        "rsi14": 58.89,
+        "beta": 0.783,
+        "perf_month": 6.5,
+        "perf_ytd": 9.8
+      }
+    },
+    "MDT": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 80.32,
+        "sma200": 91.98,
+        "rsi14": 46.01,
+        "beta": 0.597,
+        "perf_month": -2.7,
+        "perf_ytd": -15.1
+      }
+    },
+    "MGM": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 40.93,
+        "sma200": 36.46,
+        "rsi14": 60.97,
+        "beta": 1.311,
+        "perf_month": 14.7,
+        "perf_ytd": 28.8
+      }
+    },
+    "META": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 622.6,
+        "sma200": 655.71,
+        "rsi14": 39.27,
+        "beta": 1.229,
+        "perf_month": -8.8,
+        "perf_ytd": -13.4
+      }
+    },
+    "MLM": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 590.7,
+        "sma200": 618.07,
+        "rsi14": 54.48,
+        "beta": 1.102,
+        "perf_month": 0.1,
+        "perf_ytd": -4.4
+      }
+    },
+    "MKC": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 49.07,
+        "sma200": 61.03,
+        "rsi14": 41.13,
+        "beta": 0.641,
+        "perf_month": -5.3,
+        "perf_ytd": -23.8
+      }
+    },
+    "MOS": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 23.06,
+        "sma200": 26.82,
+        "rsi14": 50.15,
+        "beta": 0.808,
+        "perf_month": -2.4,
+        "perf_ytd": -16.1
+      }
+    },
+    "MNST": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 83.2,
+        "sma200": 76.0,
+        "rsi14": 64.08,
+        "beta": 0.542,
+        "perf_month": 10.2,
+        "perf_ytd": 20.6
+      }
+    },
+    "MO": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 69.71,
+        "sma200": 64.59,
+        "rsi14": 43.42,
+        "beta": 0.501,
+        "perf_month": -1.1,
+        "perf_ytd": 6.8
+      }
+    },
+    "MMM": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 149.92,
+        "sma200": 157.6,
+        "rsi14": 63.54,
+        "beta": 1.095,
+        "perf_month": 6.2,
+        "perf_ytd": 1.0
+      }
+    },
+    "MPC": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 244.93,
+        "sma200": 206.97,
+        "rsi14": 42.77,
+        "beta": 0.522,
+        "perf_month": -0.1,
+        "perf_ytd": 18.2
+      }
+    },
+    "MRK": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 115.95,
+        "sma200": 105.09,
+        "rsi14": 46.47,
+        "beta": 0.218,
+        "perf_month": -0.4,
+        "perf_ytd": 9.9
+      }
+    },
+    "MPWR": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 1541.41,
+        "sma200": 1141.4,
+        "rsi14": 43.8,
+        "beta": 1.691,
+        "perf_month": -6.0,
+        "perf_ytd": 26.9
+      }
+    },
+    "MRNA": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 49.96,
+        "sma200": 39.02,
+        "rsi14": 72.78,
+        "beta": 1.03,
+        "perf_month": 23.7,
+        "perf_ytd": 58.4
+      }
+    },
+    "MRSH": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 167.06,
+        "sma200": 180.93,
+        "rsi14": 48.49,
+        "beta": 0.611,
+        "perf_month": -1.7,
+        "perf_ytd": -9.2
+      }
+    },
+    "MTB": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 216.91,
+        "sma200": 206.13,
+        "rsi14": 50,
+        "beta": 0.587,
+        "perf_month": 4.1,
+        "perf_ytd": 9.6
+      }
+    },
+    "MSCI": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 589.22,
+        "sma200": 569.15,
+        "rsi14": 48.25,
+        "beta": 1.226,
+        "perf_month": 1.3,
+        "perf_ytd": 4.9
+      }
+    },
+    "MS": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 196.08,
+        "sma200": 174.8,
+        "rsi14": 71.75,
+        "beta": 1.221,
+        "perf_month": 14.8,
+        "perf_ytd": 28.8
+      }
+    },
+    "MSI": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 419.78,
+        "sma200": 424.03,
+        "rsi14": 50,
+        "beta": 0.89,
+        "perf_month": -4.5,
+        "perf_ytd": -5.5
+      }
+    },
+    "NDSN": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 282.83,
+        "sma200": 258.77,
+        "rsi14": 54.99,
+        "beta": 1.0,
+        "perf_month": 2.6,
+        "perf_ytd": 12.2
+      }
+    },
+    "NDAQ": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 89.03,
+        "sma200": 89.71,
+        "rsi14": 50,
+        "beta": 1.0,
+        "perf_month": -6.4,
+        "perf_ytd": -7.2
+      }
+    },
+    "MSFT": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 412.87,
+        "sma200": 451.98,
+        "rsi14": 34.59,
+        "beta": 1.103,
+        "perf_month": -8.2,
+        "perf_ytd": -16.2
+      }
+    },
+    "NCLH": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 18.27,
+        "sma200": 21.04,
+        "rsi14": 50,
+        "beta": 1.908,
+        "perf_month": 8.6,
+        "perf_ytd": -5.7
+      }
+    },
+    "MTD": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 1199.4,
+        "sma200": 1315.96,
+        "rsi14": 50,
+        "beta": 1.263,
+        "perf_month": -5.8,
+        "perf_ytd": -14.2
+      }
+    },
+    "MU": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 718.25,
+        "sma200": 395.67,
+        "rsi14": 50,
+        "beta": 1.0,
+        "perf_month": 45.2,
+        "perf_ytd": 163.6
+      }
+    },
+    "NFLX": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 89.67,
+        "sma200": 98.57,
+        "rsi14": 26.05,
+        "beta": 1.491,
+        "perf_month": -14.2,
+        "perf_ytd": -21.9
+      }
+    },
+    "NEE": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 90.73,
+        "sma200": 85.73,
+        "rsi14": 42.31,
+        "beta": 1.0,
+        "perf_month": -5.5,
+        "perf_ytd": -0.0
+      }
+    },
+    "NI": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 47.27,
+        "sma200": 44.47,
+        "rsi14": 49.25,
+        "beta": 0.547,
+        "perf_month": -1.1,
+        "perf_ytd": 5.2
       }
     },
     "NKE": {
@@ -535,57 +4085,321 @@
         "sma50": 44.3,
         "sma200": 58.9,
         "rsi14": 47.66,
-        "beta": 1.12,
-        "perf_month": 1.4,
-        "perf_ytd": -23.7
+        "beta": 1.116,
+        "perf_month": -0.2,
+        "perf_ytd": -25.0
       }
     },
-    "LOW": {
-      "sector": "Consumer Discretionary",
-      "sentiment": "neutral",
-      "technicals": {
-        "sma50": 227.8,
-        "sma200": 245.73,
-        "rsi14": 47.46,
-        "beta": 0.86,
-        "perf_month": -3.1,
-        "perf_ytd": -10.2
-      }
-    },
-    "UNP": {
+    "NOC": {
       "sector": "Industrials",
       "sentiment": "neutral",
       "technicals": {
-        "sma50": 263.65,
-        "sma200": 241.94,
-        "rsi14": 40.52,
-        "beta": 0.97,
-        "perf_month": 3.4,
-        "perf_ytd": 12.7
+        "sma50": 578.54,
+        "sma200": 616.28,
+        "rsi14": 46.28,
+        "beta": -0.121,
+        "perf_month": -4.9,
+        "perf_ytd": -10.7
       }
     },
-    "COP": {
-      "sector": "Energy",
+    "NRG": {
+      "sector": "Utilities",
       "sentiment": "neutral",
       "technicals": {
-        "sma50": 119.41,
-        "sma200": 105.08,
-        "rsi14": 37.57,
-        "beta": 0.11,
-        "perf_month": -2.0,
-        "perf_ytd": 11.3
+        "sma50": 143.53,
+        "sma200": 156.63,
+        "rsi14": 47.87,
+        "beta": 1.216,
+        "perf_month": -7.9,
+        "perf_ytd": -15.6
       }
     },
-    "DIS": {
+    "NOW": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 99.29,
+        "sma200": 137.21,
+        "rsi14": 41.14,
+        "beta": 0.927,
+        "perf_month": -3.8,
+        "perf_ytd": -30.4
+      }
+    },
+    "NSC": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 309.94,
+        "sma200": 296.21,
+        "rsi14": 40.43,
+        "beta": 1.272,
+        "perf_month": -3.0,
+        "perf_ytd": 1.5
+      }
+    },
+    "NEM": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 110.43,
+        "sma200": 102.35,
+        "rsi14": 49.44,
+        "beta": 0.455,
+        "perf_month": -4.3,
+        "perf_ytd": 3.2
+      }
+    },
+    "NTRS": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 164.88,
+        "sma200": 143.66,
+        "rsi14": 62.01,
+        "beta": 1.272,
+        "perf_month": 6.1,
+        "perf_ytd": 21.8
+      }
+    },
+    "NTAP": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 129.04,
+        "sma200": 114.57,
+        "rsi14": 54.79,
+        "beta": 1.434,
+        "perf_month": 20.0,
+        "perf_ytd": 35.1
+      }
+    },
+    "NWS": {
       "sector": "Communication Services",
       "sentiment": "neutral",
       "technicals": {
-        "sma50": 102.66,
-        "sma200": 107.2,
-        "rsi14": 47.95,
-        "beta": 1.39,
-        "perf_month": -2.6,
-        "perf_ytd": -6.7
+        "sma50": 30.06,
+        "sma200": 29.71,
+        "rsi14": 45.11,
+        "beta": 0.893,
+        "perf_month": -1.5,
+        "perf_ytd": -0.4
+      }
+    },
+    "NUE": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 228.69,
+        "sma200": 176.57,
+        "rsi14": 56.79,
+        "beta": 1.906,
+        "perf_month": 10.5,
+        "perf_ytd": 43.1
+      }
+    },
+    "NVDA": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 208.74,
+        "sma200": 189.7,
+        "rsi14": 45.34,
+        "beta": 2.202,
+        "perf_month": -2.0,
+        "perf_ytd": 7.9
+      }
+    },
+    "NWSA": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 26.16,
+        "sma200": 26.13,
+        "rsi14": 46.46,
+        "beta": 0.893,
+        "perf_month": -0.7,
+        "perf_ytd": -0.6
+      }
+    },
+    "NVR": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 6281.14,
+        "sma200": 7179.76,
+        "rsi14": 51.92,
+        "beta": 0.924,
+        "perf_month": -0.1,
+        "perf_ytd": -12.6
+      }
+    },
+    "O": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 62.45,
+        "sma200": 60.72,
+        "rsi14": 43.43,
+        "beta": 0.734,
+        "perf_month": -3.0,
+        "perf_ytd": -0.3
+      }
+    },
+    "ODFL": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 216.72,
+        "sma200": 176.1,
+        "rsi14": 44.62,
+        "beta": 1.18,
+        "perf_month": 0.8,
+        "perf_ytd": 24.0
+      }
+    },
+    "NXPI": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 278.77,
+        "sma200": 233.38,
+        "rsi14": 49.49,
+        "beta": 1.788,
+        "perf_month": 7.0,
+        "perf_ytd": 27.8
+      }
+    },
+    "OMC": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 75.62,
+        "sma200": 76.64,
+        "rsi14": 53.43,
+        "beta": 0.659,
+        "perf_month": 0.9,
+        "perf_ytd": -0.4
+      }
+    },
+    "OKE": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 88.11,
+        "sma200": 79.25,
+        "rsi14": 42.75,
+        "beta": 0.714,
+        "perf_month": -2.9,
+        "perf_ytd": 8.0
+      }
+    },
+    "ON": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 104.53,
+        "sma200": 68.14,
+        "rsi14": 48.62,
+        "beta": 1.977,
+        "perf_month": 8.0,
+        "perf_ytd": 65.7
+      }
+    },
+    "ORLY": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 91.64,
+        "sma200": 95.67,
+        "rsi14": 43.57,
+        "beta": 0.523,
+        "perf_month": -3.5,
+        "perf_ytd": -7.6
+      }
+    },
+    "ORCL": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 186.77,
+        "sma200": 205.37,
+        "rsi14": 42.6,
+        "beta": 1.655,
+        "perf_month": -1.8,
+        "perf_ytd": -10.7
+      }
+    },
+    "PANW": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 222.31,
+        "sma200": 195.65,
+        "rsi14": 64.28,
+        "beta": 0.942,
+        "perf_month": 26.9,
+        "perf_ytd": 44.2
+      }
+    },
+    "OTIS": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 74.77,
+        "sma200": 84.88,
+        "rsi14": 52.15,
+        "beta": 0.896,
+        "perf_month": -2.7,
+        "perf_ytd": -14.3
+      }
+    },
+    "OXY": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 57.27,
+        "sma200": 49.16,
+        "rsi14": 36.29,
+        "beta": 0.124,
+        "perf_month": -7.4,
+        "perf_ytd": 7.9
+      }
+    },
+    "PAYX": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 94.35,
+        "sma200": 106.92,
+        "rsi14": 50.12,
+        "beta": 0.8296729,
+        "perf_month": 3.4,
+        "perf_ytd": -8.7
+      }
+    },
+    "PCAR": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 117.79,
+        "sma200": 111.9,
+        "rsi14": 52.18,
+        "beta": 0.992,
+        "perf_month": -0.4,
+        "perf_ytd": 4.9
+      }
+    },
+    "PCG": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 16.74,
+        "sma200": 16.42,
+        "rsi14": 46.66,
+        "beta": 0.272,
+        "perf_month": -1.8,
+        "perf_ytd": 0.1
       }
     },
     "PFE": {
@@ -595,23 +4409,1751 @@
         "sma50": 26.29,
         "sma200": 25.88,
         "rsi14": 48.78,
-        "beta": 0.3,
-        "perf_month": -0.3,
-        "perf_ytd": 1.3
+        "beta": 0.295,
+        "perf_month": -1.4,
+        "perf_ytd": 0.2
       }
     },
-    "GE": {
+    "PEG": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 79.46,
+        "sma200": 81.18,
+        "rsi14": 51.52,
+        "beta": 0.533,
+        "perf_month": -0.1,
+        "perf_ytd": -2.2
+      }
+    },
+    "PEP": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 150.54,
+        "sma200": 150.28,
+        "rsi14": 38.35,
+        "beta": 0.359,
+        "perf_month": -5.9,
+        "perf_ytd": -5.8
+      }
+    },
+    "PFG": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 101.27,
+        "sma200": 90.56,
+        "rsi14": 69.08,
+        "beta": 0.896,
+        "perf_month": 8.8,
+        "perf_ytd": 21.7
+      }
+    },
+    "PGR": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 199.74,
+        "sma200": 214.73,
+        "rsi14": 57.32,
+        "beta": 0.27,
+        "perf_month": 2.3,
+        "perf_ytd": -4.8
+      }
+    },
+    "PG": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 145.0,
+        "sma200": 149.04,
+        "rsi14": 59.65,
+        "beta": 0.385,
+        "perf_month": 3.9,
+        "perf_ytd": 1.0
+      }
+    },
+    "PH": {
       "sector": "Industrials",
       "sentiment": "neutral",
       "technicals": {
-        "sma50": 306.74,
-        "sma200": 305.02,
-        "rsi14": 71.22,
-        "beta": 1.38,
-        "perf_month": 16.4,
-        "perf_ytd": 17.1
+        "sma50": 908.35,
+        "sma200": 875.25,
+        "rsi14": 65.74,
+        "beta": 1.138,
+        "perf_month": 4.1,
+        "perf_ytd": 8.1
+      }
+    },
+    "PHM": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 119.94,
+        "sma200": 124.73,
+        "rsi14": 54.25,
+        "beta": 1.216,
+        "perf_month": 1.6,
+        "perf_ytd": -2.3
+      }
+    },
+    "PLD": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 142.5,
+        "sma200": 130.75,
+        "rsi14": 43.73,
+        "beta": 1.334,
+        "perf_month": -1.1,
+        "perf_ytd": 7.8
+      }
+    },
+    "PKG": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 217.49,
+        "sma200": 214.12,
+        "rsi14": 58.75,
+        "beta": 0.835,
+        "perf_month": 5.4,
+        "perf_ytd": 7.1
+      }
+    },
+    "PLTR": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 138.68,
+        "sma200": 160.05,
+        "rsi14": 43.11,
+        "beta": 1.515,
+        "perf_month": -5.8,
+        "perf_ytd": -18.4
+      }
+    },
+    "PNR": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 79.13,
+        "sma200": 97.11,
+        "rsi14": 45.59,
+        "beta": 1.046,
+        "perf_month": -7.3,
+        "perf_ytd": -24.4
+      }
+    },
+    "PODD": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 166.25,
+        "sma200": 257.41,
+        "rsi14": 38.55,
+        "beta": 1.125,
+        "perf_month": -13.7,
+        "perf_ytd": -44.2
+      }
+    },
+    "PNW": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 101.74,
+        "sma200": 94.69,
+        "rsi14": 52.43,
+        "beta": 0.438,
+        "perf_month": 0.6,
+        "perf_ytd": 8.1
+      }
+    },
+    "PNC": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 222.14,
+        "sma200": 209.31,
+        "rsi14": 60.22,
+        "beta": 0.918,
+        "perf_month": 4.9,
+        "perf_ytd": 11.4
+      }
+    },
+    "PM": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 173.74,
+        "sma200": 166.37,
+        "rsi14": 50.48,
+        "beta": 0.408,
+        "perf_month": 3.3,
+        "perf_ytd": 7.9
+      }
+    },
+    "POOL": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 198.44,
+        "sma200": 242.17,
+        "rsi14": 54.29,
+        "beta": 1.089,
+        "perf_month": -2.1,
+        "perf_ytd": -19.8
+      }
+    },
+    "PPG": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 110.51,
+        "sma200": 107.79,
+        "rsi14": 57.23,
+        "beta": 1.062,
+        "perf_month": 6.0,
+        "perf_ytd": 8.7
+      }
+    },
+    "PRU": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 101.04,
+        "sma200": 104.13,
+        "rsi14": 60.66,
+        "beta": 0.855,
+        "perf_month": 5.9,
+        "perf_ytd": 2.8
+      }
+    },
+    "PPL": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 36.89,
+        "sma200": 36.58,
+        "rsi14": 43.98,
+        "beta": 0.596,
+        "perf_month": -4.2,
+        "perf_ytd": -3.4
+      }
+    },
+    "PSA": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 305.73,
+        "sma200": 289.19,
+        "rsi14": 52.18,
+        "beta": 0.963,
+        "perf_month": 2.2,
+        "perf_ytd": 8.1
+      }
+    },
+    "PSKY": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 10.7,
+        "sma200": 13.03,
+        "rsi14": 41.12,
+        "beta": 1.442,
+        "perf_month": -6.7,
+        "perf_ytd": -23.4
+      }
+    },
+    "Q": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 146.94,
+        "sma200": 113.06,
+        "rsi14": 54.88,
+        "beta": 1.5802284,
+        "perf_month": 6.7,
+        "perf_ytd": 38.6
+      }
+    },
+    "PSX": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 172.17,
+        "sma200": 151.4,
+        "rsi14": 37.78,
+        "beta": 0.674,
+        "perf_month": -2.9,
+        "perf_ytd": 10.4
+      }
+    },
+    "PWR": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 689.21,
+        "sma200": 521.86,
+        "rsi14": 52.65,
+        "beta": 1.215,
+        "perf_month": 3.7,
+        "perf_ytd": 37.0
+      }
+    },
+    "PTC": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 137.74,
+        "sma200": 166.65,
+        "rsi14": 29.03,
+        "beta": 0.966,
+        "perf_month": -15.1,
+        "perf_ytd": -29.8
+      }
+    },
+    "QCOM": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 189.46,
+        "sma200": 166.48,
+        "rsi14": 50.7,
+        "beta": 1.596,
+        "perf_month": 12.4,
+        "perf_ytd": 27.9
+      }
+    },
+    "PYPL": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 45.93,
+        "sma200": 55.0,
+        "rsi14": 41.76,
+        "beta": 1.336,
+        "perf_month": -8.4,
+        "perf_ytd": -23.5
+      }
+    },
+    "RCL": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 274.07,
+        "sma200": 290.55,
+        "rsi14": 58.34,
+        "beta": 1.784,
+        "perf_month": 10.0,
+        "perf_ytd": 3.8
+      }
+    },
+    "REG": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 78.54,
+        "sma200": 73.86,
+        "rsi14": 44.6,
+        "beta": 0.832,
+        "perf_month": -1.5,
+        "perf_ytd": 4.7
+      }
+    },
+    "RF": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 27.95,
+        "sma200": 27.03,
+        "rsi14": 54.97,
+        "beta": 1.027,
+        "perf_month": 2.5,
+        "perf_ytd": 6.0
+      }
+    },
+    "REGN": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 683.35,
+        "sma200": 696.91,
+        "rsi14": 36.86,
+        "beta": 0.238,
+        "perf_month": -11.0,
+        "perf_ytd": -12.8
+      }
+    },
+    "RJF": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 152.31,
+        "sma200": 158.9,
+        "rsi14": 65.03,
+        "beta": 0.951,
+        "perf_month": 4.2,
+        "perf_ytd": -0.1
+      }
+    },
+    "RL": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 368.07,
+        "sma200": 349.27,
+        "rsi14": 63.08,
+        "beta": 1.371,
+        "perf_month": 9.7,
+        "perf_ytd": 15.6
+      }
+    },
+    "ROK": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 433.99,
+        "sma200": 392.59,
+        "rsi14": 55.09,
+        "beta": 1.561,
+        "perf_month": 5.7,
+        "perf_ytd": 16.8
+      }
+    },
+    "ROL": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 52.09,
+        "sma200": 57.0,
+        "rsi14": 28.46,
+        "beta": 0.727,
+        "perf_month": -13.4,
+        "perf_ytd": -20.8
+      }
+    },
+    "RSG": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 207.71,
+        "sma200": 216.15,
+        "rsi14": 49.5,
+        "beta": 0.415,
+        "perf_month": -0.1,
+        "perf_ytd": -4.0
+      }
+    },
+    "ROST": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 225.91,
+        "sma200": 190.68,
+        "rsi14": 54.86,
+        "beta": 0.866,
+        "perf_month": 3.3,
+        "perf_ytd": 22.3
+      }
+    },
+    "ROP": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 341.02,
+        "sma200": 406.74,
+        "rsi14": 46.09,
+        "beta": 0.762,
+        "perf_month": -3.2,
+        "perf_ytd": -18.9
+      }
+    },
+    "RMD": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 207.91,
+        "sma200": 242.98,
+        "rsi14": 35.8,
+        "beta": 0.782,
+        "perf_month": -10.4,
+        "perf_ytd": -23.3
+      }
+    },
+    "RVTY": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 95.29,
+        "sma200": 95.47,
+        "rsi14": 48.41,
+        "beta": 1.107,
+        "perf_month": 2.7,
+        "perf_ytd": 2.5
+      }
+    },
+    "SATS": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 125.22,
+        "sma200": 102.54,
+        "rsi14": 41.52,
+        "beta": 0.963,
+        "perf_month": -10.8,
+        "perf_ytd": 8.9
+      }
+    },
+    "RTX": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 181.85,
+        "sma200": 182.3,
+        "rsi14": 66.04,
+        "beta": 0.306,
+        "perf_month": 5.9,
+        "perf_ytd": 5.6
+      }
+    },
+    "SBAC": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 210.39,
+        "sma200": 196.22,
+        "rsi14": 37.41,
+        "beta": 0.978,
+        "perf_month": -8.9,
+        "perf_ytd": -2.4
+      }
+    },
+    "SJM": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 100.76,
+        "sma200": 103.53,
+        "rsi14": 64.07,
+        "beta": 0.264,
+        "perf_month": 12.1,
+        "perf_ytd": 9.1
+      }
+    },
+    "SHW": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 317.32,
+        "sma200": 334.97,
+        "rsi14": 52.06,
+        "beta": 1.126,
+        "perf_month": -1.1,
+        "perf_ytd": -6.3
+      }
+    },
+    "SMCI": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 32.66,
+        "sma200": 35.6,
+        "rsi14": 38.04,
+        "beta": 1.869,
+        "perf_month": -14.9,
+        "perf_ytd": -22.0
+      }
+    },
+    "SLB": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 54.91,
+        "sma200": 44.82,
+        "rsi14": 33.27,
+        "beta": 0.708,
+        "perf_month": -8.3,
+        "perf_ytd": 12.3
+      }
+    },
+    "SCHW": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 91.01,
+        "sma200": 94.76,
+        "rsi14": 64.07,
+        "beta": 0.773,
+        "perf_month": 3.8,
+        "perf_ytd": -0.3
+      }
+    },
+    "SNA": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 376.31,
+        "sma200": 358.88,
+        "rsi14": 53.13,
+        "beta": 0.736,
+        "perf_month": 1.3,
+        "perf_ytd": 6.2
+      }
+    },
+    "SBUX": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 101.07,
+        "sma200": 91.85,
+        "rsi14": 48.59,
+        "beta": 0.977,
+        "perf_month": -1.2,
+        "perf_ytd": 8.7
+      }
+    },
+    "SNPS": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 478.35,
+        "sma200": 460.15,
+        "rsi14": 43.7,
+        "beta": 1.214,
+        "perf_month": -3.5,
+        "perf_ytd": 0.3
+      }
+    },
+    "SNDK": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 1371.78,
+        "sma200": 602.59,
+        "rsi14": 64.66,
+        "beta": 4.8812504,
+        "perf_month": 42.8,
+        "perf_ytd": 225.1
+      }
+    },
+    "SPG": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 204.63,
+        "sma200": 190.38,
+        "rsi14": 53.03,
+        "beta": 1.346,
+        "perf_month": 2.6,
+        "perf_ytd": 10.2
+      }
+    },
+    "SOLV": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 73.12,
+        "sma200": 74.36,
+        "rsi14": 44.79,
+        "beta": 0.746,
+        "perf_month": 2.0,
+        "perf_ytd": 0.3
+      }
+    },
+    "SO": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 93.73,
+        "sma200": 92.51,
+        "rsi14": 47.53,
+        "beta": 0.339,
+        "perf_month": -1.3,
+        "perf_ytd": 0.0
+      }
+    },
+    "STE": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 215.03,
+        "sma200": 239.07,
+        "rsi14": 31.7,
+        "beta": 0.923,
+        "perf_month": -7.3,
+        "perf_ytd": -16.6
+      }
+    },
+    "SRE": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 92.8,
+        "sma200": 90.94,
+        "rsi14": 45.64,
+        "beta": 0.576,
+        "perf_month": -2.7,
+        "perf_ytd": -0.8
+      }
+    },
+    "SPGI": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 424.44,
+        "sma200": 469.51,
+        "rsi14": 48.09,
+        "beta": 1.076,
+        "perf_month": -1.5,
+        "perf_ytd": -11.0
+      }
+    },
+    "STT": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 153.6,
+        "sma200": 130.2,
+        "rsi14": 74.63,
+        "beta": 1.451,
+        "perf_month": 11.4,
+        "perf_ytd": 31.4
+      }
+    },
+    "STX": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 749.3,
+        "sma200": 417.34,
+        "rsi14": 73.8,
+        "beta": 2.083,
+        "perf_month": 42.3,
+        "perf_ytd": 155.4
+      }
+    },
+    "STLD": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 237.17,
+        "sma200": 183.43,
+        "rsi14": 60.63,
+        "beta": 1.522,
+        "perf_month": 13.9,
+        "perf_ytd": 47.3
+      }
+    },
+    "SW": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 40.7,
+        "sma200": 41.0,
+        "rsi14": 58.16,
+        "beta": 0.96,
+        "perf_month": 6.7,
+        "perf_ytd": 5.9
+      }
+    },
+    "SWK": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 77.27,
+        "sma200": 75.72,
+        "rsi14": 57.95,
+        "beta": 1.202,
+        "perf_month": 6.7,
+        "perf_ytd": 8.9
+      }
+    },
+    "STZ": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 149.33,
+        "sma200": 145.98,
+        "rsi14": 41.71,
+        "beta": 0.384,
+        "perf_month": -6.9,
+        "perf_ytd": -4.8
+      }
+    },
+    "SWKS": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 68.66,
+        "sma200": 66.41,
+        "rsi14": 44.96,
+        "beta": 1.483,
+        "perf_month": 1.0,
+        "perf_ytd": 4.5
+      }
+    },
+    "SYF": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 73.3,
+        "sma200": 74.23,
+        "rsi14": 56.2,
+        "beta": 1.321,
+        "perf_month": 1.1,
+        "perf_ytd": -0.2
+      }
+    },
+    "SYK": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 313.64,
+        "sma200": 351.09,
+        "rsi14": 44.99,
+        "beta": 0.785,
+        "perf_month": -4.0,
+        "perf_ytd": -14.2
+      }
+    },
+    "SYY": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 75.13,
+        "sma200": 78.35,
+        "rsi14": 61.76,
+        "beta": 0.66,
+        "perf_month": 5.2,
+        "perf_ytd": 0.8
+      }
+    },
+    "T": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 25.09,
+        "sma200": 26.14,
+        "rsi14": 32.59,
+        "beta": 0.395,
+        "perf_month": -10.5,
+        "perf_ytd": -14.1
+      }
+    },
+    "TAP": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 41.86,
+        "sma200": 45.58,
+        "rsi14": 38.85,
+        "beta": 0.419,
+        "perf_month": -6.7,
+        "perf_ytd": -14.3
+      }
+    },
+    "TECH": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 52.43,
+        "sma200": 57.46,
+        "rsi14": 58.49,
+        "beta": 1.358,
+        "perf_month": 4.9,
+        "perf_ytd": -4.3
+      }
+    },
+    "TDG": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 1217.49,
+        "sma200": 1282.6,
+        "rsi14": 63.57,
+        "beta": 0.895,
+        "perf_month": 8.2,
+        "perf_ytd": 2.7
+      }
+    },
+    "TDY": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 630.72,
+        "sma200": 587.86,
+        "rsi14": 47.35,
+        "beta": 0.939,
+        "perf_month": -2.4,
+        "perf_ytd": 4.7
+      }
+    },
+    "TEL": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 214.8,
+        "sma200": 221.57,
+        "rsi14": 50.96,
+        "beta": 1.163,
+        "perf_month": -1.2,
+        "perf_ytd": -4.2
+      }
+    },
+    "TJX": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 157.65,
+        "sma200": 152.11,
+        "rsi14": 58.8,
+        "beta": 1.0,
+        "perf_month": 4.2,
+        "perf_ytd": 8.0
+      }
+    },
+    "TMUS": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 190.03,
+        "sma200": 207.44,
+        "rsi14": 41.21,
+        "beta": 0.301,
+        "perf_month": -4.6,
+        "perf_ytd": -12.6
+      }
+    },
+    "TRV": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 301.02,
+        "sma200": 289.53,
+        "rsi14": 57.22,
+        "beta": 0.495,
+        "perf_month": 1.7,
+        "perf_ytd": 5.7
+      }
+    },
+    "TGT": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 126.28,
+        "sma200": 107.29,
+        "rsi14": 50,
+        "beta": 0.991,
+        "perf_month": 1.2,
+        "perf_ytd": 19.1
+      }
+    },
+    "TSCO": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 34.42,
+        "sma200": 48.47,
+        "rsi14": 37.49,
+        "beta": 0.459,
+        "perf_month": -13.6,
+        "perf_ytd": -38.6
+      }
+    },
+    "TFC": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 49.25,
+        "sma200": 47.87,
+        "rsi14": 50,
+        "beta": 0.884,
+        "perf_month": -2.2,
+        "perf_ytd": 0.6
+      }
+    },
+    "TER": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 370.63,
+        "sma200": 251.81,
+        "rsi14": 50,
+        "beta": 1.0,
+        "perf_month": 10.2,
+        "perf_ytd": 62.2
+      }
+    },
+    "TPR": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 142.73,
+        "sma200": 129.78,
+        "rsi14": 54.64,
+        "beta": 1.446,
+        "perf_month": 2.2,
+        "perf_ytd": 12.4
+      }
+    },
+    "TSLA": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 401.34,
+        "sma200": 416.61,
+        "rsi14": 45.34,
+        "beta": 1.798,
+        "perf_month": -1.2,
+        "perf_ytd": -4.9
+      }
+    },
+    "TMO": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 477.65,
+        "sma200": 525.93,
+        "rsi14": 44.78,
+        "beta": 0.874,
+        "perf_month": -3.3,
+        "perf_ytd": -12.2
+      }
+    },
+    "TKO": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 193.22,
+        "sma200": 197.66,
+        "rsi14": 45.58,
+        "beta": 0.616,
+        "perf_month": 0.7,
+        "perf_ytd": -1.6
+      }
+    },
+    "TPL": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 404.94,
+        "sma200": 371.17,
+        "rsi14": 35.11,
+        "beta": 0.611,
+        "perf_month": -12.5,
+        "perf_ytd": -4.5
+      }
+    },
+    "TRMB": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 60.09,
+        "sma200": 71.5,
+        "rsi14": 25.74,
+        "beta": 1.373,
+        "perf_month": -18.7,
+        "perf_ytd": -31.7
+      }
+    },
+    "TT": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 467.85,
+        "sma200": 430.33,
+        "rsi14": 55.08,
+        "beta": 1.212,
+        "perf_month": 1.0,
+        "perf_ytd": 9.8
+      }
+    },
+    "TROW": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 102.22,
+        "sma200": 100.99,
+        "rsi14": 62.94,
+        "beta": 1.519,
+        "perf_month": 5.8,
+        "perf_ytd": 7.1
+      }
+    },
+    "TRGP": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 256.05,
+        "sma200": 206.45,
+        "rsi14": 48.05,
+        "beta": 0.71,
+        "perf_month": 1.8,
+        "perf_ytd": 26.3
+      }
+    },
+    "TTD": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 21.7,
+        "sma200": 33.9,
+        "rsi14": 34.95,
+        "beta": 1.018,
+        "perf_month": -16.3,
+        "perf_ytd": -46.4
+      }
+    },
+    "TSN": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 63.29,
+        "sma200": 59.38,
+        "rsi14": 32.73,
+        "beta": 0.382,
+        "perf_month": -11.2,
+        "perf_ytd": -5.4
+      }
+    },
+    "TXN": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 279.33,
+        "sma200": 209.69,
+        "rsi14": 53.63,
+        "beta": 1.309,
+        "perf_month": 8.1,
+        "perf_ytd": 44.0
+      }
+    },
+    "TTWO": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 219.11,
+        "sma200": 230.89,
+        "rsi14": 58.53,
+        "beta": 0.982,
+        "perf_month": 4.1,
+        "perf_ytd": -1.2
+      }
+    },
+    "TXT": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 91.36,
+        "sma200": 88.51,
+        "rsi14": 52.81,
+        "beta": 0.907,
+        "perf_month": 1.5,
+        "perf_ytd": 4.7
+      }
+    },
+    "UAL": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 100.47,
+        "sma200": 102.19,
+        "rsi14": 60.65,
+        "beta": 1.291,
+        "perf_month": 15.3,
+        "perf_ytd": 13.3
+      }
+    },
+    "TYL": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 319.64,
+        "sma200": 409.4,
+        "rsi14": 39.26,
+        "beta": 0.814,
+        "perf_month": -10.0,
+        "perf_ytd": -29.7
+      }
+    },
+    "UHS": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 164.0,
+        "sma200": 198.03,
+        "rsi14": 31.17,
+        "beta": 1.081,
+        "perf_month": -13.9,
+        "perf_ytd": -28.7
+      }
+    },
+    "UBER": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 73.52,
+        "sma200": 82.18,
+        "rsi14": 46.71,
+        "beta": 1.12,
+        "perf_month": -3.6,
+        "perf_ytd": -13.7
+      }
+    },
+    "ULTA": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 511.69,
+        "sma200": 564.07,
+        "rsi14": 33.56,
+        "beta": 0.86,
+        "perf_month": -11.9,
+        "perf_ytd": -20.1
+      }
+    },
+    "UDR": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 36.87,
+        "sma200": 36.47,
+        "rsi14": 47.34,
+        "beta": 0.712,
+        "perf_month": 2.1,
+        "perf_ytd": 3.2
+      }
+    },
+    "UNH": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 370.77,
+        "sma200": 333.09,
+        "rsi14": 57.72,
+        "beta": 0.65,
+        "perf_month": 7.8,
+        "perf_ytd": 19.9
+      }
+    },
+    "UPS": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 103.8,
+        "sma200": 99.35,
+        "rsi14": 49.11,
+        "beta": 1.037,
+        "perf_month": 1.3,
+        "perf_ytd": 5.8
+      }
+    },
+    "UNP": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 263.69,
+        "sma200": 241.95,
+        "rsi14": 41.92,
+        "beta": 0.974,
+        "perf_month": -2.1,
+        "perf_ytd": 6.7
+      }
+    },
+    "URI": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 944.4,
+        "sma200": 884.37,
+        "rsi14": 58.25,
+        "beta": 1.82,
+        "perf_month": 11.1,
+        "perf_ytd": 18.6
+      }
+    },
+    "USB": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 55.61,
+        "sma200": 52.63,
+        "rsi14": 59.13,
+        "beta": 0.999,
+        "perf_month": 4.1,
+        "perf_ytd": 10.0
+      }
+    },
+    "V": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 320.67,
+        "sma200": 329.21,
+        "rsi14": 57.04,
+        "beta": 0.765,
+        "perf_month": 3.0,
+        "perf_ytd": 0.4
+      }
+    },
+    "VEEV": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 164.38,
+        "sma200": 218.71,
+        "rsi14": 39.08,
+        "beta": 0.949,
+        "perf_month": -5.8,
+        "perf_ytd": -29.2
+      }
+    },
+    "VICI": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 28.27,
+        "sma200": 29.29,
+        "rsi14": 40.48,
+        "beta": 0.676,
+        "perf_month": -3.7,
+        "perf_ytd": -7.0
+      }
+    },
+    "VLTO": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 86.76,
+        "sma200": 95.97,
+        "rsi14": 42.77,
+        "beta": 0.848,
+        "perf_month": -4.6,
+        "perf_ytd": -13.8
+      }
+    },
+    "VMC": {
+      "sector": "Materials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 284.31,
+        "sma200": 291.39,
+        "rsi14": 59.23,
+        "beta": 1.06,
+        "perf_month": 3.7,
+        "perf_ytd": 1.2
+      }
+    },
+    "VLO": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 245.51,
+        "sma200": 200.5,
+        "rsi14": 41.83,
+        "beta": 0.553,
+        "perf_month": -2.3,
+        "perf_ytd": 19.6
+      }
+    },
+    "VRSK": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 175.39,
+        "sma200": 208.5,
+        "rsi14": 46.44,
+        "beta": 0.695,
+        "perf_month": -0.0,
+        "perf_ytd": -15.9
+      }
+    },
+    "VRSN": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 282.89,
+        "sma200": 258.75,
+        "rsi14": 33.34,
+        "beta": 0.688,
+        "perf_month": -6.4,
+        "perf_ytd": 2.4
+      }
+    },
+    "VRT": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 320.5,
+        "sma200": 222.9,
+        "rsi14": 51.37,
+        "beta": 2.037,
+        "perf_month": -0.9,
+        "perf_ytd": 42.5
+      }
+    },
+    "VRTX": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 437.91,
+        "sma200": 439.38,
+        "rsi14": 61.86,
+        "beta": 0.31,
+        "perf_month": 4.8,
+        "perf_ytd": 4.5
+      }
+    },
+    "VST": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 154.0,
+        "sma200": 170.39,
+        "rsi14": 56.79,
+        "beta": 1.405,
+        "perf_month": 3.1,
+        "perf_ytd": -6.8
+      }
+    },
+    "VTR": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 85.26,
+        "sma200": 79.18,
+        "rsi14": 43.83,
+        "beta": 0.734,
+        "perf_month": -3.6,
+        "perf_ytd": 3.8
+      }
+    },
+    "VZ": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 47.0,
+        "sma200": 44.43,
+        "rsi14": 42.28,
+        "beta": 0.22,
+        "perf_month": -2.5,
+        "perf_ytd": 3.2
+      }
+    },
+    "WAB": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 263.8,
+        "sma200": 230.72,
+        "rsi14": 59.35,
+        "beta": 0.942,
+        "perf_month": 3.1,
+        "perf_ytd": 17.8
+      }
+    },
+    "VTRS": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 15.61,
+        "sma200": 12.94,
+        "rsi14": 46.1,
+        "beta": 0.901,
+        "perf_month": 0.8,
+        "perf_ytd": 21.6
+      }
+    },
+    "WBD": {
+      "sector": "Communication Services",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 27.06,
+        "sma200": 25.08,
+        "rsi14": 38.67,
+        "beta": 1.55,
+        "perf_month": -3.0,
+        "perf_ytd": 4.6
+      }
+    },
+    "WAT": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 339.97,
+        "sma200": 344.52,
+        "rsi14": 51.83,
+        "beta": 1.202,
+        "perf_month": 5.0,
+        "perf_ytd": 3.6
+      }
+    },
+    "WDC": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 471.83,
+        "sma200": 262.79,
+        "rsi14": 75.73,
+        "beta": 2.2,
+        "perf_month": 50.9,
+        "perf_ytd": 171.0
+      }
+    },
+    "WDAY": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 127.77,
+        "sma200": 180.2,
+        "rsi14": 39.29,
+        "beta": 1.081,
+        "perf_month": -4.6,
+        "perf_ytd": -32.4
+      }
+    },
+    "WEC": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 113.6,
+        "sma200": 111.98,
+        "rsi14": 49.29,
+        "beta": 0.47,
+        "perf_month": -0.9,
+        "perf_ytd": 0.5
+      }
+    },
+    "WM": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 221.82,
+        "sma200": 221.4,
+        "rsi14": 45.01,
+        "beta": 0.457,
+        "perf_month": -2.7,
+        "perf_ytd": -2.5
+      }
+    },
+    "WELL": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 210.72,
+        "sma200": 194.36,
+        "rsi14": 46.87,
+        "beta": 0.78,
+        "perf_month": -1.9,
+        "perf_ytd": 6.3
+      }
+    },
+    "WMB": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 73.35,
+        "sma200": 66.54,
+        "rsi14": 41.57,
+        "beta": 0.601,
+        "perf_month": -2.9,
+        "perf_ytd": 7.1
+      }
+    },
+    "WFC": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 79.73,
+        "sma200": 84.19,
+        "rsi14": 62.65,
+        "beta": 0.93,
+        "perf_month": 5.1,
+        "perf_ytd": -0.4
+      }
+    },
+    "WRB": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 66.7,
+        "sma200": 70.3,
+        "rsi14": 55.56,
+        "beta": 0.311,
+        "perf_month": 2.1,
+        "perf_ytd": -3.1
+      }
+    },
+    "WSM": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 193.95,
+        "sma200": 193.85,
+        "rsi14": 65.05,
+        "beta": 1.512,
+        "perf_month": 14.0,
+        "perf_ytd": 14.1
+      }
+    },
+    "WMT": {
+      "sector": "Consumer Staples",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 125.3,
+        "sma200": 116.37,
+        "rsi14": 40.47,
+        "beta": 0.599,
+        "perf_month": -5.7,
+        "perf_ytd": 1.5
+      }
+    },
+    "WTW": {
+      "sector": "Financials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 267.15,
+        "sma200": 306.08,
+        "rsi14": 49.61,
+        "beta": 0.45,
+        "perf_month": -2.7,
+        "perf_ytd": -15.0
+      }
+    },
+    "WST": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 303.72,
+        "sma200": 271.23,
+        "rsi14": 56.12,
+        "beta": 1.182,
+        "perf_month": 6.5,
+        "perf_ytd": 19.3
+      }
+    },
+    "XEL": {
+      "sector": "Utilities",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 79.67,
+        "sma200": 78.45,
+        "rsi14": 42.94,
+        "beta": 0.408,
+        "perf_month": -2.8,
+        "perf_ytd": -1.3
+      }
+    },
+    "WYNN": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 103.48,
+        "sma200": 114.0,
+        "rsi14": 47.05,
+        "beta": 0.984,
+        "perf_month": -1.1,
+        "perf_ytd": -10.3
+      }
+    },
+    "WY": {
+      "sector": "Real Estate",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 24.22,
+        "sma200": 24.23,
+        "rsi14": 50.96,
+        "beta": 0.912,
+        "perf_month": 0.4,
+        "perf_ytd": 0.4
+      }
+    },
+    "XYL": {
+      "sector": "Industrials",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 115.02,
+        "sma200": 132.11,
+        "rsi14": 47.39,
+        "beta": 1.04,
+        "perf_month": -4.1,
+        "perf_ytd": -16.5
+      }
+    },
+    "XOM": {
+      "sector": "Energy",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 151.08,
+        "sma200": 134.26,
+        "rsi14": 36.13,
+        "beta": 0.149,
+        "perf_month": -6.9,
+        "perf_ytd": 4.8
+      }
+    },
+    "YUM": {
+      "sector": "Consumer Discretionary",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 154.96,
+        "sma200": 153.07,
+        "rsi14": 52.84,
+        "beta": 0.574,
+        "perf_month": -0.5,
+        "perf_ytd": 0.7
+      }
+    },
+    "XYZ": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 70.33,
+        "sma200": 67.31,
+        "rsi14": 54.3,
+        "beta": 2.552,
+        "perf_month": 3.6,
+        "perf_ytd": 8.2
+      }
+    },
+    "ZBH": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 87.15,
+        "sma200": 92.6,
+        "rsi14": 52.05,
+        "beta": 0.472,
+        "perf_month": 0.0,
+        "perf_ytd": -5.9
+      }
+    },
+    "ZBRA": {
+      "sector": "Information Technology",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 235.32,
+        "sma200": 252.86,
+        "rsi14": 47.41,
+        "beta": 1.626,
+        "perf_month": -1.0,
+        "perf_ytd": -7.9
+      }
+    },
+    "ZTS": {
+      "sector": "Health Care",
+      "sentiment": "neutral",
+      "technicals": {
+        "sma50": 95.95,
+        "sma200": 121.48,
+        "rsi14": 33.43,
+        "beta": 0.741,
+        "perf_month": -19.5,
+        "perf_ytd": -36.4
       }
     }
   },
-  "_perf_note": "perf_month/perf_ytd are price-vs-50/200-day-MA distance proxies (stockanalysis statistics doesn't expose period returns via fetch); ADBE/AVGO carry actual returns."
+  "_perf_note": "perf_month/perf_ytd are price-vs-50/200-day-MA distance proxies (FMP /stable has no per-period return). Technicals from FMP batch-quote + RSI; news fields kept only for researched names."
 }

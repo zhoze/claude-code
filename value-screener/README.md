@@ -92,7 +92,7 @@ value-screener/
 ├── requirements.txt     # (optional) deps; the engine itself needs none
 └── data/
     ├── universe_sp500.csv        # all 503 S&P 500 constituents (snapshot)
-    ├── fundamentals.csv          # full-metric input (40 names, stockanalysis.com, 2026-06-14)
+    ├── fundamentals.csv          # full-metric input (503 S&P 500 names, FMP /stable, 2026-06-17)
     ├── risk_notes.json           # fresh-news "why it's cheap" bear cases (dated + sourced)
     ├── market_conditions.json    # Pre-screen input: macro + per-stock news (dated + sourced)
     ├── sentiment.json            # Sentiment lens input: social/analyst/insider (dated + sourced)
@@ -125,14 +125,15 @@ reported as "no data" rather than silently failing.
 
 ---
 
-## The live screen (run 2026-06-14)
+## The live screen — full S&P 500 (run 2026-06-17)
 
-This repo ships a **real screen**, not mock data. Current prices and
-trailing-twelve-month fundamentals for **40 sector-diversified S&P 500 companies**
-were pulled from **stockanalysis.com** `/statistics/` pages on **2026-06-14**
-(a single, consistent source). Bulk index endpoints weren't available, so a
-40-name slice was screened rather than all 503 — the engine itself scales to any
-list.
+This repo ships a **real screen** of the **entire S&P 500 (503 names)**. Prices,
+TTM fundamentals, technicals (50/200-day MA, RSI, beta), analyst-consensus
+ratings and price targets were pulled from the **Financial Modeling Prep
+`/stable` API** (2026-06-17). All four lenses cover ~all names (Buffett value on
+the ~491 with complete fundamentals, Magic on all 503, Sentiment on the 482 with
+analyst coverage, macro Pre-screen for all). Earlier examples in this README came
+from a curated 40-name run; see `data/results/` for the current full-index output.
 
 Top of the ranking (see [`data/results/top_candidates.md`](data/results/top_candidates.md)
 for the full 40-name table and per-name failed gates):

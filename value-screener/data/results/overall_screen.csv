@@ -1,42 +1,504 @@
 rank,symbol,news_dir,value_dir,tech_dir,sentiment_dir,hype_risk,overall,lean,dominant
-1,BAC,63.6,74.9,100.0,,False,82.3,Bullish lean,technical
-2,UNH,63.6,44.5,100.0,,False,74.7,Bullish lean,technical
-3,KO,63.6,43.3,100.0,,False,74.5,Bullish lean,technical
-4,JPM,63.6,71.4,93.0,57.0,False,74.1,Bullish lean,technical
-5,JNJ,63.6,43.4,100.0,67.0,False,73.0,Bullish lean,technical
-6,LMT,63.6,52.9,89.0,,False,72.0,Bullish lean,technical
-7,MO,63.6,57.5,84.0,,False,71.0,Bullish lean,technical
-8,AMGN,63.6,28.7,100.0,,False,70.8,Bullish lean,technical
-9,UNP,63.6,54.5,85.0,,False,70.7,Bullish lean,technical
-10,AAPL,71.6,36.5,90.0,60.8,False,68.9,Bullish lean,technical
-11,CAT,63.6,18.4,100.0,,False,68.2,Bullish lean,technical
-12,TXN,71.6,7.4,100.0,,False,68.0,Bullish lean,technical
-13,GE,63.6,20.9,100.0,64.7,False,68.0,Bullish lean,technical
-14,PG,63.6,34.0,86.0,,False,66.0,Bullish lean,technical
-15,MRK,63.6,23.3,92.0,,False,65.9,Bullish lean,technical
-16,CL,63.6,12.7,92.0,,False,63.3,Bullish lean,technical
-17,ABBV,63.6,0,99.0,,False,63.2,Bullish lean,technical
-18,AXP,63.6,63.5,61.0,,False,62.4,Bullish lean,technical
-19,V,63.6,49.4,60.0,,False,58.5,Neutral,technical
-20,HD,63.6,44.3,61.0,,False,57.6,Neutral,technical
-21,NVDA,71.6,43.5,39.0,65.7,False,53.4,Neutral,news
-22,GOOGL,71.6,50.6,39.0,,False,52.1,Neutral,news
-23,COP,55.6,64.2,39.0,,False,50.5,Neutral,technical
-24,NKE,63.6,13.8,61.0,,False,50.0,Neutral,value
-25,XOM,55.6,55.5,38.0,,False,47.9,Neutral,technical
-26,META,71.6,62.9,0.0,81.8,False,46.8,Neutral,technical
-27,CVX,55.6,41.4,41.0,,False,45.7,Neutral,technical
-28,HON,63.6,31.0,40.0,,False,45.1,Neutral,value
-29,DIS,71.6,71.3,8.0,,False,43.7,Bearish lean,technical
-30,PFE,63.6,23.5,41.0,,False,43.7,Bearish lean,value
-31,LOW,63.6,56.3,8.0,67.8,False,43.5,Bearish lean,technical
-32,ADBE,59.6,79.0,0.0,62.0,False,43.1,Bearish lean,technical
-33,WMT,63.6,23.3,37.0,,False,41.9,Bearish lean,value
-34,AVGO,71.6,0,27.0,71.5,False,41.6,Bearish lean,value
-35,MSFT,71.6,58.1,0.0,59.8,False,41.5,Bearish lean,technical
-36,COST,63.6,11.1,39.0,,False,39.7,Bearish lean,value
-37,ORCL,71.6,43.2,9.0,,False,37.1,Bearish lean,technical
-38,MCD,63.6,50.5,10.0,,False,36.9,Bearish lean,technical
-39,ABT,63.6,53.3,8.0,,False,36.7,Bearish lean,technical
-40,MA,63.6,49.0,9.0,,False,36.1,Bearish lean,technical
-41,PEP,63.6,45.2,4.0,,False,32.9,Bearish lean,technical
+1,CNC,63.6,,100.0,,False,84.8,Bullish lean,technical
+2,GL,63.6,79.5,100.0,,False,83.5,Bullish lean,technical
+3,KLAC,71.6,88.0,100.0,65.0,False,83.5,Bullish lean,technical
+4,MTB,63.6,77.4,100.0,,False,83.0,Bullish lean,technical
+5,CRWD,71.6,,100.0,57.6,False,80.5,Bullish lean,technical
+6,UAL,63.6,81.4,100.0,60.6,False,79.3,Bullish lean,technical
+7,CINF,63.6,82.7,100.0,58.5,False,79.1,Bullish lean,technical
+8,DAL,63.6,78.5,100.0,58.4,False,78.3,Bullish lean,technical
+9,SJM,63.6,,100.0,58.5,False,78.2,Bullish lean,technical
+10,CCL,63.6,76.0,100.0,60.2,False,78.1,Bullish lean,technical
+11,JPM,63.6,71.6,98.0,67.8,False,78.1,Bullish lean,technical
+12,AIZ,63.6,76.6,100.0,58.9,False,78.0,Bullish lean,technical
+13,BAC,63.6,76.7,100.0,58.7,False,78.0,Bullish lean,technical
+14,INTC,71.6,,100.0,46.0,False,77.6,Bullish lean,technical
+15,CFG,63.6,74.1,100.0,58.8,False,77.5,Bullish lean,technical
+16,CPAY,71.6,63.5,100.0,58.9,False,77.4,Bullish lean,technical
+17,HPQ,71.6,79.7,96.0,47.8,False,77.0,Bullish lean,technical
+18,CRL,63.6,,96.0,60.1,False,76.9,Bullish lean,technical
+19,ALL,63.6,91.5,92.0,51.9,False,76.8,Bullish lean,technical
+20,MAS,63.6,68.3,100.0,59.6,False,76.5,Bullish lean,technical
+21,PPG,63.6,68.5,100.0,59.0,False,76.4,Bullish lean,technical
+22,USB,63.6,76.2,100.0,51.5,False,76.4,Bullish lean,technical
+23,IVZ,63.6,,100.0,50.7,False,76.3,Bullish lean,technical
+24,RCL,63.6,67.3,100.0,59.7,False,76.3,Bullish lean,technical
+25,HST,63.6,69.7,100.0,57.0,False,76.2,Bullish lean,technical
+26,EIX,63.6,86.7,89.0,58.2,False,76.0,Bullish lean,technical
+27,STT,63.6,68.9,100.0,56.7,False,76.0,Bullish lean,technical
+28,C,63.6,67.7,100.0,57.2,False,75.9,Bullish lean,technical
+29,PRU,63.6,80.7,97.0,49.2,False,75.8,Bullish lean,technical
+30,FITB,63.6,64.1,100.0,58.9,False,75.5,Bullish lean,technical
+31,AES,63.6,86.0,90.0,53.8,False,75.4,Bullish lean,technical
+32,KEY,63.6,63.7,100.0,58.0,False,75.2,Bullish lean,technical
+33,ELV,63.6,62.8,100.0,58.4,False,75.1,Bullish lean,technical
+34,CB,63.6,79.4,90.0,58.4,False,75.0,Bullish lean,technical
+35,MRNA,63.6,,100.0,44.8,False,74.8,Bullish lean,technical
+36,BNY,63.6,69.5,100.0,49.4,False,74.7,Bullish lean,technical
+37,DRI,63.6,60.1,100.0,58.8,False,74.7,Bullish lean,technical
+38,TRV,63.6,84.4,91.0,50.2,False,74.7,Bullish lean,technical
+39,FSLR,55.6,70.5,100.0,57.5,False,74.5,Bullish lean,technical
+40,NTAP,71.6,57.0,100.0,51.2,False,74.5,Bullish lean,technical
+41,DD,63.6,,90.0,60.1,False,74.3,Bullish lean,technical
+42,INCY,63.6,75.2,90.0,59.1,False,74.3,Bullish lean,technical
+43,KDP,63.6,58.8,100.0,58.3,False,74.3,Bullish lean,technical
+44,RF,63.6,80.0,92.0,51.1,False,74.3,Bullish lean,technical
+45,NTRS,63.6,68.3,100.0,48.2,False,74.2,Bullish lean,technical
+46,SYY,63.6,60.8,97.0,59.7,False,74.0,Bullish lean,technical
+47,GS,63.6,66.8,100.0,48.3,False,73.9,Bullish lean,technical
+48,D,63.6,63.8,100.0,50.5,False,73.8,Bullish lean,technical
+49,FDX,63.6,68.2,93.0,58.3,False,73.8,Bullish lean,technical
+50,MS,63.6,56.1,100.0,57.5,False,73.6,Bullish lean,technical
+51,NXPI,71.6,48.9,100.0,54.7,False,73.6,Bullish lean,technical
+52,AXP,63.6,62.5,99.0,51.5,False,73.3,Bullish lean,technical
+53,F,63.6,,93.0,50.9,False,73.3,Bullish lean,technical
+54,NUE,63.6,55.4,100.0,56.8,False,73.3,Bullish lean,technical
+55,RL,63.6,52.9,100.0,58.7,False,73.2,Bullish lean,technical
+56,DELL,71.6,41.8,100.0,58.6,False,73.0,Bullish lean,technical
+57,HBAN,63.6,74.3,86.0,60.6,False,73.0,Bullish lean,technical
+58,URI,63.6,52.3,100.0,57.9,False,72.9,Bullish lean,technical
+59,SPG,63.6,73.9,92.0,49.7,False,72.8,Bullish lean,technical
+60,FRT,63.6,63.2,93.0,57.9,False,72.7,Bullish lean,technical
+61,SNA,63.6,65.2,90.0,58.8,False,72.2,Bullish lean,technical
+62,VTRS,63.6,,90.0,51.6,False,72.1,Bullish lean,technical
+63,DVA,63.6,56.0,100.0,49.4,False,72.0,Bullish lean,technical
+64,DXCM,63.6,47.0,99.0,60.1,False,72.0,Bullish lean,technical
+65,GD,63.6,49.6,98.0,59.5,False,72.0,Bullish lean,technical
+66,WSM,63.6,56.7,100.0,48.9,False,72.0,Bullish lean,technical
+67,CMI,63.6,33.2,100.0,,False,71.9,Bullish lean,technical
+68,IFF,63.6,58.9,92.0,59.9,False,71.9,Bullish lean,technical
+69,TROW,63.6,55.9,100.0,49.2,False,71.9,Bullish lean,technical
+70,TXT,63.6,68.5,91.0,52.4,False,71.9,Bullish lean,technical
+71,FFIV,71.6,44.6,100.0,49.7,False,71.8,Bullish lean,technical
+72,STLD,63.6,48.7,100.0,55.6,False,71.8,Bullish lean,technical
+73,UPS,63.6,69.4,90.0,51.4,False,71.6,Bullish lean,technical
+74,PKG,63.6,50.7,100.0,51.5,False,71.3,Bullish lean,technical
+75,TJX,63.6,42.9,100.0,59.1,False,71.3,Bullish lean,technical
+76,AAPL,71.6,36.1,92.0,69.0,False,71.1,Bullish lean,technical
+77,PNC,63.6,49.2,100.0,51.3,False,71.0,Bullish lean,technical
+78,MET,63.6,40.9,100.0,59.0,False,70.9,Bullish lean,technical
+79,BBY,63.6,48.6,100.0,50.7,False,70.8,Bullish lean,technical
+80,LUV,63.6,48.8,100.0,50.7,False,70.8,Bullish lean,technical
+81,BRK-B,63.6,73.7,86.0,49.2,False,70.6,Bullish lean,technical
+82,JCI,63.6,55.6,91.0,58.8,False,70.6,Bullish lean,technical
+83,CAH,63.6,38.6,100.0,59.3,False,70.5,Bullish lean,technical
+84,KVUE,63.6,61.7,92.0,50.2,False,70.5,Bullish lean,technical
+85,VRTX,63.6,44.5,96.0,60.6,False,70.5,Bullish lean,technical
+86,CI,63.6,54.5,90.0,60.4,False,70.4,Bullish lean,technical
+87,PH,63.6,38.3,100.0,59.1,False,70.4,Bullish lean,technical
+88,SOLV,63.6,78.3,77.0,59.5,False,70.4,Bullish lean,technical
+89,UDR,63.6,54.8,91.0,58.2,False,70.3,Bullish lean,technical
+90,KO,63.6,54.9,90.0,58.7,False,70.1,Bullish lean,technical
+91,DOV,63.6,51.3,91.0,59.0,False,69.8,Bullish lean,technical
+92,EXPD,63.6,45.1,100.0,49.2,False,69.8,Bullish lean,technical
+93,WDC,71.6,31.9,100.0,52.6,False,69.8,Bullish lean,technical
+94,JNJ,63.6,51.0,91.0,58.6,False,69.7,Bullish lean,technical
+95,FCX,63.6,34.4,100.0,58.0,False,69.4,Bullish lean,technical
+96,MSCI,63.6,40.4,90.0,,False,69.3,Bullish lean,technical
+97,PFG,63.6,43.0,100.0,48.5,False,69.2,Bullish lean,technical
+98,GEV,63.6,45.9,92.0,59.0,False,69.1,Bullish lean,technical
+99,HPE,71.6,23.7,100.0,56.6,False,69.0,Bullish lean,technical
+100,RTX,63.6,35.6,97.0,60.0,False,69.0,Bullish lean,technical
+101,APH,71.6,20.4,100.0,59.5,False,68.9,Bullish lean,technical
+102,APO,63.6,30.9,100.0,59.1,False,68.9,Bullish lean,technical
+103,NDSN,63.6,44.8,92.0,59.2,False,68.9,Bullish lean,technical
+104,PM,63.6,43.4,93.0,58.4,False,68.8,Bullish lean,technical
+105,LLY,63.6,29.2,100.0,59.6,False,68.7,Bullish lean,technical
+106,ROST,63.6,42.2,93.0,59.2,False,68.7,Bullish lean,technical
+107,HSIC,63.6,29.7,100.0,58.9,False,68.6,Bullish lean,technical
+108,GWW,63.6,37.4,100.0,49.6,False,68.3,Bullish lean,technical
+109,TGT,63.6,35.7,90.0,,False,68.2,Bullish lean,technical
+110,JBL,71.6,17.6,100.0,57.7,False,68.0,Bullish lean,technical
+111,ABNB,63.6,39.9,92.0,59.0,False,67.9,Bullish lean,technical
+112,AFL,63.6,52.8,90.0,49.9,False,67.9,Bullish lean,technical
+113,GEN,71.6,73.4,67.0,59.4,False,67.9,Bullish lean,technical
+114,TRGP,55.6,52.5,91.0,58.2,False,67.9,Bullish lean,technical
+115,CNP,63.6,53.2,89.0,50.7,False,67.8,Bullish lean,technical
+116,LII,63.6,58.7,85.0,51.2,False,67.6,Bullish lean,technical
+117,V,63.6,48.9,86.0,59.3,False,67.6,Bullish lean,technical
+118,CPT,63.6,46.9,92.0,50.3,False,67.5,Bullish lean,technical
+119,IBKR,63.6,26.6,100.0,56.3,False,67.5,Bullish lean,technical
+120,LIN,63.6,39.6,91.0,58.9,False,67.5,Bullish lean,technical
+121,QCOM,71.6,24.7,100.0,48.5,False,67.5,Bullish lean,technical
+122,EVRG,63.6,48.8,90.0,51.2,False,67.4,Bullish lean,technical
+123,NCLH,63.6,71.3,68.0,,False,67.4,Bullish lean,technical
+124,HUBB,63.6,46.3,91.0,51.2,False,67.2,Bullish lean,technical
+125,CASY,63.6,20.6,100.0,58.7,False,66.8,Bullish lean,technical
+126,ITW,63.6,55.1,85.0,50.5,False,66.8,Bullish lean,technical
+127,AME,63.6,37.7,90.0,58.6,False,66.7,Bullish lean,technical
+128,DE,63.6,40.2,92.0,52.6,False,66.7,Bullish lean,technical
+129,LNT,63.6,38.4,90.0,58.2,False,66.7,Bullish lean,technical
+130,MU,71.6,12.5,100.0,56.6,False,66.7,Bullish lean,technical
+131,GE,63.6,19.3,100.0,58.5,False,66.5,Bullish lean,technical
+132,SYF,63.6,87.3,60.0,60.7,False,66.5,Bullish lean,value
+133,BIIB,63.6,18.5,100.0,58.9,False,66.4,Bullish lean,technical
+134,PG,63.6,42.1,87.0,58.3,False,66.4,Bullish lean,technical
+135,WAB,63.6,31.3,92.0,59.3,False,66.2,Bullish lean,technical
+136,COHR,71.6,0,100.0,,False,66.1,Bullish lean,technical
+137,MAR,63.6,26.2,100.0,49.9,False,66.1,Bullish lean,technical
+138,INVH,63.6,46.7,82.0,59.1,False,65.8,Bullish lean,technical
+139,TTWO,71.6,,64.0,61.4,False,65.7,Bullish lean,news
+140,VMC,63.6,37.4,87.0,58.9,False,65.6,Bullish lean,technical
+141,AMP,63.6,79.7,62.0,58.8,False,65.3,Bullish lean,value
+142,TDG,63.6,14.5,100.0,57.5,False,65.3,Bullish lean,technical
+143,CAT,63.6,15.4,100.0,56.3,False,65.2,Bullish lean,technical
+144,PANW,71.6,0,100.0,59.8,False,64.9,Bullish lean,technical
+145,CDW,71.6,68.2,61.0,59.7,False,64.8,Bullish lean,news
+146,MCHP,71.6,0,100.0,59.7,False,64.8,Bullish lean,technical
+147,WFC,63.6,77.9,65.0,52.8,False,64.8,Bullish lean,value
+148,ANET,71.6,0,100.0,59.2,False,64.7,Bullish lean,technical
+149,IP,63.6,,67.0,61.9,False,64.7,Bullish lean,technical
+150,Q,71.6,0,100.0,58.9,False,64.7,Bullish lean,technical
+151,TT,63.6,34.6,90.0,51.7,False,64.7,Bullish lean,technical
+152,BEN,63.6,18.9,100.0,49.4,False,64.6,Bullish lean,technical
+153,CDNS,71.6,0,100.0,58.4,False,64.6,Bullish lean,technical
+154,CSCO,71.6,0,100.0,58.3,False,64.6,Bullish lean,technical
+155,CSX,63.6,28.1,90.0,57.7,False,64.6,Bullish lean,technical
+156,ETN,63.6,28.3,90.0,57.5,False,64.6,Bullish lean,technical
+157,LYV,71.6,0,100.0,58.7,False,64.6,Bullish lean,technical
+158,HOOD,63.6,10.3,100.0,57.9,False,64.5,Bullish lean,technical
+159,DDOG,71.6,0,100.0,57.7,False,64.4,Bullish lean,technical
+160,WST,63.6,9.0,100.0,57.8,False,64.3,Bullish lean,technical
+161,AMAT,71.6,0.5,100.0,56.0,False,64.2,Bullish lean,technical
+162,IEX,63.6,15.1,100.0,51.4,False,64.2,Bullish lean,technical
+163,LRCX,71.6,0,100.0,56.5,False,64.2,Bullish lean,technical
+164,PGR,63.6,81.4,62.0,51.8,False,64.2,Bullish lean,value
+165,AMD,71.6,0,100.0,55.8,False,64.1,Bullish lean,technical
+166,AMGN,63.6,27.5,89.0,57.8,False,64.1,Bullish lean,technical
+167,EMR,63.6,7.3,100.0,58.8,False,64.1,Bullish lean,technical
+168,TXN,71.6,0,100.0,56.1,False,64.1,Bullish lean,technical
+169,PNW,63.6,32.9,90.0,50.1,False,64.0,Bullish lean,technical
+170,SCHW,63.6,68.5,63.0,61.9,False,64.0,Bullish lean,technical
+171,TER,71.6,0,100.0,55.4,False,64.0,Bullish lean,technical
+172,ON,71.6,0,100.0,55.0,False,63.9,Bullish lean,technical
+173,MNST,63.6,7.4,100.0,57.3,False,63.8,Bullish lean,technical
+174,SNDK,71.6,0,100.0,54.6,False,63.8,Bullish lean,technical
+175,TKO,71.6,,60.0,60.7,False,63.8,Bullish lean,news
+176,HLT,63.6,6.7,100.0,57.2,False,63.7,Bullish lean,technical
+177,PHM,63.6,79.4,61.0,52.8,False,63.7,Bullish lean,value
+178,TPR,63.6,19.8,91.0,60.0,False,63.7,Bullish lean,technical
+179,GNRC,63.6,0,100.0,,False,63.6,Bullish lean,technical
+180,MLM,63.6,74.7,59.0,59.9,False,63.5,Bullish lean,value
+181,STX,71.6,0,100.0,53.1,False,63.5,Bullish lean,technical
+182,MAA,63.6,28.4,86.0,58.4,False,63.4,Bullish lean,technical
+183,PSA,63.6,27.1,91.0,50.0,False,63.2,Bullish lean,technical
+184,RJF,63.6,73.9,64.0,50.2,False,63.1,Bullish lean,technical
+185,XYZ,71.6,3.0,93.0,59.9,False,63.0,Bullish lean,technical
+186,DHI,63.6,75.1,62.0,51.1,False,62.8,Bullish lean,value
+187,EW,63.6,0,100.0,59.3,False,62.8,Bullish lean,technical
+188,AON,63.6,68.1,60.0,60.6,False,62.6,Bullish lean,value
+189,IBM,71.6,58.8,64.0,52.8,False,62.6,Bullish lean,news
+190,UNH,63.6,0,100.0,58.5,False,62.6,Bullish lean,technical
+191,CVS,63.6,0,100.0,58.2,False,62.5,Bullish lean,technical
+192,FIX,63.6,0.0,100.0,58.0,False,62.5,Bullish lean,technical
+193,HWM,63.6,0,100.0,58.2,False,62.5,Bullish lean,technical
+194,SW,63.6,0,98.0,61.3,False,62.5,Bullish lean,technical
+195,CARR,63.6,0,100.0,57.4,False,62.4,Bullish lean,technical
+196,DOC,63.6,0,100.0,57.7,False,62.4,Bullish lean,technical
+197,FTNT,71.6,2.0,100.0,45.3,False,62.4,Bullish lean,technical
+198,CHRW,63.6,6.3,100.0,50.6,False,62.3,Bullish lean,technical
+199,ADI,71.6,0,93.0,58.6,False,62.2,Bullish lean,technical
+200,MGM,63.6,0,100.0,56.3,False,62.2,Bullish lean,technical
+201,WRB,63.6,74.4,61.0,50.2,False,62.2,Bullish lean,value
+202,JBHT,63.6,0,100.0,55.8,False,62.1,Bullish lean,technical
+203,DGX,63.6,18.8,91.0,51.7,False,61.9,Bullish lean,technical
+204,KEYS,71.6,0,92.0,59.2,False,61.9,Bullish lean,technical
+205,VST,63.6,56.7,62.0,63.6,False,61.7,Bullish lean,technical
+206,ABBV,63.6,0,96.0,59.9,False,61.5,Bullish lean,technical
+207,BKNG,63.6,60.4,60.0,62.7,False,61.5,Bullish lean,technical
+208,BAX,63.6,,65.0,51.0,False,61.1,Bullish lean,technical
+209,SWK,63.6,0,100.0,51.1,False,61.1,Bullish lean,technical
+210,ROK,63.6,0,100.0,50.5,False,61.0,Bullish lean,technical
+211,A,63.6,55.2,62.0,61.2,False,60.9,Bullish lean,technical
+212,HRL,63.6,0,100.0,49.5,False,60.8,Bullish lean,technical
+213,ADP,63.6,63.7,62.0,51.7,False,60.7,Bullish lean,technical
+214,EXPE,63.6,64.7,61.0,52.0,False,60.6,Bullish lean,technical
+215,ESS,63.6,11.1,92.0,50.8,False,60.5,Bullish lean,technical
+216,HUM,63.6,0,100.0,47.4,False,60.4,Bullish lean,technical
+217,MMM,63.6,0,98.0,50.7,False,60.3,Bullish lean,technical
+218,WAT,63.6,0,97.0,51.6,False,60.2,Bullish lean,technical
+219,ARE,63.6,,63.0,50.3,False,60.0,Bullish lean,technical
+220,HON,63.6,0,92.0,58.9,False,59.9,Neutral,technical
+221,DLTR,63.6,45.9,65.0,59.8,False,59.8,Neutral,technical
+222,EXR,63.6,11.2,90.0,50.9,False,59.8,Neutral,technical
+223,PWR,63.6,0,93.0,56.6,False,59.8,Neutral,technical
+224,BA,63.6,0,90.0,61.2,False,59.6,Neutral,technical
+225,DTE,63.6,7.9,91.0,51.2,False,59.6,Neutral,technical
+226,CHD,63.6,0,91.0,58.7,False,59.5,Neutral,technical
+227,EL,63.6,,60.0,53.6,False,59.5,Neutral,technical
+228,FTV,71.6,0,90.0,50.3,False,59.5,Neutral,technical
+229,PAYX,63.6,56.8,63.0,51.2,False,59.5,Neutral,technical
+230,EQIX,63.6,0,91.0,58.2,False,59.4,Neutral,technical
+231,IRM,63.6,0,91.0,58.3,False,59.4,Neutral,technical
+232,EBAY,63.6,9.4,90.0,50.3,False,59.3,Neutral,technical
+233,GM,63.6,0,90.0,,False,59.2,Neutral,technical
+234,MDLZ,63.6,0,90.0,59.0,False,59.2,Neutral,technical
+235,ES,63.6,61.3,59.0,51.5,False,59.1,Neutral,news
+236,FICO,71.6,37.0,60.0,63.9,False,59.1,Neutral,news
+237,CPB,63.6,60.4,60.0,49.7,False,58.9,Neutral,technical
+238,ZBH,63.6,59.8,59.0,51.6,False,58.8,Neutral,news
+239,BX,63.6,42.3,63.0,61.2,False,58.6,Neutral,technical
+240,CL,63.6,0,93.0,50.9,False,58.6,Neutral,technical
+241,EA,71.6,0,89.0,47.8,False,58.6,Neutral,technical
+242,KHC,63.6,,60.0,49.6,False,58.5,Neutral,technical
+243,ODFL,63.6,18.8,82.0,49.7,False,58.3,Neutral,technical
+244,KIM,63.6,0,92.0,50.4,False,58.2,Neutral,technical
+245,SWKS,71.6,0,82.0,58.1,False,58.2,Neutral,technical
+246,RVTY,63.6,0,86.0,59.3,False,57.9,Neutral,technical
+247,PCG,63.6,78.0,39.0,63.2,False,57.8,Neutral,value
+248,L,63.6,78.6,41.0,57.5,False,57.5,Neutral,value
+249,AKAM,71.6,0,82.0,53.6,False,57.3,Neutral,technical
+250,EG,63.6,88.0,39.0,50.9,False,57.3,Neutral,value
+251,WY,63.6,0,83.0,60.1,False,57.0,Neutral,technical
+252,ECL,63.6,35.2,62.0,60.7,False,56.8,Neutral,technical
+253,MO,63.6,74.2,40.0,58.1,False,56.4,Neutral,value
+254,BALL,63.6,70.5,40.0,60.8,False,56.2,Neutral,value
+255,KMB,63.6,39.2,63.0,50.8,False,56.0,Neutral,technical
+256,NVDA,71.6,44.0,39.0,78.2,False,56.0,Neutral,sentiment
+257,HD,63.6,31.9,61.0,59.6,False,55.5,Neutral,technical
+258,MCO,63.6,30.7,61.0,60.4,False,55.5,Neutral,value
+259,DECK,63.6,73.8,41.0,51.8,False,55.4,Neutral,value
+260,EOG,55.6,76.8,39.0,59.3,False,54.8,Neutral,value
+261,TFC,63.6,70.8,39.0,,False,54.6,Neutral,value
+262,ARES,63.6,16.9,65.0,62.5,False,54.5,Neutral,value
+263,MPC,55.6,72.0,41.0,58.4,False,54.3,Neutral,value
+264,ADM,63.6,0,81.0,49.8,False,54.2,Neutral,technical
+265,GOOG,71.6,50.8,41.0,59.1,False,54.2,Neutral,news
+266,AEP,63.6,63.7,39.0,58.8,False,54.0,Neutral,technical
+267,CF,63.6,83.3,28.0,58.4,False,54.0,Neutral,technical
+268,BMY,63.6,72.1,37.0,52.0,False,53.7,Neutral,technical
+269,OXY,55.6,80.2,33.0,60.1,False,53.5,Neutral,value
+270,ED,63.6,67.6,40.0,50.0,False,53.4,Neutral,value
+271,NI,63.6,58.1,40.0,58.8,False,53.3,Neutral,technical
+272,DVN,55.6,79.0,31.0,63.2,False,53.2,Neutral,technical
+273,REG,63.6,59.4,39.0,58.7,False,53.2,Neutral,technical
+274,PSX,55.6,70.7,38.0,58.7,False,53.1,Neutral,technical
+275,UNP,63.6,58.2,39.0,59.6,False,53.1,Neutral,technical
+276,VZ,71.6,57.5,38.0,51.9,False,53.1,Neutral,news
+277,AJG,63.6,16.0,62.0,60.7,False,52.9,Neutral,value
+278,VLO,55.6,69.4,38.0,57.8,False,52.6,Neutral,technical
+279,AEE,63.6,61.2,40.0,51.6,False,52.5,Neutral,technical
+280,GOOGL,71.6,50.6,40.0,,False,52.5,Neutral,news
+281,NEE,63.6,60.6,35.0,60.0,False,52.3,Neutral,technical
+282,BLK,63.6,14.8,60.0,61.0,False,52.1,Neutral,value
+283,WBD,71.6,,38.0,52.4,False,52.1,Neutral,news
+284,APA,55.6,85.9,30.0,52.0,False,52.0,Neutral,value
+285,DASH,71.6,0,60.0,65.0,False,51.9,Neutral,value
+286,OKE,55.6,72.5,38.0,51.2,False,51.9,Neutral,value
+287,PCAR,63.6,55.1,41.0,51.3,False,51.5,Neutral,news
+288,YUM,63.6,55.8,40.0,52.3,False,51.5,Neutral,technical
+289,GRMN,71.6,53.7,35.0,52.5,False,51.4,Neutral,news
+290,NEM,63.6,,36.0,62.8,False,51.3,Neutral,technical
+291,BKR,55.6,65.7,34.0,60.8,False,51.1,Neutral,technical
+292,EME,63.6,49.8,37.0,60.4,False,50.9,Neutral,technical
+293,COP,55.6,66.6,33.0,60.4,False,50.8,Neutral,technical
+294,MRK,63.6,42.5,41.0,59.6,False,50.7,Neutral,news
+295,AXON,63.6,0,62.0,65.0,False,50.6,Neutral,value
+296,ACGL,63.6,87.7,15.0,59.1,False,50.5,Neutral,technical
+297,SATS,71.6,,29.0,61.8,False,50.5,Neutral,technical
+298,NSC,63.6,54.4,38.0,51.8,False,50.4,Neutral,technical
+299,APTV,63.6,0,62.0,63.6,False,50.3,Neutral,value
+300,BXP,63.6,0,65.0,58.0,False,50.2,Neutral,value
+301,IR,63.6,7.4,59.0,60.7,False,50.2,Neutral,value
+302,KMI,55.6,62.2,38.0,52.5,False,50.1,Neutral,technical
+303,OMC,71.6,0,60.0,55.9,False,50.1,Neutral,value
+304,AMCR,63.6,0,63.0,60.1,False,50.0,Neutral,value
+305,TECH,63.6,0,64.0,57.5,False,49.8,Neutral,value
+306,AMZN,63.6,49.5,33.0,61.9,False,49.7,Neutral,technical
+307,CHTR,71.6,94.0,0.0,65.0,False,49.7,Neutral,technical
+308,HAL,55.6,64.6,31.0,58.9,False,49.5,Neutral,technical
+309,HIG,63.6,84.0,13.0,60.0,False,49.2,Neutral,technical
+310,COO,63.6,0,60.0,61.0,False,49.1,Neutral,value
+311,CMCSA,71.6,92.1,0.0,63.3,False,49.0,Neutral,technical
+312,SLB,55.6,58.9,32.0,60.5,False,49.0,Neutral,technical
+313,J,63.6,0,59.0,61.7,False,48.9,Neutral,value
+314,PLD,63.6,36.5,40.0,58.0,False,48.8,Neutral,technical
+315,TDY,71.6,30.3,38.0,57.5,False,48.8,Neutral,news
+316,GPC,63.6,0,62.0,55.1,False,48.6,Neutral,value
+317,SO,63.6,41.3,40.0,51.6,False,48.5,Neutral,technical
+318,COF,63.6,0,65.0,,False,48.3,Neutral,value
+319,FIS,71.6,86.6,0.0,65.0,False,48.2,Neutral,technical
+320,WEC,63.6,39.9,40.0,51.4,False,48.2,Neutral,technical
+321,WMB,55.6,44.8,38.0,60.1,False,48.2,Neutral,technical
+322,DIS,71.6,71.5,9.0,63.2,False,48.0,Neutral,technical
+323,FISV,71.6,85.3,0.0,64.4,False,47.8,Neutral,technical
+324,XOM,55.6,58.2,33.0,53.1,False,47.7,Neutral,technical
+325,ALB,63.6,,32.0,53.9,False,47.4,Neutral,technical
+326,LDOS,71.6,82.7,0.0,65.0,False,47.4,Neutral,technical
+327,UBER,71.6,69.3,7.0,64.1,False,47.0,Neutral,technical
+328,PTC,71.6,80.1,0.0,65.0,False,46.9,Neutral,technical
+329,VRSN,71.6,22.8,34.0,62.6,False,46.9,Neutral,technical
+330,NVR,63.6,74.7,11.0,60.4,False,46.8,Neutral,technical
+331,GDDY,71.6,79.0,0.0,64.5,False,46.6,Neutral,technical
+332,VICI,63.6,80.7,7.0,60.5,False,46.6,Neutral,technical
+333,CVX,55.6,42.5,35.0,59.4,False,46.5,Neutral,technical
+334,CRH,63.6,74.0,10.0,61.0,False,46.4,Neutral,technical
+335,ACN,71.6,75.5,0.0,65.0,False,46.0,Neutral,technical
+336,EQR,63.6,26.5,41.0,51.4,False,45.8,Neutral,value
+337,WTW,63.6,73.3,8.0,61.8,False,45.7,Neutral,technical
+338,BR,71.6,73.5,0.0,65.0,False,45.6,Neutral,technical
+339,CTSH,71.6,81.2,0.0,57.5,False,45.6,Neutral,technical
+340,GIS,63.6,81.6,8.0,52.3,False,45.5,Neutral,technical
+341,T,71.6,83.4,0.0,54.6,False,45.5,Neutral,technical
+342,WMT,63.6,26.6,35.0,60.2,False,45.5,Neutral,technical
+343,DOW,63.6,,28.0,53.2,False,45.4,Neutral,technical
+344,META,71.6,63.4,0.0,74.3,False,45.4,Neutral,technical
+345,UHS,63.6,89.8,0.0,57.5,False,45.4,Neutral,technical
+346,LYB,63.6,,27.0,54.5,False,45.3,Neutral,technical
+347,FOX,71.6,79.2,0.0,57.5,False,45.2,Neutral,technical
+348,CTVA,63.6,19.5,38.0,59.8,False,45.1,Neutral,value
+349,INTU,71.6,70.9,0.0,65.0,False,45.1,Neutral,technical
+350,AIG,63.6,77.1,9.0,52.2,False,44.9,Bearish lean,technical
+351,CRM,71.6,69.8,0.0,65.0,False,44.9,Bearish lean,technical
+352,AVGO,71.6,0,36.0,71.5,False,44.8,Bearish lean,value
+353,DUK,63.6,66.3,15.0,51.5,False,44.7,Bearish lean,technical
+354,FDS,63.6,74.0,10.0,52.6,False,44.7,Bearish lean,technical
+355,JKHY,71.6,69.0,0.0,65.0,False,44.7,Bearish lean,technical
+356,EXE,55.6,88.3,0.0,65.0,False,44.6,Bearish lean,technical
+357,PFE,63.6,24.7,39.0,50.5,False,44.6,Bearish lean,value
+358,FOXA,71.6,77.1,0.0,55.6,False,44.4,Bearish lean,technical
+359,IT,71.6,77.4,0.0,54.8,False,44.3,Bearish lean,technical
+360,SMCI,71.6,76.0,0.0,55.8,False,44.3,Bearish lean,technical
+361,DLR,63.6,15.7,38.0,59.3,False,44.2,Bearish lean,value
+362,MCK,63.6,64.0,9.0,61.6,False,44.2,Bearish lean,technical
+363,ETR,63.6,12.3,40.0,58.8,False,44.1,Bearish lean,value
+364,BRO,63.6,69.2,8.0,57.4,False,44.0,Bearish lean,technical
+365,IQV,63.6,62.7,9.0,61.8,False,44.0,Bearish lean,technical
+366,EXC,63.6,60.2,16.0,51.1,False,43.8,Bearish lean,technical
+367,LULU,63.6,84.1,0.0,55.1,False,43.7,Bearish lean,technical
+368,TSCO,63.6,73.8,0.0,65.0,False,43.7,Bearish lean,technical
+369,TTD,71.6,64.2,0.0,65.0,False,43.7,Bearish lean,technical
+370,HCA,63.6,76.7,0.0,62.0,False,43.6,Bearish lean,technical
+371,PYPL,63.6,85.0,0.0,53.0,False,43.5,Bearish lean,technical
+372,ROP,63.6,62.7,7.0,63.3,False,43.5,Bearish lean,technical
+373,COST,63.6,12.8,37.0,59.7,False,43.4,Bearish lean,value
+374,FAST,63.6,16.6,40.0,50.4,False,43.3,Bearish lean,value
+375,NWSA,71.6,38.4,16.0,60.8,False,43.3,Bearish lean,technical
+376,MCD,63.6,58.2,10.0,60.9,False,43.2,Bearish lean,technical
+377,TEL,71.6,51.7,10.0,57.5,False,43.2,Bearish lean,technical
+378,ADBE,59.6,78.6,0.0,62.3,False,43.1,Bearish lean,technical
+379,ZTS,63.6,77.8,0.0,57.5,False,43.0,Bearish lean,technical
+380,SNPS,71.6,0,37.0,60.2,False,42.9,Bearish lean,value
+381,ULTA,63.6,70.1,0.0,65.0,False,42.9,Bearish lean,technical
+382,VRSK,63.6,46.8,19.0,54.8,False,42.9,Bearish lean,technical
+383,LITE,71.6,0,37.0,59.5,False,42.8,Bearish lean,value
+384,AVY,63.6,56.4,9.0,61.9,False,42.7,Bearish lean,technical
+385,OTIS,63.6,65.7,8.0,54.2,False,42.7,Bearish lean,technical
+386,CPRT,63.6,67.3,0.0,65.0,False,42.4,Bearish lean,technical
+387,LVS,63.6,68.6,0.0,63.7,False,42.4,Bearish lean,technical
+388,ALGN,63.6,0,41.0,60.1,False,42.3,Bearish lean,value
+389,RMD,63.6,67.7,0.0,63.8,False,42.2,Bearish lean,technical
+390,BSX,63.6,66.2,0.0,65.0,False,42.1,Bearish lean,technical
+391,NFLX,71.6,56.3,0.0,64.3,False,42.0,Bearish lean,technical
+392,MKC,63.6,72.9,0.0,57.2,False,41.9,Bearish lean,technical
+393,MOS,63.6,62.4,8.0,53.7,False,41.9,Bearish lean,technical
+394,VRT,63.6,0,40.0,60.2,False,41.9,Bearish lean,value
+395,MA,63.6,49.2,10.0,62.6,False,41.8,Bearish lean,technical
+396,WYNN,63.6,49.4,10.0,62.8,False,41.8,Bearish lean,technical
+397,GILD,63.6,61.8,3.0,61.9,False,41.7,Bearish lean,technical
+398,NOC,63.6,66.5,0.0,62.5,False,41.7,Bearish lean,technical
+399,POOL,63.6,49.4,9.0,63.7,False,41.7,Bearish lean,technical
+400,SBUX,63.6,0,40.0,58.8,False,41.7,Bearish lean,value
+401,WM,63.6,44.0,14.0,60.5,False,41.7,Bearish lean,technical
+402,MPWR,71.6,0,34.0,59.2,False,41.6,Bearish lean,value
+403,WELL,63.6,0,39.0,59.8,False,41.5,Bearish lean,value
+404,EQT,55.6,82.8,0.0,54.6,False,41.4,Bearish lean,technical
+405,MDT,63.6,52.6,8.0,60.9,False,41.4,Bearish lean,technical
+406,REGN,63.6,64.4,0.0,63.1,False,41.4,Bearish lean,technical
+407,ABT,63.6,48.7,8.0,64.1,False,41.3,Bearish lean,technical
+408,AWK,63.6,52.8,9.0,58.2,False,41.2,Bearish lean,technical
+409,AOS,63.6,72.5,0.0,53.6,False,41.1,Bearish lean,technical
+410,ICE,63.6,61.8,0.0,64.1,False,41.1,Bearish lean,technical
+411,LOW,63.6,64.0,0.0,61.8,False,41.1,Bearish lean,technical
+412,RSG,63.6,46.8,11.0,59.8,False,41.1,Bearish lean,technical
+413,SPGI,63.6,48.0,9.0,62.2,False,41.1,Bearish lean,technical
+414,SBAC,63.6,64.2,0.0,61.3,False,41.0,Bearish lean,technical
+415,AZO,63.6,63.4,0.0,61.7,False,40.9,Bearish lean,technical
+416,PNR,63.6,68.0,0.0,57.0,False,40.9,Bearish lean,technical
+417,VTR,63.6,0,37.0,60.1,False,40.9,Bearish lean,value
+418,APD,63.6,0,37.0,59.8,False,40.8,Bearish lean,value
+419,LHX,63.6,39.2,15.0,59.1,False,40.8,Bearish lean,technical
+420,MRSH,63.6,54.3,9.0,53.9,False,40.7,Bearish lean,technical
+421,NWS,71.6,29.9,15.0,57.5,False,40.6,Bearish lean,technical
+422,DPZ,63.6,59.5,0.0,62.8,False,40.4,Bearish lean,technical
+423,ORLY,63.6,48.8,7.0,61.3,False,40.4,Bearish lean,technical
+424,PEG,63.6,43.6,11.0,59.4,False,40.4,Bearish lean,technical
+425,ALLE,63.6,68.2,0.0,53.7,False,40.3,Bearish lean,technical
+426,ERIE,63.6,67.5,8.0,,False,40.2,Bearish lean,technical
+427,LEN,63.6,51.3,7.0,58.0,False,40.2,Bearish lean,technical
+428,AVB,63.6,41.4,16.0,51.2,False,40.0,Bearish lean,technical
+429,XEL,63.6,35.7,14.0,60.0,False,39.9,Bearish lean,technical
+430,BG,63.6,0,34.0,59.8,False,39.8,Bearish lean,value
+431,CEG,63.6,55.3,0.0,63.5,False,39.7,Bearish lean,technical
+432,NDAQ,63.6,55.6,0.0,63.0,False,39.6,Bearish lean,technical
+433,STE,63.6,55.1,0.0,62.8,False,39.5,Bearish lean,technical
+434,CMS,63.6,51.9,15.0,,False,39.4,Bearish lean,technical
+435,GLW,71.6,0,39.0,,False,39.4,Bearish lean,value
+436,VEEV,63.6,51.7,0.0,65.0,False,39.2,Bearish lean,technical
+437,APP,71.6,26.6,9.0,63.1,False,39.0,Bearish lean,technical
+438,ATO,63.6,59.4,3.0,50.9,False,39.0,Bearish lean,technical
+439,DG,63.6,41.5,7.0,61.4,False,38.9,Bearish lean,technical
+440,BLDR,63.6,38.8,7.0,63.5,False,38.8,Bearish lean,technical
+441,CBOE,63.6,61.2,0.0,53.5,False,38.8,Bearish lean,technical
+442,CVNA,63.6,49.5,0.0,65.0,False,38.8,Bearish lean,technical
+443,AMT,63.6,34.7,11.0,60.0,False,38.7,Bearish lean,technical
+444,COR,63.6,,7.0,63.0,False,38.7,Bearish lean,technical
+445,CMG,63.6,35.7,8.0,62.8,False,38.4,Bearish lean,technical
+446,TMO,63.6,,7.0,62.0,False,38.4,Bearish lean,technical
+447,NKE,63.6,28.6,11.0,64.3,False,38.3,Bearish lean,technical
+448,CME,63.6,61.5,0.0,50.0,False,38.2,Bearish lean,technical
+449,FANG,55.6,0,35.0,60.2,False,38.2,Bearish lean,value
+450,CLX,63.6,41.7,10.0,51.7,False,38.1,Bearish lean,technical
+451,TMUS,71.6,,0.0,63.0,False,38.1,Bearish lean,technical
+452,CBRE,63.6,47.2,0.0,63.2,False,38.0,Bearish lean,technical
+453,CIEN,71.6,0,23.0,59.5,False,37.8,Bearish lean,value
+454,WDAY,71.6,34.3,0.0,65.0,False,37.8,Bearish lean,technical
+455,SHW,63.6,31.3,10.0,60.4,False,37.7,Bearish lean,technical
+456,STZ,63.6,45.4,1.0,61.7,False,37.7,Bearish lean,technical
+457,CTAS,63.6,36.7,9.0,56.3,False,37.6,Bearish lean,technical
+458,ORCL,71.6,18.4,9.0,63.2,False,37.4,Bearish lean,technical
+459,MSFT,71.6,59.6,0.0,,False,37.3,Bearish lean,technical
+460,XYL,63.6,50.5,0.0,55.6,False,37.1,Bearish lean,technical
+461,PODD,63.6,40.3,0.0,65.0,False,37.0,Bearish lean,technical
+462,IDXX,63.6,28.2,8.0,63.0,False,36.9,Bearish lean,technical
+463,SYK,63.6,37.8,0.0,61.8,False,35.8,Bearish lean,technical
+464,VLTO,63.6,45.2,0.0,54.3,False,35.8,Bearish lean,technical
+465,HAS,63.6,,0.0,61.9,False,35.4,Bearish lean,technical
+466,TRMB,71.6,22.1,0.0,65.0,False,35.3,Bearish lean,technical
+467,TYL,71.6,21.7,0.0,65.0,False,35.2,Bearish lean,technical
+468,EFX,63.6,28.0,0.0,64.5,False,34.4,Bearish lean,technical
+469,GEHC,63.6,29.2,0.0,62.4,False,34.2,Bearish lean,technical
+470,LH,63.6,13.3,10.0,60.5,False,34.2,Bearish lean,technical
+471,BDX,63.6,37.2,0.0,53.5,False,34.0,Bearish lean,technical
+472,PEP,63.6,33.6,2.0,52.8,False,33.9,Bearish lean,technical
+473,ZBRA,71.6,0,10.0,62.6,False,33.9,Bearish lean,technical
+474,LMT,63.6,2.4,15.0,60.4,False,33.7,Bearish lean,technical
+475,TPL,55.6,,0.0,65.0,False,33.6,Bearish lean,technical
+476,BF-B,63.6,37.4,0.0,50.0,False,33.4,Bearish lean,technical
+477,NOW,71.6,0,7.0,65.0,False,33.3,Bearish lean,technical
+478,CAG,63.6,,0.0,53.0,False,33.1,Bearish lean,technical
+479,MSI,71.6,42.8,0.0,,False,33.1,Bearish lean,technical
+480,MTD,63.6,52.9,0.0,,False,33.1,Bearish lean,technical
+481,TAP,63.6,,0.0,53.1,False,33.1,Bearish lean,technical
+482,SRE,63.6,0,14.0,60.2,False,32.8,Bearish lean,technical
+483,PPL,63.6,16.7,4.0,60.0,False,32.6,Bearish lean,technical
+484,HII,63.6,26.3,0.0,56.2,False,32.4,Bearish lean,technical
+485,PSKY,71.6,,0.0,40.0,False,32.4,Bearish lean,technical
+486,KKR,63.6,0,10.0,64.3,False,32.3,Bearish lean,technical
+487,ROL,63.6,26.2,0.0,55.4,False,32.2,Bearish lean,technical
+488,FE,63.6,4.2,14.0,52.0,False,32.0,Bearish lean,technical
+489,DHR,63.6,0,10.0,62.0,False,31.8,Bearish lean,technical
+490,ISRG,63.6,13.8,0.0,64.8,False,31.6,Bearish lean,technical
+491,O,63.6,0,14.0,51.9,False,31.2,Bearish lean,technical
+492,ADSK,71.6,0,0.0,65.0,False,30.9,Bearish lean,technical
+493,PLTR,71.6,0,0.0,64.2,False,30.7,Bearish lean,technical
+494,TSLA,63.6,0,10.0,52.0,False,29.8,Bearish lean,technical
+495,COIN,63.6,1.9,0.0,64.0,False,29.1,Bearish lean,technical
+496,CSGP,63.6,0,0.0,65.0,False,28.9,Bearish lean,technical
+497,CCI,63.6,0,7.0,52.4,False,28.8,Bearish lean,technical
+498,NRG,63.6,0,0.0,64.2,False,28.7,Bearish lean,technical
+499,TSN,63.6,0,0.0,62.5,False,28.4,Bearish lean,technical
+500,KR,63.6,0,0.0,60.5,False,28.0,Bearish lean,technical
+501,FDXF,63.6,14.6,8.0,,False,27.0,Bearish lean,technical
+502,HSY,63.6,0,0.0,54.2,False,26.7,Bearish lean,technical
+503,GPN,63.6,,0.0,,False,26.5,Bearish lean,technical
