@@ -1,0 +1,88 @@
+name: cam-watch
+
+# Manual only — runs solely when you dispatch it (never on push/schedule).
+on:
+  workflow_dispatch:
+    inputs:
+      start_local:
+        description: "Local start time HH:MM (Europe/Tallinn). Leave EMPTY to start immediately."
+        required: false
+        default: ""
+      max_hours:
+        description: "Max watch duration in hours (wait + watch must stay < 5.5h)."
+        required: false
+        default: "5"
+      interval_seconds:
+        description: "Seconds between checks."
+        required: false
+        default: "300"
+      cam_url:
+        description: "Camera snapshot URL."
+        required: false
+        default: "https://ristmikud.tallinn.ee/last/cam021.jpg"
+      spot_box:
+        description: "Spot crop box: x1,y1,x2,y2 (1280x720 frame)."
+        required: false
+        default: "110,408,512,578"
+      label:
+        description: "What you're watching (shown in the alert)."
+        required: false
+        default: "white Skoda Fabia (black roof)"
+      notify_user:
+        description: "GitHub username to @-mention in the alert issue (optional)."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Watch the spot
+        id: watch
+        env:
+          CAM_URL: ${{ inputs.cam_url }}
+          SPOT_BOX: ${{ inputs.spot_box }}
+          START_LOCAL: ${{ inputs.start_local }}
+          TZ_OFFSET: "3"
+          INTERVAL: ${{ inputs.interval_seconds }}
+          LABEL: ${{ inputs.label }}
+        run: |
+          set -euo pipefail
+          python3 -m pip install --quiet --disable-pip-version-check pillow numpy
+          export MAX_MIN=$(python3 -c "print(int(float('${{ inputs.max_hours }}')*60))")
+          python3 scripts/watch_cam_spot.py
+
+      - name: Upload evidence (baseline + gone frames)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cam-watch-evidence
+          path: watch_out/
+          if-no-files-found: warn
+
+      - name: Open alert issue if the vehicle left
+        if: steps.watch.outputs.gone == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NOTIFY: ${{ inputs.notify_user }}
+        run: |
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          {
+            echo "🚨 **${{ inputs.label }}** has LEFT its spot."
+            echo ""
+            echo "- Detected at: **${{ steps.watch.outputs.gone_at }}**"
+            echo "- Camera: ${{ inputs.cam_url }}"
+            echo "- Evidence frames (artifact \`cam-watch-evidence\`): $run_url"
+            [ -n "${NOTIFY:-}" ] && echo "" && echo "cc @${NOTIFY}"
+          } > body.md
+          gh issue create --repo "${{ github.repository }}" \
+            --title "ALERT: ${{ inputs.label }} left the spot" \
+            --body-file body.md \
+          || { echo "::error::Could not open an issue (are Issues enabled on this repo?). Failing the run so you still get a notification."; exit 1; }
