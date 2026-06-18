@@ -36,6 +36,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_WEIGHTS = {"news": 0.25, "technical": 0.35, "value": 0.20, "sentiment": 0.20}
 LENS_LABEL = {"news": "Pre-screen (news/macro)", "value": "Warren Buffett (value)",
               "technical": "Magic Elite (technical)", "sentiment": "Sentiment (social/analyst/insider)"}
+LENS_SHORT = {"news": "News", "value": "Value", "technical": "Tech", "sentiment": "Sent"}
+ALL_LENSES = ("news", "value", "technical", "sentiment")
 
 
 def clamp(v, lo, hi):
@@ -162,10 +164,17 @@ def report(ticker, d):
     # 5. Overall
     L.append("")
     if d["overall"] is not None:
+        wsum = sum(d["weights"].values()) or 1.0
         L.append(f"5. OVERALL DIRECTION  {_arrow(d['overall'])} {d['overall']}/100  "
                  f"→ {direction_label(d['overall'])}")
+        # Inline weighted breakdown so contributions and missing lenses are explicit.
+        parts = " + ".join(f"{LENS_SHORT[k]} {d['lenses'][k]:.0f}×{d['weights'][k] / wsum:.0%}"
+                           for k in ALL_LENSES if k in d["weights"])
+        excluded = [LENS_SHORT[k] for k in ALL_LENSES if k not in d["weights"]]
+        exc = f"   (excluded: {', '.join(excluded)} — no data, weights renormalized)" if excluded else ""
+        L.append(f"   = {parts}{exc}")
         L.append(f"   Dominant driver: {LENS_LABEL[d['dominant']]} "
-                 f"(score {d['lenses'][d['dominant']]}, weight {d['weights'][d['dominant']]:.0%}) "
+                 f"(score {d['lenses'][d['dominant']]:.0f}, weight {d['weights'][d['dominant']] / wsum:.0%}) "
                  f"— the lens most influencing {ticker.upper()}'s near-term move.")
     else:
         L.append("5. OVERALL DIRECTION  n/a (no lenses available)")
