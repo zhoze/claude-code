@@ -1,0 +1,17 @@
+# Secrets — NEVER commit API keys. Provide FMP_KEY via env var / CI secret.
+.env
+.env.*
+!.env.example
+*.key
+*_key
+fmp_key*
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+*.swp

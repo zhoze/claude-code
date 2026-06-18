@@ -1,0 +1,5308 @@
+{
+  "_comment": "Sentiment lens input: retail social buzz + analyst consensus + insider buying per ticker. STALE FAST - refresh before relying on it. social: very_bullish|bullish|neutral|bearish|very_bearish (Reddit most-mentioned + StockTwits bullish %). analyst: strong_buy|buy|hold|sell|strong_sell (+ analyst_upside_pct = avg price-target upside). insider: buying|neutral|selling. Names not listed get no sentiment lens (treated like missing data). sentiment.py/overall.py read this; they do NOT fetch it. Coverage below is the subset with fresh signal as of the date; expand by researching forums/portals/analyst data.",
+  "as_of": "2026-06-15",
+  "stocks": {
+    "ADBE": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 32.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ],
+      "note": "Net Buy with a high avg target (~$329) but post-earnings downgrades temper the tone."
+    },
+    "ABNB": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 9.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ADP": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 11.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AAPL": {
+      "social": "bullish",
+      "analyst": "buy",
+      "analyst_upside_pct": 10.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ],
+      "note": "Mega-cap 'safe haven' favored in Reddit portfolios."
+    },
+    "ABT": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 44.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ACGL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 11.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ABBV": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 16.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ACN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 64.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "A": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 24.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ADSK": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 64.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ADI": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 7.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ADM": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -1.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AEP": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 8.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AEE": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 10.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AIZ": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 9.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AIG": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 14.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AES": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 25.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AKAM": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 23.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AFL": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -0.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ALB": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 25.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ALGN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 17.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AJG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 21.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ALLE": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 24.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ALL": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 12.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AMD": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -11.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AMAT": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -10.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AMCR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 17.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AME": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 7.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AMT": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 16.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AMGN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 2.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AMP": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 8.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AMZN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 29.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ANET": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 11.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AON": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 21.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "APA": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 13.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AOS": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 24.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "APD": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 15.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "APO": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 10.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "APH": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 13.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ARES": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 33.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "APTV": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 41.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "APP": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 37.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ARE": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 1.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AVB": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 8.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AVGO": {
+      "social": "bullish",
+      "analyst": "buy",
+      "analyst_upside_pct": 26.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ],
+      "note": "Consensus Buy, zero Sells; targets ~$486-580 even after the guidance-miss crash."
+    },
+    "ATO": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 6.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AVY": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 29.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AWK": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 5.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AXON": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 54.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AZO": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 27.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BAC": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 8.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "AXP": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 10.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BA": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 24.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BALL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 21.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BAX": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 6.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BDX": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 23.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BBY": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 4.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BEN": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -3.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BF-B": {
+      "social": "neutral",
+      "analyst": "hold",
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BIIB": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 9.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 15.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BKNG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 34.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BKR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 21.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BLDR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 39.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BLK": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 23.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 55.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BRO": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 49.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BMY": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 13.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BNY": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -4.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BSX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 84.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BRK-B": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -5.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "C": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -2.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 25.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "BXP": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 3.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CAH": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 12.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CAG": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 20.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CASY": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 7.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CARR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -0.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CBRE": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 38.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CAT": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -7.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CBOE": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 23.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CB": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 5.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CCL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 18.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CDW": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 14.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CDNS": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 6.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CEG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 39.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CCI": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 16.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CF": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 5.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CFG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 8.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CHRW": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 3.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CHD": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 7.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CIEN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 13.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CI": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 19.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CHTR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 95.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CL": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 6.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CINF": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 6.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CMCSA": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 38.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CLX": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 11.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CMG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 35.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "COIN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 43.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CNP": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 4.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CME": {
+      "social": "neutral",
+      "analyst": "hold",
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "COR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 36.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "COO": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 23.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "COP": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 19.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CPAY": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 9.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CPT": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 1.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CPB": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -2.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "COST": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 14.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CSCO": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 5.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CRWD": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 0.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CRH": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 23.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CPRT": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 57.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CSGP": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 100.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CRM": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 71.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CRL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 17.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CSX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 1.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CTAS": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 42.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CVNA": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 430.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CVX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 12.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CVS": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 4.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "D": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 3.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CTVA": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 15.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DAL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 5.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "CTSH": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 59.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DASH": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 52.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DD": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 17.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DDOG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 1.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DE": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 17.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DECK": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 12.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DGX": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 11.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DHR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 29.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 26.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DHI": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 7.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DLTR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 15.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DELL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 7.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DOC": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 1.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DLR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 11.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DIS": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 38.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DOV": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 9.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DOW": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 21.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DPZ": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 35.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DUK": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 10.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DRI": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 8.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DTE": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 8.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DVN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 38.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DVA": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -4.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "DXCM": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 17.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EA": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -15.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EBAY": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 1.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ECL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 21.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ED": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 0.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EFX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 46.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EG": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 5.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ELV": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 6.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EIX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 4.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EL": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 23.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EME": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 19.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EOG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 11.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EQIX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 4.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EQR": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 9.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EMR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 8.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EQT": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -19.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ES": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 9.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ESS": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 5.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ETN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -0.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EVRG": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 7.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EW": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 11.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ETR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 8.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EXPD": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -5.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EXC": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 7.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "F": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 5.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EXPE": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 13.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EXR": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 6.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FANG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 17.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "EXE": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 53.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FCX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 3.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FDX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 5.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FAST": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 2.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FE": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 13.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FDS": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 17.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FFIV": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -1.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FICO": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 42.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FISV": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 45.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FIS": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 62.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FIX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 3.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FITB": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 9.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FRT": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 2.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FTV": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 2.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FOX": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 81.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FSLR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 0.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "GD": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 13.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FTNT": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -31.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "FOXA": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 37.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "GEHC": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 32.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "GDDY": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 46.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "GEN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 12.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "GE": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 6.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ],
+      "note": "22-analyst Strong Buy (33% Strong Buy / 58% Buy), but price (~$357) sits just above the ~$351 avg target."
+    },
+    "GEV": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 10.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "GILD": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 29.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "GIS": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 15.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "GRMN": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 16.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "GPC": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 34.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "GOOG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 10.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "GS": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -11.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HAS": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 29.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HAL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 9.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "GWW": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -2.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HBAN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 20.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HD": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 14.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HCA": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 30.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HLT": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -2.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HIG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 16.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HON": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 9.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HOOD": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 2.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HII": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 41.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HPE": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 43.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HPQ": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -14.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HSIC": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 9.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HRL": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -3.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HST": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -3.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HWM": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 5.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HUM": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -17.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HSY": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 27.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ICE": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 44.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "IDXX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 36.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "IBKR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -7.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "HUBB": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 8.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "IBM": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 18.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "IEX": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 9.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "IFF": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 15.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "INCY": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 10.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "INTU": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 68.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "INTC": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -26.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "INVH": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 10.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "IQV": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 28.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "IP": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 29.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "IR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 21.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "IRM": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 5.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "IT": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 31.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ISRG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 48.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "IVZ": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 4.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ITW": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 3.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "J": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 27.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "JCI": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 8.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "JBHT": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -11.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "JKHY": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 56.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "JBL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 1.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "JNJ": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 7.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ],
+      "note": "Top-analyst Strong Buy dividend aristocrat (avg target ~$267)."
+    },
+    "JPM": {
+      "social": "bullish",
+      "analyst": "buy",
+      "analyst_upside_pct": 1.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ],
+      "note": "Trending bullish on StockTwits; strong technical uptrend."
+    },
+    "KEY": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 3.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "KEYS": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 11.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "KDP": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 5.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "KIM": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 2.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "KHC": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -2.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "KKR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 45.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "KLAC": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 704.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "KMB": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 5.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "KVUE": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 1.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "L": {
+      "social": "neutral",
+      "analyst": "buy",
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "KO": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 7.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "KMI": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 17.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LDOS": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 64.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LEN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 3.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "KR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 20.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LH": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 19.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LHX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 10.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LIN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 9.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LII": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 7.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LLY": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 14.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LITE": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 13.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LNT": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 4.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LMT": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 19.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LRCX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -6.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LOW": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 28.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ],
+      "note": "Strong Buy from top 13 analysts (avg target ~$267)."
+    },
+    "LULU": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 34.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LUV": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 4.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LYB": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 29.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LVS": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 41.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MA": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 34.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MAA": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 5.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "LYV": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 8.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MAR": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -0.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MCO": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 19.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MAS": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 13.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MCD": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 22.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MCHP": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 14.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MCK": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 27.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MDLZ": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 10.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MET": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 9.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MDT": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 22.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MGM": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -7.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "META": {
+      "social": "bullish",
+      "analyst": "buy",
+      "analyst_upside_pct": 45.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ],
+      "note": "Consensus Strong Buy (~60 analysts, avg target ~$828) despite the AI-capex pullback."
+    },
+    "MLM": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 15.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MKC": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 47.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MOS": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 24.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MNST": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -1.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MO": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 4.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MMM": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 4.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MPC": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 6.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MRK": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 13.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MPWR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 11.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MRNA": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -34.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MRSH": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 25.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MS": {
+      "social": "neutral",
+      "analyst": "buy",
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NDSN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 11.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NDAQ": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 36.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "MU": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -6.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NFLX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 45.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NEE": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 16.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NI": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 8.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NKE": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 45.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NOC": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 33.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NRG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 44.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NOW": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 57.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NSC": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 11.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NEM": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 35.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NTRS": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -12.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NTAP": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 7.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NWS": {
+      "social": "neutral",
+      "analyst": "buy",
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NUE": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -4.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NVDA": {
+      "social": "very_bullish",
+      "analyst": "buy",
+      "analyst_upside_pct": 51.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ],
+      "note": "Reddit's #1 most-mentioned with bullish AI score; high beta (~2.2) -> hype-tempered."
+    },
+    "NWSA": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 22.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NVR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 19.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "O": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 12.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ODFL": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -1.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "NXPI": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -18.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "OMC": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 39.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "OKE": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 8.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ON": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -16.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ORLY": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 25.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ORCL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 38.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PANW": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 15.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "OTIS": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 27.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "OXY": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 17.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PAYX": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 8.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PCAR": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 8.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PCG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 37.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PFE": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 3.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PEG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 12.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PEP": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 18.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PFG": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -10.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PGR": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 11.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 5.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PH": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 10.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PHM": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 18.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PLD": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 3.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PKG": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 9.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PLTR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 44.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PNR": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 46.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PODD": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 55.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PNW": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 0.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PNC": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 8.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PM": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 5.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "POOL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 41.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PPG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 9.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PRU": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -5.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PPL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 16.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PSA": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 0.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PSKY": {
+      "social": "neutral",
+      "analyst": "sell",
+      "analyst_upside_pct": 0.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "Q": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 9.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PSX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 8.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PWR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -5.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PTC": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 63.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "QCOM": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -10.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "PYPL": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 19.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "RCL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 14.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "REG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 8.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "RF": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 7.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "REGN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 37.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "RJF": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 1.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "RL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 8.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ROK": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 3.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ROL": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 35.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "RSG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 15.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ROST": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 11.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ROP": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 38.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "RMD": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 42.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "RVTY": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 12.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SATS": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 28.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "RTX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 16.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SBAC": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 25.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SJM": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 6.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SHW": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 19.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SMCI": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 38.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SLB": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 19.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SCHW": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 29.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SNA": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 8.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SBUX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 8.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SNPS": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 17.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SNDK": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -19.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SPG": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -1.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SOLV": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 13.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SO": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 10.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "STE": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 35.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SRE": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 17.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SPGI": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 31.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "STT": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -5.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "STX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -29.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "STLD": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -12.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SW": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 25.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SWK": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 7.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "STZ": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 28.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SWKS": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 4.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SYF": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 21.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SYK": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 28.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "SYY": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 14.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "T": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 30.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TAP": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 20.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TECH": {
+      "social": "neutral",
+      "analyst": "buy",
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TDG": {
+      "social": "neutral",
+      "analyst": "buy",
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TDY": {
+      "social": "neutral",
+      "analyst": "buy",
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TEL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TJX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 10.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TMUS": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 37.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TRV": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 1.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TSCO": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 78.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TER": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -14.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TPR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 16.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TSLA": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 13.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TMO": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 29.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TKO": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 21.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TPL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 80.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TRMB": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 85.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TT": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 11.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TROW": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -5.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TRGP": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 4.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TTD": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 62.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TSN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 33.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TXN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -9.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TTWO": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 26.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TXT": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 15.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "UAL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 21.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "TYL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 52.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "UHS": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 52.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "UBER": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 43.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ULTA": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 51.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "UDR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 4.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "UNH": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 6.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "UPS": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 9.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "UNP": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 13.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "URI": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 2.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "USB": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 10.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "V": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 11.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "VEEV": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 52.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "VICI": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 20.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "VLTO": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 28.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "VMC": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 9.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "VLO": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 2.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "VRSK": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 31.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "VRSN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 34.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "VRT": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 18.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "VRTX": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 20.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "VST": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 40.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "VTR": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 17.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "VZ": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 12.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WAB": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 12.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "VTRS": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 10.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WBD": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 16.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WAT": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 10.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WDC": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": -32.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WDAY": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 49.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WEC": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 9.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WM": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 19.8,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WELL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 15.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WMB": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 17.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WFC": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 18.6,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WRB": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 1.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WSM": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": -7.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WMT": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 18.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WTW": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 28.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WST": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 2.2,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "XEL": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 16.7,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WYNN": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 35.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "WY": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 17.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "XYL": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 37.4,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "XOM": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 20.9,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "YUM": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 15.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "XYZ": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 16.0,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ZBH": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 10.5,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ZBRA": {
+      "social": "neutral",
+      "analyst": "buy",
+      "analyst_upside_pct": 34.1,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    },
+    "ZTS": {
+      "social": "neutral",
+      "analyst": "hold",
+      "analyst_upside_pct": 56.3,
+      "sources": [
+        {
+          "title": "FMP grades-consensus + price-target-consensus",
+          "url": "https://financialmodelingprep.com/"
+        }
+      ]
+    }
+  }
+}

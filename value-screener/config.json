@@ -1,0 +1,63 @@
+{
+  "_comment": "Tunable thresholds for the Warren Buffett value screen. Every number here is documented in buffett_formula.md with its rationale and source. Adjust freely - the engine reads all thresholds from this file.",
+
+  "valuation": {
+    "discount_rate": 0.09,
+    "_discount_rate_note": "Required rate of return. Buffett discounts owner earnings at the long-term US Treasury yield; most practitioners floor it near 9-10% to stay conservative. Lower this toward the current 10y Treasury (~0.043) for a more Buffett-literal model.",
+    "terminal_growth": 0.025,
+    "projection_years": 10,
+    "growth_cap": 0.10,
+    "_growth_cap_note": "Never extrapolate >10%/yr for a decade. High growth mean-reverts; Buffett prizes predictability over optimism.",
+    "default_growth": 0.05,
+    "_default_growth_note": "Used when historical EPS growth is unavailable.",
+    "graham_aaa_yield": 0.055,
+    "_graham_aaa_yield_note": "Current AAA corporate bond yield used in the bond-adjusted Graham formula."
+  },
+
+  "quality_gates": [
+    {"key": "roe",                "label": "ROE >= 15%",                 "op": ">=", "threshold": 0.15, "partial": 0.10, "points": 12},
+    {"key": "roic",               "label": "ROIC >= 12%",                "op": ">=", "threshold": 0.12, "partial": 0.09, "points": 10},
+    {"key": "net_margin",         "label": "Net margin >= 10%",          "op": ">=", "threshold": 0.10, "partial": 0.07, "points": 8},
+    {"key": "gross_margin",       "label": "Gross margin >= 40% (moat)", "op": ">=", "threshold": 0.40, "partial": 0.25, "points": 5},
+    {"key": "net_debt_to_ebitda", "label": "Net debt/EBITDA < 3x",       "op": "<",  "threshold": 3.0,  "partial": 4.0,  "points": 8},
+    {"key": "interest_coverage",  "label": "Interest coverage > 5x",     "op": ">",  "threshold": 5.0,  "partial": 3.0,  "points": 5},
+    {"key": "current_ratio",      "label": "Current ratio > 1.5",        "op": ">",  "threshold": 1.5,  "partial": 1.0,  "points": 4},
+    {"key": "fcf_yield",          "label": "Positive free cash flow",    "op": ">",  "threshold": 0.0,                   "points": 4},
+    {"key": "income_quality",     "label": "Earnings backed by cash",    "op": ">",  "threshold": 1.0,  "partial": 0.8,  "points": 4}
+  ],
+  "_quality_gates_note": "Quality pillar = 60 points. 'partial' awards half points when the metric clears the looser bar but misses the strict one. net_debt_to_ebitda and interest_coverage use a net-cash override in code (a company with no net debt automatically passes).",
+
+  "core_gates": ["roe", "net_margin", "net_debt_to_ebitda"],
+  "_core_gates_note": "Gates that MUST pass (strict) for a Strong Candidate verdict, regardless of total score.",
+
+  "valuation_scoring": {
+    "mos_points": 30,
+    "pe_points": 10,
+    "pe_full": 15.0,
+    "pe_zero": 30.0
+  },
+  "_valuation_scoring_note": "Valuation pillar = 40 points. Margin-of-safety scaled 0->30 as MOS goes 0%->target. P/E scaled 10->0 as P/E goes pe_full->pe_zero (don't overpay even for quality).",
+
+  "margin_of_safety_target": 0.25,
+  "_margin_of_safety_target_note": "Graham's principle: buy at >=25% below intrinsic value.",
+
+  "expected_return": {
+    "horizon_years": 5,
+    "target_gain": 0.35
+  },
+  "_expected_return_note": "Forward-return estimates assume price converges to the DCF intrinsic value over horizon_years, while intrinsic value itself compounds at the discount rate. expected_return_annual = (1+discount_rate) * (intrinsic/price)^(1/horizon_years) - 1. years_to_target = ln(1+target_gain)/ln(1+expected_return_annual). These are MODEL ESTIMATES, not predictions of price or timing.",
+
+  "overall_weights": {
+    "news": 0.25,
+    "technical": 0.35,
+    "value": 0.20,
+    "sentiment": 0.20
+  },
+  "_overall_weights_note": "How the Overall pipeline (overall.py) blends the FOUR lenses (Pre-screen news, Magic technical, Buffett value, Sentiment) into one near-term directional score. Near-term moves lean on technicals + news/sentiment; value (Buffett) is the long-horizon anchor with the smallest weight. Sentiment = retail social + analyst consensus + insider buying (hype-tempered). Weights are renormalized over whichever lenses have data; tune to taste.",
+
+  "verdict": {
+    "strong_score": 70,
+    "strong_min_mos": 0.0,
+    "watch_score": 50
+  }
+}
