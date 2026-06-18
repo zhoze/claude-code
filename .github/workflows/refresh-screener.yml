@@ -12,6 +12,7 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    environment: screen   # uses the GitHub Environment "screen" (and its FMP_KEY secret)
     defaults:
       run:
         working-directory: value-screener
