@@ -234,6 +234,14 @@ python3 refresh_sp500.py --limit 5   # quick smoke test (a few symbols)
   (manual `workflow_dispatch`) using `${{ secrets.FMP_KEY }}`, then commits the
   updated data. It never runs automatically.
 
+> **Date-sync convention:** the macro/news lens (`data/market_conditions.json`
+> `as_of` + `macro`) is **always kept on the same date as the fundamentals /
+> technicals / sentiment**. `refresh_sp500.py` (and the CI job) update the FMP
+> data but **cannot fetch news**, so after any refresh the macro/news block must
+> be re-gathered from current sources (VIX, futures, yields, oil, headlines) and
+> stamped with that same date. Otherwise the News lens silently reflects a stale
+> tape.
+
 ## Limitations
 
 - Point-in-time snapshot (2026-06-14); fundamentals change.
