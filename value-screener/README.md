@@ -57,10 +57,15 @@ StockTwits buzz, Strong-Buy/upside consensus, and insider purchases. Extreme
 *bullish* social sentiment on a **high-beta** name is partly discounted and
 flagged ⚠ (contrarian-aware) so hype doesn't inflate the score.
 
+The full **pre-opening screen** (see below) now leads the `overall.py` output as
+the market backdrop, so a single command shows you the tape *and* the stock's
+read within it. Hide it with `--no-preopen`.
+
 ```bash
-python3 overall.py                 # overall PRE-MARKET conditions only (no stock)
-python3 overall.py --ticker ADBE   # full Pre-screen → Buffett → Magic → Overall
-python3 overall.py --all           # rank ALL names (writes data/results/overall_screen.{csv,md})
+python3 overall.py                 # the pre-opening market screen only (no stock)
+python3 overall.py --ticker ADBE   # pre-opening dashboard + full Pre-screen → Buffett → Magic → Overall
+python3 overall.py --ticker ADBE --no-preopen   # stock pipeline only (hide the dashboard)
+python3 overall.py --all           # dashboard + rank ALL names (writes data/results/overall_screen.{csv,md})
 python3 prescreen.py --ticker AVGO # just the Pre-screen lens
 python3 overall.py --selftest      # built-in checks
 ```
