@@ -93,27 +93,31 @@ python3 preopen.py --selftest # built-in checks
 
 It groups the indicators the way a trader scans them at the open:
 
-- **Equity futures** — S&P / Nasdaq / Dow (or the prior cash close on a holiday)
-- **Volatility & fear** — VIX, **VVIX** (vol-of-vol), and the **CNN Fear & Greed** gauge
-- **Rates** — UST 2y / 10y and the 10y-2y spread
+- **Equity futures** — S&P / Nasdaq / Dow / Russell 2000 (or the prior cash close on a holiday)
+- **Global / overnight** — Nikkei, Hang Seng, Euro Stoxx 50, DAX, FTSE (the overseas tape that sets the pre-US-open tone)
+- **Volatility & fear** — VIX, **VVIX** (vol-of-vol), the **VIX term structure** (VIX vs VIX3M — contango/backwardation), and the **CNN Fear & Greed** gauge
+- **Rates** — UST 2y / 10y, the 10y-2y spread, and the **10y breakeven** (inflation expectations)
+- **Credit, rates-vol & positioning** — the **MOVE** index (Treasury vol), **high-yield credit spreads** (OAS), and the **equity put/call** ratio
 - **Commodities & fuel** — WTI, Brent, natural gas, **gold, silver, copper**, and the **US average pump gasoline** price
 - **FX & crypto** — the dollar (**DXY**) and **bitcoin**
-- **Top drivers** (each indicator's signed contribution to the score) and **key headlines**
+- **Top drivers** (each indicator's signed contribution to the score), **key headlines**, and the **economic calendar** (upcoming catalysts)
 
-Each new signal is folded into `score_macro` with a documented, bounded weight
-(elevated VVIX = risk-off; Fear & Greed is directional but contrarian-tempered at
-extremes; an oil/gas spike or a strong dollar is an inflation/earnings headwind; a
-safe-haven bid in metals is a mild risk-off tilt; bitcoin is a risk-appetite proxy).
-Every field is **optional** — the engine still runs on older snapshots that lack them.
+Each signal is folded into `score_macro` with a documented, bounded weight
+(elevated VIX/VVIX/MOVE = risk-off; tight high-yield spreads & a VIX in contango =
+risk-on; Fear & Greed and the put/call ratio are contrarian-tempered at extremes; an
+oil/gas spike, a strong dollar or rising breakevens are inflation/earnings headwinds;
+a safe-haven bid in metals is a mild risk-off tilt; global equities set the overnight
+tide; bitcoin is a risk-appetite proxy). Every field is **optional** — the engine
+still runs on older snapshots that lack them.
 
 > Like Pre-screen, this is **offline & deterministic** — it reads the dated,
 > sourced snapshot in [`data/market_conditions.json`](data/market_conditions.json)
 > and fetches nothing itself. **Refresh that file before relying on it.** Example
 > (2026-06-19, Juneteenth): cash markets closed, so the screen is the pre-opening
-> read for Mon Jun 22 — **CAUTIOUS, score ~41**: a strong prior close (S&P +1%,
-> VIX ~16) offset by a hawkish Fed, a 15-month-high dollar, ~$3.97 pump gas, firm
-> crude, a gold bid, and a Fear & Greed gauge at 37 (Fear). Educational only — not
-> investment advice.
+> read for Mon Jun 22 — **NEUTRAL, score ~48**: a strong prior close (S&P +1%, VIX
+> ~16) and benign plumbing (tight HY credit spreads ~2.78%, low MOVE ~65, VIX in
+> contango) offset by a hawkish Fed, a 15-month-high dollar, ~$3.97 pump gas, and a
+> Fear & Greed gauge at 37 (Fear). Educational only — not investment advice.
 
 ---
 

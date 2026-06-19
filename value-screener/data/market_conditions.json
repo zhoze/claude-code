@@ -2,7 +2,7 @@
   "_comment": "Pre-screen input: fresh macro/pre-market conditions + per-stock news, from reliable sources. NEWS GOES STALE - refresh before relying on it. To refresh: web-search current futures/VIX/yields/oil + headlines and each stock's latest news, then rewrite this file with today's date, numbers, and source links. prescreen.py and overall.py read this; they do NOT fetch news themselves. Trigger keyword: Pre-screen.",
   "as_of": "2026-06-19",
   "session": "Juneteenth holiday - US cash markets & CME equity-index futures closed Fri Jun 19; this is the PRE-OPENING read for the next session, Mon Jun 22 2026",
-  "_data_note": "Equity figures are the Thu Jun 18 cash close (no Fri futures print on the holiday). 24h markets - metals, energy, FX, crypto - are Fri Jun 19 spot. Where a publisher reported a level but not the intraday delta, the change field is a directional estimate from the dated sources below; refresh before relying on it.",
+  "_data_note": "Equity figures are the Thu Jun 18 cash close (no Fri futures print on the holiday). 24h markets - metals, energy, FX, crypto - are Fri Jun 19 spot. Global equities are Fri Jun 19 overseas sessions. Where a publisher reported a level but not the intraday delta, the change field is a directional estimate from the dated sources below; refresh before relying on it. vix3m is an estimate (publisher did not print a Jun 18 close) consistent with the VIX in contango.",
   "macro": {
     "futures_closed": true,
     "sp500_futures_pct": 0.0,
@@ -14,7 +14,8 @@
       "nasdaq100_pct": 1.9,
       "dow_pct": 0.31,
       "dow_points": 157,
-      "dow_level": 51650
+      "dow_level": 51650,
+      "russell2000_pct": 2.12
     },
     "vix": 16.4,
     "vix_change_pct": -0.1,
@@ -45,7 +46,26 @@
     "dxy_change_pct": 0.3,
     "btc": 62500,
     "btc_change_pct": -2.4,
-    "summary": "Mixed-to-cautious pre-open. The prior cash session (Thu Jun 18) closed strong - S&P +1%, Nasdaq-100 +1.9%, Dow +157 to 51,650 - on tech strength and US-Iran-deal optimism, and the VIX (16.4) / VVIX (88) point to a calm options tape. But the backdrop is full of headwinds: a hawkish Fed (Chair Kevin Warsh's first meeting flagged a possible 2026 hike), the dollar (DXY 100.7) at its highest since May 2025, pump gasoline near $3.97 (up ~$1 in a month), firm crude (WTI ~$77, Brent ~$80) and a bid in gold (~$4,178) - while the CNN Fear & Greed gauge sits at 37 (Fear) and bitcoin slides post-Fed. Net read leans neutral-to-cautious; next catalysts are May PCE inflation, Q1 GDP, and MU/FDX earnings the week of Jun 22.",
+    "move_index": 65.39,
+    "move_change_pct": -7.47,
+    "hy_oas_pct": 2.78,
+    "put_call_equity": 0.59,
+    "vix3m": 18.6,
+    "breakeven_10y": 2.29,
+    "global_equities": {
+      "nikkei_pct": 0.28,
+      "hang_seng_pct": -1.59,
+      "euro_stoxx50_pct": -0.08,
+      "dax_pct": 0.03,
+      "ftse100_pct": -0.18
+    },
+    "events": [
+      {"date": "2026-06-22", "event": "Quiet start - no major US data after the long holiday weekend", "importance": "low"},
+      {"date": "2026-06-25", "event": "Q1 GDP (final estimate)", "importance": "medium"},
+      {"date": "2026-06-26", "event": "May PCE inflation - the Fed's preferred gauge (key after the hawkish meeting)", "importance": "high"},
+      {"date": "week of Jun 22", "event": "Micron (MU) & FedEx (FDX) earnings - AI-memory & freight bellwethers", "importance": "medium"}
+    ],
+    "summary": "Mixed-to-cautious pre-open. The prior cash session (Thu Jun 18) closed strong - S&P +1%, Nasdaq-100 +1.9%, Dow +157 to 51,650 - on tech strength and US-Iran-deal optimism, and the VIX (16.4) / VVIX (88) point to a calm options tape. But the backdrop is full of headwinds: a hawkish Fed (Chair Kevin Warsh's first meeting flagged a possible 2026 hike), the dollar (DXY 100.7) at its highest since May 2025, pump gasoline near $3.97 (up ~$1 in a month), firm crude (WTI ~$77, Brent ~$80) and a bid in gold (~$4,178) - while the CNN Fear & Greed gauge sits at 37 (Fear) and bitcoin slides post-Fed. Offsetting the caution, the market plumbing is benign: high-yield credit spreads are tight (~2.78%), the MOVE (bond vol) is low (~65), the VIX curve is in contango, and small caps led Thursday (+2.1%) - so the net read is roughly NEUTRAL rather than risk-off. Overseas was mixed-to-soft overnight (Hang Seng -1.6%). Next catalysts: May PCE inflation, Q1 GDP, and MU/FDX earnings the week of Jun 22.",
     "headlines": [
       {
         "text": "US cash markets & equity-index futures closed Fri Jun 19 for Juneteenth; reopen Mon Jun 22",

@@ -39,6 +39,10 @@ SECTOR_ADJ = {"bullish": 8, "neutral": 0, "bearish": -8}
 VVIX_BASE = 90.0          # vol-of-vol baseline: above = stress, below = calm
 FG_EXTREME_LO = 20        # CNN Fear & Greed: extreme fear -> contrarian, temper the penalty
 FG_EXTREME_HI = 80        # extreme greed -> contrarian, temper the boost
+MOVE_BASE = 95.0          # Treasury-vol (MOVE) baseline: above = rates stress, below = calm
+HY_OAS_BASE = 3.5         # high-yield OAS (%) baseline: wider = risk-off, tighter = risk-on
+PUT_CALL_BASE = 0.70      # equity put/call neutral; low = complacency, high = fear (contrarian)
+BREAKEVEN_ANCHOR = 2.3    # 10y breakeven (%) anchor; above = inflation/hawkish headwind
 
 
 def clamp(v, lo, hi):
@@ -148,6 +152,52 @@ def score_macro(mc):
         adj = clamp(btc * 0.15, -5, 5)
         score += adj
         drivers.append((f"Bitcoin {btc:+.1f}%", adj))
+
+    # --- MOVE index: Treasury-market vol; elevated = rates-driven risk-off ---
+    move = m.get("move_index")
+    if move is not None:
+        adj = clamp((MOVE_BASE - move) * 0.06, -8, 5)
+        score += adj
+        drivers.append((f"MOVE {move} (vs ~{MOVE_BASE:.0f} baseline)", adj))
+
+    # --- High-yield credit spreads (OAS): wider = risk-off, tighter = risk-on ---
+    oas = m.get("hy_oas_pct")
+    if oas is not None:
+        adj = clamp((HY_OAS_BASE - oas) * 6, -12, 6)
+        score += adj
+        drivers.append((f"HY credit OAS {oas:.2f}% (vs ~{HY_OAS_BASE:.1f}% baseline)", adj))
+
+    # --- Equity put/call: CONTRARIAN - low = complacency (bearish), high = fear (bullish) ---
+    pc = m.get("put_call_equity")
+    if pc is not None:
+        adj = clamp((pc - PUT_CALL_BASE) * 15, -6, 6)
+        score += adj
+        drivers.append((f"Put/Call {pc:.2f} (contrarian)", adj))
+
+    # --- VIX term structure: contango (VIX < VIX3M) = calm; backwardation = stress ---
+    vix3m = m.get("vix3m")
+    if vix is not None and vix3m:
+        ratio = vix / vix3m
+        adj = clamp((1 - ratio) * 30, -8, 6)
+        score += adj
+        shape = "contango" if ratio < 1 else "backwardation"
+        drivers.append((f"VIX term structure {ratio:.2f} ({shape})", adj))
+
+    # --- Overnight global equities (Asia/Europe) set the pre-US-open tide ---
+    ge = m.get("global_equities") or {}
+    gvals = [v for v in ge.values() if isinstance(v, (int, float))]
+    if gvals:
+        avg = sum(gvals) / len(gvals)
+        adj = clamp(avg * 4, -12, 12)
+        score += adj
+        drivers.append((f"Global equities avg {avg:+.2f}% (overnight)", adj))
+
+    # --- Inflation expectations (10y breakeven): above anchor = hawkish headwind ---
+    be = m.get("breakeven_10y")
+    if be is not None:
+        adj = clamp(-(be - BREAKEVEN_ANCHOR) * 8, -6, 6)
+        score += adj
+        drivers.append((f"10y breakeven {be:.2f}% (vs ~{BREAKEVEN_ANCHOR:.1f}% anchor)", adj))
 
     score = round(clamp(score, 0, 100), 1)
 
@@ -260,11 +310,20 @@ def selftest():
                      "wti_oil_pct": 8.0, "gold_change_pct": 3.0, "silver_change_pct": 2.0,
                      "gasoline_change_pct": 5.0, "dxy_change_pct": 1.5, "ust2y_change_bps": 12,
                      "btc_change_pct": -6.0}}
+    mc3["macro"].update({"move_index": 130, "hy_oas_pct": 6.5, "put_call_equity": 0.45,
+                         "vix3m": 14, "breakeven_10y": 2.9,
+                         "global_equities": {"nikkei_pct": -2.0, "dax_pct": -1.5}})
     m3 = score_macro(mc3)
     labels = " ".join(l for l, _ in m3["drivers"])
-    for tok in ("VVIX", "Fear & Greed", "WTI", "metals", "Gasoline", "DXY", "2y yield", "Bitcoin"):
+    for tok in ("VVIX", "Fear & Greed", "WTI", "metals", "Gasoline", "DXY", "2y yield", "Bitcoin",
+                "MOVE", "HY credit OAS", "Put/Call", "term structure", "Global equities", "breakeven"):
         assert tok in labels, (tok, labels)
     assert m3["score"] < 50, m3          # this cluster of headwinds is net-bearish
+
+    # Calm "plumbing" (low MOVE, tight HY, contango, benign breakevens) lifts the score.
+    calm = {"macro": {"vix": 15, "move_index": 65, "hy_oas_pct": 2.6, "vix3m": 19,
+                      "breakeven_10y": 2.2, "global_equities": {"nikkei_pct": 0.8, "dax_pct": 0.5}}}
+    assert score_macro(calm)["score"] > 55, score_macro(calm)
 
     print("prescreen selftest: all assertions passed")
     print(f"  risk-on macro {macro['score']} {macro['regime']}; GOOD {good['news_score']} vs BADN {bad['news_score']}")
