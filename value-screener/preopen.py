@@ -104,16 +104,37 @@ def render(mc, macro):
             if pc.get("dow_points") is not None:
                 dow += f" ({pc['dow_points']:+d} to {dl:,})" if dl else f" ({pc['dow_points']:+d})"
             L.append(_row("Prior close - Dow", dow))
+            if pc.get("russell2000_pct") is not None:
+                L.append(_row("Prior close - Russell 2000", _pct(pc.get("russell2000_pct"))))
     else:
         L.append(_row("S&P 500 futures", "", m.get("sp500_futures_pct")))
         L.append(_row("Nasdaq futures", "", m.get("nasdaq_futures_pct")))
         L.append(_row("Dow futures", "", m.get("dow_futures_pct")))
+
+    # --- Global / overnight equities ---
+    ge = m.get("global_equities") or {}
+    if ge:
+        L.append("")
+        L.append("  GLOBAL / OVERNIGHT (sets the pre-open tone)")
+        names = [("nikkei_pct", "Nikkei 225 (JP)"), ("hang_seng_pct", "Hang Seng (HK)"),
+                 ("euro_stoxx50_pct", "Euro Stoxx 50"), ("dax_pct", "DAX (DE)"),
+                 ("ftse100_pct", "FTSE 100 (UK)")]
+        for key, label in names:
+            if ge.get(key) is not None:
+                L.append(_row(label, "", ge[key]))
 
     # --- Volatility & fear ---
     L.append("")
     L.append("  VOLATILITY & FEAR")
     L.append(_row("VIX (fear gauge)", _num(m.get("vix")), m.get("vix_change_pct")))
     L.append(_row("VVIX (vol-of-vol)", _num(m.get("vvix")), m.get("vvix_change_pct")))
+    vix3m = m.get("vix3m")
+    if vix3m is not None:
+        L.append(_row("VIX3M (3-month)", _num(vix3m)))
+        if m.get("vix") is not None:
+            ratio = m["vix"] / vix3m
+            shape = "contango (calm)" if ratio < 1 else "backwardation (stress)"
+            L.append(_row("VIX term structure", f"{ratio:.2f}  {shape}"))
     fg = m.get("fear_greed")
     if fg is not None:
         fgl = m.get("fear_greed_label", "")
@@ -128,6 +149,16 @@ def render(mc, macro):
     L.append(_row("10-year yield", _num(m.get("ust10y"), "{:.2f}%"), m.get("ust10y_change_bps"), "bps"))
     if m.get("ust2y") is not None and m.get("ust10y") is not None:
         L.append(_row("10y-2y spread", f"{(m['ust10y'] - m['ust2y']) * 100:+.0f} bps"))
+    if m.get("breakeven_10y") is not None:
+        L.append(_row("10y breakeven inflation", _num(m.get("breakeven_10y"), "{:.2f}%")))
+
+    # --- Credit, rates-vol & positioning ---
+    if any(m.get(k) is not None for k in ("move_index", "hy_oas_pct", "put_call_equity")):
+        L.append("")
+        L.append("  CREDIT, RATES-VOL & POSITIONING")
+        L.append(_row("MOVE (Treasury vol)", _num(m.get("move_index")), m.get("move_change_pct")))
+        L.append(_row("HY credit OAS", _num(m.get("hy_oas_pct"), "{:.2f}%")))
+        L.append(_row("Equity put/call", _num(m.get("put_call_equity"), "{:.2f}")))
 
     # --- Commodities & fuel ---
     L.append("")
@@ -161,6 +192,17 @@ def render(mc, macro):
         for h in heads:
             mark = {"bullish": "+", "bearish": "-"}.get(h.get("impact"), "·")
             L.append(f"    [{mark}] {h['text']}")
+
+    # --- Economic calendar ---
+    events = m.get("events", [])
+    if events:
+        L.append("")
+        L.append("  ECONOMIC CALENDAR (upcoming catalysts)")
+        sev = {"high": "!!", "medium": " !", "low": "  "}
+        for e in events:
+            tag = sev.get(e.get("importance", "low"), "  ")
+            when = e.get("date", "")
+            L.append(f"    {tag} {when:<14} {e.get('event', '')}")
 
     L.append("")
     L.append("  " + "-" * 60)
@@ -199,6 +241,11 @@ def selftest():
             "silver": 66.0, "silver_change_pct": 1.2, "copper": 6.4, "copper_change_pct": 0.3,
             "gasoline_price": 3.973, "gasoline_change_pct": 1.5, "dxy": 100.72, "dxy_change_pct": 0.3,
             "btc": 62500, "btc_change_pct": -2.4,
+            "move_index": 65.39, "move_change_pct": -7.47, "hy_oas_pct": 2.78,
+            "put_call_equity": 0.59, "vix3m": 18.6, "breakeven_10y": 2.29,
+            "global_equities": {"nikkei_pct": 0.28, "hang_seng_pct": -1.59,
+                                "euro_stoxx50_pct": -0.08, "dax_pct": 0.03, "ftse100_pct": -0.18},
+            "events": [{"date": "2026-06-26", "event": "May PCE inflation", "importance": "high"}],
             "summary": "selftest snapshot",
             "headlines": [{"text": "rally", "impact": "bullish", "weight": 7},
                           {"text": "hawkish fed", "impact": "bearish", "weight": 6}],
@@ -207,8 +254,11 @@ def selftest():
     macro = score_macro(mc)
     out = render(mc, macro)
     # Every requested indicator group must appear in the rendered screen.
-    for token in ("EQUITY FUTURES", "VIX", "VVIX", "Fear & Greed", "Gold", "Silver",
-                  "Gasoline", "WTI crude", "US dollar (DXY)", "Bitcoin", "TOP DRIVERS"):
+    for token in ("EQUITY FUTURES", "GLOBAL / OVERNIGHT", "Nikkei", "VIX", "VVIX",
+                  "VIX term structure", "Fear & Greed", "Gold", "Silver", "Gasoline",
+                  "WTI crude", "US dollar (DXY)", "Bitcoin", "10y breakeven inflation",
+                  "CREDIT, RATES-VOL & POSITIONING", "MOVE", "HY credit OAS", "Equity put/call",
+                  "ECONOMIC CALENDAR", "TOP DRIVERS"):
         assert token in out, f"missing section/indicator: {token}"
     assert 0 <= macro["score"] <= 100, macro
     # JSON mode round-trips.
