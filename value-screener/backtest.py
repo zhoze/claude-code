@@ -57,7 +57,7 @@ def make_get(key):
 
 
 def series(get, sym, lookback_days):
-    """Return sorted [(date, close)] for the last ~lookback_days days."""
+    """Return sorted [(date, close)] for the last ~lookback_days days (historical EOD)."""
     end = dt.date.today()
     start = end - dt.timedelta(days=lookback_days)
     d = get(f"historical-price-eod/light?symbol={sym}&from={start}&to={end}")
@@ -70,6 +70,23 @@ def series(get, sym, lookback_days):
             out.append((row["date"][:10], float(c)))
     out.sort(key=lambda x: x[0])
     return out
+
+
+# Map a "~N days back" request to the nearest standard quote-change window.
+def change_field(days):
+    return "1M" if days <= 45 else ("3M" if days <= 135 else "6M")
+
+
+def asof_now_via_change(get, sym, now_price, field):
+    """Fallback when historical EOD is plan-restricted: derive the as-of price from the
+    current price and the trailing %-change window. Returns (asof_price, now_price, pct)."""
+    d = get(f"stock-price-change?symbol={sym}")
+    row = d[0] if isinstance(d, list) and d else (d if isinstance(d, dict) else None)
+    if not row or row.get(field) is None or now_price in (None, 0):
+        return None
+    pct = float(row[field])
+    asof = now_price / (1 + pct / 100.0)
+    return asof, now_price, pct
 
 
 def asof_and_now(rows, days):
@@ -111,23 +128,53 @@ def main(argv=None):
     lookback = args.days + 30
     print(f"backtest: {len(syms)} symbols, as-of ~{args.days}d back, top {args.top}")
 
+    def cur_price(s):
+        try:
+            return float(fund[s]["price"])
+        except Exception:
+            return None
+
+    # Probe: is day-level historical EOD available on this plan? (SPY is a safe probe.)
+    eod_mode = bool(series(get, "SPY", lookback))
+    field = change_field(args.days)
     prices = {}
     done = 0
-    with ThreadPoolExecutor(max_workers=args.workers) as ex:
-        futs = {ex.submit(series, get, s, lookback): s for s in syms}
-        for fut in as_completed(futs):
-            s = futs[fut]
-            r = asof_and_now(fut.result(), args.days)
-            if r:
-                prices[s] = r
-            done += 1
-            if done % 200 == 0:
-                print("...", done)
-    # add SPY benchmark
-    spy = asof_and_now(series(get, "SPY", lookback), args.days)
+    if eod_mode:
+        print("price source: historical EOD (exact as-of date)")
+        with ThreadPoolExecutor(max_workers=args.workers) as ex:
+            futs = {ex.submit(series, get, s, lookback): s for s in syms}
+            for fut in as_completed(futs):
+                s = futs[fut]
+                r = asof_and_now(fut.result(), args.days)
+                if r:
+                    prices[s] = r
+                done += 1
+                if done % 200 == 0:
+                    print("...", done)
+        spy = asof_and_now(series(get, "SPY", lookback), args.days)
+    else:
+        print(f"price source: trailing %-change window '{field}' (historical EOD not in plan)")
+        with ThreadPoolExecutor(max_workers=args.workers) as ex:
+            futs = {ex.submit(asof_now_via_change, get, s, cur_price(s), field): s for s in syms}
+            for fut in as_completed(futs):
+                s = futs[fut]
+                r = fut.result()
+                if r:
+                    prices[s] = (f"~{args.days}d", r[0], "now", r[1])
+                done += 1
+                if done % 200 == 0:
+                    print("...", done)
+        sc = asof_now_via_change(get, "SPY", None, field)  # SPY price unknown locally
+        if sc is None:
+            spc = get("stock-price-change?symbol=SPY")
+            row = spc[0] if isinstance(spc, list) and spc else None
+            spy = (None, 100.0, None, 100.0 * (1 + float(row[field]) / 100.0)) if row and row.get(field) is not None else None
+        else:
+            spy = (None, sc[0], None, sc[1])
+
     print(f"priced {len(prices)} / {len(syms)} symbols")
     if not prices:
-        sys.exit("ERROR: no historical prices returned (check key/plan).")
+        sys.exit("ERROR: no price data returned (check key/plan).")
 
     # representative dates
     any_r = next(iter(prices.values()))
