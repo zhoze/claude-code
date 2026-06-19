@@ -1,17 +1,24 @@
 #!/usr/bin/env python3
 """
-refresh_sp500.py — re-pull the full S&P 500 dataset from Financial Modeling Prep
+refresh_universe.py — re-pull the screening dataset from Financial Modeling Prep
 ================================================================================
 
-Rebuilds data/fundamentals.csv, the technicals in data/market_conditions.json,
-and data/sentiment.json (analyst consensus + price targets) for the whole index.
+Rebuilds data/fundamentals.csv, data/universe.csv, the technicals in
+data/market_conditions.json, and data/sentiment.json (analyst consensus + price
+targets) for a chosen universe.
+
+The default universe is the **Russell 1000 (large + mid cap)**, approximated as the
+top ~1000 actively-trading US common stocks by market cap (the official Russell list
+is licensed; this is a close, reproducible proxy built from the FMP screener).
 
 The API key is read from the FMP_KEY environment variable and is NEVER written to
 disk or committed. Get a key at https://financialmodelingprep.com and store it as
 a secret/env var (GitHub Actions secret, or your shell), not in code.
 
-    FMP_KEY=your_key  python3 refresh_sp500.py            # full S&P 500
-    FMP_KEY=your_key  python3 refresh_sp500.py --limit 5  # quick smoke test
+    FMP_KEY=your_key  python3 refresh_universe.py                 # Russell 1000 (default)
+    FMP_KEY=your_key  python3 refresh_universe.py --count 1000    # tune the size
+    FMP_KEY=your_key  python3 refresh_universe.py --universe sp500 # the S&P 500 instead
+    FMP_KEY=your_key  python3 refresh_universe.py --limit 5       # quick smoke test
 
 Stdlib only (urllib + threads). Uses FMP /stable per-symbol endpoints (bulk
 endpoints are plan-restricted). Educational tool — not investment advice.
@@ -70,6 +77,34 @@ def capped_growth(r):
     return round(min(max(g1, 0.0), 0.10), 4) if g1 is not None else 0.07
 
 
+# --------------------------------------------------------------------------- #
+# Universe selection
+# --------------------------------------------------------------------------- #
+def universe_russell1000(get, count, min_cap):
+    """Top `count` actively-trading US common stocks by market cap (Russell-1000 proxy)."""
+    rows = get(f"company-screener?marketCapMoreThan={int(min_cap)}"
+               f"&isEtf=false&isFund=false&isActivelyTrading=true&country=US&limit=5000") or []
+    # Keep only major US exchanges and real market caps, then take the largest `count`.
+    keep = []
+    for r in rows:
+        if not r.get("marketCap"):
+            continue
+        ex = (r.get("exchangeShortName") or r.get("exchange") or "").upper()
+        if ex and ex not in ("NASDAQ", "NYSE", "AMEX", "NYSEAMERICAN"):
+            continue
+        keep.append(r)
+    keep.sort(key=lambda r: r.get("marketCap", 0), reverse=True)
+    keep = keep[:count]
+    return {r["symbol"]: {"name": r.get("companyName", ""), "sector": r.get("sector", ""),
+                          "market_cap": r.get("marketCap")} for r in keep}
+
+
+def universe_sp500(get):
+    cons = get("sp500-constituent") or []
+    return {c["symbol"]: {"name": c.get("name", ""), "sector": c.get("sector", ""),
+                          "market_cap": None} for c in cons}
+
+
 def pull_symbol(get, sym, meta, quote):
     rat = get(f"ratios-ttm?symbol={sym}")
     km = get(f"key-metrics-ttm?symbol={sym}")
@@ -96,6 +131,7 @@ def pull_symbol(get, sym, meta, quote):
         "consensus": f1(grad, "consensus"), "target_consensus": f1(tgt, "targetConsensus"),
         "g5": f1(gro, "fiveYNetIncomeGrowthPerShare"), "g3": f1(gro, "threeYNetIncomeGrowthPerShare"),
         "g1": f1(gro, "epsgrowth"),
+        "market_cap": meta.get("market_cap"),
     }
 
 
@@ -107,6 +143,18 @@ HDR = ["symbol", "name", "sector", "price", "eps", "owner_earnings_ps", "roe", "
 
 def num(x):
     return "" if x is None else x
+
+
+def write_universe(meta, label):
+    """Write data/universe.csv — the screened constituent list (symbol,name,sector,market_cap)."""
+    path = os.path.join(DATA, "universe.csv")
+    rows = sorted(meta.items(), key=lambda kv: (-(kv[1].get("market_cap") or 0), kv[0]))
+    with open(path, "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["symbol", "name", "sector", "market_cap"])
+        for sym, m in rows:
+            w.writerow([sym, m.get("name", ""), sect(m.get("sector", "")), num(m.get("market_cap"))])
+    return len(rows)
 
 
 def write_outputs(recs):
@@ -183,7 +231,13 @@ def write_outputs(recs):
 
 
 def main(argv=None):
-    p = argparse.ArgumentParser(description="Refresh the full S&P 500 dataset from FMP /stable.")
+    p = argparse.ArgumentParser(description="Refresh the screening dataset from FMP /stable.")
+    p.add_argument("--universe", choices=["russell1000", "sp500"], default="russell1000",
+                   help="Which universe to build (default: russell1000 large+mid cap).")
+    p.add_argument("--count", type=int, default=1000,
+                   help="Russell-1000 proxy size: top N US names by market cap (default 1000).")
+    p.add_argument("--min-cap", type=float, default=2e9,
+                   help="Minimum market cap for the Russell-1000 proxy (default $2B).")
     p.add_argument("--limit", type=int, default=0, help="Only pull the first N symbols (smoke test)")
     p.add_argument("--workers", type=int, default=12)
     args = p.parse_args(argv)
@@ -193,14 +247,19 @@ def main(argv=None):
         sys.exit("ERROR: set the FMP_KEY environment variable (never hardcode the key).")
     get = make_get(key)
 
-    cons = get("sp500-constituent") or []
-    if not cons:
-        sys.exit("ERROR: could not fetch S&P 500 constituents (check the key / plan).")
-    meta = {c["symbol"]: {"name": c.get("name", ""), "sector": c.get("sector", "")} for c in cons}
+    if args.universe == "sp500":
+        meta = universe_sp500(get)
+    else:
+        meta = universe_russell1000(get, args.count, args.min_cap)
+    if not meta:
+        sys.exit(f"ERROR: could not build the {args.universe} universe (check the key / plan).")
     syms = sorted(meta)
     if args.limit:
         syms = syms[:args.limit]
-    print(f"constituents: {len(syms)}")
+        meta = {s: meta[s] for s in syms}
+    print(f"universe={args.universe}  constituents: {len(syms)}")
+    nu = write_universe(meta, args.universe)
+    print(f"wrote universe.csv ({nu})")
 
     quotes = {}
     for i in range(0, len(syms), 50):
