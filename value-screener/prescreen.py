@@ -34,6 +34,12 @@ SENTIMENT_ADJ = {
 }
 SECTOR_ADJ = {"bullish": 8, "neutral": 0, "bearish": -8}
 
+# Pre-opening macro-signal tuning (all optional; each contributes only if present
+# in the snapshot, so the engine stays backward-compatible with older files).
+VVIX_BASE = 90.0          # vol-of-vol baseline: above = stress, below = calm
+FG_EXTREME_LO = 20        # CNN Fear & Greed: extreme fear -> contrarian, temper the penalty
+FG_EXTREME_HI = 80        # extreme greed -> contrarian, temper the boost
+
 
 def clamp(v, lo, hi):
     return max(lo, min(hi, v))
@@ -81,6 +87,67 @@ def score_macro(mc):
         adj = clamp(net * 0.8, -15, 15)
         score += adj
         drivers.append((f"Net headline impact {net:+.0f}", adj))
+
+    # --- Volatility-of-volatility (VVIX): elevated = risk-off ---
+    vvix = m.get("vvix")
+    if vvix is not None:
+        adj = clamp((VVIX_BASE - vvix) * 0.15, -8, 6)
+        score += adj
+        drivers.append((f"VVIX {vvix} (vs ~{VVIX_BASE:.0f} baseline)", adj))
+
+    # --- CNN Fear & Greed: directional, contrarian-tempered at extremes ---
+    fg = m.get("fear_greed")
+    if fg is not None:
+        raw = (fg - 50) * 0.18
+        if fg <= FG_EXTREME_LO or fg >= FG_EXTREME_HI:
+            raw *= 0.5          # fade the crowd at sentiment extremes
+        adj = clamp(raw, -10, 10)
+        score += adj
+        label = m.get("fear_greed_label", "")
+        drivers.append((f"Fear & Greed {fg}{' (' + label + ')' if label else ''}", adj))
+
+    # --- Crude oil: a sharp move is an inflation/risk signal (up = headwind) ---
+    oil = m.get("wti_oil_pct")
+    if oil is not None:
+        adj = clamp(-oil * 0.5, -8, 4)
+        score += adj
+        drivers.append((f"WTI crude {oil:+.1f}%", adj))
+
+    # --- Safe-haven metals bid (gold/silver rallying) = mild risk-off tilt ---
+    metal = [x for x in (m.get("gold_change_pct"), m.get("silver_change_pct")) if x is not None]
+    if metal:
+        avg = sum(metal) / len(metal)
+        adj = clamp(-avg * 0.25, -5, 3)
+        score += adj
+        drivers.append((f"Precious metals {avg:+.1f}% (safe-haven bid)", adj))
+
+    # --- Gasoline at the pump: higher = consumer/inflation headwind ---
+    gas = m.get("gasoline_change_pct")
+    if gas is not None:
+        adj = clamp(-gas * 0.3, -5, 3)
+        score += adj
+        drivers.append((f"Gasoline {gas:+.1f}% at the pump", adj))
+
+    # --- US dollar (DXY): a stronger dollar is a mild equity/earnings headwind ---
+    dxy = m.get("dxy_change_pct")
+    if dxy is not None:
+        adj = clamp(-dxy * 0.6, -5, 4)
+        score += adj
+        drivers.append((f"US dollar (DXY) {dxy:+.1f}%", adj))
+
+    # --- 2y Treasury: front-end rate move (mirrors the 10y treatment) ---
+    d2 = m.get("ust2y_change_bps")
+    if d2 is not None:
+        adj = clamp(-d2 * 0.3, -8, 8)
+        score += adj
+        drivers.append((f"2y yield {d2:+d} bps", adj))
+
+    # --- Bitcoin: cross-asset risk-appetite proxy (small weight) ---
+    btc = m.get("btc_change_pct")
+    if btc is not None:
+        adj = clamp(btc * 0.15, -5, 5)
+        score += adj
+        drivers.append((f"Bitcoin {btc:+.1f}%", adj))
 
     score = round(clamp(score, 0, 100), 1)
 
@@ -187,6 +254,18 @@ def selftest():
                      "headlines": [{"impact": "bearish", "weight": 10}]}}
     m2 = score_macro(mc2)
     assert m2["regime"] == "Risk-off" and m2["score"] < 40, m2
+
+    # Pre-opening signals: each present indicator contributes and surfaces as a driver.
+    mc3 = {"macro": {"vix": 15, "vvix": 105, "fear_greed": 18, "fear_greed_label": "Extreme Fear",
+                     "wti_oil_pct": 8.0, "gold_change_pct": 3.0, "silver_change_pct": 2.0,
+                     "gasoline_change_pct": 5.0, "dxy_change_pct": 1.5, "ust2y_change_bps": 12,
+                     "btc_change_pct": -6.0}}
+    m3 = score_macro(mc3)
+    labels = " ".join(l for l, _ in m3["drivers"])
+    for tok in ("VVIX", "Fear & Greed", "WTI", "metals", "Gasoline", "DXY", "2y yield", "Bitcoin"):
+        assert tok in labels, (tok, labels)
+    assert m3["score"] < 50, m3          # this cluster of headwinds is net-bearish
+
     print("prescreen selftest: all assertions passed")
     print(f"  risk-on macro {macro['score']} {macro['regime']}; GOOD {good['news_score']} vs BADN {bad['news_score']}")
     print(f"  risk-off macro {m2['score']} {m2['regime']}")
