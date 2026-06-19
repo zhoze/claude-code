@@ -16,8 +16,9 @@ Each lens is mapped to a 0-100 *directional* score (50 = neutral, >50 = upward
 lean). Value direction comes from the Buffett margin of safety (cheap = upward
 room); technical from the Magic score; news from the Pre-screen.
 
-    python3 overall.py --ticker ADBE     # full pipeline for one stock
-    python3 overall.py                   # pre-market conditions only (no stock)
+    python3 overall.py --ticker ADBE     # pre-opening dashboard + full pipeline for one stock
+    python3 overall.py                   # the pre-opening market screen only (no stock)
+    python3 overall.py --ticker ADBE --no-preopen   # stock pipeline only, hide the dashboard
     python3 overall.py --selftest
 
 Offline & deterministic; news is gathered from reliable sources at run time and
@@ -28,6 +29,7 @@ import argparse
 import os
 
 import prescreen
+import preopen
 import magic_lite
 import screener
 import sentiment as sentiment_lens
@@ -239,6 +241,8 @@ def selftest():
     assert d["lenses"].get("value", 0) > 60, d["lenses"]          # cheap -> upward value room
     assert "sentiment" in d["lenses"], d["lenses"]                # ADBE has a sentiment entry
     assert d["overall"] is not None and d["dominant"] in d["weights"], d
+    # The pre-opening dashboard renders as the overall context header.
+    assert "PRE-OPENING SCREEN" in preopen.render(mc, d["macro"]), "preopen header missing"
     # hype temper: high-beta very-bullish name is discounted vs the same at beta 1
     a = sentiment_lens.compute_sentiment({"social": "very_bullish", "analyst": "buy", "analyst_upside_pct": 20}, 1.0)
     b = sentiment_lens.compute_sentiment({"social": "very_bullish", "analyst": "buy", "analyst_upside_pct": 20}, 3.0)
@@ -255,6 +259,8 @@ def main(argv=None):
     p.add_argument("--input", default=screener.DEFAULT_INPUT)
     p.add_argument("--market-conditions", default=prescreen.DEFAULT_MC)
     p.add_argument("--all", action="store_true", help="Run every name in fundamentals.csv and print a ranked table")
+    p.add_argument("--no-preopen", action="store_false", dest="preopen",
+                   help="Hide the pre-opening dashboard header (show only the stock/table)")
     p.add_argument("--selftest", action="store_true")
     args = p.parse_args(argv)
     if args.selftest:
@@ -267,8 +273,9 @@ def main(argv=None):
     if args.all:
         fundamentals = screener.load_fundamentals(args.input)
         rows = screen_all(cfg, fundamentals, mc, sdata)
-        print(prescreen.macro_report(mc, prescreen.score_macro(mc)).splitlines()[0])
-        print(prescreen.score_macro(mc)["regime"], "regime |", mc.get("as_of"), "\n")
+        if args.preopen:
+            print(preopen.render(mc, prescreen.score_macro(mc)))
+            print()
         print(all_table(rows))
         csv_path = os.path.join(HERE, "data", "results", "overall_screen.csv")
         md_path = os.path.join(HERE, "data", "results", "overall_screen.md")
@@ -277,14 +284,17 @@ def main(argv=None):
         return 0
 
     if not args.ticker:
-        # Pre-market conditions only.
-        print(prescreen.macro_report(mc, prescreen.score_macro(mc)))
-        print("\nNo --ticker given: showing overall pre-market conditions only. "
+        # Pre-market conditions only: the full pre-opening dashboard.
+        print(preopen.render(mc, prescreen.score_macro(mc)))
+        print("\nNo --ticker given: showing the pre-opening market screen only. "
               "Add --ticker SYM for the full Pre-screen→Buffett→Magic→Overall run.")
         return 0
 
     fundamentals = screener.load_fundamentals(args.input)
     d = run(args.ticker, cfg, fundamentals, mc, sdata)
+    if args.preopen:
+        print(preopen.render(mc, d["macro"]))      # market backdrop, then the stock
+        print()
     print(report(args.ticker, d))
     return 0
 
