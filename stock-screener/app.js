@@ -382,16 +382,27 @@
     txt.textContent = "Fetching live quotes…";
     try {
       const symbols = universe.map((s) => s.ticker.replace(".", "-")).join(",");
-      const res = await fetch(`https://financialmodelingprep.com/api/v3/quote/${symbols}?apikey=${FMP_API_KEY}`);
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      const quotes = await res.json();
-      if (!Array.isArray(quotes)) throw new Error("Unexpected quote payload");
-      // Skip entries without a symbol so one malformed quote can't abort the
-      // whole rebuild.
-      const byTicker = new Map(
-        quotes.filter((q) => q && typeof q.symbol === "string")
-          .map((q) => [q.symbol.replace("-", "."), q])
+      const apiBase = `https://financialmodelingprep.com/api/v3`;
+      // Index an FMP array response by ticker (FMP "-" -> our ".").
+      const indexBySymbol = (arr) => new Map(
+        (Array.isArray(arr) ? arr : [])
+          .filter((row) => row && typeof row.symbol === "string")
+          .map((row) => [row.symbol.replace("-", "."), row])
       );
+      // Quote is required; price-change is best-effort so its failure can't
+      // abort the core rebuild — it only supplies the true 1-month return.
+      const [quotes, changes] = await Promise.all([
+        fetch(`${apiBase}/quote/${symbols}?apikey=${FMP_API_KEY}`).then((r) => {
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          return r.json();
+        }),
+        fetch(`${apiBase}/stock-price-change/${symbols}?apikey=${FMP_API_KEY}`)
+          .then((r) => (r.ok ? r.json() : null))
+          .catch(() => null),
+      ]);
+      if (!Array.isArray(quotes)) throw new Error("Unexpected quote payload");
+      const byTicker = indexBySymbol(quotes);
+      const changeByTicker = indexBySymbol(changes);
       universe = STOCK_UNIVERSE.map((base) => {
         const q = byTicker.get(base.ticker);
         const merged = { ...base };
@@ -404,7 +415,9 @@
           merged.sma50 = q.priceAvg50 ?? base.sma50;
           merged.sma200 = q.priceAvg200 ?? base.sma200;
           merged.volume = q.avgVolume ?? base.volume;
-          merged.perfMonth = q.changesPercentage ?? base.perfMonth;
+          // Real 1-month price change from stock-price-change; fall back to the
+          // demo value rather than the daily move when it's unavailable.
+          merged.perfMonth = changeByTicker.get(base.ticker)?.["1M"] ?? base.perfMonth;
         }
         return MagicEngine.computeMagic(merged);
       });
