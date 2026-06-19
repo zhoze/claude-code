@@ -77,6 +77,46 @@ python3 overall.py --selftest      # built-in checks
 
 ---
 
+## The US pre-opening screen — trigger: **Pre-screen**
+
+`preopen.py` is a single, scannable **pre-market dashboard** of everything that
+shapes sentiment and direction before the US cash open, rolled into one 0-100
+directional score (50 = neutral) and a risk regime. It **reuses** the Pre-screen
+macro engine (`prescreen.score_macro`) so the score and "drivers" stay consistent
+with the rest of the toolkit — it's just the rich view on top.
+
+```bash
+python3 preopen.py            # full pre-opening screen
+python3 preopen.py --json     # machine-readable snapshot
+python3 preopen.py --selftest # built-in checks
+```
+
+It groups the indicators the way a trader scans them at the open:
+
+- **Equity futures** — S&P / Nasdaq / Dow (or the prior cash close on a holiday)
+- **Volatility & fear** — VIX, **VVIX** (vol-of-vol), and the **CNN Fear & Greed** gauge
+- **Rates** — UST 2y / 10y and the 10y-2y spread
+- **Commodities & fuel** — WTI, Brent, natural gas, **gold, silver, copper**, and the **US average pump gasoline** price
+- **FX & crypto** — the dollar (**DXY**) and **bitcoin**
+- **Top drivers** (each indicator's signed contribution to the score) and **key headlines**
+
+Each new signal is folded into `score_macro` with a documented, bounded weight
+(elevated VVIX = risk-off; Fear & Greed is directional but contrarian-tempered at
+extremes; an oil/gas spike or a strong dollar is an inflation/earnings headwind; a
+safe-haven bid in metals is a mild risk-off tilt; bitcoin is a risk-appetite proxy).
+Every field is **optional** — the engine still runs on older snapshots that lack them.
+
+> Like Pre-screen, this is **offline & deterministic** — it reads the dated,
+> sourced snapshot in [`data/market_conditions.json`](data/market_conditions.json)
+> and fetches nothing itself. **Refresh that file before relying on it.** Example
+> (2026-06-19, Juneteenth): cash markets closed, so the screen is the pre-opening
+> read for Mon Jun 22 — **CAUTIOUS, score ~41**: a strong prior close (S&P +1%,
+> VIX ~16) offset by a hawkish Fed, a 15-month-high dollar, ~$3.97 pump gas, firm
+> crude, a gold bid, and a Fear & Greed gauge at 37 (Fear). Educational only — not
+> investment advice.
+
+---
+
 ## Files
 
 ```
@@ -86,6 +126,7 @@ value-screener/
 ├── config.json          # every threshold & weight (tunable, documented)
 ├── screener.py          # Buffett scoring engine (stdlib only)
 ├── prescreen.py         # Pre-screen: macro/news engine (offline, deterministic)
+├── preopen.py           # US pre-opening screen: full macro dashboard (reuses prescreen)
 ├── magic_lite.py        # compact Python port of the Magic Elite directional score
 ├── sentiment.py         # Sentiment lens: social + analyst + insider (hype-tempered)
 ├── overall.py           # pipeline orchestrator (Pre-screen→Buffett→Magic→Sentiment→Overall)

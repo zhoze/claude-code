@@ -1,0 +1,35 @@
+# Run the value-screener self-tests on every push / PR that touches it.
+# The engines are stdlib-only and offline, so no secrets or deps are needed.
+name: value-screener selftests
+
+on:
+  push:
+    paths:
+      - "value-screener/**"
+      - ".github/workflows/value-screener-tests.yml"
+  pull_request:
+    paths:
+      - "value-screener/**"
+      - ".github/workflows/value-screener-tests.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  selftests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: value-screener
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run selftests
+        run: |
+          python3 screener.py --selftest
+          python3 prescreen.py --selftest
+          python3 preopen.py --selftest
+          python3 overall.py --selftest

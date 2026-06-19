@@ -1,41 +1,93 @@
 {
   "_comment": "Pre-screen input: fresh macro/pre-market conditions + per-stock news, from reliable sources. NEWS GOES STALE - refresh before relying on it. To refresh: web-search current futures/VIX/yields/oil + headlines and each stock's latest news, then rewrite this file with today's date, numbers, and source links. prescreen.py and overall.py read this; they do NOT fetch news themselves. Trigger keyword: Pre-screen.",
-  "as_of": "2026-06-15",
-  "session": "weekend / pre-market for next session",
+  "as_of": "2026-06-19",
+  "session": "Juneteenth holiday - US cash markets & CME equity-index futures closed Fri Jun 19; this is the PRE-OPENING read for the next session, Mon Jun 22 2026",
+  "_data_note": "Equity figures are the Thu Jun 18 cash close (no Fri futures print on the holiday). 24h markets - metals, energy, FX, crypto - are Fri Jun 19 spot. Where a publisher reported a level but not the intraday delta, the change field is a directional estimate from the dated sources below; refresh before relying on it.",
   "macro": {
-    "vix": 16.2,
-    "vix_change_pct": -8.37,
-    "sp500_futures_pct": 0.19,
-    "nasdaq_futures_pct": 0.64,
-    "dow_futures_pct": 0.26,
+    "futures_closed": true,
+    "sp500_futures_pct": 0.0,
+    "nasdaq_futures_pct": 0.0,
+    "dow_futures_pct": 0.0,
+    "futures_note": "CME equity-index futures observe Juneteenth; no fresh pre-open print. Prior session (Thu Jun 18) closed strong - see prev_close.",
+    "prev_close": {
+      "sp500_pct": 1.0,
+      "nasdaq100_pct": 1.9,
+      "dow_pct": 0.31,
+      "dow_points": 157,
+      "dow_level": 51650
+    },
+    "vix": 16.4,
+    "vix_change_pct": -0.1,
+    "vvix": 88.43,
+    "vvix_change_pct": -6.45,
+    "fear_greed": 37,
+    "fear_greed_label": "Fear",
+    "fear_greed_prev": 33,
     "ust10y": 4.46,
-    "ust10y_change_bps": -8,
-    "wti_oil_pct": -5.0,
-    "summary": "Risk-on rebound from the early-June selloff: VIX back to ~16, index futures green with the Dow at a fresh all-time high, 10y yield easing to ~4.46% and oil dropping after a US-Iran interim peace deal; resilient May retail sales (+0.9%). Lingering headwind: a hawkish Fed (SEP shows ~half the FOMC seeing at least one 2026 hike).",
+    "ust10y_change_bps": 0,
+    "ust2y": 4.19,
+    "ust2y_change_bps": 0,
+    "wti_oil": 77.1,
+    "wti_oil_pct": 0.6,
+    "brent_oil": 79.95,
+    "brent_oil_pct": 0.12,
+    "natgas": 3.21,
+    "natgas_pct": -0.82,
+    "gold": 4178.25,
+    "gold_change_pct": 0.4,
+    "silver": 66.0,
+    "silver_change_pct": 1.2,
+    "copper": 6.40,
+    "copper_change_pct": 0.3,
+    "gasoline_price": 3.973,
+    "gasoline_change_pct": 1.5,
+    "dxy": 100.72,
+    "dxy_change_pct": 0.3,
+    "btc": 62500,
+    "btc_change_pct": -2.4,
+    "summary": "Mixed-to-cautious pre-open. The prior cash session (Thu Jun 18) closed strong - S&P +1%, Nasdaq-100 +1.9%, Dow +157 to 51,650 - on tech strength and US-Iran-deal optimism, and the VIX (16.4) / VVIX (88) point to a calm options tape. But the backdrop is full of headwinds: a hawkish Fed (Chair Kevin Warsh's first meeting flagged a possible 2026 hike), the dollar (DXY 100.7) at its highest since May 2025, pump gasoline near $3.97 (up ~$1 in a month), firm crude (WTI ~$77, Brent ~$80) and a bid in gold (~$4,178) - while the CNN Fear & Greed gauge sits at 37 (Fear) and bitcoin slides post-Fed. Net read leans neutral-to-cautious; next catalysts are May PCE inflation, Q1 GDP, and MU/FDX earnings the week of Jun 22.",
     "headlines": [
       {
-        "text": "US-Iran interim peace deal eases the war premium; oil drops sharply",
-        "impact": "bullish",
-        "weight": 8,
-        "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-05-2026"
+        "text": "US cash markets & equity-index futures closed Fri Jun 19 for Juneteenth; reopen Mon Jun 22",
+        "impact": "neutral",
+        "weight": 0,
+        "url": "https://www.cnbc.com/2026/06/17/stock-market-today-live-updates.html"
       },
       {
-        "text": "May retail sales +0.9% vs +0.5% expected - resilient consumer",
+        "text": "Thu Jun 18 close strong: S&P +1%, Nasdaq-100 +1.9%, Dow +157 to 51,650 on a tech-led rebound and US-Iran-deal optimism",
         "impact": "bullish",
-        "weight": 5,
-        "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-05-2026"
+        "weight": 7,
+        "url": "https://www.cnbc.com/2026/06/17/stock-market-today-live-updates.html"
       },
       {
-        "text": "Chip stocks rebound after early-June SOX -10% crash; Dow at all-time high",
-        "impact": "bullish",
-        "weight": 4,
-        "url": "https://www.cnbc.com/2026/06/06/wall-streets-fear-gauge-punches-back-as-the-crash-up-in-chip-stocks-finally-reverses.html"
-      },
-      {
-        "text": "Fed held rates; projections show ~half the FOMC sees at least one hike this year",
+        "text": "Hawkish Fed overhang: Chair Kevin Warsh's first meeting signaled a possible rate hike later in 2026",
         "impact": "bearish",
         "weight": 6,
-        "url": "https://www.cnn.com/2026/06/05/markets/stock-market-sell-off-fed"
+        "url": "https://www.schwab.com/learn/story/stock-market-update-open"
+      },
+      {
+        "text": "National average gasoline ~$3.97/gal, up sharply (~$1 in a month) - consumer/inflation headwind",
+        "impact": "bearish",
+        "weight": 3,
+        "url": "https://gasprices.aaa.com/"
+      },
+      {
+        "text": "Dollar (DXY 100.7) at its highest since May 2025; crude firm (WTI ~$77, Brent ~$80) and gold bid (~$4,178)",
+        "impact": "bearish",
+        "weight": 2,
+        "url": "https://tradingeconomics.com/united-states/currency"
+      },
+      {
+        "text": "Bitcoin sliding post-Fed (~$62.5k, -2.4%) - cross-asset risk appetite cooling",
+        "impact": "bearish",
+        "weight": 2,
+        "url": "https://finance.yahoo.com/personal-finance/investing/article/bitcoin-and-ethereum-prices-today-friday-june-19-2026-prices-keep-falling-post-fed-decision-123239380.html"
+      },
+      {
+        "text": "Week of Jun 22 light early; key catalysts are May PCE inflation, Q1 GDP, and Micron (MU) & FedEx (FDX) earnings",
+        "impact": "neutral",
+        "weight": 0,
+        "url": "https://www.kiplinger.com/investing/economy/this-weeks-economic-calendar"
       }
     ]
   },
