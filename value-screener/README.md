@@ -2,7 +2,7 @@
 
 A transparent, reproducible stock screener that scores companies against a
 quantitative approximation of **Warren Buffett's value-investing approach**, and
-a **live screen of S&P 500 names** run with real fundamentals.
+a **live screen of Russell 1000 names** run with real fundamentals.
 
 > ⚠️ **Educational tool, not investment advice.** The thresholds here approximate
 > Buffett's *quantitative* filters. His real edge — judging durable moats, honest
@@ -176,33 +176,35 @@ reported as "no data" rather than silently failing.
 
 ---
 
-## The live screen — full S&P 500 (run 2026-06-17)
+## The live screen — Russell 1000 (run 2026-06-19)
 
-This repo ships a **real screen** of the **entire S&P 500 (503 names)**. Prices,
-TTM fundamentals, technicals (50/200-day MA, RSI, beta), analyst-consensus
-ratings and price targets were pulled from the **Financial Modeling Prep
-`/stable` API** (2026-06-17). All four lenses cover ~all names (Buffett value on
-the ~491 with complete fundamentals, Magic on all 503, Sentiment on the 482 with
-analyst coverage, macro Pre-screen for all). Earlier examples in this README came
-from a curated 40-name run; see `data/results/` for the current full-index output.
+This repo ships a **real screen** of the **Russell 1000 (1000 large + mid-cap US
+names)** — the top ~1000 actively-trading US companies by market cap, a reproducible
+proxy for the licensed Russell list (built via the FMP screener). Prices, TTM
+fundamentals, technicals (50/200-day MA, RSI, beta), analyst-consensus ratings and
+price targets were pulled from the **Financial Modeling Prep `/stable` API**
+(2026-06-19). All four lenses cover ~all names (Buffett value, Magic on all 1000,
+Sentiment on the 901 with analyst coverage, macro Pre-screen for all). Earlier
+examples in this README came from a curated 40-name run; see `data/results/` for the
+current full-universe output.
 
-**Buffett value screen — top Strong Candidates** (77 of 503; full list in
+**Buffett value screen — top Strong Candidates** (113 of 1000; full list in
 [`data/results/top_candidates.md`](data/results/top_candidates.md)):
 
 | Ticker | Company | Score | Margin of Safety |
 |:--|:--|---:|---:|
-| HIG | Hartford Financial | 100 | 68.0% |
-| CF | CF Industries | 100 | 66.6% |
-| ZTS | Zoetis | 100 | 55.6% |
-| EOG | EOG Resources | 100 | 53.6% |
-| INCY | Incyte | 100 | 50.4% |
-| DECK | Deckers Outdoor | 100 | 47.6% |
+| CF | CF Industries | 100 | 67.5% |
+| HIG | Hartford Financial | 100 | 68.4% |
+| PRI | Primerica | 100 | 58.4% |
+| ZTS | Zoetis | 100 | 54.8% |
+| EOG | EOG Resources | 100 | 54.7% |
+| INCY | Incyte | 100 | 50.8% |
 
-**Overall 4-lens directional ranking — most bullish** (full 503 in
-[`data/results/overall_screen.md`](data/results/overall_screen.md)): CNC, GL,
-KLAC, MTB, CRWD, UAL, CINF, DAL, JPM, BAC — names pairing a strong uptrend
-(Magic) with decent value/sentiment. Most-bearish: HSY, KR, TSN, NRG, COIN,
-TSLA, PLTR — broken trends and/or stretched valuations.
+**Overall 4-lens directional ranking — most bullish** (full 1000 in
+[`data/results/overall_screen.md`](data/results/overall_screen.md)): CORZ, HPQ, CPA,
+FCNCA, AXSM, M, MAC, OSCR, ZION — names pairing a strong uptrend (Magic) with decent
+value/sentiment. Most-bearish: TSLA, OWL, Z, HSY, TSN — broken trends and/or
+stretched valuations.
 
 **Reading the results (still true at index scale):**
 - The **dominant driver** is usually **technical (Magic)** — it carries the
