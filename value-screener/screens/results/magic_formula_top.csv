@@ -1,0 +1,5 @@
+ticker,company,sector,industry,market_cap,enterprise_value,ebit,invested_capital,earnings_yield,return_on_capital,earnings_yield_rank,return_on_capital_rank,magic_formula_rank_sum,magic_formula_score
+AAPL,Apple Inc.,Information Technology,Consumer Electronics,3818743810000,3895186810000,133050000000,32160000000,0.03415754018739861,4.137126865671642,1.0,1.0,2.0,100.0
+MSFT,Microsoft Corp.,Information Technology,Software - Infrastructure,3697248530000,3779190530000,128528000000,279702000000,0.03400939936203746,0.45951762947708635,2.0,2.0,4.0,66.66666666666667
+GOOGL,Alphabet Inc.,Communication Services,Internet Content & Information,3792308000000,3820891000000,129166000000,365111000000,0.03380520407412826,0.353771866637817,3.0,3.0,6.0,33.333333333333336
+GM,General Motors Co.,Consumer Discretionary,Auto Manufacturers,74769186080,184101186080,2909000000,100796000000,0.01580109320282115,0.02886027223302512,4.0,4.0,8.0,0.0
