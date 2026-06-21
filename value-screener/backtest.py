@@ -33,6 +33,7 @@ import csv
 import datetime as dt
 import json
 import os
+import re
 import subprocess
 import sys
 import urllib.request
@@ -77,6 +78,86 @@ def change_field(days):
     return "1M" if days <= 45 else ("3M" if days <= 135 else "6M")
 
 
+def tech_asof(get, sym, kind, period, asof_date):
+    """Value of an FMP technical indicator (sma/rsi) on the nearest trading day <= asof_date."""
+    frm = (dt.date.fromisoformat(asof_date) - dt.timedelta(days=20)).isoformat()
+    d = get(f"technical-indicators/{kind}?symbol={sym}&periodLength={period}"
+            f"&timeframe=1day&from={frm}&to={asof_date}")
+    if not isinstance(d, list) or not d:
+        return None
+    rows = sorted([r for r in d if r.get("date")], key=lambda r: r["date"])
+    val = None
+    for r in rows:
+        if r["date"][:10] <= asof_date:
+            val = r.get(kind, r.get("value"))
+    return val
+
+
+def magic_overlay(get, picks, prices, asof_date, fund, fwd, top, hereroot):
+    """For each as-of pick, score the Elite Magic trend with as-of technicals and report
+    which picks pass a simple trend gate (Magic >= 50 and not a SHORT weekly->daily call)."""
+    cli = os.path.join(hereroot, "stock-screener", "cli.js")
+    mcp = os.path.join(DATA, "market_conditions.json")
+    betas = {}
+    try:
+        for s, v in json.load(open(mcp)).get("stocks", {}).items():
+            betas[s] = v.get("technicals", {}).get("beta")
+    except Exception:
+        pass
+
+    def fnum(s, k):
+        try:
+            return float(fund[s][k])
+        except Exception:
+            return None
+
+    print("\n" + "=" * 64)
+    print(f"  ELITE MAGIC TREND OVERLAY on the as-of {asof_date} Buffett top {top}")
+    print("=" * 64)
+    print(f"  {'TICKER':<6} {'magic':>5} {'align':>6} {'pass?':>5} {'fwd %':>8}")
+    kept, dropped = [], []
+    for r in picks:
+        s = r["symbol"]; a = prices.get(s)
+        if not a:
+            continue
+        price = a[1]
+        sma50 = tech_asof(get, s, "sma", 50, asof_date)
+        sma200 = tech_asof(get, s, "sma", 200, asof_date)
+        rsi = tech_asof(get, s, "rsi", 14, asof_date)
+        if not (sma50 and sma200 and rsi):
+            print(f"  {s:<6} {'n/a (no as-of technicals)':>30}")
+            continue
+        beta = betas.get(s) or 1.0
+        pe = fnum(s, "pe"); roic = fnum(s, "roic")
+        argv = ["node", cli, s, "--price", str(price), "--sma50", str(sma50),
+                "--sma200", str(sma200), "--rsi", str(rsi), "--beta", str(beta),
+                "--perf-month", str(round((price / sma50 - 1) * 100, 2)),
+                "--perf-ytd", str(round((price / sma200 - 1) * 100, 2)),
+                "--volume", "1000000"]
+        if pe is not None:
+            argv += ["--pe", str(pe)]
+        if roic is not None:
+            argv += ["--roic", str(round(roic * 100, 2))]
+        out = subprocess.run(argv, capture_output=True, text=True).stdout
+        m = re.search(r"MAGIC SCORE.*?:\s*(-?\d+)", out)
+        magic = int(m.group(1)) if m else None
+        am = re.search(r"alignment:\s*([A-Z/]+)", out)
+        align = am.group(1) if am else "?"
+        passed = (magic is not None and magic >= 50 and align != "SHORT")
+        fr = fwd(s)
+        (kept if passed else dropped).append(fr)
+        print(f"  {s:<6} {str(magic):>5} {align:>6} {('YES' if passed else 'no'):>5} {fr:>+7.1f}%")
+    print("-" * 64)
+
+    def avg(xs):
+        return sum(xs) / len(xs) if xs else float("nan")
+    print(f"  KEPT (passed trend gate): {len(kept)} names  ->  avg fwd {avg(kept):>+6.1f}%")
+    print(f"  DROPPED (failed gate)   : {len(dropped)} names  ->  avg fwd {avg(dropped):>+6.1f}%")
+    all_fr = kept + dropped
+    print(f"  Unfiltered top {top}       : {len(all_fr)} names  ->  avg fwd {avg(all_fr):>+6.1f}%")
+    print("=" * 64)
+
+
 def asof_now_via_change(get, sym, now_price, field):
     """Fallback when historical EOD is plan-restricted: derive the as-of price from the
     current price and the trailing %-change window. Returns (asof_price, now_price, pct)."""
@@ -112,6 +193,8 @@ def main(argv=None):
     p.add_argument("--top", type=int, default=10)
     p.add_argument("--workers", type=int, default=12)
     p.add_argument("--limit", type=int, default=0, help="Only use the first N universe symbols (smoke test).")
+    p.add_argument("--magic-overlay", action="store_true",
+                   help="Score each pick's Elite Magic trend with as-of technicals (eod mode only).")
     args = p.parse_args(argv)
 
     key = os.environ.get("FMP_KEY")
@@ -239,6 +322,13 @@ def main(argv=None):
     print("=" * 64)
     print("  NOTE: only price was rewound; TTM fundamentals are current values used as a")
     print("  proxy (mild look-ahead). Indicative, educational — not investment advice.")
+
+    if args.magic_overlay:
+        if not eod_mode:
+            print("\n(magic overlay skipped: needs exact as-of dates, unavailable in change mode)")
+        else:
+            magic_overlay(get, picks, prices, asof_date, fund, fwd, args.top,
+                          os.path.dirname(HERE))
     return 0
 
 
