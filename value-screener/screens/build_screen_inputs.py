@@ -14,6 +14,13 @@ Universe: the largest ~1000 actively-traded US common stocks by market cap
 (a faithful, reproducible proxy for the Russell 1000, which FMP does not expose
 as a constituent list on this plan). Override with --universe a,b,c or a file.
 
+Sanity filters (so bad source rows can't fake a "cheap" name):
+  * Valuation is anchored to the LIVE quote market cap, not the annual key-metrics
+    snapshot — and PE / FCF-yield / EV-EBIT / P-B are recomputed from it. This
+    prevents a stale snapshot (e.g. a years-old market cap) from inflating scores.
+  * Non-common-stock tickers (baby bonds, notes, debentures, preferreds) are
+    dropped via NON_EQUITY_RE; names with no usable market cap are dropped too.
+
 The API key is read from FMP_KEY and is NEVER written to disk or committed.
 
     FMP_KEY=your_key  python3 build_screen_inputs.py                 # full ~1000
@@ -27,6 +34,7 @@ import argparse
 import csv
 import json
 import os
+import re
 import sys
 import time
 import urllib.parse
@@ -36,6 +44,15 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 HERE = os.path.dirname(os.path.abspath(__file__))
 INPUTS = os.path.join(HERE, "inputs")
 BASE = "https://financialmodelingprep.com/stable"
+
+# Names that trade under their own ticker but are NOT common equity — baby bonds,
+# notes, debentures, depositary/preferred shares (e.g. CMSD = "CMS Energy ...
+# 5.875% Junior Subordinated Notes due 2079"). These slip past the equity screener.
+NON_EQUITY_RE = re.compile(
+    r"\d%|Notes\s+due|Subordinated|Debentures?|Depositary|\bPfd\b"
+    r"|Preferred\s+(?:Stock|Shares|Series)|Cumulative\s+Preferred",
+    re.I,
+)
 
 
 def make_get(key):
@@ -104,13 +121,15 @@ def pull_symbol(get, sym):
     bal = get(f"balance-sheet-statement?symbol={sym}&period=annual&limit=2")
     cf = get(f"cash-flow-statement?symbol={sym}&period=annual&limit=5")
     prof = get(f"profile?symbol={sym}")
+    quote = get(f"quote?symbol={sym}")
     if not (km and rat and inc and bal):
         return None
     prof0 = prof[0] if isinstance(prof, list) and prof else {}
-    return build_record(sym, km, rat, inc, bal, cf or [], prof0)
+    quote0 = quote[0] if isinstance(quote, list) and quote else {}
+    return build_record(sym, km, rat, inc, bal, cf or [], prof0, quote0)
 
 
-def build_record(sym, km, rat, inc, bal, cf, prof):
+def build_record(sym, km, rat, inc, bal, cf, prof, quote=None):
     """Turn raw FMP rows (newest-first) into a flat record for all three screens."""
     k0, r0, i0, b0 = km[0], rat[0], inc[0], bal[0]
     i1 = inc[1] if len(inc) > 1 else {}
@@ -153,8 +172,39 @@ def build_record(sym, km, rat, inc, bal, cf, prof):
     if shares_t and shares_old and shares_old != 0:
         shares_change = shares_t / shares_old - 1
 
-    ev = g(k0, "enterpriseValue")
-    mktcap = g(k0, "marketCap") or g(prof, "marketCap", "mktCap")
+    quote = quote or {}
+    company_name = g(prof, "companyName", "name", default="")
+    # Drop non-common-stock securities (baby bonds, notes, preferreds).
+    if NON_EQUITY_RE.search(company_name or ""):
+        return None
+
+    # Live valuation anchor: trust the current quote's market cap, not a possibly
+    # stale annual key-metrics snapshot (which made e.g. KLA look ~10x too cheap).
+    mktcap = g(quote, "marketCap")
+    if not mktcap or mktcap <= 0:
+        mktcap = g(k0, "marketCap") or g(prof, "marketCap", "mktCap")
+    if not mktcap or mktcap <= 0:
+        return None  # no usable market cap -> can't value it, drop
+    price = g(quote, "price") or g(prof, "price")
+
+    # Enterprise value from the live market cap + latest net debt.
+    total_debt = g(b0, "totalDebt")
+    if total_debt is None:
+        total_debt = (g(b0, "longTermDebt") or 0) + (g(b0, "shortTermDebt") or 0)
+    cash = g(b0, "cashAndShortTermInvestments", "cashAndCashEquivalents") or 0
+    ev = mktcap + (total_debt or 0) - cash
+
+    # Recompute the price-based ratios off the live anchor so a stale snapshot
+    # can't manufacture fake "cheapness".
+    latest_fcf = fcf_of(k0, cf0)
+    fcf_yield = (latest_fcf / mktcap) if (latest_fcf is not None and mktcap) else None
+    eps_ttm = g(quote, "eps")
+    pe = g(quote, "pe")
+    if (pe is None or pe <= 0) and eps_ttm and eps_ttm > 0 and price:
+        pe = price / eps_ttm
+    equity = g(b0, "totalStockholdersEquity", "totalEquity")
+    price_to_book = (mktcap / equity) if (equity and equity > 0) else g(r0, "priceToBookRatio")
+
     nwc = None
     if g(b0, "totalCurrentAssets") is not None and g(b0, "totalCurrentLiabilities") is not None:
         nwc = g(b0, "totalCurrentAssets") - g(b0, "totalCurrentLiabilities")
@@ -174,7 +224,7 @@ def build_record(sym, km, rat, inc, bal, cf, prof):
         "sector": g(prof, "sector", default=""),
         "industry": g(prof, "industry", default=""),
         "market_cap": mktcap,
-        "price": g(prof, "price"),
+        "price": price,
         # --- Buffett quality (5y averages + latest balance/valuation) ---
         "roic_5y_avg": mean([g(x, "returnOnInvestedCapital") for x in km]),
         "roe_5y_avg": mean([g(x, "returnOnEquity") for x in km]),
@@ -186,8 +236,8 @@ def build_record(sym, km, rat, inc, bal, cf, prof):
         "debt_to_equity": g(r0, "debtToEquityRatio"),
         "interest_coverage": icov,
         "current_ratio": g(r0, "currentRatio"),
-        "fcf_yield": g(k0, "freeCashFlowYield"),
-        "pe": g(r0, "priceToEarningsRatio"),
+        "fcf_yield": fcf_yield,
+        "pe": pe,
         "ev_ebit": (ev / ebit) if (ev and ebit and ebit > 0) else None,
         "shares_change_5y_pct": shares_change,
         # --- Magic Formula ---
@@ -196,7 +246,7 @@ def build_record(sym, km, rat, inc, bal, cf, prof):
         "net_working_capital": nwc,
         "net_fixed_assets": npe,
         # --- Piotroski (t / t-1) ---
-        "price_to_book": g(r0, "priceToBookRatio"),
+        "price_to_book": price_to_book,
         "net_income_t": g(i0, "netIncome"),
         "net_income_t_minus_1": g(i1, "netIncome"),
         "total_assets_t": g(b0, "totalAssets"),
