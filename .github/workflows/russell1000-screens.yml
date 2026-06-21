@@ -1,0 +1,50 @@
+# Manual run of the three value screens (Buffett Quality, Magic Formula,
+# Piotroski F-Score) on the full Russell 1000.
+# Requires the "screen" environment secret FMP_KEY (with statement access).
+# Manual-only (workflow_dispatch) so it never runs automatically.
+name: Russell 1000 three-screen run
+
+on:
+  workflow_dispatch:
+    inputs:
+      top:
+        description: "How many names to keep per screen"
+        default: "10"
+      target:
+        description: "Universe size (largest US names by market cap)"
+        default: "1000"
+
+permissions:
+  contents: write
+
+jobs:
+  screens:
+    runs-on: ubuntu-latest
+    environment: screen   # uses the GitHub Environment "screen" (and its FMP_KEY secret)
+    defaults:
+      run:
+        working-directory: value-screener/screens
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install pandas
+
+      - name: Build Russell 1000 input CSVs (FMP)
+        env:
+          FMP_KEY: ${{ secrets.FMP_KEY }}   # stored secret — never hardcoded
+        run: python3 build_screen_inputs.py --target "${{ github.event.inputs.target }}"
+
+      - name: Run the three screens
+        run: python3 run_screens.py --top "${{ github.event.inputs.top }}" | tee results/console_report.txt
+
+      - name: Commit inputs + results
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add inputs/ results/
+          git commit -m "Auto-run Russell 1000 three-screen results [skip ci]" || echo "no changes"
+          git push

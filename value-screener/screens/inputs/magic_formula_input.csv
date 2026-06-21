@@ -1,0 +1,7 @@
+ticker,company,sector,industry,market_cap,enterprise_value,ebit,net_working_capital,net_fixed_assets,price
+AAPL,Apple Inc.,Information Technology,Consumer Electronics,3818743810000,3895186810000,133050000000,-17674000000,49834000000,297.06
+GM,General Motors Co.,Consumer Discretionary,Auto Manufacturers,74769186080,184101186080,2909000000,15425000000,85371000000,81.0
+GOOGL,Alphabet Inc.,Communication Services,Internet Content & Information,3792308000000,3820891000000,129166000000,103293000000,261818000000,313.0
+MSFT,Microsoft Corp.,Information Technology,Software - Infrastructure,3697248530000,3779190530000,128528000000,49913000000,229789000000,497.41
+UNH,UnitedHealth Group Inc.,Health Care,Healthcare Plans,300400100000,354424100000,18964000000,-24315000000,10762000000,330.0
+V,Visa Inc.,Financial Services,Credit Services,662959960000,667976960000,23994000000,2718000000,4236000000,341.0
