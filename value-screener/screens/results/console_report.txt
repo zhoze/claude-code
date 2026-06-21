@@ -1,0 +1,50 @@
+
+==============================================================================
+1. BUFFETT QUALITY COMPOUNDER  (top 10)
+==============================================================================
+ticker                         company                 sector  buffett_quality_total_score  quality_score  growth_score  balance_sheet_score  valuation_score  roic_5y_avg  roe_5y_avg  fcf_margin_5y_avg     pe
+  KLAC                 KLA Corporation             Technology                       90.914         98.242       100.000               62.046          100.000        0.324       1.166              0.308  2.934
+  DECK     Deckers Outdoor Corporation      Consumer Cyclical                       87.694         77.530       100.000               96.623           89.178        0.283       0.348              0.156 14.217
+  ADBE                      Adobe Inc.             Technology                       87.545         99.817        90.302               72.131           75.302        0.271       0.400              0.399 19.135
+   PRI                 Primerica, Inc.     Financial Services                       83.524         84.985        68.571               83.258           96.553        6.377       0.251              0.258 11.258
+   TPL  Texas Pacific Land Corporation                 Energy                       83.003        100.000       100.000               99.501            3.040        0.386       0.422              0.619 41.149
+  NVDA              NVIDIA Corporation             Technology                       82.984        100.000       100.000               98.368            3.395        0.452       0.588              0.360 37.824
+  META            Meta Platforms, Inc. Communication Services                       82.285         91.834        97.615               88.301           30.419        0.207       0.275              0.276 27.527
+  UTHR United Therapeutics Corporation             Healthcare                       81.690         72.920       100.000              100.000           65.699        0.135       0.162              0.330 16.172
+  EXEL                  Exelixis, Inc.             Healthcare                       81.318         62.779       100.000               98.199           82.316        0.138       0.173              0.225 15.132
+     V                       Visa Inc.     Financial Services                       80.339         99.571       100.000               70.642           18.516        0.247       0.445              0.575 33.403
+
+==============================================================================
+2. MAGIC FORMULA (Greenblatt)  (top 10)
+==============================================================================
+ticker                     company                 sector  magic_formula_score  earnings_yield  return_on_capital  earnings_yield_rank  return_on_capital_rank
+   OMC          Omnicom Group Inc. Communication Services              100.000           0.116              8.150               21.000                   7.000
+  CROX                 Crocs, Inc.      Consumer Cyclical               97.697           0.145              1.164                6.000                  48.000
+  CPAY                Corpay, Inc.             Technology               97.343           0.088              8.587               54.000                   4.000
+  DELL      Dell Technologies Inc.             Technology               97.343           0.088              8.371               52.000                   6.000
+  SOLV       Solventum Corporation             Healthcare               96.014           0.121              1.064               18.000                  55.000
+   EOG         EOG Resources, Inc.                 Energy               94.243           0.129              0.776               12.000                  81.000
+  KLAC             KLA Corporation             Technology               93.888           0.329              0.666                1.000                  96.000
+  MTCH           Match Group, Inc. Communication Services               93.003           0.081              1.581               79.000                  28.000
+  PTCT      PTC Therapeutics, Inc.             Healthcare               92.383           0.154              0.594                5.000                 109.000
+   WDC Western Digital Corporation             Technology               91.585           0.094              0.804               47.000                  76.000
+
+==============================================================================
+3. PIOTROSKI F-SCORE (low P/B value)  (top 10)
+==============================================================================
+ticker                                                          company                 sector  piotroski_f_score  price_to_book  roa_t  ocf_to_assets  asset_turnover_t
+    RF                                    Regions Financial Corporation     Financial Services                  9          1.245  0.014          0.014             0.060
+   HIG                      The Hartford Financial Services Group, Inc.     Financial Services                  9          2.050  0.046          0.071             0.329
+   NWS                                                 News Corporation Communication Services                  9          2.220  0.029          0.070             0.545
+  KLAC                                                  KLA Corporation             Technology                  9          2.539  0.258          0.259             0.757
+   MOS                                               The Mosaic Company        Basic Materials                  8          0.633  0.023          0.035             0.492
+  CMSD CMS Energy Corporation 5.875% Junior Subordinated Notes due 2079              Utilities                  8          0.756  0.028          0.058             0.211
+   FNB                                               F.N.B. Corporation     Financial Services                  8          0.909  0.011          0.010             0.054
+   TFC                                     Truist Financial Corporation     Financial Services                  8          0.957  0.010          0.011             0.056
+   RNR                                      RenaissanceRe Holdings Ltd.     Financial Services                  8          1.087  0.051          0.071             0.237
+   KEY                                                          KeyCorp     Financial Services                  8          1.109  0.010          0.012             0.061
+
+==============================================================================
+OVERLAP — names in 2+ screens
+==============================================================================
+  KLAC   — Buffett Quality, Magic Formula, Piotroski
