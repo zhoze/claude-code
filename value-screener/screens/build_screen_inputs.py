@@ -198,10 +198,15 @@ def build_record(sym, km, rat, inc, bal, cf, prof, quote=None):
     # can't manufacture fake "cheapness".
     latest_fcf = fcf_of(k0, cf0)
     fcf_yield = (latest_fcf / mktcap) if (latest_fcf is not None and mktcap) else None
-    eps_ttm = g(quote, "eps")
     pe = g(quote, "pe")
-    if (pe is None or pe <= 0) and eps_ttm and eps_ttm > 0 and price:
-        pe = price / eps_ttm
+    if pe is None or pe <= 0:
+        # quote PE is missing on some plans -> derive from live mcap / latest net income
+        ni = g(i0, "netIncome")
+        eps_ttm = g(quote, "eps")
+        if ni and ni > 0:
+            pe = mktcap / ni
+        elif eps_ttm and eps_ttm > 0 and price:
+            pe = price / eps_ttm
     equity = g(b0, "totalStockholdersEquity", "totalEquity")
     price_to_book = (mktcap / equity) if (equity and equity > 0) else g(r0, "priceToBookRatio")
 
