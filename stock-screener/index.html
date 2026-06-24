@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elite Magic Trader — Stock Screener</title>
+  <meta name="description" content="A Magic Trader Elite–style stock screener: believer-based signals, risk colors, Explorations and bond inversions." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">◆</span>
+      <div>
+        <h1>Elite&nbsp;Magic&nbsp;Trader</h1>
+        <p class="tagline">Weighted multi-dimensional risk · 8 dimensions · risk colors · bond inversions</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <div class="status-pill" id="dataStatus" title="Where the current data comes from">
+        <span class="dot"></span><span id="dataStatusText">Demo dataset</span>
+      </div>
+      <button class="ghost-btn" id="liveBtn" title="Attempt to fetch live quotes (requires a configured API key)">⟳ Live data</button>
+    </div>
+  </header>
+
+  <!-- ============ BOND INVERSION MACRO BANNER ============ -->
+  <section class="bond-banner" id="bondBanner" title="Yield-curve inversions act as a macro risk gauge">
+    <div class="bond-headline">
+      <span class="bond-label">Bond Inversions</span>
+      <span class="bond-gauge" id="bondGauge">—</span>
+      <span class="bond-note" id="bondNote"></span>
+    </div>
+    <div class="bond-curve" id="bondCurve"><!-- yield chips built by JS --></div>
+  </section>
+
+  <main class="layout">
+    <!-- ============ FILTER SIDEBAR ============ -->
+    <aside class="filters" id="filters">
+      <div class="filters-head">
+        <h2>Screen</h2>
+        <button class="link-btn" id="resetBtn">Reset</button>
+      </div>
+
+      <label class="field">
+        <span>Search ticker / name</span>
+        <input type="search" id="searchInput" placeholder="e.g. AAPL or Energy" autocomplete="off" />
+      </label>
+
+      <div class="presets">
+        <span class="field-label">Explorations</span>
+        <div class="preset-grid" id="presetGrid"></div>
+      </div>
+
+      <label class="field">
+        <span>Sector</span>
+        <select id="sectorSelect"></select>
+      </label>
+
+      <label class="field">
+        <span>Price band <small class="hint">(Volume Explorer)</small></span>
+        <select id="priceBand">
+          <option value="any">Any price</option>
+          <option value="u5">Under $5</option>
+          <option value="5-15">$5 – $15</option>
+          <option value="15-100">$15 – $100</option>
+          <option value="100-200">$100 – $200</option>
+          <option value="200-500">$200 – $500</option>
+          <option value="o500">Above $500</option>
+        </select>
+      </label>
+
+      <label class="check stacked"><input type="checkbox" id="volFilter" checked /> Volume &gt; 500,000 <small class="hint">(base filter)</small></label>
+      <label class="check stacked"><input type="checkbox" id="volQual" /> Unusually high volume (VQua)</label>
+
+      <fieldset class="range-field">
+        <legend>Weekly trend <small class="hint">(higher timeframe)</small></legend>
+        <select id="weekly">
+          <option value="any">Any</option>
+          <option value="bull">Bullish weekly</option>
+          <option value="bear">Bearish weekly</option>
+          <option value="neutral">Flat / mixed</option>
+        </select>
+      </fieldset>
+
+      <fieldset class="range-field">
+        <legend>Daily territory <small class="hint">(Blue Line)</small></legend>
+        <select id="territory">
+          <option value="any">Any</option>
+          <option value="bull">Bullish (Close &gt; Blue Line)</option>
+          <option value="bear">Bearish (Close &lt; Blue Line)</option>
+        </select>
+      </fieldset>
+
+      <fieldset class="range-field">
+        <legend>Magic Lines gate</legend>
+        <select id="mlGate">
+          <option value="any">Any</option>
+          <option value="1">Above both (long-confirmed)</option>
+          <option value="-1">Below both (short-confirmed)</option>
+          <option value="0">Between lines (no confirm)</option>
+        </select>
+      </fieldset>
+
+      <fieldset class="range-field">
+        <legend>Magic Candle</legend>
+        <select id="candle">
+          <option value="any">Any candle</option>
+          <option value="turquoise">Turquoise — sudden bull reversal</option>
+          <option value="green">Bull (confirmed)</option>
+          <option value="yellow">Yellow — bull warning</option>
+          <option value="neutral">Neutral</option>
+          <option value="indigo">Indigo — bear warning</option>
+          <option value="golden">Golden — sudden bear reversal</option>
+          <option value="red">Bear (confirmed)</option>
+        </select>
+      </fieldset>
+
+      <fieldset class="range-field">
+        <legend>HTR Ribbon</legend>
+        <select id="ribbon">
+          <option value="any">Any ribbon</option>
+          <option value="green">Green — bulls control health</option>
+          <option value="red">Red — bears control health</option>
+          <option value="black">Black — neutral</option>
+        </select>
+      </fieldset>
+
+      <fieldset class="range-field">
+        <legend>DSPR Preceptor type</legend>
+        <select id="dspr">
+          <option value="any">Any type</option>
+          <option value="a">a — bull, prices dropping (shakeout)</option>
+          <option value="b">b — bull, rising (fully charged)</option>
+          <option value="c">c — bull, rising (extended)</option>
+          <option value="d">d — bull, dropping after a rise</option>
+          <option value="e">e — bear, dropping</option>
+          <option value="f">f — bear, counter-bounce</option>
+        </select>
+      </fieldset>
+
+      <fieldset class="range-field">
+        <legend>Trading Zone (1 top – 6 bottom)</legend>
+        <div class="row">
+          <input type="number" id="zoneMin" placeholder="1" min="1" max="6" step="1" />
+          <span class="dash">–</span>
+          <input type="number" id="zoneMax" placeholder="6" min="1" max="6" step="1" />
+        </div>
+      </fieldset>
+
+      <fieldset class="range-field">
+        <legend>Min Five-Ingredient alignment</legend>
+        <input type="range" id="ingMin" min="0" max="5" value="0" />
+        <output id="ingMinOut">0 / 5</output>
+        <select id="ingSide">
+          <option value="bull">Bullish ingredients</option>
+          <option value="bear">Bearish ingredients</option>
+        </select>
+      </fieldset>
+
+      <label class="check stacked"><input type="checkbox" id="entryOnly" /> Entry Trigger only (5/5 + volume + candle)</label>
+      <label class="check stacked"><input type="checkbox" id="lowRiskOnly" /> Lowest-risk volatility only</label>
+
+      <fieldset class="range-field">
+        <legend>Market cap</legend>
+        <select id="capMin">
+          <option value="0">Any min</option>
+          <option value="2e9">$2B+</option>
+          <option value="10e9">$10B+</option>
+          <option value="50e9">$50B+</option>
+          <option value="200e9">$200B+</option>
+          <option value="1e12">$1T+</option>
+        </select>
+      </fieldset>
+    </aside>
+
+    <!-- ============ RESULTS ============ -->
+    <section class="results">
+      <div class="results-head">
+        <div class="summary">
+          <strong id="matchCount">0</strong> matches
+          <span class="muted" id="universeCount"></span>
+        </div>
+        <div class="results-actions">
+          <span class="active-exploration" id="activeExploration"></span>
+          <button class="ghost-btn" id="exportBtn">⤓ Export CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="resultsTable">
+          <thead><tr id="headerRow"></tr></thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+        <p class="empty" id="emptyState" hidden>No instruments match this screen. Loosen a constraint or pick another Exploration.</p>
+      </div>
+
+      <footer class="legend">
+        <div class="legend-colors" id="legendColors"></div>
+        <div class="legend-text">
+          <span><strong>Weekly → Daily</strong> = multi-timeframe: the <strong>Weekly</strong> column is the higher-timeframe trend; ⇉ marks names where it agrees with the daily 5-ingredient alignment.</span>
+          <span><strong>8D Risk</strong> = Magic Eight Dimensions℠ weighted risk (0–100, higher = more risk); <strong>click any row</strong> for the per-dimension breakdown. It is orthogonal to the directional <strong>Magic</strong> conviction score.</span>
+          <span><strong>Ribbon</strong> = who controls Magic Health (green bull / red bear / black neutral); the number is elapsed-time risk (+1→+7 bull, −1→−7 bear).</span>
+          <span><strong>5 Ing.</strong> = Direction + Health + Spike + Pure Health + Ribbon aligned on the same bar.</span>
+        </div>
+        <span class="disclaimer">Magic Trader® Elite "identifies risk on a weighted basis — no buy or sell signals are given." Interpretive model of the manual/overview docs — demo data, educational use only, not investment advice.</span>
+      </footer>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="magic.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
