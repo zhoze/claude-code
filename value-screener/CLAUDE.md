@@ -8,6 +8,10 @@ Before running `preopen.py` (or `overall.py`, `prescreen.py`) **always update
 only as current as that file. Never present the screen from a stale snapshot; if
 the `as_of` date isn't today, refresh it.
 
+**When the user asks to "run the screen": refresh `market_conditions.json` to
+match today's date first, then just run the screen — do not ask, do not offer
+options, do not add extra steps. Refresh → run.**
+
 ### How to refresh the `macro` block
 Pull the latest values, then rewrite the `macro` block with today's `as_of`,
 numbers, and source links (keep the existing schema/keys):
