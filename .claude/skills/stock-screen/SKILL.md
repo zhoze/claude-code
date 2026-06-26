@@ -19,6 +19,13 @@ advice.** Always say this once in the final output.
 The committed dataset is the Russell 1000 set; if you must refresh, refresh Russell
 1000 (see "Refreshing data"), never fall back to S&P 500.
 
+**ALWAYS refresh the data first, then screen.** At the start of every run, trigger the
+Russell 1000 refresh (CI workflow "Refresh screener dataset", or `refresh_universe.py`
+locally) and wait for the committed dataset to update before running the Buffett or
+Elite Magic screens. Do not screen on a stale `fundamentals.csv`. If a refresh is
+genuinely impossible (no network/secret), say so explicitly and report the as-of date
+you fell back to.
+
 ## Tools & paths
 - Engines live in `value-screener/` (Python, stdlib only) and `stock-screener/`
   (the Elite Magic JS engine, Node).
@@ -75,10 +82,10 @@ Wait for the answer. Do not proceed until the user chooses.
 
 ## Stage 3a — Warren Buffett value screen → top 10
 
-1. **Confirm the universe is fresh Russell 1000.** Check `as_of` in
-   `value-screener/data/market_conditions.json` / the dataset. If it is stale and a
-   refresh is possible, refresh **Russell 1000** (see "Refreshing data"); otherwise note
-   the as-of date. Never screen S&P 500.
+1. **Refresh the Russell 1000 dataset first (mandatory).** Trigger the "Refresh
+   screener dataset" CI workflow (`universe: russell1000`) and wait for it to commit the
+   updated `fundamentals.csv` / `universe.csv`, then `git pull`. Only screen once the
+   data is current. Never screen a stale snapshot, and never screen S&P 500.
 2. **Run the Buffett engine and take the top 10:**
    ```bash
    python3 value-screener/screener.py --input value-screener/data/fundamentals.csv --top 10
