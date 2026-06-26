@@ -1,0 +1,17 @@
+{
+  "name": "iha-daily-poster",
+  "version": "1.0.0",
+  "description": "Agent that posts a predefined message daily to an iha.ee ad category using a logged-in account.",
+  "type": "module",
+  "scripts": {
+    "post": "node src/post.js",
+    "post:dry": "node src/post.js --dry-run",
+    "inspect": "node src/post.js --inspect",
+    "schedule": "node src/scheduler.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "node-cron": "^3.0.3",
+    "playwright": "^1.44.0"
+  }
+}

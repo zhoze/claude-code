@@ -1,0 +1,37 @@
+{
+  "site": {
+    "loginUrl": "https://www.iha.ee/login",
+    "postUrl": "https://www.iha.ee/adprom/men-couples"
+  },
+
+  "message": {
+    "_comment": "The predefined message to post. Max 160 chars on iha.ee. Provide this later.",
+    "text": "REPLACE_ME_WITH_YOUR_MESSAGE"
+  },
+
+  "schedule": {
+    "_comment": "Cron expression + timezone used by src/scheduler.js. Default: every day at 10:00 EET.",
+    "cron": "0 10 * * *",
+    "timezone": "Europe/Tallinn"
+  },
+
+  "selectors": {
+    "_comment": "CSS selectors / accessible-name fallbacks. Login fields are confirmed from the public login page (Kasutajanimi / Parool / Sisene). The POST form selectors are placeholders — run `npm run inspect` while logged in to capture the real ones, then paste them here.",
+
+    "login": {
+      "username": "input[name='username'], input[name='kasutajanimi'], #username",
+      "password": "input[name='password'], input[name='parool'], #password",
+      "submit": "button[type='submit'], input[type='submit']",
+      "submitText": "Sisene",
+      "loggedInIndicator": "a[href*='logout'], a[href*='valju']"
+    },
+
+    "post": {
+      "_comment": "PLACEHOLDERS — confirm with `npm run inspect`. The message textarea, the category control (men -> couples), and the submit button.",
+      "messageField": "textarea[name='text'], textarea#text",
+      "submit": "button[type='submit'], input[type='submit']",
+      "submitText": "Lisa kuulutus",
+      "successIndicator": null
+    }
+  }
+}
