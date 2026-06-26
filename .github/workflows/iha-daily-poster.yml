@@ -1,0 +1,67 @@
+name: iha.ee daily poster
+
+# Posts the predefined message in daily-poster/config.json to iha.ee once a day.
+#
+# Credentials come from repository secrets (Settings -> Secrets and variables ->
+# Actions): IHA_USERNAME and IHA_PASSWORD. They are never stored in the repo.
+#
+# NOTE ON TIMING:
+#   GitHub Actions cron is ALWAYS in UTC and does not follow DST.
+#   10:00 Europe/Tallinn = 07:00 UTC in summer (EEST), 08:00 UTC in winter (EET).
+#   The schedule below targets 10:00 local during summer. Adjust to "0 8 * * *"
+#   for winter if exact local time matters. Scheduled runs can also be delayed
+#   by a few minutes to ~hours on shared runners.
+#
+# NOTE ON BRANCHES:
+#   Scheduled (cron) runs only fire from the repository's DEFAULT branch.
+#   This workflow must be merged to the default branch before the daily schedule
+#   takes effect. `workflow_dispatch` lets you run it manually for testing.
+
+on:
+  schedule:
+    - cron: "0 7 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Fill the form but do not submit"
+        type: boolean
+        default: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: daily-poster
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Post message
+        env:
+          IHA_USERNAME: ${{ secrets.IHA_USERNAME }}
+          IHA_PASSWORD: ${{ secrets.IHA_PASSWORD }}
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            node src/post.js --dry-run
+          else
+            node src/post.js
+          fi
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: daily-poster/screenshots/
+          if-no-files-found: ignore
+          retention-days: 7

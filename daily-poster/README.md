@@ -57,15 +57,38 @@ npm run post
 ## Run it daily
 
 This repo's environment is ephemeral, so the schedule must run somewhere
-**persistent** (a VPS, home server, Raspberry Pi, or GitHub Actions). Two options:
+**persistent**. GitHub Actions is set up for this; system cron and a long-running
+scheduler are also supported.
 
-**A) System cron (recommended)** — edit `crontab -e`:
+### A) GitHub Actions (configured)
+
+Workflow: `.github/workflows/iha-daily-poster.yml`.
+
+1. Add your credentials as repository secrets:
+   **Settings → Secrets and variables → Actions → New repository secret**
+   - `IHA_USERNAME`
+   - `IHA_PASSWORD`
+2. Make sure `daily-poster/config.json` has your real `message.text` and the
+   confirmed `selectors.post` (see "First run" above), committed to the repo.
+3. **Merge this workflow to the default branch** — scheduled (cron) runs only
+   fire from the default branch. Until then, use **Actions → iha.ee daily poster
+   → Run workflow** to trigger it manually (there's a "dry run" checkbox).
+
+Timing caveats:
+- GitHub cron is **UTC and ignores DST**. The workflow uses `0 7 * * *`
+  (= 10:00 Tallinn in summer / 09:00 in winter). Change to `0 8 * * *` for exact
+  10:00 in winter.
+- Scheduled runs on shared runners can be delayed (minutes to occasionally hours).
+
+Debugging: every run uploads the `screenshots/` folder as a build artifact.
+
+### B) System cron — edit `crontab -e`:
 
 ```
 0 10 * * * cd /path/to/daily-poster && /usr/bin/node src/post.js >> post.log 2>&1
 ```
 
-**B) Long-running scheduler** (keep a process alive with pm2/systemd):
+### C) Long-running scheduler (pm2/systemd keeps a process alive):
 
 ```bash
 npm run schedule
