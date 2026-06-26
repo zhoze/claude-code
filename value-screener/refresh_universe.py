@@ -105,6 +105,25 @@ def universe_sp500(get):
                           "market_cap": None} for c in cons}
 
 
+def universe_from_csv():
+    """Fallback: reuse the already-established constituent list from data/universe.csv
+    (so a refresh updates prices/fundamentals even when the FMP screener is unavailable)."""
+    path = os.path.join(DATA, "universe.csv")
+    if not os.path.exists(path):
+        return {}
+    out = {}
+    for r in csv.DictReader(open(path)):
+        s = r.get("symbol")
+        if not s:
+            continue
+        try:
+            mc = float(r["market_cap"]) if r.get("market_cap") else None
+        except ValueError:
+            mc = None
+        out[s] = {"name": r.get("name", ""), "sector": r.get("sector", ""), "market_cap": mc}
+    return out
+
+
 def pull_symbol(get, sym, meta, quote):
     rat = get(f"ratios-ttm?symbol={sym}")
     km = get(f"key-metrics-ttm?symbol={sym}")
@@ -252,7 +271,14 @@ def main(argv=None):
     else:
         meta = universe_russell1000(get, args.count, args.min_cap)
     if not meta:
-        sys.exit(f"ERROR: could not build the {args.universe} universe (check the key / plan).")
+        # Screener endpoint unavailable (e.g. plan-gated) — refresh the established list.
+        meta = universe_from_csv()
+        if meta:
+            print(f"WARN: {args.universe} screener unavailable; refreshing the "
+                  f"{len(meta)} committed universe.csv constituents instead.")
+    if not meta:
+        sys.exit(f"ERROR: could not build the {args.universe} universe and no "
+                 f"data/universe.csv fallback exists (check the key / plan).")
     syms = sorted(meta)
     if args.limit:
         syms = syms[:args.limit]
