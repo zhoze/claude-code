@@ -1,33 +1,33 @@
 {
   "_comment": "Pre-screen input: fresh macro/pre-market conditions + per-stock news, from reliable sources. NEWS GOES STALE - refresh before relying on it. To refresh: web-search current futures/VIX/yields/oil + headlines and each stock's latest news, then rewrite this file with today's date, numbers, and source links. prescreen.py and overall.py read this; they do NOT fetch news themselves. Trigger keyword: Pre-screen.",
-  "as_of": "2026-06-26",
-  "session": "Pre-opening read for the Fri 2026-06-26 US cash session — May core PCE inflation prints pre-market.",
+  "as_of": "2026-07-05",
+  "session": "Weekend read for the Mon 2026-07-06 US cash session (markets closed Fri Jul 3 for Independence Day; last close Thu Jul 2).",
   "_data_note": "Equity figures are the Thu Jun 18 cash close (no Fri futures print on the holiday). 24h markets - metals, energy, FX, crypto - are Fri Jun 19 spot. Global equities are Fri Jun 19 overseas sessions. Where a publisher reported a level but not the intraday delta, the change field is a directional estimate from the dated sources below; refresh before relying on it. vix3m is an estimate (publisher did not print a Jun 18 close) consistent with the VIX in contango.",
   "macro": {
-    "futures_closed": false,
+    "futures_closed": true,
     "sp500_futures_pct": 0.0,
-    "nasdaq_futures_pct": -0.1,
-    "dow_futures_pct": 0.1,
-    "futures_note": "Normal session. Pre-open read for Fri 2026-06-26 — May PCE (core) inflation, the Fed's preferred gauge, prints pre-market. US index futures ~flat after a sharp risk-off night in Asia.",
+    "nasdaq_futures_pct": 0.0,
+    "dow_futures_pct": 0.0,
+    "futures_note": "US markets closed Fri Jul 3 (Independence Day observed); last cash close Thu Jul 2. This is the weekend read for the next session, Mon 2026-07-06.",
     "prev_close": {
-      "sp500_pct": 1.0,
-      "nasdaq100_pct": 1.9,
-      "dow_pct": 0.31,
-      "dow_points": 157,
-      "dow_level": 51650,
-      "russell2000_pct": 2.12
+      "sp500_pct": 0.0,
+      "nasdaq100_pct": -0.8,
+      "dow_pct": 1.14,
+      "dow_points": 595,
+      "dow_level": 52900,
+      "russell2000_pct": -0.55
     },
-    "vix": 20.03,
-    "vix_change_pct": 6.0,
-    "vvix": 91.19,
-    "vvix_change_pct": -4.6,
+    "vix": 15.81,
+    "vix_change_pct": -2.1,
+    "vvix": 88.8,
+    "vvix_change_pct": -0.3,
     "fear_greed": 37,
     "fear_greed_label": "Fear",
     "fear_greed_prev": 33,
-    "ust10y": 4.4,
-    "ust10y_change_bps": -1,
-    "ust2y": 4.09,
-    "ust2y_change_bps": -2,
+    "ust10y": 4.49,
+    "ust10y_change_bps": 1,
+    "ust2y": 4.14,
+    "ust2y_change_bps": -3,
     "wti_oil": 77.1,
     "wti_oil_pct": 0.6,
     "brent_oil": 79.95,
@@ -42,24 +42,17 @@
     "copper_change_pct": 0.3,
     "gasoline_price": 3.973,
     "gasoline_change_pct": 1.5,
-    "dxy": 101.02,
-    "dxy_change_pct": -0.58,
+    "dxy": 100.88,
+    "dxy_change_pct": 0.0,
     "btc": 62500,
     "btc_change_pct": -2.4,
     "move_index": 69.06,
     "move_change_pct": 0.0,
     "hy_oas_pct": 2.78,
     "put_call_equity": 0.59,
-    "vix3m": 20.33,
+    "vix3m": 19.04,
     "breakeven_10y": 2.29,
-    "global_equities": {
-      "nikkei_pct": -4.15,
-      "hang_seng_pct": -1.75,
-      "euro_stoxx50_pct": -0.78,
-      "dax_pct": -1.08,
-      "ftse100_pct": -0.76,
-      "kospi_pct": -5.8
-    },
+    "global_equities": {},
     "events": [
       {
         "date": "2026-06-22",
@@ -82,7 +75,7 @@
         "importance": "medium"
       }
     ],
-    "summary": "Cautious pre-open for Fri 2026-06-26, a PCE-inflation morning. Overnight was sharply risk-off in Asia (Nikkei -4.2%, KOSPI -5.8%, Hang Seng -1.8%) and Europe is soft (DAX -1.1%, FTSE -0.8%). US index futures are roughly flat ahead of the May core PCE print (the Fed's preferred gauge, key after the hawkish Warsh meeting). The VIX has jumped to ~20 (+6%) and VVIX ~91, but Treasuries catch a safe-haven bid (10y 4.40%, 2y 4.09%, both a touch lower) and the dollar eases (DXY 101.0). Net: defensive into the data.",
+    "summary": "Calm, mildly risk-on into the July 4th holiday weekend. The S&P 500 sits near record highs (~7,483, flat Thu Jul 2) and the Dow jumped ~1.1% (+595); the Nasdaq lagged (-0.8%) and small caps eased (-0.5%). The VIX has fallen back to ~15.8 (calm) with VVIX ~89 and the VIX curve in contango. Treasury yields are firm (10y 4.49%, 2y 4.14%) and the dollar is steady (DXY 100.9). US markets were closed Fri Jul 3; this is the weekend read for Mon Jul 6. Overnight international moves were not refreshed over the holiday.",
     "headlines": [
       {
         "text": "US cash markets & equity-index futures closed Fri Jun 19 for Juneteenth; reopen Mon Jun 22",
@@ -127,7 +120,7 @@
         "url": "https://www.kiplinger.com/investing/economy/this-weeks-economic-calendar"
       }
     ],
-    "as_of": "2026-06-26"
+    "as_of": "2026-07-05"
   },
   "sectors": {
     "Information Technology": {

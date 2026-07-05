@@ -220,6 +220,7 @@ def write_outputs(recs):
                 e[k] = old[s][k]
         stocks[s] = e
     mc["stocks"] = stocks
+    mc["as_of"] = time.strftime("%Y-%m-%d")   # stamp the refresh date (prices/technicals are fresh)
     json.dump(mc, open(mcp, "w"), indent=2, ensure_ascii=False)
 
     # sentiment.json — analyst consensus + target upside; overlay researched social
