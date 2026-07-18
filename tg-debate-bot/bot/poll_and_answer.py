@@ -82,10 +82,14 @@ def send(chat_id: int, text: str):
 
 
 def main():
-    tok = os.environ["TELEGRAM_BOT_TOKEN"]
+    tok = os.environ["TELEGRAM_BOT_TOKEN"].strip()
+    colon = tok.find(":")
+    bad_positions = [i for i, c in enumerate(tok) if not (c.isalnum() or c in "_-:")]
     print(
-        f"Token check: len={len(tok)}, stripped_len={len(tok.strip())}, "
-        f"format_ok={bool(re.fullmatch(r'[0-9]{6,12}:[A-Za-z0-9_-]{30,50}', tok.strip()))}"
+        f"Token check: len={len(tok)}, "
+        f"format_ok={bool(re.fullmatch(r'[0-9]{6,12}:[A-Za-z0-9_-]{30,50}', tok))}, "
+        f"colon_at={colon}, digits_before_colon={tok[:colon].isdigit() if colon > 0 else False}, "
+        f"invalid_char_positions={bad_positions[:10]}"
     )
 
     me = requests.get(f"{TG}/getMe", timeout=30).json()
