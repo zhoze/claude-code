@@ -11,6 +11,7 @@ Optional:
 """
 
 import os
+import re
 import sys
 import asyncio
 import requests
@@ -23,7 +24,7 @@ OPENAI_MODEL = "gpt-5.6-terra"   # balanced tier of the GPT-5.6 family (Jul 2026
 DEBATE_ROUNDS = 1
 MAX_TOKENS = 1500
 
-TG = f"https://api.telegram.org/bot{os.environ['TELEGRAM_BOT_TOKEN']}"
+TG = f"https://api.telegram.org/bot{os.environ['TELEGRAM_BOT_TOKEN'].strip()}"
 OFFSET_FILE = Path(__file__).resolve().parent.parent / "state" / "offset.txt"
 ALLOWED_CHAT_ID = os.environ.get("ALLOWED_CHAT_ID")
 
@@ -81,6 +82,12 @@ def send(chat_id: int, text: str):
 
 
 def main():
+    tok = os.environ["TELEGRAM_BOT_TOKEN"]
+    print(
+        f"Token check: len={len(tok)}, stripped_len={len(tok.strip())}, "
+        f"format_ok={bool(re.fullmatch(r'[0-9]{6,12}:[A-Za-z0-9_-]{30,50}', tok.strip()))}"
+    )
+
     me = requests.get(f"{TG}/getMe", timeout=30).json()
     print(f"Bot: @{me.get('result', {}).get('username')} (ok={me.get('ok')})")
 
