@@ -81,8 +81,13 @@ def send(chat_id: int, text: str):
 
 
 def main():
+    me = requests.get(f"{TG}/getMe", timeout=30).json()
+    print(f"Bot: @{me.get('result', {}).get('username')} (ok={me.get('ok')})")
+
     offset = int(OFFSET_FILE.read_text().strip() or 0)
     r = requests.get(f"{TG}/getUpdates", params={"offset": offset + 1, "timeout": 0}, timeout=30).json()
+    if not r.get("ok"):
+        print(f"getUpdates error: {r.get('error_code')} {r.get('description')}", file=sys.stderr)
     updates = r.get("result", [])
     if not updates:
         print("No new messages.")
