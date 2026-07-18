@@ -4,8 +4,7 @@ import os
 import re
 import sys
 import time
-import urllib.request
-import urllib.parse
+import requests
 
 SEARCH_URL = (
     "https://www.iha.ee/search/1/?age1=0&age2=0&K_riik=0&K_elukoht=&username={username}"
@@ -15,25 +14,21 @@ SEARCH_URL = (
 
 
 def fetch_status(username: str) -> str | None:
-    url = SEARCH_URL.format(username=urllib.parse.quote(username), cb=int(time.time()))
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        html = resp.read().decode("utf-8", errors="replace")
-
+    url = SEARCH_URL.format(username=requests.utils.quote(username), cb=int(time.time()))
+    resp = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=30)
+    resp.raise_for_status()
     pattern = re.compile(
         r'>' + re.escape(username) + r'</a>.*?Viimati online:\s*([^<]+)<',
         re.DOTALL,
     )
-    match = pattern.search(html)
+    match = pattern.search(resp.text)
     return match.group(1).strip() if match else None
 
 
 def send_telegram(token: str, chat_id: str, text: str) -> None:
     url = f"https://api.telegram.org/bot{token}/sendMessage"
-    data = urllib.parse.urlencode({"chat_id": chat_id, "text": text}).encode()
-    req = urllib.request.Request(url, data=data)
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        resp.read()
+    resp = requests.post(url, data={"chat_id": chat_id, "text": text}, timeout=15)
+    resp.raise_for_status()
 
 
 def main() -> int:
