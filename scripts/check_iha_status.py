@@ -4,7 +4,10 @@ import os
 import re
 import sys
 import time
+import warnings
 import requests
+from urllib3.exceptions import InsecureRequestWarning
+warnings.filterwarnings("ignore", category=InsecureRequestWarning)
 
 SEARCH_URL = (
     "https://www.iha.ee/search/1/?age1=0&age2=0&K_riik=0&K_elukoht=&username={username}"
@@ -15,7 +18,7 @@ SEARCH_URL = (
 
 def fetch_status(username: str) -> str | None:
     url = SEARCH_URL.format(username=requests.utils.quote(username), cb=int(time.time()))
-    resp = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=30)
+    resp = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=30, verify=False)
     resp.raise_for_status()
     pattern = re.compile(
         r'>' + re.escape(username) + r'</a>.*?Viimati online:\s*([^<]+)<',
