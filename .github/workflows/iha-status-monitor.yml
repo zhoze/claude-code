@@ -4,7 +4,12 @@ on:
   schedule:
     # Hourly at :07, 06:00-20:00 UTC == 09:07-23:07 Estonia time (EEST, UTC+3)
     - cron: "7 6-20 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      test:
+        description: 'Send a test Telegram notification'
+        type: boolean
+        default: false
 
 jobs:
   check-status:
@@ -18,6 +23,21 @@ jobs:
 
       - name: Install dependencies
         run: pip install requests
+
+      - name: Test Telegram notification
+        if: github.event_name == 'workflow_dispatch' && inputs.test == true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python3 -c "
+          import os, requests
+          token = os.environ['TELEGRAM_BOT_TOKEN']
+          chat_id = os.environ['TELEGRAM_CHAT_ID']
+          resp = requests.post(f'https://api.telegram.org/bot{token}/sendMessage', data={'chat_id': chat_id, 'text': 'Test: iha.ee monitor is working!'}, timeout=15)
+          resp.raise_for_status()
+          print('Test message sent to Telegram.')
+          "
 
       - name: Check status and notify
         env:
