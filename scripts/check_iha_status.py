@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check an iha.ee user's "last online" status and notify via Telegram if recently online."""
+"""Check iha.ee users' "last online" status and notify via Telegram if recently online."""
 import os
 import re
 import sys
@@ -34,23 +34,31 @@ def send_telegram(token: str, chat_id: str, text: str) -> None:
     resp.raise_for_status()
 
 
-def main() -> int:
-    username = os.environ.get("IHA_USERNAME", "Suk87")
+def check_user(username: str, token: str, chat_id: str) -> None:
     status = fetch_status(username)
 
     if status is None:
         print(f"Could not find a 'Viimati online' value for {username}; skipping.")
-        return 0
+        return
 
     print(f"{username} - Viimati online: {status}")
 
     if re.fullmatch(r"\d+m", status):
-        token = os.environ["TELEGRAM_BOT_TOKEN"]
-        chat_id = os.environ["TELEGRAM_CHAT_ID"]
         send_telegram(token, chat_id, f"{username} was online {status} ago on iha.ee")
         print("Telegram notification sent.")
     else:
         print("Not recently online (not in minutes); no notification sent.")
+
+
+def main() -> int:
+    usernames_env = os.environ.get("IHA_USERNAMES", os.environ.get("IHA_USERNAME", "Suk87"))
+    usernames = [u.strip() for u in usernames_env.split(",") if u.strip()]
+
+    token = os.environ["TELEGRAM_BOT_TOKEN"]
+    chat_id = os.environ["TELEGRAM_CHAT_ID"]
+
+    for username in usernames:
+        check_user(username, token, chat_id)
 
     return 0
 
