@@ -127,7 +127,9 @@ def summarize(act: dict, model: str) -> str | None:
             system=(
                 "Oled Eesti õiguse ekspert. Koosta avaldatud õigusaktist 2–3 lauseline "
                 "eestikeelne kokkuvõte: mis muutub või kehtestatakse ja kellele see on "
-                "oluline. Vasta ainult eesti keeles, ilma sissejuhatuseta."
+                "oluline. Kasuta AINULT kasutaja sõnumis antud akti teksti (Riigi "
+                "Teataja) — ära lisa fakte muudest allikatest ega oma taustateadmistest. "
+                "Vasta ainult eesti keeles, ilma sissejuhatuseta."
             ),
             messages=[{
                 "role": "user",

@@ -53,6 +53,12 @@ branch merges to `main`; until then use `workflow_dispatch`.
 
 ## Conventions
 
+- **Single source of truth: Riigi Teataja only.** All facts in digests and in
+  the interactive agent's answers must come from the riigiteataja.ee API /
+  act texts — no other websites, search engines, or model background knowledge.
+  The summarizer prompt pins Claude to the supplied act text; the interactive
+  agent (`.claude/agents/eesti-oiguse-agent.md`) may only curl
+  `www.riigiteataja.ee` and has no general web tools.
 - Secrets only via GitHub Actions secrets: `DEBATE_TELEGRAM_BOT_TOKEN` (mapped
   to `TELEGRAM_BOT_TOKEN`), `ANTHROPIC_API_KEY`, `ALLOWED_CHAT_ID` (digest
   destination chat). Never commit or print values.
