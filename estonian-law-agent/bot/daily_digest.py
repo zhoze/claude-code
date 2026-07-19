@@ -4,7 +4,8 @@ Eesti õiguse agent — igapäevane Riigi Teataja seire (GitHub Actions edition)
 Each run: query the Riigi Teataja search API for laws published since the last
 run, detect newly effective consolidated versions of the watched laws
 (config.yaml), summarize each new act in Estonian with Claude, and send the
-digest to Telegram. Every fact in the digest carries a riigiteataja.ee link.
+digest to Telegram as an .xlsx document (one row per act; separate columns for
+the recap and the riigiteataja.ee source link) with a short Estonian caption.
 
 Env vars (GitHub Actions secrets):
   TELEGRAM_BOT_TOKEN, ANTHROPIC_API_KEY
@@ -24,6 +25,7 @@ import json
 import os
 import re
 import sys
+import tempfile
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from urllib.parse import urlencode
@@ -31,6 +33,9 @@ from zoneinfo import ZoneInfo
 
 import requests
 import yaml
+from openpyxl import Workbook
+from openpyxl.styles import Alignment, Font
+from openpyxl.utils import get_column_letter
 
 API = "https://www.riigiteataja.ee/api/oigusakt_otsing/1/otsi"
 AKT_URL = "https://www.riigiteataja.ee/akt/{}"
@@ -122,6 +127,8 @@ def fetch_act_text(gid) -> str:
 
 def summarize(act: dict, model: str) -> str | None:
     """2–3 lauseline eestikeelne kokkuvõte; None kui kokkuvõtet ei õnnestu teha."""
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        return None
     try:
         from anthropic import Anthropic
 
@@ -156,58 +163,91 @@ def watched_title_stems(versions: dict) -> dict:
     return {ly: v["pealkiri"].lower() for ly, v in versions.items() if v.get("pealkiri")}
 
 
-def format_act(act: dict, model: str) -> str:
-    lines = [f"📜 {act['pealkiri']}"]
-    detail = f"{act['valjaandja']}, avaldatud {act['avaldamise_kp']}"
-    algus = (act.get("kehtivus") or {}).get("algus")
-    if algus:
-        detail += f", jõustub {algus}"
-    lines.append(detail)
-    summary = summarize(act, model)
-    if summary:
-        lines.append(summary)
-    lines.append(AKT_URL.format(act["globaalID"]))
-    return "\n".join(lines)
+def digest_rows(watched_hits, other_acts, new_versions, today) -> list[dict]:
+    """Flatten the digest into spreadsheet rows: watched hits first, then the
+    rest (both newest first), then newly effective consolidated versions."""
+    rows = []
+    for act in watched_hits + other_acts:
+        rows.append({
+            "watched": act in watched_hits,
+            "avaldatud": act["avaldamise_kp"],
+            "pealkiri": act["pealkiri"],
+            "valjaandja": act.get("valjaandja") or "",
+            "joustub": (act.get("kehtivus") or {}).get("algus") or "",
+            "kokkuvote": act.get("kokkuvote") or "",
+            "link": AKT_URL.format(act["globaalID"]),
+        })
+    for ly, v in new_versions.items():
+        rows.append({
+            "watched": True,
+            "avaldatud": today.isoformat(),
+            "pealkiri": f"{v['pealkiri']} ({ly}) — uus terviktekst",
+            "valjaandja": "",
+            "joustub": v["kehtivuse_algus"] or "",
+            "kokkuvote": f"Jälgitava seaduse uus terviktekst kehtib alates "
+                         f"{v['kehtivuse_algus']}.",
+            "link": AKT_URL.format(v["globaalID"]),
+        })
+    return rows
 
 
-def compose_digest(new_acts, watched_hits, new_versions, model, today) -> str:
-    parts = [f"⚖️ Riigi Teataja seire — {today.strftime('%d.%m.%Y')}"]
+def build_workbook(rows: list[dict], today: date) -> Path:
+    """Write the digest as an .xlsx file and return its path."""
+    wb = Workbook()
+    ws = wb.active
+    ws.title = f"Riigi Teataja {today.strftime('%d.%m.%Y')}"
 
-    if new_versions:
-        block = ["⭐ Sinu jälgitavate seaduste uued redaktsioonid:"]
-        for ly, v in new_versions.items():
-            block.append(
-                f"• {v['pealkiri']} ({ly}) — uus terviktekst kehtib alates "
-                f"{v['kehtivuse_algus']}\n{AKT_URL.format(v['globaalID'])}"
-            )
-        parts.append("\n".join(block))
+    headers = ["⭐", "Avaldatud", "Pealkiri", "Väljaandja", "Jõustub",
+               "Kokkuvõte", "Link"]
+    widths = [4, 12, 55, 22, 12, 80, 42]
+    ws.append(headers)
+    for col, width in enumerate(widths, start=1):
+        ws.cell(row=1, column=col).font = Font(bold=True)
+        ws.column_dimensions[get_column_letter(col)].width = width
+    ws.freeze_panes = "A2"
 
-    if watched_hits:
-        block = ["⭐ Sinu jälgitavaid seadusi puudutavad uued aktid:"]
-        block += [format_act(a, model) for a in watched_hits]
-        parts.append("\n\n".join(block))
+    wrap = Alignment(wrap_text=True, vertical="top")
+    link_font = Font(color="0563C1", underline="single")
+    for r, row in enumerate(rows, start=2):
+        ws.append(["⭐" if row["watched"] else "", row["avaldatud"],
+                   row["pealkiri"], row["valjaandja"], row["joustub"],
+                   row["kokkuvote"], row["link"]])
+        for col in (3, 6):
+            ws.cell(row=r, column=col).alignment = wrap
+        link_cell = ws.cell(row=r, column=7)
+        link_cell.hyperlink = row["link"]
+        link_cell.font = link_font
 
-    if new_acts:
-        block = ["🆕 Uued avaldatud seadused:"]
-        block += [format_act(a, model) for a in new_acts]
-        parts.append("\n\n".join(block))
-
-    if not (new_acts or watched_hits or new_versions):
-        parts.append("Uusi seadusi ei avaldatud ja jälgitavates seadustes muudatusi ei ole.")
-
-    parts.append("Allikas: Riigi Teataja — https://www.riigiteataja.ee")
-    return "\n\n".join(parts)
+    path = Path(tempfile.gettempdir()) / f"Riigi_Teataja_{today.isoformat()}.xlsx"
+    wb.save(path)
+    return path
 
 
-def send_telegram(text: str):
+def build_caption(rows: list[dict], today: date) -> str:
+    """Short Estonian caption for the Telegram document (limit 1024 chars)."""
+    watched = [r for r in rows if r["watched"]]
+    caption = (f"⚖️ Riigi Teataja seire {today.strftime('%d.%m.%Y')} — "
+               f"{len(rows)} kirjet, neist ⭐ jälgitavaid: {len(watched)}. "
+               f"Kokkuvõtted ja lingid manuses.")
+    for r in watched:
+        line = f"\n⭐ {r['pealkiri']}"
+        if len(caption) + len(line) > 1000:
+            caption += "\n⭐ …"
+            break
+        caption += line
+    return caption
+
+
+def send_telegram_document(path: Path, caption: str):
     tg = f"https://api.telegram.org/bot{os.environ['TELEGRAM_BOT_TOKEN'].strip()}"
-    chat_id = os.environ["ALLOWED_CHAT_ID"]
-    for i in range(0, len(text), 4000):
+    with path.open("rb") as f:
         requests.post(
-            f"{tg}/sendMessage",
-            json={"chat_id": chat_id, "text": text[i:i + 4000],
-                  "disable_web_page_preview": True},
-            timeout=30,
+            f"{tg}/sendDocument",
+            data={"chat_id": os.environ["ALLOWED_CHAT_ID"], "caption": caption},
+            files={"document": (path.name, f,
+                                "application/vnd.openxmlformats-officedocument"
+                                ".spreadsheetml.sheet")},
+            timeout=120,
         ).raise_for_status()
 
 
@@ -277,17 +317,28 @@ def main():
     print(f"Uusi akte alates {since}: {len(new_acts)} "
           f"(jälgitavaid: {len(watched_hits)}, uusi redaktsioone: {len(new_versions)})")
 
-    digest = compose_digest(other_acts, watched_hits, new_versions,
-                            config.get("summary_model", "claude-sonnet-5"), today)
-
-    if args.dry_run:
-        print("\n" + digest)
-        return
-
     if new_acts or new_versions or not config.get("quiet_days", True):
-        send_telegram(digest)
-        print("Kokkuvõte saadetud Telegrami.")
+        model = config.get("summary_model", "claude-sonnet-5")
+        for act in new_acts:
+            act["kokkuvote"] = summarize(act, model) or ""
+
+        rows = digest_rows(watched_hits, other_acts, new_versions, today)
+        workbook = build_workbook(rows, today)
+        caption = build_caption(rows, today)
+
+        if args.dry_run:
+            print(f"\n{caption}\n\nExceli fail: {workbook} ({len(rows)} rida)")
+            for row in rows:
+                star = "⭐" if row["watched"] else "  "
+                print(f"{star} {row['avaldatud']}  {row['pealkiri'][:60]}  {row['link']}")
+            return
+
+        send_telegram_document(workbook, caption)
+        print(f"Kokkuvõte saadetud Telegrami Exceli failina ({len(rows)} rida).")
     else:
+        if args.dry_run:
+            print("Uusi akte pole — vaikne päev.")
+            return
         print("Uusi akte pole — sõnumit ei saadeta (quiet_days).")
 
     cutoff = (today - timedelta(days=14)).isoformat()
