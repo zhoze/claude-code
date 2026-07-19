@@ -11,7 +11,6 @@ Optional:
 """
 
 import os
-import re
 import sys
 import asyncio
 import requests
@@ -82,16 +81,6 @@ def send(chat_id: int, text: str):
 
 
 def main():
-    tok = os.environ["TELEGRAM_BOT_TOKEN"].strip()
-    colon = tok.find(":")
-    bad_positions = [i for i, c in enumerate(tok) if not (c.isalnum() or c in "_-:")]
-    print(
-        f"Token check: len={len(tok)}, "
-        f"format_ok={bool(re.fullmatch(r'[0-9]{6,12}:[A-Za-z0-9_-]{30,50}', tok))}, "
-        f"colon_at={colon}, digits_before_colon={tok[:colon].isdigit() if colon > 0 else False}, "
-        f"invalid_char_positions={bad_positions[:10]}"
-    )
-
     me = requests.get(f"{TG}/getMe", timeout=30).json()
     print(f"Bot: @{me.get('result', {}).get('username')} (ok={me.get('ok')})")
 
@@ -112,7 +101,7 @@ def main():
         if not text or not chat_id:
             continue
         if ALLOWED_CHAT_ID and str(chat_id) != ALLOWED_CHAT_ID:
-            print(f"Ignoring chat {chat_id} (not allowed).")
+            print("Ignoring message from non-allowed chat.")
             continue
 
         print(f"Question: {text[:80]}")
