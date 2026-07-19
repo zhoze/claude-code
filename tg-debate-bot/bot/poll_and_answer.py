@@ -39,7 +39,7 @@ async def ask_claude(prompt: str, system: str = "") -> str:
         system=system or "You are a careful expert assistant. Be concise and correct.",
         messages=[{"role": "user", "content": prompt}],
     )
-    return resp.content[0].text
+    return "".join(b.text for b in resp.content if b.type == "text")
 
 
 async def ask_gpt(prompt: str, system: str = "") -> str:
