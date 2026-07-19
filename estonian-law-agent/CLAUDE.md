@@ -16,8 +16,12 @@ the repo's default branch):
 3. Check each watched law (`config.yaml` → `lyhendid`) for a newly effective
    consolidated version (`lyhend=X&kehtiv=<today>`)
 4. Summarize each new act in Estonian with Claude (`claude-sonnet-5`); a failed
-   summary falls back to a title-only entry — the digest must still send
-5. Send the digest to Telegram (watched-law hits first, links on every entry)
+   summary falls back to an empty recap cell — the digest must still send
+5. Send the digest to Telegram as one **.xlsx document** (`sendDocument`) with
+   columns ⭐ | Avaldatud | Pealkiri | Väljaandja | Jõustub | Kokkuvõte | Link
+   (recap and source link in separate columns; Link cells are real hyperlinks;
+   watched-law hits sorted first) plus a short Estonian caption listing the ⭐
+   hits. No more chunked text messages.
 6. Commit the new state (`[skip ci]`)
 
 Entry point: `bot/daily_digest.py`. Watched laws: VÕS, TSÜS, KAS, KAVS, FIS,
@@ -67,8 +71,9 @@ branch merges to `main`; until then use `workflow_dispatch`.
 - Secrets only via GitHub Actions secrets: `DEBATE_TELEGRAM_BOT_TOKEN` (mapped
   to `TELEGRAM_BOT_TOKEN`), `ANTHROPIC_API_KEY`, `ALLOWED_CHAT_ID` (digest
   destination chat). Never commit or print values.
-- Digest language is Estonian; every entry carries its riigiteataja.ee link.
-- Telegram messages are chunked at 4000 chars; link previews disabled.
+- Digest language is Estonian; every row carries its riigiteataja.ee link.
+- Delivery is a single .xlsx document per digest (Telegram sendDocument,
+  50 MB limit); the caption is capped at 1024 chars.
 - State commits use `[skip ci]` and `git pull --rebase` before push.
 - `quiet_days: true` in config: no Telegram message on days without news.
 - Local testing: `python bot/daily_digest.py --dry-run --force --since 2026-07-10`
