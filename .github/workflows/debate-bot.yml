@@ -2,7 +2,8 @@ name: Telegram Debate Bot
 
 on:
   schedule:
-    - cron: "*/5 * * * *"   # every 5 min (GitHub cron is best-effort)
+    # every 5 min (GitHub cron is best-effort; often 10-20 min in practice)
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 concurrency:
