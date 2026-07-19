@@ -23,6 +23,17 @@ and `gpt-5.6-terra` (OpenAI).
 2. One critique round: each model sees the other's answer and improves its own
 3. Claude acts as synthesis judge and merges the two into the final answer
 
+## Scheduling reality
+
+GitHub throttles `schedule` triggers hard in this repo (the */5 cron can go an
+hour+ between fires; the iha monitor's hourly cron shows the same pattern).
+`workflow_dispatch` is not throttled, so reliable 5-minute polling comes from an
+external pinger (cron-job.org) POSTing every 5 min to
+`https://api.github.com/repos/zhoze/claude-code/actions/workflows/debate-bot.yml/dispatches`
+with body `{"ref":"main"}` and a fine-grained PAT (Actions: read/write on this
+repo only). The GitHub cron stays enabled as a fallback; the concurrency group
+makes overlapping triggers queue safely.
+
 ## Conventions
 
 - Secrets only via GitHub Actions secrets: `DEBATE_TELEGRAM_BOT_TOKEN`
