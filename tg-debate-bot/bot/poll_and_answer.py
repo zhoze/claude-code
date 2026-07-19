@@ -21,7 +21,7 @@ from openai import AsyncOpenAI
 CLAUDE_MODEL = "claude-sonnet-5"
 OPENAI_MODEL = "gpt-5.6-terra"   # balanced tier of the GPT-5.6 family (Jul 2026)
 DEBATE_ROUNDS = 1
-MAX_TOKENS = 1500
+MAX_TOKENS = 3000
 
 TG = f"https://api.telegram.org/bot{os.environ['TELEGRAM_BOT_TOKEN'].strip()}"
 OFFSET_FILE = Path(__file__).resolve().parent.parent / "state" / "offset.txt"
