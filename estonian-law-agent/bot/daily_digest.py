@@ -36,7 +36,7 @@ API = "https://www.riigiteataja.ee/api/oigusakt_otsing/1/otsi"
 AKT_URL = "https://www.riigiteataja.ee/akt/{}"
 AKT_XML_URL = "https://www.riigiteataja.ee/public-api/api/v1/akt/{}/blob-xml"
 PAGE_SIZE = 500
-SCAN_PAGES = 3          # newest acts live on the last pages of the result set
+DEFAULT_MAX_SCAN_PAGES = 40   # safety cap for deep backfills (~20k acts)
 XML_TRUNCATE = 30_000   # chars of act text handed to the summary model
 MAX_SUMMARY_TOKENS = 400
 TALLINN = ZoneInfo("Europe/Tallinn")
@@ -66,24 +66,29 @@ def api_search(**params) -> dict:
     return r.json()
 
 
-def fetch_new_acts(since: date, seen_ids: set, scope: dict) -> list[dict]:
+def fetch_new_acts(since: date, seen_ids: set, scope: dict,
+                   max_pages: int = DEFAULT_MAX_SCAN_PAGES) -> list[dict]:
     """Return acts published on/after `since`, newest publication date first.
 
-    The API has no publication-date filter, but results are deterministically
-    ordered and new acts appear on the last pages, so scan those and filter by
-    the date embedded in globaalID.
+    The API has no publication-date filter and its result ordering is only
+    loosely chronological (documents are interleaved by indexing order), so
+    a partial scan can miss acts. The laws-only scope is small (~10 pages),
+    so scan every page backwards from the end — bounded by `max_pages` as a
+    safety cap — and filter by the date embedded in globaalID.
     """
     base = {"limiit": PAGE_SIZE, "tekst": "algtekst", **scope}
     total = api_search(**base, leht=1)["metaandmed"]["kokku"]
     last_page = max(1, -(-total // PAGE_SIZE))
+    first_page = max(1, last_page - max_pages + 1)
 
     acts = []
-    for page in range(last_page, max(0, last_page - SCAN_PAGES), -1):
+    for page in range(last_page, first_page - 1, -1):
         for act in api_search(**base, leht=page).get("aktid", []):
             pub = parse_globaal_id(act["globaalID"])
             if pub and pub >= since and act["globaalID"] not in seen_ids:
                 act["avaldamise_kp"] = pub.isoformat()
                 acts.append(act)
+    print(f"Skaneeritud lehti: {last_page - first_page + 1} (kokku {last_page})")
     acts.sort(key=lambda a: (a["avaldamise_kp"], a["globaalID"]), reverse=True)
     return acts
 
@@ -252,7 +257,8 @@ def main():
                                (today - timedelta(days=3)).isoformat())
     seen_ids = set(state.get("seen_ids", []))
 
-    new_acts = fetch_new_acts(since, seen_ids, scope)
+    new_acts = fetch_new_acts(since, seen_ids, scope,
+                              config.get("max_scan_pages", DEFAULT_MAX_SCAN_PAGES))
 
     # Newly effective consolidated versions of watched laws
     old_versions = state.get("redaktsioonid", {})

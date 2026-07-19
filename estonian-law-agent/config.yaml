@@ -19,5 +19,11 @@ scope:
 # true — kui uusi akte pole, siis Telegrami sõnumit ei saadeta.
 quiet_days: true
 
+# Mitu API otsingulehte (à 500 akti) maksimaalselt tagantpoolt skaneeritakse.
+# Seaduste-ainult ulatus on ~10 lehte, seega vaikimisi skaneeritakse KÕIK lehed
+# (täielik ja õige sõltumata API järjestusest); piir kaitseb juhuks, kui
+# ulatust laiendatakse (nt määrused, ~160 000 akti).
+max_scan_pages: 40
+
 # Mudel, millega koostatakse aktide eestikeelsed lühikokkuvõtted.
 summary_model: claude-sonnet-5
