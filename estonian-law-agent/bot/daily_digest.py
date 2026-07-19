@@ -177,9 +177,16 @@ async def _debate_analysis(prompt: str, claude_model: str, gpt_model: str) -> st
     from anthropic import AsyncAnthropic
     from openai import AsyncOpenAI
 
-    anthropic_client = AsyncAnthropic()
-    openai_client = AsyncOpenAI()
+    # Close the clients before asyncio.run() tears down the loop — otherwise
+    # their transports are garbage-collected on a closed loop and raise
+    # "RuntimeError: Event loop is closed".
+    async with AsyncAnthropic() as anthropic_client, AsyncOpenAI() as openai_client:
+        return await _run_debate(anthropic_client, openai_client,
+                                 prompt, claude_model, gpt_model)
 
+
+async def _run_debate(anthropic_client, openai_client,
+                      prompt: str, claude_model: str, gpt_model: str) -> str:
     async def ask_claude(content: str, system: str = ANALYSIS_SYSTEM) -> str:
         resp = await anthropic_client.messages.create(
             model=claude_model, max_tokens=ANALYSIS_MAX_TOKENS, system=system,
