@@ -1,9 +1,6 @@
 name: iha.ee status monitor
 
 on:
-  schedule:
-    # Hourly at :07, 06:00-20:00 UTC == 09:07-23:07 Estonia time (EEST, UTC+3)
-    - cron: "7 6-20 * * *"
   workflow_dispatch:
     inputs:
       test:
