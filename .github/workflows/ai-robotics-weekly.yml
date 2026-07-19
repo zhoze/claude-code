@@ -1,0 +1,53 @@
+name: AI & Robotics Weekly News
+
+on:
+  schedule:
+    # 11:00 Europe/Tallinn on Mondays: 08:00 UTC in summer (EEST), 09:00 UTC in
+    # winter (EET). The script's local-time guard lets the right one through.
+    # NOTE: schedule is throttled in this repo and only fires from main — the
+    # Claude Code Remote Routine + workflow_dispatch is the primary trigger.
+    - cron: "0 8 * * 1"
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run even outside Monday 11:00 Europe/Tallinn"
+        type: boolean
+        default: true
+
+concurrency:
+  group: ai-robotics-weekly
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  weekly-news:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r ai-robotics-news-agent/requirements.txt
+
+      - name: Run weekly news debate pipeline
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          FORCE_RUN: ${{ inputs.force && 'true' || 'false' }}
+        run: python ai-robotics-news-agent/bot/weekly_news.py
+
+      - name: Commit report
+        run: |
+          git config user.name "ai-robotics-news-agent"
+          git config user.email "bot@users.noreply.github.com"
+          git add ai-robotics-news-agent/reports/
+          git diff --cached --quiet || git commit -m "chore: AI & robotics weekly report $(date -u +%F) [skip ci]"
+          git pull --rebase
+          git push
