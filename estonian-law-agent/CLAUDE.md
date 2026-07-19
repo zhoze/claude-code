@@ -36,7 +36,12 @@ notably there is **no publication-date filter**):
 New-act detection: results are deterministically ordered with the newest acts on
 the **last** pages; modern `globaalID` encodes the publication notation
 `<RT part><DDMM><YYYY><seq>` (116072026004 = RT I, 16.07.2026, 4). The bot scans
-the last pages and filters by that embedded date + a seen-ID set in state.
+backwards from the last page and filters by that embedded date + a seen-ID set
+in state. NB: the ordering is only *loosely* chronological (interleaved by
+indexing order), so partial scans can miss acts — the bot therefore scans ALL
+pages of the laws-only scope (~10 pages, ~10s), capped by `max_scan_pages` in
+config.yaml (default 40 ≈ 20k acts) as protection if the scope is ever widened.
+This makes arbitrary-depth `--since` backfills complete and correct.
 Act links: `https://www.riigiteataja.ee/akt/{globaalID}` (user-facing page); act
 text for summarization:
 `https://www.riigiteataja.ee/public-api/api/v1/akt/{globaalID}/blob-xml`
