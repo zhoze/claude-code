@@ -15,14 +15,23 @@ the repo's default branch):
    `state/last_check.json` → `last_date`
 3. Check each watched law (`config.yaml` → `lyhendid`) for a newly effective
    consolidated version (`lyhend=X&kehtiv=<today>`)
-4. Summarize each new act in Estonian with Claude (`claude-sonnet-5`); a failed
-   summary falls back to an empty recap cell — the digest must still send
+4. For each new act (text fetched once): a 2–3 sentence Estonian recap by
+   Claude (`claude-sonnet-5`), plus a **debate-consensus analysis** using the
+   tg-debate-bot flow — Claude and ChatGPT (`analysis_gpt_model`, default
+   `gpt-5.6-terra`) analyze independently, one critique round, Claude
+   synthesizes the consensus (~5 LLM calls per act). Both are source-pinned to
+   the act text only. Any failure → empty cell — the digest must still send.
 5. Send the digest to Telegram as one **.xlsx document** (`sendDocument`) with
-   columns ⭐ | Avaldatud | Pealkiri | Väljaandja | Jõustub | Kokkuvõte | Link
-   (recap and source link in separate columns; Link cells are real hyperlinks;
-   watched-law hits sorted first) plus a short Estonian caption listing the ⭐
-   hits. No more chunked text messages.
+   columns ⭐ | Avaldatud | Pealkiri | Väljaandja | Jõustub | Kokkuvõte |
+   Analüüs (Claude+ChatGPT konsensus) | Link (recap, analysis, and source link
+   in separate columns; Link cells are real hyperlinks; watched-law hits sorted
+   first) plus a short Estonian caption listing the ⭐ hits. No more chunked
+   text messages.
 6. Commit the new state (`[skip ci]`)
+
+Cost/time note: the debate adds ~4 LLM calls per act (~30-60s each act,
+independent+critique rounds run in parallel). Deep backfills of ~40+ acts can
+approach the 30-min job timeout — split very deep backfills into date ranges.
 
 Entry point: `bot/daily_digest.py`. Watched laws: VÕS, TSÜS, KAS, KAVS, FIS,
 KMS, TLS, TMS (edit `config.yaml` to change).
@@ -69,8 +78,9 @@ branch merges to `main`; until then use `workflow_dispatch`.
   agent (`.claude/agents/eesti-oiguse-agent.md`) may only curl
   `www.riigiteataja.ee` and has no general web tools.
 - Secrets only via GitHub Actions secrets: `DEBATE_TELEGRAM_BOT_TOKEN` (mapped
-  to `TELEGRAM_BOT_TOKEN`), `ANTHROPIC_API_KEY`, `ALLOWED_CHAT_ID` (digest
-  destination chat). Never commit or print values.
+  to `TELEGRAM_BOT_TOKEN`), `ANTHROPIC_API_KEY`, `OPENAI_API_KEY` (debate
+  analysis), `ALLOWED_CHAT_ID` (digest destination chat). Never commit or
+  print values.
 - Digest language is Estonian; every row carries its riigiteataja.ee link.
 - Delivery is a single .xlsx document per digest (Telegram sendDocument,
   50 MB limit); the caption is capped at 1024 chars.

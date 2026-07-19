@@ -1,4 +1,5 @@
 requests
 anthropic
+openai
 pyyaml
 openpyxl
