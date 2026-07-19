@@ -1,0 +1,52 @@
+name: Estonian Law Daily Digest
+
+on:
+  schedule:
+    # 10:00 Europe/Tallinn: 07:00 UTC in summer (EEST), 08:00 UTC in winter (EET).
+    # The script's local-time guard lets the right one through and skips the other.
+    - cron: "0 7 * * *"
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run even outside 10:00 Europe/Tallinn"
+        type: boolean
+        default: true
+
+concurrency:
+  group: estonian-law-daily
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r estonian-law-agent/requirements.txt
+
+      - name: Check Riigi Teataja and send digest
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.DEBATE_TELEGRAM_BOT_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ALLOWED_CHAT_ID: ${{ secrets.ALLOWED_CHAT_ID }}
+          FORCE_RUN: ${{ inputs.force && 'true' || 'false' }}
+        run: python estonian-law-agent/bot/daily_digest.py
+
+      - name: Commit updated state
+        run: |
+          git config user.name "estonian-law-agent"
+          git config user.email "bot@users.noreply.github.com"
+          git add estonian-law-agent/state/last_check.json
+          git diff --cached --quiet || git commit -m "chore: update law digest state [skip ci]"
+          git pull --rebase
+          git push
