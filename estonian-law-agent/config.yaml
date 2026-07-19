@@ -1,0 +1,23 @@
+# Eesti õiguse agendi seadistus.
+# Jälgitavad seadused Riigi Teataja lühendite järgi — igapäevane kokkuvõte
+# tõstab nende seaduste muudatused ja uued redaktsioonid esile.
+lyhendid:
+  - VÕS    # Võlaõigusseadus
+  - TSÜS   # Tsiviilseadustiku üldosa seadus
+  - KAS    # Krediidiasutuste seadus
+  - KAVS   # Krediidiandjate ja -vahendajate seadus
+  - FIS    # Finantsinspektsiooni seadus
+  - KMS    # Käibemaksuseadus
+  - TLS    # Töölepingu seadus
+  - TMS    # Täitemenetluse seadustik
+
+# Milliseid akte igapäevaselt seiratakse (Riigi Teataja otsingu API parameetrid).
+scope:
+  dokument: seadus   # ainult seadused (RT I)
+  kov: "false"       # ilma kohalike omavalitsuste aktideta
+
+# true — kui uusi akte pole, siis Telegrami sõnumit ei saadeta.
+quiet_days: true
+
+# Mudel, millega koostatakse aktide eestikeelsed lühikokkuvõtted.
+summary_model: claude-sonnet-5
