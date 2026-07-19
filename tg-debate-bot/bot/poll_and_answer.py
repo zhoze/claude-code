@@ -37,20 +37,21 @@ async def ask_claude(prompt: str, system: str = "") -> str:
         max_tokens=MAX_TOKENS,
         system=system or "You are a careful expert assistant. Be concise and correct.",
         messages=[{"role": "user", "content": prompt}],
+        tools=[{"type": "web_search_20260318", "name": "web_search", "max_uses": 3}],
     )
     return "".join(b.text for b in resp.content if b.type == "text")
 
 
 async def ask_gpt(prompt: str, system: str = "") -> str:
-    resp = await openai_client.chat.completions.create(
+    # Responses API: web search is not available via Chat Completions
+    resp = await openai_client.responses.create(
         model=OPENAI_MODEL,
-        max_completion_tokens=MAX_TOKENS,
-        messages=[
-            {"role": "system", "content": system or "You are a careful expert assistant. Be concise and correct."},
-            {"role": "user", "content": prompt},
-        ],
+        max_output_tokens=MAX_TOKENS,
+        instructions=system or "You are a careful expert assistant. Be concise and correct.",
+        input=prompt,
+        tools=[{"type": "web_search"}],
     )
-    return resp.choices[0].message.content
+    return resp.output_text
 
 
 async def debate(question: str) -> str:

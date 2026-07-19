@@ -46,9 +46,16 @@ makes overlapping triggers queue safely.
   tolerate races with the repo's other cron workflows.
 - A failed debate must still send the error message to Telegram and continue.
 
+## Web search
+
+Both models have server-side web search enabled for live information:
+Claude via the `web_search_20260318` tool (max 3 searches per call, $10/1k
+searches), GPT via the Responses API `web_search` tool ($10/1k calls + ~8k
+input tokens per search). Models search only when a question needs fresh
+data; searches add a few cents to those questions.
+
 ## Backlog
 
-- Web search tool for both models (grounded answers)
 - VPS long-polling deployment (instant replies instead of 5–15 min latency)
 - Route OOG/logistics questions through the oog-transport-cost-calculator
   scripts
