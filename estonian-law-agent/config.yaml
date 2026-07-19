@@ -25,5 +25,9 @@ quiet_days: true
 # ulatust laiendatakse (nt määrused, ~160 000 akti).
 max_scan_pages: 40
 
-# Mudel, millega koostatakse aktide eestikeelsed lühikokkuvõtted.
+# Mudel, millega koostatakse aktide eestikeelsed lühikokkuvõtted (ja mis on
+# Claude'i pool väitlusanalüüsis + sünteesikohtunik).
 summary_model: claude-sonnet-5
+
+# ChatGPT pool väitlusanalüüsis (sama mudel, mida kasutab tg-debate-bot).
+analysis_gpt_model: gpt-5.6-terra

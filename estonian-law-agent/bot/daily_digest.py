@@ -21,6 +21,7 @@ Usage:
 """
 
 import argparse
+import asyncio
 import json
 import os
 import re
@@ -44,6 +45,7 @@ PAGE_SIZE = 500
 DEFAULT_MAX_SCAN_PAGES = 40   # safety cap for deep backfills (~20k acts)
 XML_TRUNCATE = 30_000   # chars of act text handed to the summary model
 MAX_SUMMARY_TOKENS = 400
+ANALYSIS_MAX_TOKENS = 700   # debate answers and the consensus synthesis
 TALLINN = ZoneInfo("Europe/Tallinn")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -125,14 +127,13 @@ def fetch_act_text(gid) -> str:
     return re.sub(r"\s+", " ", text).strip()[:XML_TRUNCATE]
 
 
-def summarize(act: dict, model: str) -> str | None:
+def summarize(act: dict, text: str, model: str) -> str | None:
     """2–3 lauseline eestikeelne kokkuvõte; None kui kokkuvõtet ei õnnestu teha."""
     if not os.environ.get("ANTHROPIC_API_KEY"):
         return None
     try:
         from anthropic import Anthropic
 
-        text = fetch_act_text(act["globaalID"])
         resp = Anthropic().messages.create(
             model=model,
             max_tokens=MAX_SUMMARY_TOKENS,
@@ -151,6 +152,75 @@ def summarize(act: dict, model: str) -> str | None:
         return "".join(b.text for b in resp.content if b.type == "text").strip()
     except Exception as e:
         print(f"Hoiatus: kokkuvõte ebaõnnestus ({act['globaalID']}): {e}", file=sys.stderr)
+        return None
+
+
+ANALYSIS_SYSTEM = (
+    "Oled Eesti õiguse ekspert. Analüüsi õigusakti AINULT kasutaja sõnumis antud "
+    "Riigi Teataja teksti põhjal — ära kasuta muid allikaid ega taustateadmisi. "
+    "Käsitle: akti eesmärk, keda ja kuidas see praktikas mõjutab, olulisemad "
+    "muudatused ning võimalikud riskid või mõjud. Vasta ainult eesti keeles, "
+    "ilma sissejuhatuseta, kuni 6 lauset."
+)
+
+CRITIQUE_TEMPLATE = (
+    "Akt:\n{prompt}\n\nSinu varasem analüüs:\n{own}\n\n"
+    "Teise AI analüüs samast aktist:\n{other}\n\n"
+    "Võrdle kahte analüüsi, pane tähele vigu või puudujääke, ja väljasta AINULT "
+    "oma parandatud analüüs (eesti keeles, kuni 6 lauset, ainult akti teksti põhjal)."
+)
+
+
+async def _debate_analysis(prompt: str, claude_model: str, gpt_model: str) -> str:
+    """tg-debate-bot flow: independent answers -> one critique round -> Claude
+    synthesizes the consensus."""
+    from anthropic import AsyncAnthropic
+    from openai import AsyncOpenAI
+
+    anthropic_client = AsyncAnthropic()
+    openai_client = AsyncOpenAI()
+
+    async def ask_claude(content: str, system: str = ANALYSIS_SYSTEM) -> str:
+        resp = await anthropic_client.messages.create(
+            model=claude_model, max_tokens=ANALYSIS_MAX_TOKENS, system=system,
+            messages=[{"role": "user", "content": content}],
+        )
+        return "".join(b.text for b in resp.content if b.type == "text").strip()
+
+    async def ask_gpt(content: str) -> str:
+        resp = await openai_client.chat.completions.create(
+            model=gpt_model, max_completion_tokens=ANALYSIS_MAX_TOKENS,
+            messages=[{"role": "system", "content": ANALYSIS_SYSTEM},
+                      {"role": "user", "content": content}],
+        )
+        return resp.choices[0].message.content.strip()
+
+    claude_ans, gpt_ans = await asyncio.gather(ask_claude(prompt), ask_gpt(prompt))
+    claude_ans, gpt_ans = await asyncio.gather(
+        ask_claude(CRITIQUE_TEMPLATE.format(prompt=prompt, own=claude_ans, other=gpt_ans)),
+        ask_gpt(CRITIQUE_TEMPLATE.format(prompt=prompt, own=gpt_ans, other=claude_ans)),
+    )
+
+    return await ask_claude(
+        f"Akt:\n{prompt}\n\nAnalüüs A:\n{claude_ans}\n\nAnalüüs B:\n{gpt_ans}\n\n"
+        "Ühenda need üheks parimaks konsensusanalüüsiks. Kus need lahknevad, vali "
+        "akti tekstiga paremini põhjendatud seisukoht. Eesti keeles, kuni 6 lauset, "
+        "ainult akti teksti põhjal.",
+        system="Oled sünteesikohtunik, kes ühendab kaks eksperdianalüüsi. "
+               "Kasuta ainult antud akti teksti; vasta eesti keeles.",
+    )
+
+
+def analyze_act(act: dict, text: str, claude_model: str, gpt_model: str) -> str | None:
+    """Claude+ChatGPT väitluse konsensusanalüüs; None kui ei õnnestu."""
+    if not (os.environ.get("ANTHROPIC_API_KEY") and os.environ.get("OPENAI_API_KEY")):
+        return None
+    prompt = f"Akt: {act['pealkiri']} ({act.get('valjaandja') or ''})\n\nTekst:\n{text}"
+    try:
+        return asyncio.run(_debate_analysis(
+            prompt, claude_model, gpt_model))
+    except Exception as e:
+        print(f"Hoiatus: analüüs ebaõnnestus ({act['globaalID']}): {e}", file=sys.stderr)
         return None
 
 
@@ -175,6 +245,7 @@ def digest_rows(watched_hits, other_acts, new_versions, today) -> list[dict]:
             "valjaandja": act.get("valjaandja") or "",
             "joustub": (act.get("kehtivus") or {}).get("algus") or "",
             "kokkuvote": act.get("kokkuvote") or "",
+            "analyys": act.get("analyys") or "",
             "link": AKT_URL.format(act["globaalID"]),
         })
     for ly, v in new_versions.items():
@@ -186,6 +257,7 @@ def digest_rows(watched_hits, other_acts, new_versions, today) -> list[dict]:
             "joustub": v["kehtivuse_algus"] or "",
             "kokkuvote": f"Jälgitava seaduse uus terviktekst kehtib alates "
                          f"{v['kehtivuse_algus']}.",
+            "analyys": "",
             "link": AKT_URL.format(v["globaalID"]),
         })
     return rows
@@ -198,8 +270,8 @@ def build_workbook(rows: list[dict], today: date) -> Path:
     ws.title = f"Riigi Teataja {today.strftime('%d.%m.%Y')}"
 
     headers = ["⭐", "Avaldatud", "Pealkiri", "Väljaandja", "Jõustub",
-               "Kokkuvõte", "Link"]
-    widths = [4, 12, 55, 22, 12, 80, 42]
+               "Kokkuvõte", "Analüüs (Claude+ChatGPT konsensus)", "Link"]
+    widths = [4, 12, 55, 22, 12, 80, 85, 42]
     ws.append(headers)
     for col, width in enumerate(widths, start=1):
         ws.cell(row=1, column=col).font = Font(bold=True)
@@ -211,10 +283,10 @@ def build_workbook(rows: list[dict], today: date) -> Path:
     for r, row in enumerate(rows, start=2):
         ws.append(["⭐" if row["watched"] else "", row["avaldatud"],
                    row["pealkiri"], row["valjaandja"], row["joustub"],
-                   row["kokkuvote"], row["link"]])
-        for col in (3, 6):
+                   row["kokkuvote"], row["analyys"], row["link"]])
+        for col in (3, 6, 7):
             ws.cell(row=r, column=col).alignment = wrap
-        link_cell = ws.cell(row=r, column=7)
+        link_cell = ws.cell(row=r, column=8)
         link_cell.hyperlink = row["link"]
         link_cell.font = link_font
 
@@ -319,8 +391,17 @@ def main():
 
     if new_acts or new_versions or not config.get("quiet_days", True):
         model = config.get("summary_model", "claude-sonnet-5")
+        gpt_model = config.get("analysis_gpt_model", "gpt-5.6-terra")
         for act in new_acts:
-            act["kokkuvote"] = summarize(act, model) or ""
+            try:
+                text = fetch_act_text(act["globaalID"])
+            except Exception as e:
+                print(f"Hoiatus: teksti laadimine ebaõnnestus ({act['globaalID']}): {e}",
+                      file=sys.stderr)
+                act["kokkuvote"] = act["analyys"] = ""
+                continue
+            act["kokkuvote"] = summarize(act, text, model) or ""
+            act["analyys"] = analyze_act(act, text, model, gpt_model) or ""
 
         rows = digest_rows(watched_hits, other_acts, new_versions, today)
         workbook = build_workbook(rows, today)
@@ -341,12 +422,10 @@ def main():
             return
         print("Uusi akte pole — sõnumit ei saadeta (quiet_days).")
 
-    cutoff = (today - timedelta(days=14)).isoformat()
+    # Keep all seen IDs forever — laws-only volume is ~100/year, and trimming
+    # would let --since backfills re-report already-delivered acts.
     state["last_date"] = today.isoformat()
-    state["seen_ids"] = sorted(
-        {i for i in seen_ids if (parse_globaal_id(i) or date.min).isoformat() >= cutoff}
-        | {a["globaalID"] for a in new_acts}
-    )
+    state["seen_ids"] = sorted(seen_ids | {a["globaalID"] for a in new_acts})
     state["redaktsioonid"] = {
         ly: v["kehtivuse_algus"] for ly, v in versions.items() if v["kehtivuse_algus"]
     }
