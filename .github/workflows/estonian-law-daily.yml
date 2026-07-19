@@ -12,6 +12,10 @@ on:
         description: "Run even outside 10:00 Europe/Tallinn"
         type: boolean
         default: true
+      since:
+        description: "Backfill: report acts published since this date (YYYY-MM-DD)"
+        type: string
+        default: ""
 
 concurrency:
   group: estonian-law-daily
@@ -40,7 +44,8 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           ALLOWED_CHAT_ID: ${{ secrets.ALLOWED_CHAT_ID }}
           FORCE_RUN: ${{ inputs.force && 'true' || 'false' }}
-        run: python estonian-law-agent/bot/daily_digest.py
+          SINCE: ${{ inputs.since }}
+        run: python estonian-law-agent/bot/daily_digest.py ${SINCE:+--since "$SINCE"}
 
       - name: Commit updated state
         run: |
