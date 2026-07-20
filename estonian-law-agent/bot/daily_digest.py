@@ -44,7 +44,7 @@ AKT_XML_URL = "https://www.riigiteataja.ee/public-api/api/v1/akt/{}/blob-xml"
 PAGE_SIZE = 500
 DEFAULT_MAX_SCAN_PAGES = 40   # safety cap for deep backfills (~20k acts)
 XML_TRUNCATE = 30_000   # chars of act text handed to the summary model
-MAX_SUMMARY_TOKENS = 400
+MAX_SUMMARY_TOKENS = 800
 ANALYSIS_MAX_TOKENS = 700   # debate answers and the consensus synthesis
 TALLINN = ZoneInfo("Europe/Tallinn")
 
