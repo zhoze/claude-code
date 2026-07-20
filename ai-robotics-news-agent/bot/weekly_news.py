@@ -40,7 +40,7 @@ REPORTS_DIR = BASE_DIR / "reports"
 
 MAX_TOKENS = 8000          # search/eval/debate stages; web search results are large
 SYNTH_MAX_TOKENS = 16000   # final synthesis emits the whole data JSON
-CALL_TIMEOUT = 600         # seconds per API call
+CALL_TIMEOUT = 900         # seconds per API call (web-search evaluations run long)
 DEBATE_LOG_TRUNCATE = 500
 
 STORY_SCHEMA = (
@@ -215,7 +215,7 @@ class Pipeline:
         return result
 
     async def gpt_follow_up(self, round_no: int, queries: list[str],
-                            stories: list[dict]) -> list[dict]:
+                            stories: list[dict]) -> tuple[list[dict], list[dict]]:
         result = await self.ask_gpt_json(
             f"Existing stories:\n{json.dumps(stories, ensure_ascii=False, indent=2)}\n\n"
             "Claude requested these follow-up searches:\n"
@@ -235,7 +235,7 @@ class Pipeline:
             if u.get("id") in by_id and note:
                 by_id[u["id"]]["follow_up_note"] = note
         self.log(f"follow_up_{round_no}", "gpt", json.dumps(result, ensure_ascii=False))
-        return stories + new
+        return stories + new, new
 
     async def claude_synthesize(self, week_of: str, stories: list[dict],
                                 evaluation: dict) -> dict:
@@ -277,8 +277,15 @@ class Pipeline:
                                                remaining=max_rounds - n + 1)
             if verdict["consensus_reached"] or not verdict["follow_up_queries"]:
                 break
-            stories = await self.gpt_follow_up(n, verdict["follow_up_queries"], stories)
-            evaluation = await self.claude_evaluate(stories)
+            stories, new_stories = await self.gpt_follow_up(
+                n, verdict["follow_up_queries"], stories)
+            # re-evaluate only the new stories; a full re-evaluation with web
+            # search blows past the per-call timeout at 14+ stories
+            if new_stories:
+                new_eval = await self.claude_evaluate(new_stories)
+                evaluation["assessments"] = (evaluation.get("assessments", [])
+                                             + new_eval.get("assessments", []))
+                evaluation["missing_topics"] = new_eval.get("missing_topics", [])
             stories, evaluation = await self.debate_round(n + 1, stories, evaluation)
 
         final = await self.claude_synthesize(week_of, stories, evaluation)
