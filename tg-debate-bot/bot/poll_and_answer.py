@@ -21,7 +21,8 @@ from openai import AsyncOpenAI
 CLAUDE_MODEL = "claude-sonnet-5"
 OPENAI_MODEL = "gpt-5.6-terra"   # balanced tier of the GPT-5.6 family (Jul 2026)
 DEBATE_ROUNDS = 1
-MAX_TOKENS = 3000
+MAX_TOKENS = 3000        # nominal answer size
+API_TOKEN_CAP = MAX_TOKENS * 2   # headroom: search/reasoning overhead counts against the cap
 
 TG = f"https://api.telegram.org/bot{os.environ['TELEGRAM_BOT_TOKEN'].strip()}"
 OFFSET_FILE = Path(__file__).resolve().parent.parent / "state" / "offset.txt"
@@ -34,7 +35,7 @@ openai_client = AsyncOpenAI()
 async def ask_claude(prompt: str, system: str = "") -> str:
     resp = await anthropic_client.messages.create(
         model=CLAUDE_MODEL,
-        max_tokens=MAX_TOKENS,
+        max_tokens=API_TOKEN_CAP,
         system=system or "You are a careful expert assistant. Be concise and correct.",
         messages=[{"role": "user", "content": prompt}],
         tools=[{"type": "web_search_20260318", "name": "web_search", "max_uses": 3}],
@@ -46,7 +47,7 @@ async def ask_gpt(prompt: str, system: str = "") -> str:
     # Responses API: web search is not available via Chat Completions
     resp = await openai_client.responses.create(
         model=OPENAI_MODEL,
-        max_output_tokens=MAX_TOKENS,
+        max_output_tokens=API_TOKEN_CAP,
         instructions=system or "You are a careful expert assistant. Be concise and correct.",
         input=prompt,
         tools=[{"type": "web_search"}],
