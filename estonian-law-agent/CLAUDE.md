@@ -21,6 +21,8 @@ the repo's default branch):
    `gpt-5.6-terra`) analyze independently, one critique round, Claude
    synthesizes the consensus (~5 LLM calls per act). Both are source-pinned to
    the act text only. Any failure → empty cell — the digest must still send.
+   Newly effective consolidated versions of watched laws get the same recap +
+   analysis treatment, generated from the newly effective full text.
 5. Send the digest to Telegram as one **.xlsx document** (`sendDocument`) with
    columns ⭐ | Avaldatud | Pealkiri | Väljaandja | Jõustub | Kokkuvõte |
    Analüüs (Claude+ChatGPT konsensus) | Link (recap, analysis, and source link
