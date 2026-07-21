@@ -1,0 +1,20 @@
+# ERR news trustworthiness agent configuration.
+
+# News sources. Each needs an RSS feed (or a dedicated fetch function added
+# to news_agent.py if a future site has no feed). Extend this list to cover
+# more sites; the pipeline already loops over `sources`.
+sources:
+  - name: ERR News
+    rss_url: https://news.err.ee/rss
+
+top_n: 5              # top stories to consider per source, per run
+recipient_email: priitmr@gmail.com
+
+# Models (keep names here, never hardcoded in the script)
+claude_model: claude-sonnet-5     # trust-check, debate, full summary
+gpt_model: gpt-5.6-terra          # trust-check, debate
+
+claude_web_max_uses: 4   # web_search max_uses per Claude trust-check call
+
+dedup_days: 14         # don't re-check/re-email a story already sent recently
+run_hour_tallinn: 8    # daily local-time guard (Europe/Tallinn)

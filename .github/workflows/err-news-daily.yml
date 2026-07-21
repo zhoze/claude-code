@@ -1,0 +1,53 @@
+name: ERR News Trustworthiness Digest
+
+on:
+  schedule:
+    # 08:00 Europe/Tallinn: 05:00 UTC in summer (EEST), 06:00 UTC in winter (EET).
+    # The script's local-time guard lets the right one through and skips the other.
+    - cron: "0 5 * * *"
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run even outside 08:00 Europe/Tallinn"
+        type: boolean
+        default: true
+
+concurrency:
+  group: err-news-daily
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r err-news-agent/requirements.txt
+
+      - name: Check ERR news and send digest
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
+          EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
+          FORCE_RUN: ${{ inputs.force && 'true' || 'false' }}
+        run: python err-news-agent/bot/news_agent.py
+
+      - name: Commit updated state
+        run: |
+          git config user.name "err-news-agent"
+          git config user.email "bot@users.noreply.github.com"
+          git add err-news-agent/state/sent_guids.json
+          git diff --cached --quiet || git commit -m "chore: update ERR news digest state [skip ci]"
+          git pull --rebase
+          git push
