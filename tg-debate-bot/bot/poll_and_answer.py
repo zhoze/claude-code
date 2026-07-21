@@ -23,6 +23,7 @@ OPENAI_MODEL = "gpt-5.6-terra"   # balanced tier of the GPT-5.6 family (Jul 2026
 DEBATE_ROUNDS = 1
 MAX_TOKENS = 3000        # nominal answer size
 API_TOKEN_CAP = MAX_TOKENS * 2   # headroom: search/reasoning overhead counts against the cap
+DEBATE_TIMEOUT_S = 360           # hard budget per question; job must finish inside the 10-min limit
 
 TG = f"https://api.telegram.org/bot{os.environ['TELEGRAM_BOT_TOKEN'].strip()}"
 OFFSET_FILE = Path(__file__).resolve().parent.parent / "state" / "offset.txt"
@@ -51,6 +52,7 @@ async def ask_gpt(prompt: str, system: str = "") -> str:
         instructions=system or "You are a careful expert assistant. Be concise and correct.",
         input=prompt,
         tools=[{"type": "web_search"}],
+        reasoning={"effort": "low"},
     )
     return resp.output_text
 
@@ -108,7 +110,7 @@ def main():
 
         print(f"Question: {text[:80]}")
         try:
-            answer = asyncio.run(debate(text))
+            answer = asyncio.run(asyncio.wait_for(debate(text), DEBATE_TIMEOUT_S))
             send(chat_id, "✅ Consensus answer:\n" + answer)
         except Exception as e:
             send(chat_id, f"Error: {e}")
