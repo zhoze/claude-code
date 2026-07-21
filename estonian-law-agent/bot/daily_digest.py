@@ -45,7 +45,7 @@ PAGE_SIZE = 500
 DEFAULT_MAX_SCAN_PAGES = 40   # safety cap for deep backfills (~20k acts)
 XML_TRUNCATE = 30_000   # chars of act text handed to the summary model
 MAX_SUMMARY_TOKENS = 800
-ANALYSIS_MAX_TOKENS = 700   # debate answers and the consensus synthesis
+ANALYSIS_MAX_TOKENS = 1500   # debate answers and the consensus synthesis
 TALLINN = ZoneInfo("Europe/Tallinn")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -160,14 +160,14 @@ ANALYSIS_SYSTEM = (
     "Riigi Teataja teksti põhjal — ära kasuta muid allikaid ega taustateadmisi. "
     "Käsitle: akti eesmärk, keda ja kuidas see praktikas mõjutab, olulisemad "
     "muudatused ning võimalikud riskid või mõjud. Vasta ainult eesti keeles, "
-    "ilma sissejuhatuseta, kuni 6 lauset."
+    "ilma sissejuhatuseta, kuni 12 lauset."
 )
 
 CRITIQUE_TEMPLATE = (
     "Akt:\n{prompt}\n\nSinu varasem analüüs:\n{own}\n\n"
     "Teise AI analüüs samast aktist:\n{other}\n\n"
     "Võrdle kahte analüüsi, pane tähele vigu või puudujääke, ja väljasta AINULT "
-    "oma parandatud analüüs (eesti keeles, kuni 6 lauset, ainult akti teksti põhjal)."
+    "oma parandatud analüüs (eesti keeles, kuni 12 lauset, ainult akti teksti põhjal)."
 )
 
 
@@ -211,7 +211,7 @@ async def _run_debate(anthropic_client, openai_client,
     return await ask_claude(
         f"Akt:\n{prompt}\n\nAnalüüs A:\n{claude_ans}\n\nAnalüüs B:\n{gpt_ans}\n\n"
         "Ühenda need üheks parimaks konsensusanalüüsiks. Kus need lahknevad, vali "
-        "akti tekstiga paremini põhjendatud seisukoht. Eesti keeles, kuni 6 lauset, "
+        "akti tekstiga paremini põhjendatud seisukoht. Eesti keeles, kuni 12 lauset, "
         "ainult akti teksti põhjal.",
         system="Oled sünteesikohtunik, kes ühendab kaks eksperdianalüüsi. "
                "Kasuta ainult antud akti teksti; vasta eesti keeles.",
