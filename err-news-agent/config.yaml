@@ -6,6 +6,8 @@
 sources:
   - name: ERR News
     rss_url: https://news.err.ee/rss
+  - name: Al Jazeera
+    rss_url: https://www.aljazeera.com/xml/rss/all.xml
 
 top_n: 5              # top stories to consider per source, per run
 recipient_email: priitmr@gmail.com
