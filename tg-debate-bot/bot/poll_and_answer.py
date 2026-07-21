@@ -12,6 +12,7 @@ Optional:
 
 import os
 import sys
+import time
 import asyncio
 import requests
 from pathlib import Path
@@ -23,7 +24,8 @@ OPENAI_MODEL = "gpt-5.6-terra"   # balanced tier of the GPT-5.6 family (Jul 2026
 DEBATE_ROUNDS = 1
 MAX_TOKENS = 3000        # nominal answer size
 API_TOKEN_CAP = MAX_TOKENS * 2   # headroom: search/reasoning overhead counts against the cap
-DEBATE_TIMEOUT_S = 360           # hard budget per question; job must finish inside the 10-min limit
+DEBATE_TIMEOUT_S = 420           # hard budget per question; job must finish inside the 10-min limit
+RUN_BUDGET_S = 440               # stop taking new questions after this; the rest stay queued
 
 TG = f"https://api.telegram.org/bot{os.environ['TELEGRAM_BOT_TOKEN'].strip()}"
 OFFSET_FILE = Path(__file__).resolve().parent.parent / "state" / "offset.txt"
@@ -85,6 +87,7 @@ def send(chat_id: int, text: str):
 
 
 def main():
+    run_start = time.monotonic()
     me = requests.get(f"{TG}/getMe", timeout=30).json()
     print(f"Bot: @{me.get('result', {}).get('username')} (ok={me.get('ok')})")
 
@@ -98,6 +101,9 @@ def main():
         return
 
     for u in updates:
+        if time.monotonic() - run_start > RUN_BUDGET_S:
+            print("Run budget exhausted; remaining messages stay queued for the next run.")
+            break
         offset = max(offset, u["update_id"])
         msg = u.get("message") or {}
         text = msg.get("text")
@@ -112,9 +118,13 @@ def main():
         try:
             answer = asyncio.run(asyncio.wait_for(debate(text), DEBATE_TIMEOUT_S))
             send(chat_id, "✅ Consensus answer:\n" + answer)
+        except asyncio.TimeoutError:
+            send(chat_id, f"\u23f1 The debate exceeded {DEBATE_TIMEOUT_S // 60} minutes and was stopped. "
+                          "Try a narrower or simpler question.")
+            print("Error: debate timed out", file=sys.stderr)
         except Exception as e:
-            send(chat_id, f"Error: {e}")
-            print(f"Error: {e}", file=sys.stderr)
+            send(chat_id, f"Error: {type(e).__name__}: {e}")
+            print(f"Error: {type(e).__name__}: {e}", file=sys.stderr)
 
     OFFSET_FILE.write_text(str(offset))
     print(f"Done. New offset: {offset}")
