@@ -267,9 +267,9 @@ def render_email(results: list[dict], run_date: str) -> tuple[str, str]:
     excluded = [r for r in results if not r["confirmed"]]
 
     story_word = "story" if len(confirmed) == 1 else "stories"
-    subject = f"ERR News Digest — {len(confirmed)} trustworthy {story_word} — {run_date}"
+    subject = f"News Trustworthiness Digest — {len(confirmed)} trustworthy {story_word} — {run_date}"
 
-    lines = [f"ERR News Digest — {run_date}", ""]
+    lines = [f"News Trustworthiness Digest — {run_date}", ""]
     if confirmed:
         lines.append("=== Confirmed trustworthy stories ===")
         lines.append("")

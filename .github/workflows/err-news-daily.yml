@@ -23,7 +23,9 @@ permissions:
 jobs:
   digest:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # ~11.5 min for 5 stories from one source; two sources (up to 10 stories,
+    # processed sequentially) roughly doubles that, so leave real headroom.
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
 
