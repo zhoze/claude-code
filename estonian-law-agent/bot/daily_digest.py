@@ -260,11 +260,12 @@ def digest_rows(watched_hits, other_acts, new_versions, today) -> list[dict]:
             "watched": True,
             "avaldatud": today.isoformat(),
             "pealkiri": f"{v['pealkiri']} ({ly}) — uus terviktekst",
-            "valjaandja": "",
+            "valjaandja": v.get("valjaandja") or "",
             "joustub": v["kehtivuse_algus"] or "",
-            "kokkuvote": f"Jälgitava seaduse uus terviktekst kehtib alates "
-                         f"{v['kehtivuse_algus']}.",
-            "analyys": "",
+            "kokkuvote": (f"Jälgitava seaduse uus terviktekst kehtib alates "
+                          f"{v['kehtivuse_algus']}. "
+                          + (v.get("kokkuvote") or "")).strip(),
+            "analyys": v.get("analyys") or "",
             "link": AKT_URL.format(v["globaalID"]),
         })
     return rows
@@ -399,16 +400,31 @@ def main():
     if new_acts or new_versions or not config.get("quiet_days", True):
         model = config.get("summary_model", "claude-sonnet-5")
         gpt_model = config.get("analysis_gpt_model", "gpt-5.6-terra")
-        for act in new_acts:
+        # New consolidated versions of watched laws get a recap + analysis of
+        # the newly effective full text, same as freshly published acts.
+        version_pseudo_acts = []
+        for ly, v in new_versions.items():
+            v["valjaandja"] = "Riigikogu"
+            version_pseudo_acts.append({
+                "globaalID": v["globaalID"],
+                "pealkiri": f"{v['pealkiri']} ({ly}) — terviktekst kehtiv "
+                            f"alates {v['kehtivuse_algus']}",
+                "valjaandja": "Riigikogu",
+                "_target": v,
+            })
+        for act in new_acts + version_pseudo_acts:
             try:
                 text = fetch_act_text(act["globaalID"])
             except Exception as e:
                 print(f"Hoiatus: teksti laadimine ebaõnnestus ({act['globaalID']}): {e}",
                       file=sys.stderr)
-                act["kokkuvote"] = act["analyys"] = ""
+                text = None
+            target = act.pop("_target", act)
+            if text is None:
+                target["kokkuvote"] = target["analyys"] = ""
                 continue
-            act["kokkuvote"] = summarize(act, text, model) or ""
-            act["analyys"] = analyze_act(act, text, model, gpt_model) or ""
+            target["kokkuvote"] = summarize(act, text, model) or ""
+            target["analyys"] = analyze_act(act, text, model, gpt_model) or ""
 
         rows = digest_rows(watched_hits, other_acts, new_versions, today)
         workbook = build_workbook(rows, today)
