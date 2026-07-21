@@ -1,0 +1,27 @@
+# Email inbox digest agent configuration.
+
+recipient_email: st.hoze@mac.com
+
+# Mailbox read over IMAP using the same Gmail account/app password used for
+# sending (EMAIL_ADDRESS / EMAIL_APP_PASSWORD secrets). Documented here only —
+# never hardcode credentials.
+imap_host: imap.gmail.com
+
+run_hour_utc: 9   # daily guard; already UTC so no DST conversion is needed
+
+# First run (no state file yet) or safety fallback: how far back to look.
+lookback_hours_default: 26
+
+# Senders considered "API usage" emails (Anthropic/OpenAI billing, spend,
+# rate-limit, and usage notifications). Matched against the From header's
+# domain.
+api_usage_domains:
+  - anthropic.com
+  - openai.com
+
+max_emails_scanned: 300   # safety cap on messages fetched from IMAP per run
+max_interesting: 8        # cap on "interesting" emails surfaced in the digest
+snippet_chars: 600        # body chars per email handed to the summary model
+
+claude_model: claude-sonnet-5
+summary_max_tokens: 1500
