@@ -2,7 +2,7 @@
 
 A transparent, reproducible stock screener that scores companies against a
 quantitative approximation of **Warren Buffett's value-investing approach**, and
-a **live screen of S&P 500 names** run with real fundamentals.
+a **live screen of Russell 1000 names** run with real fundamentals.
 
 > ⚠️ **Educational tool, not investment advice.** The thresholds here approximate
 > Buffett's *quantitative* filters. His real edge — judging durable moats, honest
@@ -139,10 +139,11 @@ value-screener/
 ├── magic_lite.py        # compact Python port of the Magic Elite directional score
 ├── sentiment.py         # Sentiment lens: social + analyst + insider (hype-tempered)
 ├── overall.py           # pipeline orchestrator (Pre-screen→Buffett→Magic→Sentiment→Overall)
+├── refresh_universe.py  # re-pull the dataset from FMP (default universe: Russell 1000)
 ├── requirements.txt     # (optional) deps; the engine itself needs none
 └── data/
-    ├── universe_sp500.csv        # all 503 S&P 500 constituents (snapshot)
-    ├── fundamentals.csv          # full-metric input (503 S&P 500 names, FMP /stable, 2026-06-17)
+    ├── universe.csv              # screened constituents (Russell 1000 large+mid cap)
+    ├── fundamentals.csv          # full-metric input (Russell 1000 names, FMP /stable)
     ├── risk_notes.json           # fresh-news "why it's cheap" bear cases (dated + sourced)
     ├── market_conditions.json    # Pre-screen input: macro + per-stock news (dated + sourced)
     ├── sentiment.json            # Sentiment lens input: social/analyst/insider (dated + sourced)
@@ -175,33 +176,35 @@ reported as "no data" rather than silently failing.
 
 ---
 
-## The live screen — full S&P 500 (run 2026-06-17)
+## The live screen — Russell 1000 (run 2026-06-19)
 
-This repo ships a **real screen** of the **entire S&P 500 (503 names)**. Prices,
-TTM fundamentals, technicals (50/200-day MA, RSI, beta), analyst-consensus
-ratings and price targets were pulled from the **Financial Modeling Prep
-`/stable` API** (2026-06-17). All four lenses cover ~all names (Buffett value on
-the ~491 with complete fundamentals, Magic on all 503, Sentiment on the 482 with
-analyst coverage, macro Pre-screen for all). Earlier examples in this README came
-from a curated 40-name run; see `data/results/` for the current full-index output.
+This repo ships a **real screen** of the **Russell 1000 (1000 large + mid-cap US
+names)** — the top ~1000 actively-trading US companies by market cap, a reproducible
+proxy for the licensed Russell list (built via the FMP screener). Prices, TTM
+fundamentals, technicals (50/200-day MA, RSI, beta), analyst-consensus ratings and
+price targets were pulled from the **Financial Modeling Prep `/stable` API**
+(2026-06-19). All four lenses cover ~all names (Buffett value, Magic on all 1000,
+Sentiment on the 901 with analyst coverage, macro Pre-screen for all). Earlier
+examples in this README came from a curated 40-name run; see `data/results/` for the
+current full-universe output.
 
-**Buffett value screen — top Strong Candidates** (77 of 503; full list in
+**Buffett value screen — top Strong Candidates** (113 of 1000; full list in
 [`data/results/top_candidates.md`](data/results/top_candidates.md)):
 
 | Ticker | Company | Score | Margin of Safety |
 |:--|:--|---:|---:|
-| HIG | Hartford Financial | 100 | 68.0% |
-| CF | CF Industries | 100 | 66.6% |
-| ZTS | Zoetis | 100 | 55.6% |
-| EOG | EOG Resources | 100 | 53.6% |
-| INCY | Incyte | 100 | 50.4% |
-| DECK | Deckers Outdoor | 100 | 47.6% |
+| CF | CF Industries | 100 | 67.5% |
+| HIG | Hartford Financial | 100 | 68.4% |
+| PRI | Primerica | 100 | 58.4% |
+| ZTS | Zoetis | 100 | 54.8% |
+| EOG | EOG Resources | 100 | 54.7% |
+| INCY | Incyte | 100 | 50.8% |
 
-**Overall 4-lens directional ranking — most bullish** (full 503 in
-[`data/results/overall_screen.md`](data/results/overall_screen.md)): CNC, GL,
-KLAC, MTB, CRWD, UAL, CINF, DAL, JPM, BAC — names pairing a strong uptrend
-(Magic) with decent value/sentiment. Most-bearish: HSY, KR, TSN, NRG, COIN,
-TSLA, PLTR — broken trends and/or stretched valuations.
+**Overall 4-lens directional ranking — most bullish** (full 1000 in
+[`data/results/overall_screen.md`](data/results/overall_screen.md)): CORZ, HPQ, CPA,
+FCNCA, AXSM, M, MAC, OSCR, ZION — names pairing a strong uptrend (Magic) with decent
+value/sentiment. Most-bearish: TSLA, OWL, Z, HSY, TSN — broken trends and/or
+stretched valuations.
 
 **Reading the results (still true at index scale):**
 - The **dominant driver** is usually **technical (Magic)** — it carries the
@@ -265,24 +268,28 @@ screen flags the bargain; the note is the reason to dig deeper before buying.
 
 ## Refreshing the data (FMP API key)
 
-`refresh_sp500.py` re-pulls the entire S&P 500 (fundamentals + technicals +
-analyst-consensus sentiment) from Financial Modeling Prep. **The key is read from
-the `FMP_KEY` environment variable and is never written to disk or committed.**
+`refresh_universe.py` re-pulls the dataset (fundamentals + technicals +
+analyst-consensus sentiment) from Financial Modeling Prep. **The default universe is
+the Russell 1000 (large + mid cap)** — the top ~1000 actively-trading US names by
+market cap (a reproducible proxy for the licensed Russell list). **The key is read
+from the `FMP_KEY` environment variable and is never written to disk or committed.**
 
 ```bash
-export FMP_KEY=your_key          # or: cp .env.example .env && edit, then load it
-python3 refresh_sp500.py         # rebuilds data/{fundamentals,market_conditions,sentiment}
+export FMP_KEY=your_key            # or: cp .env.example .env && edit, then load it
+python3 refresh_universe.py        # Russell 1000 → data/{universe,fundamentals,market_conditions,sentiment}
 python3 screener.py && python3 overall.py --all
-python3 refresh_sp500.py --limit 5   # quick smoke test (a few symbols)
+python3 refresh_universe.py --count 1000     # tune the size
+python3 refresh_universe.py --universe sp500 # the S&P 500 instead
+python3 refresh_universe.py --limit 5        # quick smoke test (a few symbols)
 ```
 
 - **Secret hygiene:** never hardcode the key. Store it as a shell env var, a
-  gitignored `.env` (see `.env.example`), or a **GitHub Actions secret**
-  (`Settings → Secrets and variables → Actions → FMP_KEY`). `.gitignore` already
-  blocks `.env`/`*.key`.
+  gitignored `.env` (see `.env.example`), or a **GitHub Actions secret**. `.gitignore`
+  already blocks `.env`/`*.key`/`fmp_key*`.
 - **CI:** `.github/workflows/refresh-screener.yml` runs the refresh on demand
-  (manual `workflow_dispatch`) using `${{ secrets.FMP_KEY }}`, then commits the
-  updated data. It never runs automatically.
+  (manual `workflow_dispatch`, with a `universe` input) using the `FMP_KEY` secret in
+  the `screen` GitHub Environment, then commits the updated data. It never runs
+  automatically.
 
 ## Limitations
 
