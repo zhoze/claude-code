@@ -1,0 +1,22 @@
+name = "whatsapp-claude-bot"
+main = "worker.js"
+compatibility_date = "2026-07-01"
+
+# Create with: npx wrangler kv namespace create CHAT_HISTORY
+kv_namespaces = [
+  { binding = "CHAT_HISTORY", id = "REPLACE_WITH_KV_NAMESPACE_ID" }
+]
+
+[vars]
+# From Meta App Dashboard -> WhatsApp -> API Setup
+PHONE_NUMBER_ID = "REPLACE_WITH_PHONE_NUMBER_ID"
+# The specific person's number: E.164 without '+', e.g. 37255512345
+ALLOWED_WA_NUMBER = "REPLACE_WITH_PERSON_NUMBER"
+CLAUDE_MODEL = "claude-opus-4-8"
+
+# Secrets (set with `npx wrangler secret put <NAME>`, never commit):
+#   ANTHROPIC_API_KEY    - console.anthropic.com API key
+#   WHATSAPP_TOKEN       - permanent system-user access token (Meta Business Settings)
+#   WHATSAPP_APP_SECRET  - Meta App Dashboard -> App settings -> Basic -> App secret
+#   VERIFY_TOKEN         - any random string; must match the webhook config in Meta
+#   PERSONA              - system prompt: who "you" are and how you write
