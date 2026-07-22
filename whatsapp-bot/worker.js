@@ -1,131 +1,106 @@
 /**
- * WhatsApp auto-reply bot — Cloudflare Worker (official Meta Cloud API).
+ * WhatsApp auto-reply bot — Cloudflare Worker (Twilio WhatsApp API).
  *
  * Answers messages from one specific person as the owner, using the Claude API.
+ * Uses Twilio as the WhatsApp provider (no Meta developer account required).
  * Single file, zero dependencies — deployable with `wrangler deploy` or by
  * pasting into the Cloudflare dashboard.
  *
  * Secrets (wrangler secret put ...):
- *   ANTHROPIC_API_KEY, WHATSAPP_TOKEN, WHATSAPP_APP_SECRET, VERIFY_TOKEN, PERSONA
+ *   ANTHROPIC_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, PERSONA
  * Vars (wrangler.toml):
- *   PHONE_NUMBER_ID, ALLOWED_WA_NUMBER, CLAUDE_MODEL
+ *   TWILIO_WHATSAPP_FROM, ALLOWED_WA_NUMBER, CLAUDE_MODEL
  * KV binding: CHAT_HISTORY
  */
 
-const GRAPH = "https://graph.facebook.com/v21.0";
 const MAX_HISTORY_TURNS = 20;      // messages kept per sender (10 exchanges)
 const HISTORY_TTL_S = 86400;       // conversation memory lifetime
-const DEDUPE_TTL_S = 300;          // Meta retries webhook deliveries
-const WA_TEXT_LIMIT = 4096;        // WhatsApp per-message char limit
+const DEDUPE_TTL_S = 300;          // provider may retry webhook deliveries
+const WA_TEXT_LIMIT = 1500;        // Twilio WhatsApp body limit is 1600 chars
 
 export default {
   async fetch(request, env, ctx) {
-    const url = new URL(request.url);
-
-    if (request.method === "GET") {
-      return handleVerification(url, env);
-    }
-
-    if (request.method === "POST") {
-      const rawBody = await request.text();
-      const signature = request.headers.get("X-Hub-Signature-256") || "";
-      if (!(await verifySignature(rawBody, signature, env.WHATSAPP_APP_SECRET))) {
-        return new Response("invalid signature", { status: 401 });
-      }
-      // Ack immediately; Meta retries on slow responses.
-      ctx.waitUntil(processWebhook(rawBody, env));
+    if (request.method !== "POST") {
       return new Response("ok", { status: 200 });
     }
 
-    return new Response("method not allowed", { status: 405 });
+    const rawBody = await request.text();
+    const params = Object.fromEntries(new URLSearchParams(rawBody));
+    const signature = request.headers.get("X-Twilio-Signature") || "";
+
+    if (!(await verifyTwilioSignature(request.url, params, signature, env.TWILIO_AUTH_TOKEN))) {
+      return new Response("invalid signature", { status: 401 });
+    }
+
+    // Ack immediately with empty TwiML; reply is sent async via the REST API
+    // because a Claude call can exceed Twilio's webhook timeout.
+    ctx.waitUntil(handleMessage(params, env));
+    return new Response("<Response></Response>", {
+      status: 200,
+      headers: { "content-type": "text/xml" },
+    });
   },
 };
 
-function handleVerification(url, env) {
-  const mode = url.searchParams.get("hub.mode");
-  const token = url.searchParams.get("hub.verify_token");
-  const challenge = url.searchParams.get("hub.challenge");
-  if (mode === "subscribe" && token === env.VERIFY_TOKEN && challenge) {
-    return new Response(challenge, { status: 200 });
-  }
-  return new Response("forbidden", { status: 403 });
-}
-
-async function verifySignature(body, header, appSecret) {
-  if (!header.startsWith("sha256=")) return false;
+// X-Twilio-Signature = Base64(HMAC-SHA1(authToken, url + sorted(name+value)))
+async function verifyTwilioSignature(url, params, signature, authToken) {
+  const data = url + Object.keys(params).sort().map(k => k + params[k]).join("");
   const key = await crypto.subtle.importKey(
-    "raw", new TextEncoder().encode(appSecret),
-    { name: "HMAC", hash: "SHA-256" }, false, ["sign"],
+    "raw", new TextEncoder().encode(authToken),
+    { name: "HMAC", hash: "SHA-1" }, false, ["sign"],
   );
-  const mac = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(body));
-  const expected = [...new Uint8Array(mac)].map(b => b.toString(16).padStart(2, "0")).join("");
-  const provided = header.slice("sha256=".length);
-  if (provided.length !== expected.length) return false;
+  const mac = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(data));
+  const expected = btoa(String.fromCharCode(...new Uint8Array(mac)));
+  if (signature.length !== expected.length) return false;
   let diff = 0;
   for (let i = 0; i < expected.length; i++) {
-    diff |= expected.charCodeAt(i) ^ provided.charCodeAt(i);
+    diff |= expected.charCodeAt(i) ^ signature.charCodeAt(i);
   }
   return diff === 0;
 }
 
-async function processWebhook(rawBody, env) {
-  let payload;
+async function handleMessage(params, env) {
   try {
-    payload = JSON.parse(rawBody);
-  } catch {
-    return;
-  }
+    const from = (params.From || "").replace("whatsapp:", "");
+    const body = (params.Body || "").trim();
+    const sid = params.MessageSid || params.SmsMessageSid;
 
-  for (const entry of payload.entry || []) {
-    for (const change of entry.changes || []) {
-      if (change.field !== "messages") continue;
-      for (const msg of change.value?.messages || []) {
-        try {
-          await handleMessage(msg, env);
-        } catch (e) {
-          console.error(`error handling ${msg.id}: ${e}`);
-        }
-      }
+    if (from !== env.ALLOWED_WA_NUMBER) {
+      console.log("ignoring message from non-allowed number");
+      return;
     }
+    if (!body || !sid) {
+      console.log("ignoring message without text body");
+      return;
+    }
+
+    const dedupeKey = `dedupe:${sid}`;
+    if (await env.CHAT_HISTORY.get(dedupeKey)) {
+      console.log(`duplicate delivery of ${sid}, skipping`);
+      return;
+    }
+    await env.CHAT_HISTORY.put(dedupeKey, "1", { expirationTtl: DEDUPE_TTL_S });
+
+    const histKey = `hist:${from}`;
+    const history = JSON.parse((await env.CHAT_HISTORY.get(histKey)) || "[]");
+    const messages = [...history, { role: "user", content: body }];
+
+    const reply = await askClaude(messages, env);
+    if (!reply) {
+      console.error("empty reply from Claude, nothing sent");
+      return;
+    }
+
+    await sendText(from, reply, env);
+
+    const newHistory = [...messages, { role: "assistant", content: reply }]
+      .slice(-MAX_HISTORY_TURNS);
+    await env.CHAT_HISTORY.put(histKey, JSON.stringify(newHistory), {
+      expirationTtl: HISTORY_TTL_S,
+    });
+  } catch (e) {
+    console.error(`error handling message: ${e}`);
   }
-}
-
-async function handleMessage(msg, env) {
-  if (msg.from !== env.ALLOWED_WA_NUMBER) {
-    console.log(`ignoring message from non-allowed number`);
-    return;
-  }
-  if (msg.type !== "text" || !msg.text?.body) {
-    console.log(`ignoring unsupported message type: ${msg.type}`);
-    return;
-  }
-
-  const dedupeKey = `dedupe:${msg.id}`;
-  if (await env.CHAT_HISTORY.get(dedupeKey)) {
-    console.log(`duplicate delivery of ${msg.id}, skipping`);
-    return;
-  }
-  await env.CHAT_HISTORY.put(dedupeKey, "1", { expirationTtl: DEDUPE_TTL_S });
-
-  await markAsRead(msg.id, env);
-
-  const histKey = `hist:${msg.from}`;
-  const history = JSON.parse((await env.CHAT_HISTORY.get(histKey)) || "[]");
-  const messages = [...history, { role: "user", content: msg.text.body }];
-
-  const reply = await askClaude(messages, env);
-  if (!reply) {
-    console.error("empty reply from Claude, nothing sent");
-    return;
-  }
-
-  await sendText(msg.from, reply, env);
-
-  const newHistory = [...messages, { role: "assistant", content: reply }]
-    .slice(-MAX_HISTORY_TURNS);
-  await env.CHAT_HISTORY.put(histKey, JSON.stringify(newHistory), {
-    expirationTtl: HISTORY_TTL_S,
-  });
 }
 
 async function askClaude(messages, env) {
@@ -160,42 +135,23 @@ async function askClaude(messages, env) {
 }
 
 async function sendText(to, text, env) {
+  const endpoint =
+    `https://api.twilio.com/2010-04-01/Accounts/${env.TWILIO_ACCOUNT_SID}/Messages.json`;
+  const auth = "Basic " + btoa(`${env.TWILIO_ACCOUNT_SID}:${env.TWILIO_AUTH_TOKEN}`);
+
   for (let i = 0; i < text.length; i += WA_TEXT_LIMIT) {
-    const resp = await fetch(`${GRAPH}/${env.PHONE_NUMBER_ID}/messages`, {
+    const form = new URLSearchParams({
+      From: env.TWILIO_WHATSAPP_FROM,
+      To: `whatsapp:${to}`,
+      Body: text.slice(i, i + WA_TEXT_LIMIT),
+    });
+    const resp = await fetch(endpoint, {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${env.WHATSAPP_TOKEN}`,
-      },
-      body: JSON.stringify({
-        messaging_product: "whatsapp",
-        to,
-        type: "text",
-        text: { body: text.slice(i, i + WA_TEXT_LIMIT) },
-      }),
+      headers: { authorization: auth, "content-type": "application/x-www-form-urlencoded" },
+      body: form.toString(),
     });
     if (!resp.ok) {
-      throw new Error(`WhatsApp send ${resp.status}: ${(await resp.text()).slice(0, 300)}`);
+      throw new Error(`Twilio send ${resp.status}: ${(await resp.text()).slice(0, 300)}`);
     }
-  }
-}
-
-async function markAsRead(messageId, env) {
-  // Best-effort: blue ticks make the auto-reply look natural; failure is non-fatal.
-  try {
-    await fetch(`${GRAPH}/${env.PHONE_NUMBER_ID}/messages`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${env.WHATSAPP_TOKEN}`,
-      },
-      body: JSON.stringify({
-        messaging_product: "whatsapp",
-        status: "read",
-        message_id: messageId,
-      }),
-    });
-  } catch (e) {
-    console.log(`mark-as-read failed: ${e}`);
   }
 }
