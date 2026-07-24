@@ -1,0 +1,29 @@
+name: buddies-smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: "What to say to the buddies"
+        required: false
+        default: "Is pineapple on pizza a crime?"
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r drinking-buddies-agent/requirements.txt
+      - name: Run buddies
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MSG: ${{ inputs.message }}
+        run: printf '%s\n' "$MSG" | python drinking-buddies-agent/buddies.py
