@@ -39,8 +39,23 @@ echo "some topic" | python buddies.py   # scripted / smoke test
 - Secrets only via env vars: `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`. Never
   commit or print values.
 
+## Telegram bot
+
+`bot/poll_and_chat.py` — same GitHub Actions polling pattern as
+`tg-debate-bot` (getUpdates with `state/offset.txt`, cron every ~5 min via
+`.github/workflows/buddies-telegram.yml`, cron only fires from the default
+branch). Shares personas, models, and the transcript memory with `buddies.py`.
+One bar round per incoming message; `forget` wipes memory; `/start` greets.
+
+Secrets: `BUDDIES_TELEGRAM_BOT_TOKEN` (mapped to `TELEGRAM_BOT_TOKEN`),
+`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `ALLOWED_CHAT_ID` (must stay enabled —
+restricts the bot to the owner's chat). A separate bot from the debate bot:
+one token allows only one getUpdates consumer.
+
+GitHub throttles `schedule` triggers in this repo (see tg-debate-bot/CLAUDE.md)
+— for reliable ~5-min polling add a cron-job.org pinger POSTing to
+`.../actions/workflows/buddies-telegram.yml/dispatches` with `{"ref":"main"}`.
+
 ## Backlog
 
-- Move to Telegram once validated here (copy the `tg-debate-bot` GitHub
-  Actions polling pattern: workflow, secrets, offset state).
 - Multi-round AI banter between user turns / configurable rounds.
