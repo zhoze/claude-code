@@ -19,6 +19,12 @@ Single terminal script: `buddies.py`.
   disagree and tease each other; no assistant-speak.
 - A buddy erroring (rate limit, network) prints the error as that buddy's
   reply and the conversation continues — a failure must not kill the loop.
+- **Persistent memory:** the transcript is saved to `state/transcript.json`
+  after every turn and loaded on startup, so past topics carry over between
+  sessions. The models see the last ~40 entries (`CONTEXT_TURNS`). Typing
+  `forget` wipes the memory. The `buddies-smoke.yml` workflow commits the
+  updated memory back to the branch with `[skip ci]` (same pattern as
+  tg-debate-bot's offset state).
 
 ## Running
 

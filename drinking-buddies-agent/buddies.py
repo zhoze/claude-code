@@ -12,13 +12,17 @@ Usage:
 """
 
 import sys
+import json
 import asyncio
+from pathlib import Path
 from anthropic import AsyncAnthropic
 from openai import AsyncOpenAI
 
 CLAUDE_MODEL = "claude-opus-5"
 OPENAI_MODEL = "gpt-5.6-terra"
 MAX_TOKENS = 1000
+CONTEXT_TURNS = 40  # how many recent transcript entries the models see
+STATE_FILE = Path(__file__).resolve().parent / "state" / "transcript.json"
 
 BASE_PERSONA = (
     "You are {name}, one of three friends hanging out at a bar: the user, Claude "
@@ -66,8 +70,24 @@ def openai_client() -> AsyncOpenAI:
     return _openai_client
 
 
+def load_transcript() -> list[tuple[str, str]]:
+    try:
+        return [tuple(entry) for entry in json.loads(STATE_FILE.read_text())]
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+
+
+def save_transcript(transcript: list[tuple[str, str]]) -> None:
+    STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    STATE_FILE.write_text(
+        json.dumps([list(entry) for entry in transcript], ensure_ascii=False, indent=1)
+    )
+
+
 def render_transcript(transcript: list[tuple[str, str]]) -> str:
-    return "\n\n".join(f"{speaker}: {text}" for speaker, text in transcript)
+    return "\n\n".join(
+        f"{speaker}: {text}" for speaker, text in transcript[-CONTEXT_TURNS:]
+    )
 
 
 async def ask_claude(transcript: list[tuple[str, str]]) -> str:
@@ -102,15 +122,18 @@ async def buddy_turn(name, ask, transcript) -> None:
     except Exception as e:
         reply = f"(spills drink) Sorry, I glitched: {type(e).__name__}: {e}"
     transcript.append((name, reply))
+    save_transcript(transcript)
     print(f"\n🍺 {name}: {reply}", flush=True)
 
 
 async def main() -> None:
-    transcript: list[tuple[str, str]] = []
+    transcript = load_transcript()
     interactive = sys.stdin.isatty()
     if interactive:
         print("🍻 Welcome to the bar. Claude and ChatGPT are already a beer in.")
-        print("   Say something (exit/quit to leave).\n")
+        if transcript:
+            print(f"   (They remember your last conversation — {len(transcript)} lines of it.)")
+        print("   Say something (exit/quit to leave, 'forget' to wipe their memory).\n")
 
     while True:
         try:
@@ -129,8 +152,14 @@ async def main() -> None:
             continue
         if user_text.lower() in ("exit", "quit"):
             break
+        if user_text.lower() == "forget":
+            transcript = []
+            save_transcript(transcript)
+            print("🫧 Memory wiped. The buddies wake up with no idea what happened.", flush=True)
+            continue
 
         transcript.append(("You", user_text))
+        save_transcript(transcript)
         await buddy_turn("Claude", ask_claude, transcript)
         await buddy_turn("ChatGPT", ask_gpt, transcript)
         if interactive:
