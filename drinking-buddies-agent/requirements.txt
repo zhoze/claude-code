@@ -1,0 +1,2 @@
+anthropic>=0.50
+openai>=1.60
