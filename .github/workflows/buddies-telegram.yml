@@ -1,41 +1,39 @@
-name: buddies-smoke
+name: Drinking Buddies Telegram
 
 on:
+  schedule:
+    - cron: "*/5 * * * *"
   workflow_dispatch:
-    inputs:
-      message:
-        description: "What to say to the buddies"
-        required: false
-        default: "Is pineapple on pizza a crime?"
 
 permissions:
   contents: write
 
 concurrency:
-  group: buddies-smoke
+  group: buddies-telegram
 
 jobs:
-  smoke:
+  poll:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install -r drinking-buddies-agent/requirements.txt
-      - name: Run buddies
+      - name: Poll and chat
         env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.BUDDIES_TELEGRAM_BOT_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          MSG: ${{ inputs.message }}
-        run: printf '%s\n' "$MSG" | python drinking-buddies-agent/buddies.py
-      - name: Persist memory
+          ALLOWED_CHAT_ID: ${{ secrets.ALLOWED_CHAT_ID }}
+        run: python drinking-buddies-agent/bot/poll_and_chat.py
+      - name: Persist state
         run: |
           git config user.name "buddies-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add drinking-buddies-agent/state/transcript.json
+          git add drinking-buddies-agent/state/
           git diff --cached --quiet && exit 0
-          git commit -m "chore: update buddies memory [skip ci]"
+          git commit -m "chore: update buddies state [skip ci]"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin "HEAD:${GITHUB_REF_NAME}"
