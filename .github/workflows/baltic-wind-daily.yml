@@ -13,6 +13,13 @@ on:
         description: "Run even outside 09:30 Europe/Tallinn workdays"
         type: boolean
         default: true
+  push:
+    # Pre-merge trigger path: workflow_dispatch/schedule only work once the
+    # workflow exists on the default branch, so until then the Routine pokes
+    # baltic-wind-news-agent/trigger/run-request.txt on the agent branch.
+    # State commits touch only state/ (and say [skip ci]) — no retrigger loop.
+    branches: ["claude/baltic-wind-news-agent-7a2c9o"]
+    paths: ["baltic-wind-news-agent/trigger/**"]
 
 concurrency:
   group: baltic-wind-daily
@@ -41,7 +48,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
           EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
-          FORCE_RUN: ${{ inputs.force && 'true' || 'false' }}
+          FORCE_RUN: ${{ (github.event_name == 'push' || inputs.force) && 'true' || 'false' }}
         run: python baltic-wind-news-agent/bot/wind_agent.py
 
       - name: Commit updated state

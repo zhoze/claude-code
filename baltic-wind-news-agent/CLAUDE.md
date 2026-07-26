@@ -44,9 +44,16 @@ Same pattern as `err-news-agent`/`estonian-law-agent`: GitHub throttles
 `schedule:` crons in this repo (and they only fire from the default
 branch), so `.github/workflows/baltic-wind-daily.yml` has the double UTC
 cron as a fallback, while a Claude Code Remote Routine ("Baltic wind news
-(workdays 09:30 Tallinn)", cron `30 6 * * 1-5` UTC with a winter-time
-send_later hop) dispatches the workflow via `workflow_dispatch` on the
-agent branch as the reliable primary trigger.
+report (workdays 09:30 Tallinn)", cron `30 6 * * 1-5` UTC with a
+winter-time send_later hop) is the reliable primary trigger.
+
+Pre-merge wrinkle: `workflow_dispatch` and `schedule` only work once the
+workflow file exists on the default branch. Until this branch is merged,
+the workflow also fires on `push` to the agent branch scoped to
+`trigger/**`, and the Routine starts a run by updating
+`trigger/run-request.txt` via the GitHub contents API. After merge, the
+Routine can dispatch `workflow_dispatch` on `main` instead (its prompt
+covers both cases) and the push trigger block can be removed.
 
 ## Conventions
 
