@@ -1,0 +1,54 @@
+name: Baltic Wind Energy News Report
+
+on:
+  schedule:
+    # 09:30 Europe/Tallinn on workdays: 06:30 UTC in summer (EEST), 07:30 UTC
+    # in winter (EET). The script's local-time guard lets the right one
+    # through and skips the other. Only fires from the default branch.
+    - cron: "30 6 * * 1-5"
+    - cron: "30 7 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run even outside 09:30 Europe/Tallinn workdays"
+        type: boolean
+        default: true
+
+concurrency:
+  group: baltic-wind-daily
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    # ~40 HTTP fetches plus 4 Claude calls; a normal run takes a few minutes.
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r baltic-wind-news-agent/requirements.txt
+
+      - name: Find new projects and send report
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
+          EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
+          FORCE_RUN: ${{ inputs.force && 'true' || 'false' }}
+        run: python baltic-wind-news-agent/bot/wind_agent.py
+
+      - name: Commit updated state
+        run: |
+          git config user.name "baltic-wind-news-agent"
+          git config user.email "bot@users.noreply.github.com"
+          git add baltic-wind-news-agent/state/
+          git diff --cached --quiet || git commit -m "chore: update baltic wind state [skip ci]"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

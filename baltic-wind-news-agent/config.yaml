@@ -1,0 +1,130 @@
+# Baltic wind energy news agent configuration.
+#
+# The agent finds NEWLY ANNOUNCED planned wind-farm projects in Estonia,
+# Latvia and Lithuania and emails a workday report with links. Projects
+# already in state/reported_projects.json are never reported again.
+# Reference source collections live in sources/*.md; the fetchable subset
+# is configured below. Feeds/pages that fail are logged and skipped.
+
+recipient_email: priitmr@gmail.com
+
+# Model (keep names here, never hardcoded in the script)
+claude_model: claude-sonnet-5
+discovery_web_max_uses: 5    # web_search max_uses per per-country discovery call
+
+# 09:30 Europe/Tallinn guard, workdays only (Mon-Fri)
+run_hour_tallinn: 9
+
+# RSS feeds (all verified live 2026-07-26)
+rss_sources:
+  - name: ERR News
+    rss_url: https://news.err.ee/rss
+  - name: LSM English
+    rss_url: https://eng.lsm.lv/rss/
+  - name: LRT English
+    rss_url: https://www.lrt.lt/en/news-in-english?rss
+  - name: BalticWind.EU
+    rss_url: https://balticwind.eu/feed/
+  - name: OffshoreWIND.biz
+    rss_url: https://www.offshorewind.biz/feed/
+  - name: Baltic News Network
+    rss_url: https://bnn-news.com/feed
+  - name: The Baltic Times
+    rss_url: https://www.baltictimes.com/rss/
+  - name: 15min
+    rss_url: https://www.15min.lt/rss
+  - name: Dienas Bizness
+    rss_url: https://www.db.lv/rss
+  - name: Äripäev
+    rss_url: https://www.aripaev.ee/rss
+  - name: Nordex Group
+    rss_url: https://www.nordex-online.com/en/feed/
+
+# Non-RSS listing pages: anchors are extracted and keyword-prefiltered.
+# Developer/OEM newsrooms, associations, and the municipality shortlist
+# from sources/baltic_municipalities_wind_farm_news_links.md.
+listing_pages:
+  - name: Vestas company news
+    url: https://www.vestas.com/en/media/company-news
+  - name: Ignitis Renewables news
+    url: https://ignitisrenewables.com/news/
+  - name: Sunly news
+    url: https://sunly.ee/en/news
+  - name: Utilitas news
+    url: https://utilitas.ee/en/news/
+  - name: Enefit news
+    url: https://www.enefit.ee/en/uudised
+  - name: Latvenergo press releases
+    url: https://latvenergo.lv/en/jaunumi/preses-relizes
+  - name: European Energy news
+    url: https://europeanenergy.com/news/
+  - name: Estonian Wind Power Association
+    url: https://tuuleenergia.ee/news/?lang=en
+  - name: Latvian Wind Energy Association
+    url: https://wea.lv/en/
+  - name: Lithuanian Wind Power Association
+    url: https://lvea.lt/en/
+  - name: WindEurope news
+    url: https://windeurope.org/news/
+  - name: LIAA ELWIND articles
+    url: https://www.liaa.gov.lv/en/articles?category%5B1392%5D=1392
+  # Estonian municipalities (homepages list recent /uudised/ links;
+  # Saaremaa's news listing is JS-rendered with no RSS — covered by
+  # national media and the discovery sweep instead)
+  - name: Lääneranna news
+    url: https://www.laanerannavald.ee
+  - name: Rakvere vald news
+    url: https://rakverevald.ee/uudised/
+  - name: Viru-Nigula news
+    url: https://viru-nigula.ee
+  # Latvian municipalities
+  - name: Bauska news
+    url: https://www.bauskasnovads.lv/lv/jaunumi
+  - name: Aizkraukle news
+    url: https://www.aizkraukle.lv/lv/jaunumi
+  - name: Kuldīga wind projects
+    url: https://www.kuldigasnovads.lv/pasvaldiba/veja-parku-projekti/
+  - name: Valmiera news
+    url: https://www.valmierasnovads.lv/jaunumi/
+  - name: Limbaži news
+    url: https://www.limbazunovads.lv/lv/jaunumi
+  - name: Tukums news
+    url: https://www.tukums.lv/lv/jaunumi
+  - name: Ventspils novads news
+    url: https://www.ventspilsnovads.lv/lv/jaunumi
+  - name: Jelgava novads news
+    url: https://www.jelgavasnovads.lv/lv/jaunumi
+  # Lithuanian municipalities
+  - name: Anykščiai news
+    url: https://www.anyksciai.lt/naujienos/
+  - name: Jonava news
+    url: https://www.jonava.lt/gyventojams/naujienos
+  - name: Šakiai news
+    url: https://www.sakiai.lt/aktualijos
+  - name: Pagėgiai news
+    url: https://www.pagegiai.lt/naujienos/
+  - name: Skuodas news
+    url: https://skuodas.lt/naujienos/
+  - name: Telšiai news
+    url: https://telsiai.lt/naujienos
+  - name: Kelmė news
+    url: https://www.kelme.lt/naujienos/
+
+# Case-insensitive substrings; a candidate title/URL must contain at least
+# one wind word. Covers English, Estonian, Latvian and Lithuanian
+# (including ASCII-folded forms used in URLs: veja, vejo).
+wind_keywords:
+  - wind
+  - tuul          # Estonian: tuul/tuule/tuulepark/tuulik
+  - "vēja"        # Latvian
+  - veja          # Latvian, ASCII (veja-parks in URLs)
+  - "vėjo"        # Lithuanian
+  - vejo          # Lithuanian, ASCII
+  - elektrostaciju   # Latvian: vēja elektrostaciju parks
+  - elektrini     # Lithuanian: vėjo elektrinių parkas
+  - meretuule     # Estonian: offshore wind
+  - offshore
+
+max_candidates: 120        # cap on candidates sent to the novelty/extraction call
+max_links_per_listing: 25  # cap on keyword-matched anchors taken per listing page
+seen_url_days: 60          # article-level dedup window (project dedup is permanent)

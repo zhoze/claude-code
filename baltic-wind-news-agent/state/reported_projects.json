@@ -1,0 +1,796 @@
+{
+  "projects": [
+    {
+      "key": "aidu-wind-farm-ee",
+      "name": "Aidu Wind Farm",
+      "country": "EE",
+      "aliases": [
+        "Aidu"
+      ],
+      "developer": "Eleon",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "sopi-tootsi-wind-farm-ee",
+      "name": "Sopi-Tootsi Wind Farm",
+      "country": "EE",
+      "aliases": [
+        "Sopi-Tootsi",
+        "Sopi Tootsi",
+        "Tootsi"
+      ],
+      "developer": "Enefit Green",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "liivi-bay-offshore-wind-farm-ee",
+      "name": "Liivi Bay Offshore Wind Farm",
+      "country": "EE",
+      "aliases": [
+        "Liivi Bay",
+        "Liivi offshore",
+        "Liivi laht"
+      ],
+      "developer": "Enefit Green",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "saare-liivi-offshore-wind-farm-ee",
+      "name": "Saare-Liivi Offshore Wind Farm",
+      "country": "EE",
+      "aliases": [
+        "Saare-Liivi",
+        "Saare Liivi"
+      ],
+      "developer": "Utilitas Wind",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "tuul-energy-offshore-wind-farm-ee",
+      "name": "Tuul Energy Offshore Wind Farm",
+      "country": "EE",
+      "aliases": [
+        "Tuul Energy",
+        "Saare 2.1",
+        "Saare 2.2"
+      ],
+      "developer": "Sunly / Deep Wind Offshore / VALOREM",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "ignitis-cip-estonian-offshore-seabed-sites-ee",
+      "name": "Ignitis-CIP Estonian Offshore Seabed Sites",
+      "country": "EE",
+      "aliases": [
+        "Ignitis CIP offshore Estonia",
+        "Estonian offshore wind tender sites"
+      ],
+      "developer": "Ignitis Renewables / Copenhagen Infrastructure Partners",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "saare-wind-energy-offshore-wind-farm-ee",
+      "name": "Saare Wind Energy Offshore Wind Farm",
+      "country": "EE",
+      "aliases": [
+        "Saare Wind Energy",
+        "Saaremaa offshore 1400 MW"
+      ],
+      "developer": "Saare Wind Energy / Van Oord",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "saare-1-avara-offshore-wind-farm-ee",
+      "name": "Saare 1 / Avara Offshore Wind Farm",
+      "country": "EE",
+      "aliases": [
+        "Saare 1",
+        "Avara"
+      ],
+      "developer": "Oxan Energy",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "lode-penuja-wind-farm-ee",
+      "name": "Lode-Penuja Wind Farm",
+      "country": "EE",
+      "aliases": [
+        "Lode-Penuja",
+        "Lode Penuja"
+      ],
+      "developer": "Utilitas Wind",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "elwind-offshore-wind-farm-ee",
+      "name": "ELWIND Offshore Wind Farm",
+      "country": "EE",
+      "aliases": [
+        "ELWIND",
+        "Estonian-Latvian offshore wind farm"
+      ],
+      "developer": "Estonia / Latvia joint project",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "polendmaa-wind-farm-ee",
+      "name": "Põlendmaa Wind Farm",
+      "country": "EE",
+      "aliases": [
+        "Polendmaa",
+        "Põlendmaa"
+      ],
+      "developer": "Sunly",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "laaneranna-wind-farm-areas-3-and-3b-ee",
+      "name": "Lääneranna Wind Farm Areas 3 and 3b",
+      "country": "EE",
+      "aliases": [
+        "Lääneranna wind farm",
+        "Laaneranna"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "saarde-wind-farm-expansion-ee",
+      "name": "Saarde Wind Farm Expansion",
+      "country": "EE",
+      "aliases": [
+        "Saarde tuulepark"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "tori-wind-farm-areas-p9-and-p10-ee",
+      "name": "Tori Wind Farm Areas P9 and P10",
+      "country": "EE",
+      "aliases": [
+        "Tori wind areas"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "varudi-wind-farm-ee",
+      "name": "Varudi Wind Farm",
+      "country": "EE",
+      "aliases": [
+        "Varudi"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "varudi-nugeri-wind-farm-ee",
+      "name": "Varudi-Nugeri Wind Farm",
+      "country": "EE",
+      "aliases": [
+        "Varudi-Nugeri"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "pada-samma-wind-farm-ee",
+      "name": "Pada-Samma Wind Farm",
+      "country": "EE",
+      "aliases": [
+        "Pada-Samma"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "pada-arukula-wind-farm-ee",
+      "name": "Pada-Aruküla Wind Farm",
+      "country": "EE",
+      "aliases": [
+        "Pada-Arukula",
+        "Pada-Aruküla"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "nasva-wind-turbine-ee",
+      "name": "Nasva Wind Turbine",
+      "country": "EE",
+      "aliases": [
+        "Nasva"
+      ],
+      "developer": "Five Wind Energy",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "jarva-municipality-wind-farm-plan-ee",
+      "name": "Järva Municipality Wind Farm Plan",
+      "country": "EE",
+      "aliases": [
+        "Jarva wind plan"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "parnu-wind-energy-special-plan-ee",
+      "name": "Pärnu Wind Energy Special Plan",
+      "country": "EE",
+      "aliases": [
+        "Parnu tuuleenergia eriplaneering"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "vestas-68-mw-estonian-order-aidu-ee",
+      "name": "Vestas 68 MW Estonian Order (Aidu)",
+      "country": "EE",
+      "aliases": [
+        "Vestas Estonia 68 MW"
+      ],
+      "developer": "Vestas",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "pienava-wind-farm-lv",
+      "name": "Pienava Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Pienava",
+        "Pienava Wind"
+      ],
+      "developer": "Latvenergo / Eolus",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "laflora-energy-wind-farm-lv",
+      "name": "Laflora Energy Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Laflora",
+        "Kaigu bog wind farm",
+        "Windy"
+      ],
+      "developer": "Latvenergo / Laflora",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "ventspils-wind-farm-lv",
+      "name": "Ventspils Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Ventspils Wind",
+        "Ventspils-2",
+        "Ventspils 64 MW"
+      ],
+      "developer": "Baltic Renewables",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "nitaure-wind-farm-lv",
+      "name": "Nītaure Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Nitaure"
+      ],
+      "developer": "Baltic Renewables",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "kurzeme-wind-park-lv",
+      "name": "Kurzeme Wind Park",
+      "country": "LV",
+      "aliases": [
+        "Kurzeme",
+        "Kurzeme VES"
+      ],
+      "developer": "Sunly",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "lode-wind-farm-lv",
+      "name": "Lode Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Lode"
+      ],
+      "developer": "Utilitas Wind",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "valmiera-valka-wind-farm-lv",
+      "name": "Valmiera-Valka Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Valmiera-Valka"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "limbazi-wind-farm-lv",
+      "name": "Limbaži Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Limbazi"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "aloja-wind-farm-lv",
+      "name": "Aloja Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Aloja"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "iecava-wind-farm-lv",
+      "name": "Iecava Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Iecava"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "eleja-wind-farm-lv",
+      "name": "Eleja Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Eleja"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "stelpe-1-wind-farm-lv",
+      "name": "Stelpe-1 Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Stelpe 1"
+      ],
+      "developer": "Ignitis Renewables",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "stelpe-2-wind-farm-lv",
+      "name": "Stelpe-2 Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Stelpe 2"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "aizkraukle-koknese-wind-farm-lv",
+      "name": "Aizkraukle-Koknese Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Aizkraukle",
+        "Koknese"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "livani-wind-farm-lv",
+      "name": "Līvāni Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Livani"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "prikuli-wind-farm-lv",
+      "name": "Prīkuļi Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Prikuli"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "tume-wind-farm-lv",
+      "name": "Tume Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Tume"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "eko-ziemeli-wind-farm-lv",
+      "name": "EKO Ziemeļi Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "EKO Ziemeli",
+        "Eko Ziemeļi"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "osenieki-wind-farm-lv",
+      "name": "Ošenieki Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Osenieki"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "latvijas-veja-parki-state-forest-portfolio-lv",
+      "name": "Latvijas Vēja Parki State Forest Portfolio",
+      "country": "LV",
+      "aliases": [
+        "Latvijas veja parki",
+        "ten new wind parks"
+      ],
+      "developer": "Latvijas vēja parki",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "eolus-pne-kurzeme-offshore-wind-farm-lv",
+      "name": "Eolus-PNE Kurzeme Offshore Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Kurzeme offshore",
+        "Eolus PNE offshore"
+      ],
+      "developer": "Eolus / PNE",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "taaleri-lords-lb-112-mw-wind-farm-lv",
+      "name": "Taaleri-Lords LB 112 MW Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "Taaleri Lords LB 112 MW"
+      ],
+      "developer": "Taaleri / Lords LB",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "birzgale-wind-turbines-lv",
+      "name": "Birzgale Wind Turbines",
+      "country": "LV",
+      "aliases": [
+        "Birzgale"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "telsiai-wind-farm-lt",
+      "name": "Telšiai Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Telsiai",
+        "Telšiai 124 MW",
+        "Telsiai district wind park"
+      ],
+      "developer": "Utilitas Wind",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "akmene-ii-wind-farm-lt",
+      "name": "Akmenė II Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Akmene II",
+        "Akmenė 99 MW"
+      ],
+      "developer": "Aquila Clean Energy",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "akmene-district-three-turbine-wind-farm-lt",
+      "name": "Akmenė District Three-Turbine Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Akmene three turbines"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "kelme-i-wind-farm-lt",
+      "name": "Kelmė I Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Kelme I",
+        "Kelmė 80 MW"
+      ],
+      "developer": "Enefit Green",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "kelme-ii-wind-farm-lt",
+      "name": "Kelmė II Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Kelme II",
+        "Kelmė 87 MW"
+      ],
+      "developer": "Enefit Green",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "pagegiai-wind-farm-lt",
+      "name": "Pagėgiai Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Pagegiai",
+        "Pagėgiai 264 MW",
+        "Pagėgių vėjas"
+      ],
+      "developer": "Renerga / LT Energija",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "jonava-hybrid-project-lt",
+      "name": "Jonava Hybrid Project",
+      "country": "LT",
+      "aliases": [
+        "Jonava",
+        "Jonava 470 MW"
+      ],
+      "developer": "Energix / European Energy",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "curonian-nord-offshore-wind-farm-lt",
+      "name": "Curonian Nord Offshore Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Curonian Nord"
+      ],
+      "developer": "Ignitis Renewables",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "lithuanian-second-offshore-wind-area-lt",
+      "name": "Lithuanian Second Offshore Wind Area",
+      "country": "LT",
+      "aliases": [
+        "second offshore wind farm Lithuania",
+        "second 700 MW offshore"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "nord-wind-park-pasvalys-lt",
+      "name": "Nord Wind Park (Pasvalys)",
+      "country": "LT",
+      "aliases": [
+        "Nord Wind Park",
+        "Pasvalys hybrid"
+      ],
+      "developer": "Ignitis Renewables",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "otada-sakiai-wind-farm-lt",
+      "name": "Otada-Šakiai Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Otada",
+        "Sakiai GE wind"
+      ],
+      "developer": "GE Vernova",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "suduvos-vejas-wind-farm-lt",
+      "name": "Sūduvos Vėjas Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Suduvos vejas",
+        "Šakiai-Vilkaviškis 50 turbines"
+      ],
+      "developer": "UAB Sūduvos vėjas",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "sunly-land-sakiai-wind-farm-lt",
+      "name": "Sunly Land Šakiai Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Sunly Land Sakiai",
+        "Lukšiai-Griškabūdis 19 turbines"
+      ],
+      "developer": "Sunly Land",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "barzdai-wind-farm-lt",
+      "name": "Barzdai Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Barzdai"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "marijampole-wind-farm-lt",
+      "name": "Marijampolė Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Marijampole",
+        "Marijampolės vėjo parkas"
+      ],
+      "developer": "UAB Marijampolės vėjo parkas",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "troskunai-wind-farm-lt",
+      "name": "Troškūnai Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Troskunai"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "viesintos-wind-farm-lt",
+      "name": "Viešintos Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Viesintos"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "kavarskas-traupis-wind-farm-lt",
+      "name": "Kavarskas-Traupis Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Kavarskas",
+        "Traupis"
+      ],
+      "developer": "UAB Aušrinis",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "zygaiciai-wind-farm-lt",
+      "name": "Žygaičiai Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Zygaiciai"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "skuodas-200-mw-wind-farm-lt",
+      "name": "Skuodas 200 MW Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Skuodas",
+        "Lenkimai",
+        "Plaušiniai"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "green-genius-polenergia-lithuanian-offshore-lt",
+      "name": "Green Genius-Polenergia Lithuanian Offshore",
+      "country": "LT",
+      "aliases": [
+        "Green Genius Polenergia offshore"
+      ],
+      "developer": "Green Genius / Polenergia",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "e-energija-kaunas-region-wind-farm-lt",
+      "name": "E Energija Kaunas Region Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "E energija Kaunas wind"
+      ],
+      "developer": "E energija",
+      "first_reported": "seed",
+      "links": []
+    },
+    {
+      "key": "jonava-district-zeimiai-kulva-wind-farm-lt",
+      "name": "Jonava District Žeimiai-Kulva Wind Farm",
+      "country": "LT",
+      "aliases": [
+        "Zeimiai",
+        "Kulva",
+        "Jonava 25 turbines"
+      ],
+      "developer": "",
+      "first_reported": "seed",
+      "links": []
+    }
+  ]
+}
