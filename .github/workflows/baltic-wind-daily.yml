@@ -32,7 +32,9 @@ jobs:
   report:
     runs-on: ubuntu-latest
     # ~40 HTTP fetches plus 4 Claude calls; a normal run takes a few minutes.
-    timeout-minutes: 30
+    # The bot bounds its own API time (per-call timeouts, max_retries=1,
+    # discovery deadline), so worst case stays well under this.
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
 
@@ -49,6 +51,7 @@ jobs:
           EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
           EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
           FORCE_RUN: ${{ (github.event_name == 'push' || inputs.force) && 'true' || 'false' }}
+          PYTHONUNBUFFERED: "1"
         run: python baltic-wind-news-agent/bot/wind_agent.py
 
       - name: Commit updated state

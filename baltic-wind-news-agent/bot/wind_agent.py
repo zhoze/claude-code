@@ -29,6 +29,7 @@ import os
 import re
 import smtplib
 import sys
+import time
 import traceback
 import unicodedata
 import xml.etree.ElementTree as ET
@@ -49,7 +50,9 @@ REGISTRY_FILE = BASE_DIR / "state" / "reported_projects.json"
 SEEN_URLS_FILE = BASE_DIR / "state" / "seen_urls.json"
 LAST_RUN_FILE = BASE_DIR / "state" / "last_run.json"
 
-CALL_TIMEOUT = 300           # seconds per API call
+CALL_TIMEOUT = 300           # seconds per API call (extraction)
+DISCOVERY_CALL_TIMEOUT = 180  # seconds per discovery web-search call
+DISCOVERY_DEADLINE = 840     # stop starting discovery calls this far into the run
 DISCOVERY_MAX_TOKENS = 2500
 EXTRACTION_MAX_TOKENS = 8000
 SNIPPET_LEN = 300
@@ -163,7 +166,7 @@ class Agent:
         self.cfg = cfg
 
     def ask(self, prompt: str, system: str, *, max_tokens: int,
-            web_max_uses: int = 0) -> str:
+            web_max_uses: int = 0, timeout: int = CALL_TIMEOUT) -> str:
         kwargs = {}
         if web_max_uses > 0:
             kwargs["tools"] = [{"type": "web_search_20260318", "name": "web_search",
@@ -171,7 +174,7 @@ class Agent:
         resp = self.client.messages.create(
             model=self.cfg["claude_model"], max_tokens=max_tokens,
             system=system, messages=[{"role": "user", "content": prompt}],
-            timeout=CALL_TIMEOUT, **kwargs)
+            timeout=timeout, **kwargs)
         return "".join(b.text for b in resp.content if b.type == "text")
 
     def ask_json(self, prompt: str, system: str, **kwargs):
@@ -183,7 +186,8 @@ class Agent:
                       f"Previous output:\n{text}\n\n"
                       "Output ONLY the corrected JSON — no prose, no code fences.")
             fixed = self.ask(repair, "You output only valid JSON.",
-                             max_tokens=kwargs.get("max_tokens", EXTRACTION_MAX_TOKENS))
+                             max_tokens=kwargs.get("max_tokens", EXTRACTION_MAX_TOKENS),
+                             timeout=kwargs.get("timeout", CALL_TIMEOUT))
             return extract_json(fixed)
 
     def discover(self, country_code: str, run_date: str, seen_urls: set) -> list[dict]:
@@ -211,7 +215,8 @@ class Agent:
             "You are a wind-energy market monitor for the Baltic states. "
             "Output only JSON.",
             max_tokens=DISCOVERY_MAX_TOKENS,
-            web_max_uses=self.cfg["discovery_web_max_uses"])
+            web_max_uses=self.cfg["discovery_web_max_uses"],
+            timeout=DISCOVERY_CALL_TIMEOUT)
         out = []
         if isinstance(result, list):
             for item in result:
@@ -424,10 +429,15 @@ def main():
         except Exception as e:
             print(f"Warning: listing fetch failed for {page['name']}: {e}", file=sys.stderr)
 
-    agent = Agent(Anthropic(), cfg)
+    agent = Agent(Anthropic(max_retries=1), cfg)
 
+    run_start = time.monotonic()
     harvested_urls = {c["url"] for c in candidates}
     for code in COUNTRY_NAMES:
+        if time.monotonic() - run_start > DISCOVERY_DEADLINE:
+            print(f"Warning: discovery deadline reached, skipping {code} sweep",
+                  file=sys.stderr)
+            continue
         try:
             got = [c for c in agent.discover(code, run_date, seen_urls)
                    if c["url"] not in harvested_urls]
