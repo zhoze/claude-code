@@ -16,8 +16,9 @@ scope:
   dokument: seadus   # ainult seadused (RT I)
   kov: "false"       # ilma kohalike omavalitsuste aktideta
 
-# true — kui uusi akte pole, siis Telegrami sõnumit ei saadeta.
-quiet_days: true
+# false — ka uute aktideta päeval saadetakse lühike teavitus ("uusi seadusi
+# ei avaldatud"), et oleks kindlus, et seire töötab. true = tühjal päeval vaikus.
+quiet_days: false
 
 # Mitu API otsingulehte (à 500 akti) maksimaalselt tagantpoolt skaneeritakse.
 # Seaduste-ainult ulatus on ~10 lehte, seega vaikimisi skaneeritakse KÕIK lehed
