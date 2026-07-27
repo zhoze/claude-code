@@ -87,6 +87,8 @@ branch merges to `main`; until then use `workflow_dispatch`.
 - Delivery is a single .xlsx document per digest (Telegram sendDocument,
   50 MB limit); the caption is capped at 1024 chars.
 - State commits use `[skip ci]` and `git pull --rebase` before push.
-- `quiet_days: true` in config: no Telegram message on days without news.
+- `quiet_days: false` in config: days without news send a short text
+  notification ("uusi seadusi ei avaldatud") as a liveness signal; set to
+  true for silence on empty days.
 - Local testing: `python bot/daily_digest.py --dry-run --force --since 2026-07-10`
   (no Telegram, no state write). `--seed` re-initializes `state/last_check.json`.

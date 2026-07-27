@@ -318,6 +318,15 @@ def build_caption(rows: list[dict], today: date) -> str:
     return caption
 
 
+def send_telegram_text(text: str):
+    tg = f"https://api.telegram.org/bot{os.environ['TELEGRAM_BOT_TOKEN'].strip()}"
+    requests.post(
+        f"{tg}/sendMessage",
+        json={"chat_id": os.environ["ALLOWED_CHAT_ID"], "text": text},
+        timeout=30,
+    ).raise_for_status()
+
+
 def send_telegram_document(path: Path, caption: str):
     tg = f"https://api.telegram.org/bot{os.environ['TELEGRAM_BOT_TOKEN'].strip()}"
     with path.open("rb") as f:
@@ -397,7 +406,7 @@ def main():
     print(f"Uusi akte alates {since}: {len(new_acts)} "
           f"(jälgitavaid: {len(watched_hits)}, uusi redaktsioone: {len(new_versions)})")
 
-    if new_acts or new_versions or not config.get("quiet_days", True):
+    if new_acts or new_versions:
         model = config.get("summary_model", "claude-sonnet-5")
         gpt_model = config.get("analysis_gpt_model", "gpt-5.6-terra")
         # New consolidated versions of watched laws get a recap + analysis of
@@ -439,6 +448,14 @@ def main():
 
         send_telegram_document(workbook, caption)
         print(f"Kokkuvõte saadetud Telegrami Exceli failina ({len(rows)} rida).")
+    elif not config.get("quiet_days", True):
+        text = (f"⚖️ Riigi Teataja seire {today.strftime('%d.%m.%Y')} — uusi "
+                f"seadusi ei avaldatud ja jälgitavates seadustes muudatusi ei ole.")
+        if args.dry_run:
+            print(f"\n{text}")
+            return
+        send_telegram_text(text)
+        print("Vaikse päeva teavitus saadetud Telegrami.")
     else:
         if args.dry_run:
             print("Uusi akte pole — vaikne päev.")
