@@ -791,6 +791,32 @@
       "developer": "",
       "first_reported": "seed",
       "links": []
+    },
+    {
+      "key": "herro-wind-park-ee",
+      "name": "Herro Wind Park",
+      "country": "EE",
+      "aliases": [
+        "Herro"
+      ],
+      "developer": "Sunly",
+      "first_reported": "2026-07-27",
+      "links": [
+        "https://sunly.ee/en/news/valga-municipality-and-sunly-agree-on-local-benefits-of-herro-wind-park"
+      ]
+    },
+    {
+      "key": "alutaguse-wind-park-ee",
+      "name": "Alutaguse Wind Park",
+      "country": "EE",
+      "aliases": [
+        "Alutaguse"
+      ],
+      "developer": "Sunly",
+      "first_reported": "2026-07-27",
+      "links": [
+        "https://sunly.ee/en/news/alutaguse-municipality-and-sunly-agree-on-local-benefits-for-the-alutaguse-wind-park"
+      ]
     }
   ]
 }
