@@ -7,9 +7,11 @@ included; the email is sent even when nothing new was found.
 
 ## Pipeline (`bot/wind_agent.py`)
 
-1. **Local-time guard**: proceed only at 09:30 Europe/Tallinn on Mon–Fri
-   (double UTC cron `30 6` + `30 7` Mon–Fri covers EEST/EET; the wrong one
-   exits early). `--force`/`FORCE_RUN` bypasses.
+1. **Local-time guard**: proceed on Mon–Fri at/after 09:30 Europe/Tallinn
+   (double UTC cron `30 6` + `30 7` Mon–Fri covers EEST/EET), but at most
+   once per day — `state/last_run.json` records the last sent date, so a
+   throttled/delayed cron still delivers the report while repeat runs the
+   same day exit early. `--force`/`FORCE_RUN` bypasses both checks.
 2. **RSS harvest**: `config.yaml` → `rss_sources` (ERR, LSM, LRT English,
    BalticWind.EU, OffshoreWIND.biz, BNN, Baltic Times, 15min, Dienas
    Bizness, Äripäev). Multilingual wind-keyword prefilter

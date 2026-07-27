@@ -47,6 +47,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 CONFIG_FILE = BASE_DIR / "config.yaml"
 REGISTRY_FILE = BASE_DIR / "state" / "reported_projects.json"
 SEEN_URLS_FILE = BASE_DIR / "state" / "seen_urls.json"
+LAST_RUN_FILE = BASE_DIR / "state" / "last_run.json"
 
 CALL_TIMEOUT = 300           # seconds per API call
 DISCOVERY_MAX_TOKENS = 2500
@@ -352,6 +353,16 @@ def save_registry(projects: list[dict]):
         json.dumps({"projects": projects}, ensure_ascii=False, indent=2) + "\n")
 
 
+def load_last_sent() -> str:
+    if LAST_RUN_FILE.exists():
+        return json.loads(LAST_RUN_FILE.read_text()).get("last_sent", "")
+    return ""
+
+
+def save_last_sent(run_date: str):
+    LAST_RUN_FILE.write_text(json.dumps({"last_sent": run_date}) + "\n")
+
+
 def load_seen_urls() -> dict:
     if SEEN_URLS_FILE.exists():
         return json.loads(SEEN_URLS_FILE.read_text())
@@ -376,11 +387,18 @@ def main():
     now = datetime.now(TALLINN)
     cfg = yaml.safe_load(CONFIG_FILE.read_text())
     force = args.force or os.environ.get("FORCE_RUN") == "true"
-    if not (force or args.dry_run) and (
-            now.hour != cfg["run_hour_tallinn"] or now.weekday() >= 5):
-        print(f"Not a workday {cfg['run_hour_tallinn']}:xx Europe/Tallinn "
-              f"(now {now:%a %H:%M}); skipping. Use --force to run anyway.")
-        return
+    # GitHub throttles schedule crons in this repo, so delayed runs are the
+    # norm: accept any workday run from run_hour_tallinn onward, and rely on
+    # last_run.json to guarantee at most one report per day.
+    if not (force or args.dry_run):
+        if now.weekday() >= 5 or now.hour < cfg["run_hour_tallinn"]:
+            print(f"Not a workday at/after {cfg['run_hour_tallinn']}:30 "
+                  f"Europe/Tallinn (now {now:%a %H:%M}); skipping. "
+                  "Use --force to run anyway.")
+            return
+        if load_last_sent() == f"{now:%Y-%m-%d}":
+            print(f"Report for {now:%Y-%m-%d} already sent; skipping.")
+            return
 
     run_date = args.date or f"{now:%Y-%m-%d}"
     today = date.fromisoformat(run_date)
@@ -468,6 +486,7 @@ def main():
     for c in candidates:
         seen[c["url"]] = run_date
     save_seen_urls(seen, today, cfg["seen_url_days"])
+    save_last_sent(run_date)
     print(f"Sent report: {len(new_projects)} new project(s) from "
           f"{len(candidates)} candidates.")
 
