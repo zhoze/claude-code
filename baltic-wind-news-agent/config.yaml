@@ -17,6 +17,7 @@ discovery_web_max_uses: 3
 
 # 09:30 Europe/Tallinn guard, workdays only (Mon-Fri)
 run_hour_tallinn: 9
+run_minute_tallinn: 30
 
 # RSS feeds (all verified live 2026-07-26)
 rss_sources:

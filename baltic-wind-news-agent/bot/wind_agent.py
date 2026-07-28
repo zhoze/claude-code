@@ -402,8 +402,9 @@ def main():
     # norm: accept any workday run from run_hour_tallinn onward, and rely on
     # last_run.json to guarantee at most one report per day.
     if not (force or args.dry_run):
-        if now.weekday() >= 5 or now.hour < cfg["run_hour_tallinn"]:
-            print(f"Not a workday at/after {cfg['run_hour_tallinn']}:30 "
+        target = (cfg["run_hour_tallinn"], cfg["run_minute_tallinn"])
+        if now.weekday() >= 5 or (now.hour, now.minute) < target:
+            print(f"Not a workday at/after {target[0]}:{target[1]:02d} "
                   f"Europe/Tallinn (now {now:%a %H:%M}); skipping. "
                   "Use --force to run anyway.")
             return

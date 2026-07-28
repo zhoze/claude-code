@@ -48,23 +48,19 @@ reference), so day-1 reports contain only genuinely new announcements.
 
 ## Scheduling reality
 
-Same pattern as `err-news-agent`/`estonian-law-agent`: GitHub throttles
-`schedule:` crons in this repo (today's fired ~4 h late), so the double
-UTC cron is a fallback while a Claude Code Remote Routine ("Baltic wind
-news report (workdays 09:30 Tallinn)", cron `30 6 * * 1-5` UTC with a
-winter-time send_later hop) is the primary trigger.
+**Cron is the only trigger — no Claude session can start a run.** Unlike
+`err-news-agent`/`estonian-law-agent`, this agent has no working Routine:
+Routine-fired sessions get neither GitHub MCP tools nor `gh`, and their
+`git push` is rejected 403 on every branch (both verified 2026-07-28).
+See `SCHEDULING.md` for the full evidence — and delete the Routine, which
+can now only emit error summaries.
 
-**Routine-fired sessions have NO GitHub MCP tools** (verified 2026-07-27:
-only claude.ai connectors are attached, no `gh` CLI) — they do have the
-repo clone at `/home/user/claude-code` with authenticated git push. The
-Routine therefore triggers a run with plain git: commit a timestamp to
-`baltic-wind-news-agent/trigger/run-request.txt` on `main` and push
-(the workflow's `push` trigger is scoped to that path), then verifies by
-polling `git log origin/main` for the `chore: update baltic wind state
-[skip ci]` commit the run pushes at the end. Only `workflow_dispatch`
-carries force; push/cron runs obey the guard, so a stray trigger push is
-a cheap no-op. `state/last_run.json` guarantees at most one report per
-day across all trigger paths.
+GitHub delays this repo's crons by 2–4 h, so the workflow schedules an
+attempt every 30 min from 06:30 to 11:00 UTC on weekdays. The first
+attempt that both runs and passes the 09:30-Tallinn guard sends the
+report; `state/last_run.json` turns every later attempt that day into a
+~20 s no-op. Only `workflow_dispatch` carries force, so manual/push runs
+also obey the guards.
 
 The Routine's exact prompt text lives in `routine-prompt.md` — keep the
 two in sync when either changes, since the live copy is stored in the
