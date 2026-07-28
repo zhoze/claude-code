@@ -52,8 +52,9 @@ reference), so day-1 reports contain only genuinely new announcements.
 `err-news-agent`/`estonian-law-agent`, this agent has no working Routine:
 Routine-fired sessions get neither GitHub MCP tools nor `gh`, and their
 `git push` is rejected 403 on every branch (both verified 2026-07-28).
-See `SCHEDULING.md` for the full evidence — and delete the Routine, which
-can now only emit error summaries.
+The Routine that used to drive this was deleted on 2026-07-28; do not add
+another without first confirming push access. See `SCHEDULING.md` for the
+full evidence.
 
 GitHub delays this repo's crons by 2–4 h, so the workflow schedules an
 attempt every 30 min from 06:30 to 11:00 UTC on weekdays. The first
@@ -62,9 +63,10 @@ report; `state/last_run.json` turns every later attempt that day into a
 ~20 s no-op. Only `workflow_dispatch` carries force, so manual/push runs
 also obey the guards.
 
-The Routine's exact prompt text lives in `routine-prompt.md` — keep the
-two in sync when either changes, since the live copy is stored in the
-claude.ai Routines UI and cannot be read back from a repo.
+Nothing outside this repo is needed to send the daily report — no session,
+no connector, no stored prompt. Manual runs: `workflow_dispatch` (with
+`force: true` to bypass both guards), or, with push access, commit a
+timestamp to `trigger/run-request.txt` on `main`.
 
 ## Conventions
 

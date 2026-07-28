@@ -1,9 +1,10 @@
 # Scheduling: why this agent runs on cron alone
 
-**Short version: no Claude Code Remote Routine can trigger this workflow.
-Delete or disable the Routine "Baltic wind news report (workdays 09:30
-Tallinn)" — it can only produce error summaries. GitHub Actions `schedule:`
-carries the daily report by itself.**
+**Short version: no Claude Code Remote Routine can trigger this workflow.**
+The Routine "Baltic wind news report (workdays 09:30 Tallinn)" was deleted
+on 2026-07-28 because it could only produce error summaries. GitHub Actions
+`schedule:` carries the daily report by itself. Do not add a Routine back
+unless the push-access gap below has been closed first.
 
 ## What was tried, and why each failed
 
