@@ -14,11 +14,11 @@ on:
         type: boolean
         default: true
   push:
-    # Pre-merge trigger path: workflow_dispatch/schedule only work once the
-    # workflow exists on the default branch, so until then the Routine pokes
-    # baltic-wind-news-agent/trigger/run-request.txt on the agent branch.
+    # Routine trigger path: sessions spawned by Claude Code Remote Routines
+    # have git push access but no GitHub MCP tools, so the Routine starts a
+    # run by committing a timestamp to trigger/run-request.txt on main.
     # State commits touch only state/ (and say [skip ci]) — no retrigger loop.
-    branches: ["claude/baltic-wind-news-agent-7a2c9o"]
+    branches: ["main"]
     paths: ["baltic-wind-news-agent/trigger/**"]
 
 concurrency:
@@ -50,7 +50,10 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
           EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
-          FORCE_RUN: ${{ (github.event_name == 'push' || inputs.force) && 'true' || 'false' }}
+          # Only manual dispatch forces; push- and cron-triggered runs obey
+          # the local-time + once-per-day guard, so a trigger push outside
+          # the window (or after a sent report) is a cheap no-op.
+          FORCE_RUN: ${{ inputs.force && 'true' || 'false' }}
           PYTHONUNBUFFERED: "1"
         run: python baltic-wind-news-agent/bot/wind_agent.py
 

@@ -43,19 +43,22 @@ reference), so day-1 reports contain only genuinely new announcements.
 ## Scheduling reality
 
 Same pattern as `err-news-agent`/`estonian-law-agent`: GitHub throttles
-`schedule:` crons in this repo (and they only fire from the default
-branch), so `.github/workflows/baltic-wind-daily.yml` has the double UTC
-cron as a fallback, while a Claude Code Remote Routine ("Baltic wind news
-report (workdays 09:30 Tallinn)", cron `30 6 * * 1-5` UTC with a
-winter-time send_later hop) is the reliable primary trigger.
+`schedule:` crons in this repo (today's fired ~4 h late), so the double
+UTC cron is a fallback while a Claude Code Remote Routine ("Baltic wind
+news report (workdays 09:30 Tallinn)", cron `30 6 * * 1-5` UTC with a
+winter-time send_later hop) is the primary trigger.
 
-Pre-merge wrinkle: `workflow_dispatch` and `schedule` only work once the
-workflow file exists on the default branch. Until this branch is merged,
-the workflow also fires on `push` to the agent branch scoped to
-`trigger/**`, and the Routine starts a run by updating
-`trigger/run-request.txt` via the GitHub contents API. After merge, the
-Routine can dispatch `workflow_dispatch` on `main` instead (its prompt
-covers both cases) and the push trigger block can be removed.
+**Routine-fired sessions have NO GitHub MCP tools** (verified 2026-07-27:
+only claude.ai connectors are attached, no `gh` CLI) — they do have the
+repo clone at `/home/user/claude-code` with authenticated git push. The
+Routine therefore triggers a run with plain git: commit a timestamp to
+`baltic-wind-news-agent/trigger/run-request.txt` on `main` and push
+(the workflow's `push` trigger is scoped to that path), then verifies by
+polling `git log origin/main` for the `chore: update baltic wind state
+[skip ci]` commit the run pushes at the end. Only `workflow_dispatch`
+carries force; push/cron runs obey the guard, so a stray trigger push is
+a cheap no-op. `state/last_run.json` guarantees at most one report per
+day across all trigger paths.
 
 ## Conventions
 
