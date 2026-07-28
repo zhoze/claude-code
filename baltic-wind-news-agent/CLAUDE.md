@@ -60,6 +60,10 @@ carries force; push/cron runs obey the guard, so a stray trigger push is
 a cheap no-op. `state/last_run.json` guarantees at most one report per
 day across all trigger paths.
 
+The Routine's exact prompt text lives in `routine-prompt.md` — keep the
+two in sync when either changes, since the live copy is stored in the
+claude.ai Routines UI and cannot be read back from a repo.
+
 ## Conventions
 
 - Secrets only via GitHub Actions secrets: `ANTHROPIC_API_KEY`,
