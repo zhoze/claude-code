@@ -171,10 +171,15 @@ class Agent:
         if web_max_uses > 0:
             kwargs["tools"] = [{"type": "web_search_20260318", "name": "web_search",
                                 "max_uses": web_max_uses}]
-        resp = self.client.messages.create(
-            model=self.cfg["claude_model"], max_tokens=max_tokens,
-            system=system, messages=[{"role": "user", "content": prompt}],
-            timeout=timeout, **kwargs)
+        # Stream rather than wait on one response: during web-search turns a
+        # non-streaming request sits idle long enough to trip the SDK's read
+        # timeout (it fired on every discovery call before this). Streaming
+        # applies the timeout between chunks instead of to the whole response.
+        with self.client.messages.stream(
+                model=self.cfg["claude_model"], max_tokens=max_tokens,
+                system=system, messages=[{"role": "user", "content": prompt}],
+                timeout=timeout, **kwargs) as stream:
+            resp = stream.get_final_message()
         return "".join(b.text for b in resp.content if b.type == "text")
 
     def ask_json(self, prompt: str, system: str, **kwargs):
