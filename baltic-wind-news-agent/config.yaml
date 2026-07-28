@@ -10,7 +10,10 @@ recipient_email: priitmr@gmail.com
 
 # Model (keep names here, never hardcoded in the script)
 claude_model: claude-sonnet-5
-discovery_web_max_uses: 5    # web_search max_uses per per-country discovery call
+# web_search max_uses per per-country discovery call. Each search costs
+# roughly 2 minutes of wall clock, so this is the main lever on sweep
+# duration; 3 keeps a sweep near 6 min (the three countries run in parallel).
+discovery_web_max_uses: 3
 
 # 09:30 Europe/Tallinn guard, workdays only (Mon-Fri)
 run_hour_tallinn: 9

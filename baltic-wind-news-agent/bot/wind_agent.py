@@ -29,10 +29,11 @@ import os
 import re
 import smtplib
 import sys
-import time
 import traceback
 import unicodedata
 import xml.etree.ElementTree as ET
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import TimeoutError as FuturesTimeout
 from datetime import date, datetime, timedelta
 from email.mime.text import MIMEText
 from pathlib import Path
@@ -436,22 +437,35 @@ def main():
 
     agent = Agent(Anthropic(max_retries=1), cfg)
 
-    run_start = time.monotonic()
+    # Run the country sweeps concurrently: a single web-search sweep takes
+    # 5-10 minutes, so sequentially the third country never fit inside
+    # DISCOVERY_DEADLINE. In parallel all three cost one sweep of wall clock.
     harvested_urls = {c["url"] for c in candidates}
-    for code in COUNTRY_NAMES:
-        if time.monotonic() - run_start > DISCOVERY_DEADLINE:
-            print(f"Warning: discovery deadline reached, skipping {code} sweep",
-                  file=sys.stderr)
-            continue
+    with ThreadPoolExecutor(max_workers=len(COUNTRY_NAMES)) as pool:
+        futures = {pool.submit(agent.discover, code, run_date, seen_urls): code
+                   for code in COUNTRY_NAMES}
         try:
-            got = [c for c in agent.discover(code, run_date, seen_urls)
-                   if c["url"] not in harvested_urls]
-            candidates += got
-            harvested_urls |= {c["url"] for c in got}
-            print(f"[discovery] {COUNTRY_NAMES[code]}: {len(got)} candidates")
-        except Exception as e:
-            print(f"Warning: discovery failed for {code}: {e}", file=sys.stderr)
-            traceback.print_exc()
+            for future in as_completed(futures, timeout=DISCOVERY_DEADLINE):
+                code = futures[future]
+                try:
+                    found = future.result()
+                except Exception as e:
+                    print(f"Warning: discovery failed for {code}: {e}", file=sys.stderr)
+                    continue
+                got = [c for c in found if c["url"] not in harvested_urls]
+                candidates += got
+                harvested_urls |= {c["url"] for c in got}
+                print(f"[discovery] {COUNTRY_NAMES[code]}: {len(got)} new "
+                      f"({len(found)} found, rest already seen)")
+        except FuturesTimeout:
+            unfinished = [c for f, c in futures.items() if not f.done()]
+            print(f"Warning: discovery deadline reached, ignoring results from "
+                  f"{', '.join(unfinished)}", file=sys.stderr)
+        # Results past the deadline are ignored, but an already-issued API call
+        # cannot be cancelled and the pool joins its thread on exit, so a slow
+        # sweep still delays the report. Per-call streaming timeouts keep that
+        # bounded, with the workflow's job timeout as the final backstop.
+        pool.shutdown(wait=True, cancel_futures=True)
 
     candidates = candidates[:cfg["max_candidates"]]
     print(f"Total candidates for extraction: {len(candidates)}")

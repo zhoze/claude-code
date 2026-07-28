@@ -21,6 +21,12 @@ included; the email is sent even when nothing new was found.
    extraction + same prefilter. Every fetch failure is logged, never fatal.
 4. **Claude web-search discovery**: one call per country (EN + local
    language queries, last 7 days) to catch sources outside the fixed list.
+   These calls **stream** — a non-streaming request idles through the
+   model's web-search turns and trips the SDK read timeout, which killed
+   every sweep until 2026-07-28. A sweep costs roughly 2 min per search
+   (`discovery_web_max_uses`), so the three countries run in **parallel**
+   via a thread pool; results arriving after `DISCOVERY_DEADLINE` are
+   ignored so a slow sweep can't sink the report.
 5. **Extraction & novelty**: one Claude call gets all candidates plus the
    project registry (`state/reported_projects.json`, names + aliases) and
    returns only projects NOT in the registry. Non-project stories (policy,
