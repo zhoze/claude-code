@@ -20,15 +20,23 @@ for a reason that took three wrong turns to pin down:
 2. The conclusion drawn from that failure — "no Routine can ever trigger this"
    — was wrong, and the git-push fallback built on it also 403'd.
 3. The actual blocker, found 2026-07-29 by inspecting `ListConnectors` from a
-   Routine firing: **there is no GitHub connector on the account at all**
-   (only Bigdata.com, Descript, FMP, Gmail, Google Calendar, Google Drive,
-   Notion, Slack, Wolfram). A UI-created Routine cannot attach a connector
-   that does not exist, so recreating the Routine alone fixes nothing.
+   Routine firing: **the firing session has no GitHub tools at all**. Its
+   connector list held only Bigdata.com, Descript, FMP, Gmail, Google
+   Calendar, Google Drive, Notion, Slack and Wolfram, and both
+   `api.github.com` and `git push` returned 403.
 
-To get exact 09:30 delivery, the order must be:
-**claude.ai → Settings → Connectors → add GitHub**, *then* create the Routine
-from the UI with the schedule and prompt below. Until the connector exists,
-the `workflow_run` chain is what delivers the report.
+Creating the Routine from the claude.ai UI was then tried and **did not help**:
+the account's GitHub integration shows *type Web, status active* — which is
+what gives interactive Claude Code web sessions their repo access, and is why
+`mcp__github__*` works in those — but a scheduled firing did not inherit it.
+So the missing piece is a GitHub entry in the *connector* list attached to
+scheduled sessions, which is a different grant from the Web integration and
+may simply not be on offer.
+
+Do not sink more time into this unless a GitHub connector actually appears in
+claude.ai → Settings → Connectors. The `workflow_run` chain below delivers the
+report without any of it; a Routine would only move delivery from ~10:00 to
+09:30.
 
 ## How this repo's agents get triggered
 
