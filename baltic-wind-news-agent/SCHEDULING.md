@@ -1,43 +1,48 @@
-# Scheduling: create the Routine from the claude.ai UI
+# Scheduling: how the daily report actually gets triggered
 
-**A Routine dispatching this workflow is the reliable trigger. It must be
-created in the claude.ai Routines UI, not with the `create_trigger` MCP tool.**
-GitHub Actions `schedule:` is only a fallback here — it fires late and
-sometimes not at all.
+**Primary trigger is the `workflow_run` chain** — this workflow runs right
+after the Estonian law digest or the ERR News digest finishes, because both of
+those get triggered every day while this workflow's own cron keeps being
+skipped. It needs no connector, no push access and no Claude session, so it
+works today. `schedule:` and `workflow_dispatch` remain as extra paths, and
+`state/last_run.json` means only the first one to land each day sends anything.
 
-## The mistake that cost two days of reports
+## Why not a Routine (yet)
 
-The first Routine was created with `mcp__…__create_trigger` from a Claude Code
-session. That call returned a warning which was noted and then not acted on:
+A Routine dispatching this workflow would give exact 09:30 delivery, and that
+is what `estonian-law-daily.yml` uses. It is **not currently possible here**,
+for a reason that took three wrong turns to pin down:
 
-> this trigger stores no MCP connectors, so the sessions it fires will run
-> without connector (`mcp__<server>__*`) tools. Connectors on triggers created
-> via this tool are limited to those the calling session itself holds […] If
-> the routine needs connectors, create it from a session that holds them, or
-> **ask the user to create it from the claude.ai routines UI**.
+1. The first Routine was created with the `create_trigger` MCP tool, whose
+   response warned that such triggers store no connectors and said to create
+   it from the claude.ai UI instead. That warning was not acted on, so its
+   firings had no GitHub tools.
+2. The conclusion drawn from that failure — "no Routine can ever trigger this"
+   — was wrong, and the git-push fallback built on it also 403'd.
+3. The actual blocker, found 2026-07-29 by inspecting `ListConnectors` from a
+   Routine firing: **there is no GitHub connector on the account at all**
+   (only Bigdata.com, Descript, FMP, Gmail, Google Calendar, Google Drive,
+   Notion, Slack, Wolfram). A UI-created Routine cannot attach a connector
+   that does not exist, so recreating the Routine alone fixes nothing.
 
-So its firings had no GitHub connector — hence "no GitHub access available",
-and hence the later 403 on `git push` too. The wrong conclusion was drawn from
-that (that *no* Routine can trigger this workflow). It is wrong because
-`estonian-law-daily.yml` in this same repo is dispatched by a Routine **every
-single day at 07:00:4x UTC**, without fail, including on the day the Baltic
-wind Routine was failing. Routines in this account can dispatch workflows
-perfectly well — they just need the connector grant that only UI creation (or
-a session that itself holds the connector) provides.
+To get exact 09:30 delivery, the order must be:
+**claude.ai → Settings → Connectors → add GitHub**, *then* create the Routine
+from the UI with the schedule and prompt below. Until the connector exists,
+the `workflow_run` chain is what delivers the report.
 
-## How the repo's agents actually get triggered
+## How this repo's agents get triggered
 
-| Workflow | Primary trigger | Punctuality |
+| Workflow | Trigger | Punctuality |
 | --- | --- | --- |
-| `estonian-law-daily.yml` | Routine → `workflow_dispatch`, 07:00 UTC | Exact, every day |
-| `err-news-daily.yml` | `schedule:` cron | Fires, ~45 min–2 h late |
-| `baltic-wind-daily.yml` | **needs a UI-created Routine** | cron alone: unreliable |
+| `estonian-law-daily.yml` | Routine → `workflow_dispatch` ~07:00 UTC | Exact, every day |
+| `err-news-daily.yml` | `schedule:` cron | Fires daily, ~45 min–2 h late |
+| `baltic-wind-daily.yml` | `workflow_run` off the two above | ~10:00–11:00 Tallinn |
 
-Evidence for "unreliable": on 2026-07-29 this workflow got **zero** scheduled
-runs between 06:30 and 11:00 UTC even though ten cron entries covered that
-window, while `err-news-daily.yml` (two entries) fired normally. GitHub
-documents that high-frequency schedules are throttled and that scheduled runs
-can be dropped under load, so the cron list here is deliberately kept to two.
+This workflow's own `schedule:` produced **zero** runs on both 2026-07-28 and
+2026-07-29 — including a day when ten cron entries covered 06:30–11:00 UTC and
+`err-news-daily.yml` (two entries) fired normally. GitHub documents that
+scheduled runs are throttled and may be dropped under load. The cron list is
+kept to two entries and treated as a bonus, never as the mechanism.
 
 ## The Routine to create
 
@@ -71,8 +76,10 @@ rather than trying to work around it in the prompt.
 
 ## Triggering a run by hand
 
-- **Actions UI / API:** `workflow_dispatch`. `force: true` bypasses both the
-  09:30 guard and the once-per-day guard, so it *will* send a second report
-  the same day; `force: false` respects them.
+- **Actions UI / API:** `workflow_dispatch`. `force` now defaults to **false**,
+  so a plain "Run workflow" respects the 09:30 and once-per-day guards. It used
+  to default to true, which is why 2026-07-28 received three identical reports
+  (09:13, 09:31, 09:55 UTC). Tick `force` only when a duplicate or off-hours
+  report is genuinely wanted.
 - **With push access:** commit a timestamp to
   `baltic-wind-news-agent/trigger/run-request.txt` on `main`.
