@@ -42,8 +42,17 @@ can be dropped under load, so the cron list here is deliberately kept to two.
 ## The Routine to create
 
 In claude.ai → Routines, create a routine named
-**"Baltic wind news report (workdays 09:30 Tallinn)"** with cron
-`30 6 * * 1-5` (UTC) and this prompt:
+**"Baltic wind news report (workdays 09:30 Tallinn)"**.
+
+**Schedule.** If the UI accepts a plain-language schedule, prefer
+*"every weekday at 9:30 AM"* in **Europe/Tallinn** — it tracks DST for you.
+If it wants a cron expression, use `30 6 * * 1-5`, which is UTC and means
+minute 30, hour 06, any day of month, any month, days Mon–Fri, i.e. **06:30
+UTC on weekdays** = 09:30 Tallinn in summer (EEST). In winter (EET) that same
+instant is 08:30 local, which is why step 1 of the prompt waits an hour rather
+than reporting early; with a local-time schedule that step simply never fires.
+
+**Prompt:**
 
 ---
 
