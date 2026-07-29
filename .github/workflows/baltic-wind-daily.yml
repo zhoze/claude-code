@@ -14,12 +14,25 @@ on:
     # GitHub's documented throttling of high-frequency schedules.
     - cron: "30 6 * * 1-5"
     - cron: "30 7 * * 1-5"
+  workflow_run:
+    # Reliability chain — the real fix while this repo's cron keeps skipping
+    # this workflow (zero scheduled runs on both 2026-07-28 and 2026-07-29).
+    # These two digests DO get triggered every day, so run right after one of
+    # them finishes: the law digest is dispatched ~07:00 UTC (10:00 Tallinn)
+    # and ERR News fires by cron ~07:45 UTC. Both are past the 09:30 Tallinn
+    # guard, and last_run.json means whichever lands first sends and the other
+    # is a no-op. Needs no connector, no push, no Claude session.
+    workflows: ["Estonian Law Daily Digest", "ERR News Trustworthiness Digest"]
+    types: [completed]
   workflow_dispatch:
     inputs:
       force:
-        description: "Run even outside 09:30 Europe/Tallinn workdays"
+        # Defaults to FALSE on purpose: clicking "Run workflow" used to force
+        # a send, which is how 2026-07-28 got three identical reports. Tick it
+        # only when you deliberately want a duplicate/off-hours report.
+        description: "Bypass the 09:30 Tallinn and once-per-day guards"
         type: boolean
-        default: true
+        default: false
   push:
     # Manual escape hatch for anyone who has push access: committing a
     # timestamp to trigger/run-request.txt on main starts a run without the

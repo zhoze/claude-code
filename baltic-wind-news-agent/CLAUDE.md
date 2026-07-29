@@ -48,21 +48,23 @@ reference), so day-1 reports contain only genuinely new announcements.
 
 ## Scheduling reality
 
-Same pattern as `estonian-law-agent`: a **Routine dispatching this
-workflow is the reliable trigger**, and `schedule:` cron is the fallback
-(it fires late here, and on 2026-07-29 not at all). The Routine **must be
-created in the claude.ai Routines UI** — one created with the
-`create_trigger` MCP tool fires without connectors, so it has no
-`mcp__github__*` and no push, which is exactly why the first attempt at
-this failed for two days. Full evidence and the prompt to paste:
-`SCHEDULING.md`.
+**The `workflow_run` chain is what actually delivers.** This workflow's
+own `schedule:` got zero runs on both 2026-07-28 and 2026-07-29, so it
+now also runs on completion of `Estonian Law Daily Digest` / `ERR News
+Trustworthiness Digest`, which are triggered reliably every day. That
+lands ~10:00–11:00 Tallinn and needs no connector, no push and no Claude
+session.
 
-The double UTC cron (`30 6` + `30 7`, Mon–Fri) covers EEST/EET; the
-local-time guard skips anything before 09:30 Tallinn, and
-`state/last_run.json` reduces any later run that day to a ~20 s no-op, so
-Routine and cron can both fire without ever sending twice. Only
-`workflow_dispatch` with `force: true` bypasses those guards. Keep the
-cron list short — a 10-entry fan got the workflow zero scheduled runs.
+A Routine would give exact 09:30 delivery, but **the account has no
+GitHub connector at all** — so a Routine, however it is created, fires
+without `mcp__github__*` (and without push). Add the connector first,
+then create the Routine from the claude.ai UI. Full history and the
+prompt: `SCHEDULING.md`.
+
+Whatever fires, `state/last_run.json` plus the 09:30-Tallinn guard mean
+only the day's first run sends; the rest are ~20 s no-ops. Only
+`workflow_dispatch` with `force: true` (no longer the default) bypasses
+them. Keep the cron list short — a 10-entry fan got zero scheduled runs.
 
 Nothing outside this repo is needed to send the daily report — no session,
 no connector, no stored prompt. Manual runs: `workflow_dispatch` (with
