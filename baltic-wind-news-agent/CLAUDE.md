@@ -55,11 +55,12 @@ Trustworthiness Digest`, which are triggered reliably every day. That
 lands ~10:00–11:00 Tallinn and needs no connector, no push and no Claude
 session.
 
-A Routine would give exact 09:30 delivery, but **the account has no
-GitHub connector at all** — so a Routine, however it is created, fires
-without `mcp__github__*` (and without push). Add the connector first,
-then create the Routine from the claude.ai UI. Full history and the
-prompt: `SCHEDULING.md`.
+A Routine would give exact 09:30 delivery, but every attempt fired
+without `mcp__github__*` and without push — including one created from
+the claude.ai UI while the account's GitHub integration (type Web) was
+active, since scheduled firings do not inherit that. Treat the Routine
+path as closed unless a GitHub *connector* appears in claude.ai settings.
+Full history: `SCHEDULING.md`.
 
 Whatever fires, `state/last_run.json` plus the 09:30-Tallinn guard mean
 only the day's first run sends; the rest are ~20 s no-ops. Only
