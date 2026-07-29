@@ -48,20 +48,21 @@ reference), so day-1 reports contain only genuinely new announcements.
 
 ## Scheduling reality
 
-**Cron is the only trigger — no Claude session can start a run.** Unlike
-`err-news-agent`/`estonian-law-agent`, this agent has no working Routine:
-Routine-fired sessions get neither GitHub MCP tools nor `gh`, and their
-`git push` is rejected 403 on every branch (both verified 2026-07-28).
-The Routine that used to drive this was deleted on 2026-07-28; do not add
-another without first confirming push access. See `SCHEDULING.md` for the
-full evidence.
+Same pattern as `estonian-law-agent`: a **Routine dispatching this
+workflow is the reliable trigger**, and `schedule:` cron is the fallback
+(it fires late here, and on 2026-07-29 not at all). The Routine **must be
+created in the claude.ai Routines UI** — one created with the
+`create_trigger` MCP tool fires without connectors, so it has no
+`mcp__github__*` and no push, which is exactly why the first attempt at
+this failed for two days. Full evidence and the prompt to paste:
+`SCHEDULING.md`.
 
-GitHub delays this repo's crons by 2–4 h, so the workflow schedules an
-attempt every 30 min from 06:30 to 11:00 UTC on weekdays. The first
-attempt that both runs and passes the 09:30-Tallinn guard sends the
-report; `state/last_run.json` turns every later attempt that day into a
-~20 s no-op. Only `workflow_dispatch` carries force, so manual/push runs
-also obey the guards.
+The double UTC cron (`30 6` + `30 7`, Mon–Fri) covers EEST/EET; the
+local-time guard skips anything before 09:30 Tallinn, and
+`state/last_run.json` reduces any later run that day to a ~20 s no-op, so
+Routine and cron can both fire without ever sending twice. Only
+`workflow_dispatch` with `force: true` bypasses those guards. Keep the
+cron list short — a 10-entry fan got the workflow zero scheduled runs.
 
 Nothing outside this repo is needed to send the daily report — no session,
 no connector, no stored prompt. Manual runs: `workflow_dispatch` (with

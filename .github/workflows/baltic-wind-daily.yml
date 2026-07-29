@@ -2,26 +2,18 @@ name: Baltic Wind Energy News Report
 
 on:
   schedule:
-    # Cron is the ONLY trigger that needs no credentials, so it carries the
-    # daily report on its own (no Claude session can start a run: Routine-fired
-    # sessions have neither GitHub MCP nor git push to this repo).
+    # Fallback trigger only — the reliable one is a Routine dispatching this
+    # workflow (see SCHEDULING.md). 09:30 Europe/Tallinn is 06:30 UTC in
+    # summer (EEST) / 07:30 UTC in winter (EET); the script's local-time guard
+    # lets the right one through and skips the other, and last_run.json makes
+    # a second run the same day a no-op.
     #
-    # Target is 09:30 Europe/Tallinn = 06:30 UTC in summer (EEST) / 07:30 UTC
-    # in winter (EET), but GitHub delays this repo's crons by 2-4 h. So fire
-    # every 30 min across the morning: the first attempt that actually runs
-    # sends the report, and `state/last_run.json` turns every later one into a
-    # ~20 s no-op. More entries = better odds of landing near 09:30, never a
-    # duplicate report.
+    # Keep this list SHORT. A 10-entry fan was tried on 2026-07-28 to work
+    # around GitHub's cron lag and the workflow then got zero scheduled runs
+    # the next day, while the repo's 2-entry workflows kept firing — matching
+    # GitHub's documented throttling of high-frequency schedules.
     - cron: "30 6 * * 1-5"
-    - cron: "0 7 * * 1-5"
     - cron: "30 7 * * 1-5"
-    - cron: "0 8 * * 1-5"
-    - cron: "30 8 * * 1-5"
-    - cron: "0 9 * * 1-5"
-    - cron: "30 9 * * 1-5"
-    - cron: "0 10 * * 1-5"
-    - cron: "30 10 * * 1-5"
-    - cron: "0 11 * * 1-5"
   workflow_dispatch:
     inputs:
       force:
