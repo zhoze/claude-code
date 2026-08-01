@@ -1,0 +1,20 @@
+# AEGIS Qdrant configuration. Installed to /aegis/config/qdrant.yaml,
+# read by aegis-vectordb.service (uid aegis-vectordb).
+#
+# Loopback only, gRPC off, telemetry off. The kernel policy additionally
+# restricts who may even connect to 6333 (aegis-core, aegis-ht, admin, root).
+
+log_level: INFO
+
+service:
+  host: 127.0.0.1
+  http_port: 6333
+  # gRPC disabled: one protocol surface, and ingest speaks plain REST.
+  enable_tls: false
+
+storage:
+  storage_path: /aegis/vectordb/storage
+  snapshots_path: /aegis/vectordb/snapshots
+  on_disk_payload: true
+
+telemetry_disabled: true

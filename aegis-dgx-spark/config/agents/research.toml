@@ -1,0 +1,23 @@
+# The first agent that reads the open web. This is the input side of T1 in
+# docs/part-00-threat-model.md — add allowlist domains one at a time and
+# re-run tests/verify-egress.sh afterwards.
+
+[agent]
+name        = "research"
+version     = "1.0.0"
+description = "Reads allowlisted external sources. Holds no business data."
+trust_zone  = "low"
+model_role  = "general"
+
+[capabilities]
+tools = ["web.fetch", "web.summarise"]
+
+[permissions]
+read    = ["/aegis/scratch/lt"]
+write   = ["/aegis/scratch/lt"]
+network = true
+
+[limits]
+memory_gib      = 6
+timeout_seconds = 90
+max_tool_calls  = 8

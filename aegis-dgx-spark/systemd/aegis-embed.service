@@ -1,0 +1,43 @@
+[Unit]
+Description=AEGIS embedding service (llama.cpp --embeddings)
+Documentation=file:/aegis/docs/part-13-knowledge-rag.md
+After=network.target
+
+[Service]
+Type=exec
+User=aegis-llm
+Group=aegis-llm
+SupplementaryGroups=video render
+WorkingDirectory=/aegis/models
+EnvironmentFile=/aegis/config/llm.env
+ExecStartPre=/usr/bin/python3 /aegis/bin/aegis-verify-model ${AEGIS_EMBED_MODEL_PATH}
+ExecStart=/aegis/bin/llama-server \
+    --model ${AEGIS_EMBED_MODEL_PATH} \
+    --alias ${AEGIS_EMBED_MODEL_NAME} \
+    --host 127.0.0.1 \
+    --port 8001 \
+    --ctx-size ${AEGIS_EMBED_CTX} \
+    --embeddings \
+    --no-webui
+Restart=on-failure
+RestartSec=5
+TimeoutStartSec=300
+
+# Embedding models are small; this cap is generous.
+MemoryMax=8G
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+RestrictSUIDSGID=yes
+RestrictRealtime=yes
+LockPersonality=yes
+SystemCallArchitectures=native
+ReadWritePaths=/aegis/logs/llm
+ReadOnlyPaths=/aegis/models
+
+[Install]
+WantedBy=multi-user.target

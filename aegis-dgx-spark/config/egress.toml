@@ -1,0 +1,107 @@
+# AEGIS Egress Allowlist
+# ======================
+#
+# Exact hostnames only. No wildcards, no suffix matching. If you need three
+# subdomains, write three entries — a rule for "anthropic.com" that also
+# matches attacker-controlled subdomains is how allowlists leak.
+#
+# class = "auto"   always allowed; carries no private data outbound
+# class = "gated"  requires a single-use token from `aegis-approve`
+# anything absent  denied
+#
+# Every entry needs a note. If you cannot write why it is here, remove it.
+
+[gate]
+listen_host        = "127.0.0.1"
+listen_port        = 3128
+connect_timeout    = 15.0
+idle_timeout       = 300.0
+max_request_bytes  = 33554432   # 32 MiB per connection, outbound
+
+# ---------------------------------------------------------------------------
+# GATED — cloud inference. Nothing reaches these without you typing a command.
+# ---------------------------------------------------------------------------
+
+[[route]]
+host = "api.anthropic.com"
+class = "gated"
+note = "Cloud reasoning for tasks that exceed local capability. Uses AEGIS's own API key, not the operator's claude.ai subscription."
+allow_uids = ["aegis-core"]
+
+[[route]]
+host = "integrate.api.nvidia.com"
+class = "gated"
+note = "NVIDIA NIM hosted inference. AEGIS's own key."
+allow_uids = ["aegis-core"]
+
+# ---------------------------------------------------------------------------
+# AUTO — no private data leaves through these. Read that claim critically
+# before adding anything: a search query IS private data.
+#
+# The Hugging Face entries cover the full download path as of 2025: the hub
+# itself, the legacy LFS CDN, and the Xet-backed CAS hosts that weight blobs
+# redirect to now. Exact-match means every redirect target needs its own
+# line; if a download 403s at the Gate, read the audit log for the denied
+# host and add it HERE with a note, not a wildcard.
+# ---------------------------------------------------------------------------
+
+[[route]]
+host = "huggingface.co"
+class = "auto"
+note = "Model weight metadata and resolve/ redirects. Fetching a model reveals which models you run; acceptable, but it is not nothing."
+allow_uids = ["aegis-llm"]
+
+[[route]]
+host = "cdn-lfs.huggingface.co"
+class = "auto"
+note = "Model weight blobs (legacy LFS CDN; some repos still serve from here)."
+allow_uids = ["aegis-llm"]
+
+[[route]]
+host = "cdn-lfs-us-1.hf.co"
+class = "auto"
+note = "Model weight blobs (current US LFS CDN)."
+allow_uids = ["aegis-llm"]
+
+[[route]]
+host = "cdn-lfs-eu-1.hf.co"
+class = "auto"
+note = "Model weight blobs (current EU LFS CDN — nearest to an Estonian box)."
+allow_uids = ["aegis-llm"]
+
+[[route]]
+host = "cas-bridge.xethub.hf.co"
+class = "auto"
+note = "Model weight blobs (Xet CAS bridge; most new repos redirect here)."
+allow_uids = ["aegis-llm"]
+
+[[route]]
+host = "transfer.xethub.hf.co"
+class = "auto"
+note = "Model weight blobs (Xet transfer host)."
+allow_uids = ["aegis-llm"]
+
+# ---------------------------------------------------------------------------
+# OS packages do NOT go through the Gate. apt drops to the `_apt` uid and
+# speaks plain GET (not CONNECT), so the Ubuntu-mirror routes that used to
+# sit here were decorative — they could never match. Package traffic rides
+# the `_apt` / root uid rules in config/nftables/aegis.nft.tmpl instead,
+# which is also where NVIDIA's repositories are reachable from. Keep it that
+# way: the Gate's job is AEGIS's own egress, not the distribution's.
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Low-trust research egress.
+#
+# Deliberately empty at first install. Adding a general web-fetch capability
+# is the single biggest increase in attack surface in this whole system:
+# it is the input side of the prompt-injection path described in part-00.
+# Add specific domains you actually need, one at a time, and only for
+# aegis-lt.
+# ---------------------------------------------------------------------------
+
+# [[route]]
+# host = "err.ee"
+# class = "auto"
+# note = "Estonian public broadcaster RSS."
+# allow_uids = ["aegis-lt"]

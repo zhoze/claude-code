@@ -1,0 +1,220 @@
+#!/usr/sbin/nft -f
+#
+# AEGIS egress policy — TEMPLATE.
+#
+# This file is the reason the architecture is real rather than aspirational.
+# Everything above it — Core, the router, the agents — is software that can be
+# confused, injected, or wrong. This is the kernel refusing.
+#
+# Read every line before you apply it. Do not add a rule here to fix a broken
+# service without understanding what you are opening.
+#
+# TEMPLATE: every @@ADMIN_USER@@ token is replaced with your admin username
+# by bootstrap/05-egress-gate.sh at render time (the rendered file lands at
+# /aegis/config/nftables/aegis.nft). Never edit the rendered copy — edit this
+# template and re-run phase 5, which re-renders, `nft -c`s, and applies
+# behind an auto-rollback timer.
+#
+#   sudo nft -c -f /aegis/config/nftables/aegis.nft   # check, don't apply
+#   sudo nft -f  /aegis/config/nftables/aegis.nft     # apply
+#   sudo nft list table inet aegis                    # verify
+#
+# SCOPE: this file owns `table inet aegis` and nothing else. It deliberately
+# does NOT `flush ruleset` — DGX OS ships Docker and the NVIDIA container
+# toolkit, whose tables must survive both install and every nftables.service
+# restart. The three-statement dance below (declare, delete, define) replaces
+# our table atomically whatever state it was in.
+#
+# Load-order caveat: `meta skuid "name"` resolves through getpwnam at parse
+# time, so bootstrap/01 (service users) must run before this loads, and the
+# system users referenced here (systemd-resolve, systemd-timesync, _apt) must
+# exist — the compare stage checks that.
+
+table inet aegis
+delete table inet aegis
+
+define LAN = { 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12 }
+define TAILSCALE = { 100.64.0.0/10 }
+
+table inet aegis {
+
+    # ------------------------------------------------------------------
+    # Named sets. Keep these small and justify each entry in a comment.
+    # ------------------------------------------------------------------
+
+    # Loopback ports that in-box services legitimately talk to.
+    set local_services {
+        type inet_service
+        elements = {
+            3128,   # egress gate (CONNECT proxy)
+            8000,   # llm runtime  - OpenAI-compatible endpoint
+            8001,   # embeddings   - llama.cpp --embeddings
+            8080,   # aegis core
+            6333,   # vector db (qdrant)
+        }
+    }
+
+    # ------------------------------------------------------------------
+    # INPUT — deny unsolicited inbound. Administration arrives over
+    # Tailscale or the LAN, never from the public internet.
+    # ------------------------------------------------------------------
+
+    chain input {
+        type filter hook input priority filter; policy drop;
+
+        iif lo accept
+        ct state established,related accept
+        ct state invalid drop
+
+        # ICMP: keep it, you will want it when debugging at 23:00.
+        ip protocol icmp icmp type { echo-request, destination-unreachable, time-exceeded } accept
+        ip6 nexthdr icmpv6 accept
+
+        # Tailscale data plane.
+        udp dport 41641 accept
+        iifname "tailscale0" accept
+
+        # SSH from the LAN and from Tailscale only. Never from anywhere else.
+        ip saddr $LAN tcp dport 22 accept
+        ip saddr $TAILSCALE tcp dport 22 accept
+
+        # Home Assistant lives on separate hardware (Part 16). If you are
+        # exposing AEGIS services to the LAN, add them here explicitly and
+        # write down why.
+
+        counter comment "input drop"
+    }
+
+    # ------------------------------------------------------------------
+    # FORWARD — this host does not route, with one carve-out: Docker (and
+    # the NVIDIA container toolkit) forward container traffic across their
+    # bridges. Their own tables handle NAT and their own filtering; ours
+    # must not silently kill it. Everything that is not a container bridge
+    # still drops.
+    # ------------------------------------------------------------------
+
+    chain forward {
+        type filter hook forward priority filter; policy drop;
+        ct state established,related accept
+        iifname "docker0" accept
+        oifname "docker0" accept
+        iifname "br-*" accept
+        oifname "br-*" accept
+        counter comment "no forwarding on this host outside container bridges"
+    }
+
+    # ------------------------------------------------------------------
+    # OUTPUT — the important one. Default deny. Every allowance is
+    # attached to a uid, and every uid is a role.
+    # ------------------------------------------------------------------
+
+    chain output {
+        type filter hook output priority filter; policy drop;
+
+        ct state established,related accept
+        ct state invalid drop
+
+        # ICMPv6 is not optional on a dual-stack network: neighbour
+        # discovery and router solicitation are how IPv6 works at all, and
+        # most of it is kernel-generated (no meaningful uid to match).
+        meta l4proto ipv6-icmp accept
+
+        # Outbound ICMP for the humans who debug this box.
+        meta skuid { 0, "@@ADMIN_USER@@" } ip protocol icmp accept
+
+        # --- loopback, scoped by role ---------------------------------
+        #
+        # Loopback is NOT blanket-allowed for service users. If it were, a
+        # high-trust agent could reach the Gate directly and the trust
+        # split would be decorative.
+
+        # Core: may reach the Gate, the models, and the vector db.
+        oif lo meta skuid "aegis-core" tcp dport @local_services accept
+
+        # Low-trust agents (web, research): may reach the Gate and the models.
+        oif lo meta skuid "aegis-lt" tcp dport { 3128, 8000, 8001, 8080 } accept
+
+        # High-trust agents (your CF&S data): models and vector db ONLY.
+        # Deliberately no 3128. A high-trust agent has no path to the
+        # internet at all, approved or otherwise. If it needs something
+        # from outside, Core fetches it and hands it over as data.
+        oif lo meta skuid "aegis-ht" tcp dport { 8000, 8001, 6333 } accept
+
+        # The Gate and the model runtime need loopback for their own health
+        # checks and metrics. The vector db answers on 6333 (conntrack
+        # covers its replies) and initiates nothing.
+        oif lo meta skuid { "aegis-proxy", "aegis-llm" } accept
+
+        # Root and your admin account get loopback: resolved's stub lives
+        # on 127.0.0.53, and `curl 127.0.0.1:8000` from an admin shell is
+        # how half of the verification steps work.
+        oif lo meta skuid { 0, "@@ADMIN_USER@@" } accept
+
+        # apt's sandbox uid needs the resolved stub on loopback.
+        oif lo meta skuid "_apt" udp dport 53 accept
+        oif lo meta skuid "_apt" tcp dport 53 accept
+
+        # Everything else on loopback: dropped by policy, logged.
+        oif lo limit rate 5/minute log prefix "aegis-lo-deny " counter
+
+        # --- DNS ------------------------------------------------------
+        # Names are resolved by exactly four parties:
+        #   systemd-resolve  the system stub's upstream queries — without
+        #                    this line, EVERY name lookup on the box dies
+        #                    the moment this policy loads
+        #   aegis-proxy      the Gate resolves CONNECT hosts itself
+        #   root             OS maintenance
+        #   @@ADMIN_USER@@   you, debugging
+        # Agents do not: they hand a hostname to the Gate in a CONNECT line
+        # and the Gate resolves it. This removes DNS as an exfiltration
+        # channel for agents.
+        meta skuid "systemd-resolve" udp dport 53 accept
+        meta skuid "systemd-resolve" tcp dport 53 accept
+        meta skuid "systemd-resolve" tcp dport 853 accept comment "DNS-over-TLS upstreams"
+        meta skuid { "aegis-proxy", 0, "@@ADMIN_USER@@" } udp dport 53 accept
+        meta skuid { "aegis-proxy", 0, "@@ADMIN_USER@@" } tcp dport 53 accept
+
+        # --- time -----------------------------------------------------
+        # timesyncd runs as its own uid, not root. TLS to every allowlisted
+        # host depends on this clock.
+        meta skuid { "systemd-timesync", 0 } udp dport 123 accept comment "ntp"
+
+        # --- the Gate: the only path to the public internet -----------
+        #
+        # Note it is allowed broadly on 443 here. Domain-level control is
+        # enforced *inside* the Gate, because the kernel cannot see SNI
+        # cheaply and IP allowlisting breaks on every CDN rotation. The
+        # kernel's job is "only this uid, and no other". The Gate's job is
+        # "only these hostnames, and gated ones need a token".
+        meta skuid "aegis-proxy" tcp dport 443 accept
+        meta skuid "aegis-proxy" tcp dport 80 accept
+
+        # --- system maintenance ---------------------------------------
+        # Root may update the OS, and apt's http/https workers drop to the
+        # _apt uid (APT::Sandbox::User) — both are needed or package
+        # installs and unattended security upgrades die silently. This is
+        # a real hole and you should know it: anything running as root can
+        # reach the internet. Keep the root-owned service list short and
+        # audited (see part-05).
+        meta skuid { 0, "_apt" } tcp dport { 80, 443 } accept
+
+        # Tailscale daemon.
+        meta skuid 0 udp dport 41641 accept
+        oifname "tailscale0" accept
+
+        # --- your interactive admin session ---------------------------
+        #
+        # This is YOUR account, not AEGIS's. Written as its own rule so
+        # that Claude Code's access to api.anthropic.com is visible in the
+        # policy and revocable without touching the Gate.
+        meta skuid "@@ADMIN_USER@@" tcp dport { 22, 80, 443 } accept
+
+        # --- LAN ------------------------------------------------------
+        # Talking to Home Assistant on its own box, the NAS, printers.
+        ip daddr $LAN meta skuid { "aegis-core", 0, "@@ADMIN_USER@@" } accept
+
+        # --- everything else -------------------------------------------
+        limit rate 10/minute log prefix "aegis-egress-deny " counter
+        counter comment "egress drop"
+    }
+}

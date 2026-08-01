@@ -1,0 +1,22 @@
+[Unit]
+Description=AEGIS backup (tier 1: hourly local snapshot)
+Documentation=file:/aegis/docs/part-06-storage.md
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/etc/default/aegis-backup
+ExecStart=/aegis/bin/aegis-backup --tier local
+# Runs as root (it must read every role's data), but with the blast radius
+# trimmed: nothing outside /aegis/backups is writable, no privilege
+# re-escalation, no devices. Off-box/off-site tiers are run manually or get
+# their own units once configured — they need ssh and looser paths.
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectHome=read-only
+ProtectSystem=strict
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+RestrictRealtime=yes
+SystemCallArchitectures=native
+ReadWritePaths=/aegis/backups

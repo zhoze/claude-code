@@ -1,0 +1,63 @@
+[Unit]
+Description=AEGIS Egress Gate — the only path out
+Documentation=file:/aegis/docs/part-07-networking-and-egress.md
+After=network-online.target nftables.service
+Wants=network-online.target
+Requires=nftables.service
+
+[Service]
+Type=exec
+User=aegis-proxy
+Group=aegis-proxy
+SupplementaryGroups=aegis-operators
+ExecStart=/usr/bin/python3 /aegis/src/egress_gate/gate.py
+Restart=always
+RestartSec=2
+
+Environment=AEGIS_GATE_CONFIG=/aegis/config/egress.toml
+Environment=AEGIS_APPROVAL_DIR=/aegis/run/approvals
+Environment=AEGIS_AUDIT_LOG=/aegis/logs/egress/audit.jsonl
+Environment=PYTHONUNBUFFERED=1
+
+# Cloud credentials are STAGED here and nowhere else — under the one uid
+# Core cannot read. (The Gate does not inject them into CONNECT tunnels; the
+# phase-5+ release step consumes them.) ImportCredential searches
+# /etc/credstore.encrypted and tolerates absence, so the Gate — the thing
+# phase 5 depends on — starts on a box where no key has been provisioned
+# yet. bootstrap/04-credentials.sh creates them:
+#   printf '%s' "$KEY" | sudo systemd-creds encrypt --name=anthropic_api_key \
+#        - /etc/credstore.encrypted/anthropic_api_key
+ImportCredential=anthropic_api_key
+ImportCredential=nvidia_api_key
+
+# --- hardening -------------------------------------------------------------
+# The Gate touches three paths and one socket. Everything else is off.
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+ProtectProc=invisible
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged @resources @obsolete
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+ReadWritePaths=/aegis/logs/egress /aegis/run/approvals
+ReadOnlyPaths=/aegis/config /aegis/src /proc/net
+
+[Install]
+WantedBy=multi-user.target

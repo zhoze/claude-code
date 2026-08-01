@@ -1,0 +1,7 @@
+[Unit]
+Description=Daily scratch cleanup
+[Timer]
+OnCalendar=daily
+Persistent=true
+[Install]
+WantedBy=timers.target

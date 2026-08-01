@@ -1,0 +1,52 @@
+[Unit]
+Description=AEGIS Core — orchestration
+Documentation=file:/aegis/docs/part-10-aegis-core.md
+After=aegis-egress-gate.service aegis-llm.service
+Wants=aegis-llm.service
+Requires=aegis-egress-gate.service
+
+[Service]
+Type=exec
+User=aegis-core
+Group=aegis-core
+WorkingDirectory=/aegis
+Environment=HTTPS_PROXY=http://127.0.0.1:3128
+Environment=HTTP_PROXY=http://127.0.0.1:3128
+Environment=NO_PROXY=127.0.0.1,localhost
+Environment=PYTHONPATH=/aegis/src
+# aegis_core.service is a minimal heartbeat/health stub until the phase-5
+# task loop is built — see src/aegis_core/service.py. Installed by phase 09,
+# deliberately not enabled.
+ExecStart=/aegis/venv/bin/python -m aegis_core.service
+Restart=on-failure
+RestartSec=5
+MemoryMax=4G
+
+# Core holds NO cloud credentials. They live in the gate's unit, which is
+# what stops Core making an unrouted call even if it constructs one.
+# Do not add LoadCredential here.
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectProc=invisible
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictNamespaces=yes
+RestrictSUIDSGID=yes
+RestrictRealtime=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged @resources @mount
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_INET AF_UNIX
+ReadWritePaths=/aegis/logs/core /aegis/run/core /aegis/state
+ReadOnlyPaths=/aegis/config /aegis/src
+
+[Install]
+WantedBy=multi-user.target

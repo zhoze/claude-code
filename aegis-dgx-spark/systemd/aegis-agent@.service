@@ -1,0 +1,61 @@
+[Unit]
+Description=AEGIS agent %i
+Documentation=file:/aegis/docs/part-11-agents.md
+After=aegis-llm.service aegis-egress-gate.service
+Wants=aegis-llm.service
+
+# Templated so each agent is a separate unit with its own lifecycle, its own
+# logs, and its own failure domain. Start with:
+#   systemctl start aegis-agent@research     (runs as aegis-lt)
+#   systemctl start aegis-agent@documents    (runs as aegis-ht)
+# The trust zone drop-in at
+# /etc/systemd/system/aegis-agent@<name>.service.d/zone.conf is GENERATED
+# from the agent's manifest by /aegis/bin/aegis-zone-sync — run it after
+# every manifest change. The runner refuses to start if zone and uid do not
+# match.
+
+[Service]
+Type=exec
+# Default to the RESTRICTIVE zone. An agent that forgets to declare itself
+# gets no business data, which is the safe direction to fail.
+User=aegis-lt
+Group=aegis-lt
+WorkingDirectory=/aegis/scratch/lt
+Environment=AEGIS_AGENT=%i
+Environment=PYTHONPATH=/aegis/src
+Environment=HTTPS_PROXY=http://127.0.0.1:3128
+Environment=HTTP_PROXY=http://127.0.0.1:3128
+Environment=NO_PROXY=127.0.0.1,localhost
+ExecStart=/aegis/venv/bin/python -m aegis_core.agent_runner --agent %i
+Restart=on-failure
+RestartSec=5
+
+# Overridden per-agent by the generated zone.conf (limits.memory_gib).
+MemoryMax=8G
+TasksMax=256
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectProc=invisible
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictNamespaces=yes
+RestrictSUIDSGID=yes
+RestrictRealtime=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged @resources @mount @debug
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_INET AF_UNIX
+
+ReadWritePaths=/aegis/scratch/lt
+ReadOnlyPaths=/aegis/config/agents
+
+[Install]
+WantedBy=multi-user.target

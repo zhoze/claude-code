@@ -1,0 +1,9 @@
+[Unit]
+Description=Reconcile Core decision log against Gate audit log
+Documentation=file:/aegis/docs/part-10-aegis-core.md
+
+[Service]
+Type=oneshot
+ExecStart=/aegis/bin/aegis-reconcile
+# See aegis-verify.service for the $$EXIT_STATUS quoting rationale.
+ExecStopPost=/bin/sh -c '[ "$$EXIT_STATUS" = "0" ] || logger -p auth.crit "AEGIS RECONCILIATION FOUND A GAP (exit=$$EXIT_STATUS)"'

@@ -1,0 +1,18 @@
+# AEGIS routing policy. See docs/part-09-model-routing.md.
+#
+# Nothing in this file grants network access. It shapes model choice and
+# produces clear errors. The boundary is nftables and the Egress Gate.
+
+[routing]
+default    = "local"
+cloud_host = "api.anthropic.com"
+
+# Setting this true does NOT let confidential data reach the cloud: high-trust
+# agents have no route to the Gate. It only makes the router stop saying so.
+# Leave it false.
+confidential_may_leave = false
+
+[routing.cost]
+monthly_cap_eur  = 50
+alert_at_percent = 70
+on_cap_exceeded  = "local_only"

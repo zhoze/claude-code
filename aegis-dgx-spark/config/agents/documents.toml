@@ -1,0 +1,21 @@
+[agent]
+name        = "documents"
+version     = "1.0.0"
+description = "Answers questions over stored CF&S and personal documents, with citations."
+trust_zone  = "high"
+model_role  = "general"
+
+[capabilities]
+tools = ["knowledge.search", "knowledge.cite"]
+
+[permissions]
+read    = ["/aegis/knowledge"]
+# The vector db is reached over 127.0.0.1:6333, never by writing its files —
+# the server (uid aegis-vectordb) is the ONLY writer of /aegis/vectordb.
+write   = ["/aegis/scratch/ht"]
+network = false            # must stay false; the registry rejects true here
+
+[limits]
+memory_gib      = 8
+timeout_seconds = 120
+max_tool_calls  = 12

@@ -1,0 +1,5 @@
+[Unit]
+Description=Reap low-trust scratch workspace
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/find /aegis/scratch -type f -mtime +7 -delete

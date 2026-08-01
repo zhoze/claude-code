@@ -1,0 +1,15 @@
+[Unit]
+Description=AEGIS egress boundary verification
+Documentation=file:/aegis/docs/part-07-networking-and-egress.md
+
+[Service]
+Type=oneshot
+# Non-interactive: the scheduled run must not mint real approval tokens or
+# make live cloud calls as root (test 5 is skipped; the boundary tests all
+# still run).
+Environment=AEGIS_VERIFY_NONINTERACTIVE=1
+ExecStart=/aegis/bin/verify-egress.sh
+# Failure here means the privacy boundary is not what the documents claim.
+# $EXIT_STATUS can be an exit code OR a signal name (and systemd expands
+# $VAR itself, hence $$) — string-compare, never `test -eq`.
+ExecStopPost=/bin/sh -c '[ "$$EXIT_STATUS" = "0" ] || logger -p auth.crit "AEGIS EGRESS VERIFICATION FAILED (exit=$$EXIT_STATUS)"'

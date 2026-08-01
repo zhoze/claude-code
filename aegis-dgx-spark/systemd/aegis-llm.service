@@ -1,0 +1,54 @@
+[Unit]
+Description=AEGIS local model runtime (llama.cpp, general model)
+Documentation=file:/aegis/docs/part-08-ai-runtime.md
+After=network.target
+
+[Service]
+Type=exec
+User=aegis-llm
+Group=aegis-llm
+# GPU device nodes on GB10 are Tegra-style (/dev/nvgpu/*) and group-owned;
+# discrete boards use /dev/nvidia*. We deliberately do NOT DeviceAllow= a
+# hard-coded list (systemd does not glob device paths and the node set
+# varies by platform) — PrivateDevices stays off and access is governed by
+# the node groups below plus normal DAC.
+SupplementaryGroups=video render
+WorkingDirectory=/aegis/models
+EnvironmentFile=/aegis/config/llm.env
+# Refuse to serve a model whose sha256 no longer matches models.toml.
+# Set AEGIS_SKIP_MODEL_VERIFY=1 in llm.env only while debugging.
+ExecStartPre=/usr/bin/python3 /aegis/bin/aegis-verify-model ${AEGIS_MODEL_PATH}
+ExecStart=/aegis/bin/llama-server \
+    --model ${AEGIS_MODEL_PATH} \
+    --alias ${AEGIS_MODEL_NAME} \
+    --host 127.0.0.1 \
+    --port 8000 \
+    --ctx-size ${AEGIS_CTX_SIZE} \
+    --n-gpu-layers ${AEGIS_GPU_LAYERS} \
+    --parallel ${AEGIS_PARALLEL} \
+    --no-webui
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=600
+
+# Unified memory: the GGUF weights are mmap'd (file-backed, reclaimable page
+# cache), so a MemoryHigh at model size would cause reclaim thrash, not
+# protection — the old vLLM-era 72G/80G split was wrong for this runtime.
+# MemoryMax is a BACKSTOP against runaway KV-cache growth; @@MEMORYMAX@@ is
+# substituted by bootstrap/06-models.sh from the machine's measured memory.
+MemoryMax=@@MEMORYMAX@@
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+RestrictSUIDSGID=yes
+RestrictRealtime=yes
+LockPersonality=yes
+SystemCallArchitectures=native
+ReadWritePaths=/aegis/models /aegis/logs/llm
+
+[Install]
+WantedBy=multi-user.target

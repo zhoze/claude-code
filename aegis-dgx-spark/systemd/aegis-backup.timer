@@ -1,0 +1,7 @@
+[Unit]
+Description=AEGIS hourly local snapshot (RPO 1h, see part-06)
+[Timer]
+OnCalendar=hourly
+Persistent=true
+[Install]
+WantedBy=timers.target

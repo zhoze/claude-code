@@ -1,0 +1,21 @@
+# AEGIS model registry. Installed to /aegis/config/models.toml.
+#
+# Every model this system serves gets an entry BEFORE it is served:
+# bootstrap/06-models.sh appends one per download, and
+# /aegis/bin/aegis-verify-model (ExecStartPre of aegis-llm and aegis-embed)
+# refuses to start a service whose file no longer matches its recorded
+# sha256. "Which model produced this answer" is a question you will need to
+# answer; retired models KEEP their entries so old decision-log lines stay
+# interpretable — never delete, add `retired = "date"` instead.
+#
+# Fields:
+#   name        served alias (aegis-general | aegis-embed | ...)
+#   role        "general" | "embedding"
+#   repo/file   Hugging Face source
+#   path        absolute path on this box
+#   sha256      of the file at `path`, verified on every service start
+#   license     fill this in from the repo page — it is not optional
+#   downloaded  ISO date
+#   retired     ISO date, once replaced (entry stays)
+
+# Entries are appended below by bootstrap/06-models.sh.

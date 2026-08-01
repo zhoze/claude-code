@@ -1,0 +1,18 @@
+# Nothing credential-shaped, ever.
+*.key
+*.pem
+*.p12
+*.env
+!config/llm.env
+!config/site-overrides.env
+scan-report/
+.env*
+credentials*
+*secret*
+*token*
+/aegis/run/
+audit.jsonl
+__pycache__/
+*.pyc
+venv/
+SETUP-PLAN.md

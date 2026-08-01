@@ -1,0 +1,39 @@
+[Unit]
+Description=AEGIS vector database (Qdrant)
+Documentation=file:/aegis/docs/part-13-knowledge-rag.md
+After=network.target
+
+[Service]
+Type=exec
+# Its OWN uid — not aegis-ht. If the server shared a uid with the high-trust
+# agents, a compromised agent could rewrite the index files directly and
+# bypass every query-time permission filter. Agents reach the db over
+# 127.0.0.1:6333 and nothing else.
+User=aegis-vectordb
+Group=aegis-vectordb
+WorkingDirectory=/aegis/vectordb
+# Bound to loopback via config. Never 0.0.0.0 — that is one typo away from
+# publishing an unauthenticated index of your client documents to the LAN.
+ExecStart=/aegis/bin/qdrant --config-path /aegis/config/qdrant.yaml
+Restart=on-failure
+RestartSec=5
+MemoryMax=16G
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+RestrictNamespaces=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+SystemCallArchitectures=native
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+ReadWritePaths=/aegis/vectordb
+ReadOnlyPaths=/aegis/config
+
+[Install]
+WantedBy=multi-user.target
