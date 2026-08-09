@@ -1,0 +1,113 @@
+# DGX Quant Screener configuration
+# All times America/New_York. All thresholds configurable; defaults follow the spec.
+
+run:
+  mode: live                 # live | backtest | dry-run
+  timezone: America/New_York
+  # Pre-open schedule (minutes before regular session open, spec §49)
+  t_ingest: 120
+  t_analytics: 90
+  t_macro: 60
+  t_final: 30
+  storage_dir: storage
+
+data:
+  provider: yfinance         # yfinance | fmp (fmp used for fundamentals when key present)
+  fmp_api_key_env: FMP_API_KEY
+  price_cache_days: 3650     # ~10y of daily history
+  max_staleness_hours: 30    # market data older than this is "stale" -> reject/deconfide
+  fundamental_max_age_days: 120
+
+universe:
+  index: russell3000
+  membership_csv: null       # point-in-time membership file: date,ticker,action(add|drop)
+  fallback_proxy_etf: IWV    # used only when membership_csv missing (flagged as biased)
+  min_price: 5.0
+  min_avg_dollar_volume: 5_000_000   # 20-day ADV in USD
+  min_history_days: 252
+  exclude_types: [etf, cef, spac, preferred, warrant, adr_illiquid]
+  require_listed_options: true
+
+screens:
+  # Initial equal weights (spec §4); overridden by validated adaptive weights from learning DB
+  weights:
+    piotroski: 1.0
+    magic_formula: 1.0
+    acquirers_multiple: 1.0
+    value_composite: 1.0
+    quality: 1.0
+    garp: 1.0
+    fcf_owner_earnings: 1.0
+    shareholder_yield: 1.0
+    financial_strength: 1.0
+    fundamental_momentum: 1.0
+  min_overlap: 4             # normally reject < 4/10 (spec §5)
+  max_finalists: 5
+  sector_normalize: true
+
+ml:
+  horizons_days: [1, 5, 10, 20]
+  min_train_days: 756        # 3y minimum before first prediction
+  walkforward:
+    scheme: expanding        # expanding | rolling
+    validation_days: 63
+    test_days: 21
+    min_folds: 6
+  min_oos_ic: 0.02           # reject models below this out-of-sample information coefficient
+  max_train_val_gap: 0.15    # reject if train accuracy - walkforward accuracy exceeds this
+  models: [logistic, random_forest]
+  random_state: 42
+
+portfolio:
+  cvar_alpha: 0.95
+  cvar_stress_alphas: [0.975, 0.99]
+  lambda_grid: [0.5, 1.0, 2.0, 4.0, 8.0]
+  max_weight: 0.40
+  max_sector_weight: 0.60
+  sum_weights_max: 1.0       # long-only, cash allowed
+  scenario_days: 1260        # 5y of daily scenarios
+  scenario_blend:            # weights for blended expected return (spec §9)
+    historical: 0.25
+    fundamental: 0.20
+    ml: 0.30
+    technical: 0.15
+    regime: 0.10
+
+technicals:
+  backtest_days: 1260
+  oos_fraction: 0.35         # last 35% of history is out-of-sample for strategy selection
+  min_trades: 12             # reject strategies with fewer OOS trades (spec §14, §36)
+  commission_bps: 1.0
+  slippage_bps: 5.0
+  atr_period: 14
+
+options:
+  min_liquidity_score: 30    # 0-100; below this "technically listed but unusable"
+  max_rel_spread: 0.15       # reject if near-the-money spread > 15% of mid
+
+scoring:
+  # Initial conservative balanced weights (spec §37); adapted only via walk-forward learning
+  weights:
+    fundamental: 0.16
+    overlap: 0.12
+    ml_expected_return: 0.14
+    mean_cvar: 0.10
+    technical: 0.12
+    technical_robustness: 0.10
+    macro: 0.08
+    options: 0.08
+    liquidity: 0.05
+    catalyst: 0.05
+  penalties:
+    event_risk_max: 15
+    tail_risk_max: 15
+    model_uncertainty_max: 10
+  min_final_score: 65        # candidate must clear this to be selectable
+  min_confidence: 55
+  max_selections: 3
+
+learning:
+  outcome_horizons_days: [1, 5, 10, 20, 60]
+  screen_perf_window: 252
+  champion_min_advantage_t: 2.0   # challenger must beat champion with t-stat >= this
+  weight_update_half_life_days: 126

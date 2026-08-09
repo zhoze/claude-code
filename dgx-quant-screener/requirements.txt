@@ -1,0 +1,12 @@
+# CPU-side dependencies. GPU stack (cudf/cuml via RAPIDS conda, cuopt via NVIDIA
+# pip index) is installed by scripts/setup_dgx_spark.sh; everything here also
+# works standalone with automatic CPU fallbacks.
+pandas>=2.1
+numpy>=1.26
+scipy>=1.11
+scikit-learn>=1.4
+pyyaml>=6.0
+requests>=2.31
+yfinance>=0.2.40
+pyarrow>=15.0
+pandas-market-calendars>=4.3
