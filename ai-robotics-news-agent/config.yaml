@@ -10,6 +10,7 @@ topics:
   - robotics (humanoids, industrial robots, autonomous systems, drones)
 
 target_story_count: 10        # aim for ~10 candidate stories
+min_story_count: 6            # below this (or an empty category) the verdict must request follow-ups
 max_follow_up_rounds: 2       # cap on Claude-requested extra ChatGPT search rounds
 claude_web_max_uses: 5        # web_search max_uses per Claude evaluation call
 gpt_max_searches_hint: 8      # soft cap via prompt (Responses API has no max_uses)
