@@ -138,11 +138,15 @@ class Pipeline:
         result = await self.ask_gpt_json(
             f"Search the web for the most significant AI and robotics news of the "
             f"past 7 days (week ending {week_of}). Topics of interest:\n{topics}\n\n"
-            f"Use at most {self.cfg['gpt_max_searches_hint']} web searches. Prefer "
+            "Run several distinct web searches spanning BOTH categories (AI and "
+            f"robotics) — never stop after one query; use up to "
+            f"{self.cfg['gpt_max_searches_hint']} searches. Prefer "
             "primary sources and reputable outlets; skip rumor aggregators when a "
             "primary source exists; every URL must be real and reachable.\n\n"
             f"Return ONLY a JSON object with this schema:\n{STORY_SCHEMA}\n"
-            f"Include about {self.cfg['target_story_count']} stories with ids s1, s2, ...",
+            f"Include about {self.cfg['target_story_count']} stories "
+            f"(at least {self.cfg.get('min_story_count', 6)}, with both categories "
+            "represented) with ids s1, s2, ...",
             "You are a diligent tech news researcher. Output only JSON.")
         self.search_rounds += 1
         stories = result.get("stories", [])
@@ -199,18 +203,34 @@ class Pipeline:
 
     async def claude_verdict(self, round_no: int, stories: list[dict],
                              evaluation: dict, remaining: int) -> dict:
+        n_ai = sum(1 for s in stories if s.get("category") == "ai")
+        n_rob = sum(1 for s in stories if s.get("category") == "robotics")
+        min_count = self.cfg.get("min_story_count", 6)
         result = await self.ask_claude_json(
             f"Current stories:\n{json.dumps(stories, ensure_ascii=False, indent=2)}\n\n"
             f"Current evaluation:\n{json.dumps(evaluation, ensure_ascii=False, indent=2)}\n\n"
+            f"Coverage status: {len(stories)} stories ({n_ai} ai, {n_rob} robotics); "
+            f"the weekly target is {self.cfg['target_story_count']} with a hard "
+            f"minimum of {min_count} and both categories represented.\n"
             f"You have {remaining} follow-up search round(s) left. Request follow-up "
-            "searches ONLY for genuine gaps: unverified major claims, important "
-            "missing topics, or thin sourcing. If coverage is adequate, declare "
-            "consensus. Return ONLY JSON:\n"
+            "searches for genuine gaps: unverified major claims, important "
+            "missing topics, thin sourcing — and ALWAYS when the hard minimum or "
+            "category coverage is not met (HARD RULE: in that case you MUST return "
+            "consensus_reached=false with specific queries to fill the gaps). "
+            "If coverage is adequate, declare consensus. Return ONLY JSON:\n"
             '{"consensus_reached": true/false, '
             '"follow_up_queries": ["specific search query", ...], "reason": "brief"}',
             "You decide whether the news coverage is complete enough. Output only JSON.")
         result.setdefault("consensus_reached", True)
         result.setdefault("follow_up_queries", [])
+        # backstop: never accept consensus on thin coverage while budget remains
+        thin = len(stories) < min_count or n_ai == 0 or n_rob == 0
+        if thin and remaining > 0 and result["consensus_reached"] and not result["follow_up_queries"]:
+            result["consensus_reached"] = False
+            result["follow_up_queries"] = [
+                f"most significant news of the past week: {t}" for t in self.cfg["topics"]]
+            result["reason"] = (result.get("reason", "")
+                                + " | coverage below minimum — follow-up forced by pipeline")
         self.log(f"verdict_{round_no}", "claude", json.dumps(result, ensure_ascii=False))
         return result
 
