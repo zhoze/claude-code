@@ -60,21 +60,28 @@ def screen_fundamental_signals(df: pd.DataFrame, top: int | None = None,
     report_dropped(before, len(df), NAME, "missing revenue history")
 
     sales_g = _pct_change(df["revenue_y1"], df["revenue_y2"])
+    inv_g = _pct_change(df["inventory_t"], df["inventory_t_minus_1"])
+    rec_g = _pct_change(df["receivables_t"], df["receivables_t_minus_1"])
     gp_g = _pct_change(df["gross_margin_t"] * df["revenue_y1"],
                        df["gross_margin_t_minus_1"] * df["revenue_y2"])
+    sga_g = _pct_change(df["sga_t"], df["sga_t_minus_1"])
     etr_t = df["income_tax_expense_t"] / df["pretax_income_t"]
     etr_1 = df["income_tax_expense_t_minus_1"] / df["pretax_income_t_minus_1"]
     etr_valid = (df["pretax_income_t"] > 0) & (df["pretax_income_t_minus_1"] > 0)
     capex_g = _pct_change(df["capex_t"].abs(), df["capex_t_minus_1"].abs())
     capex_med = capex_g.groupby(df["sector"]).transform("median")
 
+    # Each comparison is masked with .where(...) so a signal whose inputs are
+    # missing (e.g. zero-inventory software firms make inv_g 0/0 = NaN) counts
+    # as not-computable instead of silently scoring bearish — a NaN in a plain
+    # pandas comparison would come out False.
     signals = pd.DataFrame(index=df.index)
-    signals["s1_inventory"] = _pct_change(df["inventory_t"], df["inventory_t_minus_1"]) <= sales_g
-    signals["s2_receivables"] = _pct_change(df["receivables_t"], df["receivables_t_minus_1"]) <= sales_g
-    signals["s3_gross_margin"] = gp_g >= sales_g
-    signals["s4_sga"] = _pct_change(df["sga_t"], df["sga_t_minus_1"]) <= sales_g
-    signals["s5_tax_rate"] = (etr_t >= etr_1).where(etr_valid)
-    signals["s6_capex"] = capex_g >= capex_med
+    signals["s1_inventory"] = (inv_g <= sales_g).where(inv_g.notna() & sales_g.notna())
+    signals["s2_receivables"] = (rec_g <= sales_g).where(rec_g.notna() & sales_g.notna())
+    signals["s3_gross_margin"] = (gp_g >= sales_g).where(gp_g.notna() & sales_g.notna())
+    signals["s4_sga"] = (sga_g <= sales_g).where(sga_g.notna() & sales_g.notna())
+    signals["s5_tax_rate"] = (etr_t >= etr_1).where(etr_valid & etr_t.notna() & etr_1.notna())
+    signals["s6_capex"] = (capex_g >= capex_med).where(capex_g.notna() & capex_med.notna())
 
     # A signal is only counted where its inputs exist; rows must have most signals.
     computable = signals.notna().sum(axis=1)
