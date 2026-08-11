@@ -1,0 +1,11 @@
+ticker,company,sector,industry,market_cap,accruals_to_assets,net_income_t,operating_cash_flow_t
+BIPI,BIP Bermuda Holdings I Limited,Industrials,Specialty Business Services,13188409526.0,-4.414157210259701,1375000000,166502000000.0
+HNGE,"Hinge Health, Inc.",Healthcare,Medical - Healthcare Information Services,6739063565.0,-0.9868718339656705,-528260999,171441000.0
+FIG,,,,19097415320.0,-0.7249530648785241,-1250463000,250681000.0
+CHYM,"Chime Financial, Inc. Class A Common Stock",Financial Services,Banks - Regional,8508157374.0,-0.6204477875971862,-1009936000,52780000.0
+KKRS,KKR Group Finance Co. IX LLC 4.,Financial Services,Financial - Credit Services,14420160836.0,-0.47851270047785166,0,477760000.0
+SYM,Symbotic Inc.,Industrials,Industrial - Machinery,26470000920.0,-0.44418680675590344,-16937000,866939000.0
+PL,Planet Labs PBC,Industrials,Aerospace & Defense,7480459163.0,-0.42846401368488135,-246860000,134362000.0
+RAL,Ralliant Corp,Technology,"Hardware, Equipment & Parts",7854348995.0,-0.3793700971783164,-1222500000,397600000.0
+RBLX,Roblox Corporation,Technology,Electronic Gaming & Multimedia,37023259508.0,-0.34202657272201176,-1065057000,1796358000.0
+GSAT,"Globalstar, Inc.",Communication Services,Telecommunications Services,10197507557.0,-0.3123006008667901,-8651000,621650000.0

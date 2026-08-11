@@ -1,8 +1,11 @@
-# Manual run of the three value screens (Buffett Quality, Magic Formula,
-# Piotroski F-Score) on the full Russell 1000.
+# Manual run of the 20 fundamental screens (Piotroski, Magic Formula, Buffett
+# Quality, Graham, Novy-Marx, Fama-French RMW, Sloan accruals, FCF yield,
+# shareholder yield, Altman Z, Ohlson O, Beneish M, Mohanram G, residual
+# income, composite value, dividend growth, low leverage, asset growth,
+# Lev-Thiagarajan signals, GARP) + consensus on the full Russell 1000.
 # Requires the "screen" environment secret FMP_KEY (with statement access).
 # Manual-only (workflow_dispatch) so it never runs automatically.
-name: Russell 1000 three-screen run
+name: Russell 1000 fundamental screens
 
 on:
   workflow_dispatch:
@@ -38,7 +41,7 @@ jobs:
           FMP_KEY: ${{ secrets.FMP_KEY }}   # stored secret — never hardcoded
         run: python3 build_screen_inputs.py --target "${{ github.event.inputs.target }}"
 
-      - name: Run the three screens
+      - name: Run the 20 screens + consensus
         run: python3 run_screens.py --top "${{ github.event.inputs.top }}" | tee results/console_report.txt
 
       - name: Commit inputs + results
@@ -46,5 +49,5 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add inputs/ results/
-          git commit -m "Auto-run Russell 1000 three-screen results [skip ci]" || echo "no changes"
+          git commit -m "Auto-run Russell 1000 20-screen results [skip ci]" || echo "no changes"
           git push
