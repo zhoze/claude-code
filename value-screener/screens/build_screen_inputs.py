@@ -4,11 +4,20 @@ build_screen_inputs.py — build the three screen input CSVs for the Russell 100
 ===============================================================================
 
 Pulls multi-year fundamentals from Financial Modeling Prep (/stable) and writes
-the exact input CSVs consumed by the three screens in this directory:
+the exact input CSVs consumed by the twenty screens in this directory:
 
     screens/inputs/buffett_quality_input.csv   -> screen_buffett_quality.py
     screens/inputs/magic_formula_input.csv     -> screen_magic_formula.py
     screens/inputs/piotroski_input.csv         -> screen_piotroski_f_score.py
+    screens/inputs/extended_input.csv          -> the extended-formula screens
+                                                  (Graham, RMW, shareholder yield,
+                                                  Altman Z, Ohlson O, Beneish M,
+                                                  Mohanram G, dividend growth,
+                                                  Lev-Thiagarajan signals)
+    screens/inputs/as_of.txt                   -> data date + universe size stamp
+
+Cash-flow payout fields in extended_input.csv keep the FMP sign convention:
+cash outflows (dividends, buybacks, debt repayment) are negative numbers.
 
 Universe: the largest ~1000 actively-traded US common stocks by market cap
 (a faithful, reproducible proxy for the Russell 1000, which FMP does not expose
@@ -49,7 +58,7 @@ BASE = "https://financialmodelingprep.com/stable"
 # notes, debentures, depositary/preferred shares (e.g. CMSD = "CMS Energy ...
 # 5.875% Junior Subordinated Notes due 2079"). These slip past the equity screener.
 NON_EQUITY_RE = re.compile(
-    r"\d%|Notes\s+due|Subordinated|Debentures?|Depositary|\bPfd\b"
+    r"\d%|\d+\.\d+\s*$|Notes\s+due|Subordinated|Debentures?|Depositary|\bPfd\b"
     r"|Preferred\s+(?:Stock|Shares|Series)|Cumulative\s+Preferred",
     re.I,
 )
@@ -118,7 +127,7 @@ def pull_symbol(get, sym):
     km = get(f"key-metrics?symbol={sym}&period=annual&limit=5")
     rat = get(f"ratios?symbol={sym}&period=annual&limit=5")
     inc = get(f"income-statement?symbol={sym}&period=annual&limit=5")
-    bal = get(f"balance-sheet-statement?symbol={sym}&period=annual&limit=2")
+    bal = get(f"balance-sheet-statement?symbol={sym}&period=annual&limit=5")
     cf = get(f"cash-flow-statement?symbol={sym}&period=annual&limit=5")
     prof = get(f"profile?symbol={sym}")
     quote = get(f"quote?symbol={sym}")
@@ -135,6 +144,7 @@ def build_record(sym, km, rat, inc, bal, cf, prof, quote=None):
     i1 = inc[1] if len(inc) > 1 else {}
     b1 = bal[1] if len(bal) > 1 else {}
     cf0 = cf[0] if cf else {}
+    cf1 = cf[1] if len(cf) > 1 else {}
 
     revenues = [g(x, "revenue") for x in inc]
     epss = [g(x, "epsDiluted", "eps") for x in inc]
@@ -223,7 +233,7 @@ def build_record(sym, km, rat, inc, bal, cf, prof, quote=None):
         rev, ta = g(inc_row, "revenue"), g(bal_row, "totalAssets")
         return rev / ta if ta else None
 
-    return {
+    rec = {
         "ticker": sym,
         "company": g(prof, "companyName", "name", default=""),
         "sector": g(prof, "sector", default=""),
@@ -273,6 +283,53 @@ def build_record(sym, km, rat, inc, bal, cf, prof, quote=None):
         "asset_turnover_t_minus_1": at(i1, b1),
     }
 
+    # --- Extended columns (exact-formula screens: Graham, RMW, shareholder
+    # yield, Altman Z, Ohlson O, Beneish M, Mohanram G, dividend growth,
+    # Lev-Thiagarajan). Cash-flow fields keep FMP signs: outflows negative. ---
+    rec.update({
+        "retained_earnings_t": g(b0, "retainedEarnings"),
+        "total_liabilities_t": g(b0, "totalLiabilities"),
+        "total_liabilities_t_minus_1": g(b1, "totalLiabilities"),
+        "receivables_t": g(b0, "netReceivables", "accountsReceivables"),
+        "receivables_t_minus_1": g(b1, "netReceivables", "accountsReceivables"),
+        "inventory_t": g(b0, "inventory"),
+        "inventory_t_minus_1": g(b1, "inventory"),
+        "ppe_net_t": npe,
+        "ppe_net_t_minus_1": g(b1, "propertyPlantEquipmentNet"),
+        "sga_t": g(i0, "sellingGeneralAndAdministrativeExpenses",
+                   "generalAndAdministrativeExpenses"),
+        "sga_t_minus_1": g(i1, "sellingGeneralAndAdministrativeExpenses",
+                           "generalAndAdministrativeExpenses"),
+        "rd_expense_t": g(i0, "researchAndDevelopmentExpenses"),
+        "rd_expense_t_minus_1": g(i1, "researchAndDevelopmentExpenses"),
+        "capex_t": g(cf0, "capitalExpenditure"),
+        "capex_t_minus_1": g(cf1, "capitalExpenditure"),
+        "dep_amort_t": g(cf0, "depreciationAndAmortization")
+            or g(i0, "depreciationAndAmortization"),
+        "dep_amort_t_minus_1": g(cf1, "depreciationAndAmortization")
+            or g(i1, "depreciationAndAmortization"),
+        "interest_expense_t": g(i0, "interestExpense"),
+        "income_tax_expense_t": g(i0, "incomeTaxExpense"),
+        "income_tax_expense_t_minus_1": g(i1, "incomeTaxExpense"),
+        "pretax_income_t": g(i0, "incomeBeforeTax", "pretaxIncome"),
+        "pretax_income_t_minus_1": g(i1, "incomeBeforeTax", "pretaxIncome"),
+        "ocf_t_minus_1": g(cf1, "netCashProvidedByOperatingActivities", "operatingCashFlow"),
+        "stock_repurchased_t": g(cf0, "commonStockRepurchased", "purchaseOfOwnShares"),
+        "common_stock_issued_t": g(cf0, "commonStockIssuance", "commonStockIssued"),
+        "debt_flow_t": g(cf0, "netDebtIssuance", "debtRepayment"),
+    })
+    for y in range(1, 6):
+        inc_y = inc[y - 1] if len(inc) >= y else {}
+        bal_y = bal[y - 1] if len(bal) >= y else {}
+        cf_y = cf[y - 1] if len(cf) >= y else {}
+        ni_y, ta_y = g(inc_y, "netIncome"), g(bal_y, "totalAssets")
+        rec[f"eps_y{y}"] = g(inc_y, "epsDiluted", "eps")
+        rec[f"revenue_y{y}"] = g(inc_y, "revenue")
+        rec[f"roa_y{y}"] = (ni_y / ta_y) if (ni_y is not None and ta_y) else None
+        rec[f"dividends_paid_y{y}"] = g(cf_y, "netDividendsPaid", "dividendsPaid",
+                                        "commonDividendsPaid")
+    return rec
+
 
 BUFFETT_COLS = ["ticker", "company", "sector", "industry", "market_cap", "roic_5y_avg",
                 "roe_5y_avg", "gross_margin_5y_avg", "operating_margin_5y_avg",
@@ -287,6 +344,17 @@ PIOTROSKI_COLS = ["ticker", "company", "sector", "industry", "market_cap", "pric
                   "current_assets_t", "current_liabilities_t", "current_assets_t_minus_1",
                   "current_liabilities_t_minus_1", "shares_outstanding_t", "shares_outstanding_t_minus_1",
                   "gross_margin_t", "gross_margin_t_minus_1", "asset_turnover_t", "asset_turnover_t_minus_1"]
+EXTENDED_COLS = (["ticker", "company", "sector", "industry", "market_cap",
+                  "retained_earnings_t", "total_liabilities_t", "total_liabilities_t_minus_1",
+                  "receivables_t", "receivables_t_minus_1", "inventory_t", "inventory_t_minus_1",
+                  "ppe_net_t", "ppe_net_t_minus_1", "sga_t", "sga_t_minus_1",
+                  "rd_expense_t", "rd_expense_t_minus_1", "capex_t", "capex_t_minus_1",
+                  "dep_amort_t", "dep_amort_t_minus_1", "interest_expense_t",
+                  "income_tax_expense_t", "income_tax_expense_t_minus_1",
+                  "pretax_income_t", "pretax_income_t_minus_1", "ocf_t_minus_1",
+                  "stock_repurchased_t", "common_stock_issued_t", "debt_flow_t"]
+                 + [f"{base}_y{y}" for base in ("eps", "revenue", "roa", "dividends_paid")
+                    for y in range(1, 6)])
 
 
 def write_csv(path, cols, records):
@@ -303,6 +371,9 @@ def write_all(records):
     write_csv(os.path.join(INPUTS, "buffett_quality_input.csv"), BUFFETT_COLS, records)
     write_csv(os.path.join(INPUTS, "magic_formula_input.csv"), MAGIC_COLS, records)
     write_csv(os.path.join(INPUTS, "piotroski_input.csv"), PIOTROSKI_COLS, records)
+    write_csv(os.path.join(INPUTS, "extended_input.csv"), EXTENDED_COLS, records)
+    with open(os.path.join(INPUTS, "as_of.txt"), "w") as f:
+        f.write(f"{time.strftime('%Y-%m-%d')} — {len(records)} companies\n")
     return len(records)
 
 
@@ -343,7 +414,7 @@ def main(argv=None):
                 print("...", done)
 
     n = write_all(records)
-    print(f"wrote 3 input CSVs to {INPUTS} ({n} companies with usable data)")
+    print(f"wrote 4 input CSVs to {INPUTS} ({n} companies with usable data)")
     print("Now run:  python3 run_screens.py")
     return 0
 

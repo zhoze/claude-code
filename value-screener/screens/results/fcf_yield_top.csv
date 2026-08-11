@@ -1,0 +1,11 @@
+ticker,company,sector,industry,market_cap,fcf_yield,roic_5y_avg,pe
+BIPI,BIP Bermuda Holdings I Limited,Industrials,Specialty Business Services,13188409526.0,7.364800115473757,0.8762199797409538,9.591570564363636
+JXN,Jackson Financial Inc.,Financial Services,Insurance - Life,8763918449.0,0.6570120470092932,0.0006495684178552,324.5895721851852
+SNEX,StoneX Group Inc.,Financial Services,Financial - Capital Markets,8162111573.0,0.5296301038446979,0.0933177792850484,26.682286933638444
+FNF,"Fidelity National Financial, Inc.",Financial Services,Insurance - Specialty,13971967901.0,0.4562707304490536,0.0122076551738278,23.209249004983388
+OMF,"OneMain Holdings, Inc.",Financial Services,Financial - Credit Services,6966519300.0,0.4492918005696187,0.0345649394594279,8.897214942528736
+SYF,Synchrony Financial,Financial Services,Financial - Credit Services,24770304621.0,0.397693938396237,0.1020158313153736,6.973621796452703
+MET,,,,52491705580.0,0.3449116350850339,0.0096485843610684,15.534686469369635
+RZC,"Reinsurance Group of America, Incorporated",Financial Services,Insurance - Diversified,15819024447.0,0.2586126605788157,0.0083669383449591,13.383269413705584
+RGA,"Reinsurance Group of America, Incorporated",Financial Services,Insurance - Reinsurance,15837807155.0,0.2583059611701655,0.0083669383449591,13.39916002961083
+CMCSA,Comcast Corporation,Communication Services,Telecommunications Services,84983315777.0,0.2576152718899343,0.0675881988319354,4.249590747924793

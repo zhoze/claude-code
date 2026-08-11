@@ -1,0 +1,11 @@
+ticker,company,sector,industry,market_cap,asset_growth_1y,net_income_t,total_assets_t
+BIPI,BIP Bermuda Holdings I Limited,Industrials,Specialty Business Services,13188409526.0,-0.9884263327970146,1375000000,856000000
+TXNM,"TXNM Energy, Inc.",Utilities,Regulated Electric,6355688870.0,-0.6237105912112809,151362000,4345436000
+PPG,"PPG Industries, Inc.",Basic Materials,Chemicals - Specialty,26157314660.0,-0.5904389440642206,1576000000,7959000000
+TPR,"Tapestry, Inc.",Consumer Cyclical,Luxury Goods,28573203900.0,-0.5087822757029926,183200000,6580500000
+WDC,Western Digital Corporation,Technology,Computer Hardware,164489144040.0,-0.4211179097072929,1861000000,14002000000
+ADM,Archer-Daniels-Midland Company,Consumer Defensive,Agricultural Farm Products,41400066405.0,-0.3493833417807062,1078000000,34659000000
+FTV,Fortive Corporation,Technology,Industrial - Machinery,18831265407.0,-0.3102003396783046,579200000,11737700000
+DLTR,"Dollar Tree, Inc.",Consumer Defensive,Discount Stores,24202519500.0,-0.27771937352499465,1282500000,13466200000
+LEN,Lennar Corporation,Consumer Cyclical,Residential Construction,20834457099.0,-0.16659115734668162,2078179000,34430437000
+LUV,Southwest Airlines Co.,Industrials,"Airlines, Airports & Air Services",23505141735.0,-0.13893333333333335,441000000,29061000000

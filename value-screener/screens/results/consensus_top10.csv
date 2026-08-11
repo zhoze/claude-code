@@ -1,0 +1,11 @@
+rank,ticker,company,sector,screens_eligible,top10_count,avg_percentile,screens
+1,CMCSA,Comcast Corporation,Communication Services,8,3,80.93298121702898,"composite_value, fcf_yield, gross_profitability"
+2,ADBE,Adobe Inc.,Technology,9,2,87.24649210141496,"buffett_quality, magic_formula"
+3,SM,SM Energy Company,Energy,7,2,82.4193165568552,"garp_peg, residual_income"
+4,FISV,"Fiserv, Inc.",Technology,6,2,82.3674032300746,"composite_value, magic_formula"
+5,NVR,"NVR, Inc.",Consumer Cyclical,9,2,78.45619789974957,"low_leverage_quality, residual_income"
+6,CTSH,Cognizant Technology Solutions Corporation,Technology,9,2,76.60831849807815,"composite_value, gross_profitability"
+7,IDCC,"InterDigital, Inc.",Technology,10,2,76.10571255173403,"buffett_quality, garp_peg"
+8,LKQ,LKQ Corporation,Consumer Cyclical,7,2,76.05662094802649,"composite_value, gross_profitability"
+9,SYF,Synchrony Financial,Financial Services,7,2,73.13351440621983,"composite_value, fcf_yield"
+10,PRI,"Primerica, Inc.",Financial Services,8,2,72.50045082597408,"buffett_quality, residual_income"
