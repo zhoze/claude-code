@@ -32,7 +32,7 @@ import numpy as np
 import pandas as pd
 
 __all__ = [
-    "rank", "delay", "delta", "correlation", "covariance", "stddev", "ts_sum",
+    "clean", "rank", "delay", "delta", "correlation", "covariance", "stddev", "ts_sum",
     "product", "ts_min", "ts_max", "ts_argmax", "ts_argmin", "ts_rank",
     "decay_linear", "scale", "signedpower", "sign", "log", "abs_", "min_", "max_",
     "lt", "le", "gt", "ge", "eq", "or_", "and_", "not_", "where",
@@ -40,9 +40,16 @@ __all__ = [
 ]
 
 
-def _clean(x: pd.DataFrame) -> pd.DataFrame:
-    """Map +-inf to NaN (rolling corr on constant series, div by zero, log(0)...)."""
+def clean(x: pd.DataFrame) -> pd.DataFrame:
+    """Map +-inf to NaN (div by zero in raw formula arithmetic, log(0), ...).
+
+    Screen/alpha implementations should wrap their final expression in clean()
+    whenever the formula contains a division not already inside a cleaning op.
+    """
     return x.replace([np.inf, -np.inf], np.nan)
+
+
+_clean = clean  # internal alias used by the operators below
 
 
 # ---------------------------------------------------------------- cross-sectional

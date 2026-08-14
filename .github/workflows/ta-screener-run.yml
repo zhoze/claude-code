@@ -1,0 +1,59 @@
+# Manual run of the 150 technical-analysis screens (101 Formulaic Alphas +
+# earnings/PEAD incl. SUE, EAR and Beat-and-Drop + momentum + mean reversion +
+# low-risk + validated trend indicators) with the evidence-ranked catalog and
+# family-balanced consensus, on the ~1000 largest US stocks.
+# Requires the "screen" environment secret FMP_KEY.
+# Manual-only (workflow_dispatch) so it never runs automatically.
+name: TA 150-screen run
+
+on:
+  workflow_dispatch:
+    inputs:
+      top:
+        description: "How many names to keep per screen"
+        default: "10"
+      target:
+        description: "Universe size (largest US names by market cap)"
+        default: "1000"
+      empirical:
+        description: "Compute walk-forward RankIC per screen (slower)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  screens:
+    runs-on: ubuntu-latest
+    environment: screen   # uses the GitHub Environment "screen" (and its FMP_KEY secret)
+    defaults:
+      run:
+        working-directory: ta-screener
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install pandas
+
+      - name: Build input snapshot (FMP, ~3k calls)
+        env:
+          FMP_KEY: ${{ secrets.FMP_KEY }}   # stored secret — never hardcoded
+        run: python3 build_screen_inputs.py --target "${{ github.event.inputs.target }}"
+
+      - name: Run the 150 screens + consensus
+        run: |
+          EMP=""
+          if [ "${{ github.event.inputs.empirical }}" = "true" ]; then EMP="--empirical"; fi
+          python3 run_screens.py --top "${{ github.event.inputs.top }}" $EMP | tee results/console_report.txt
+
+      - name: Commit inputs + results
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add inputs/ results/
+          git commit -m "Auto-run TA 150-screen results [skip ci]" || echo "no changes"
+          git push

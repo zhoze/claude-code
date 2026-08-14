@@ -1,0 +1,45 @@
+# Run the ta-screener selftests on every push / PR that touches it.
+# All 150 screens run on the deterministic synthetic panel — no secrets needed.
+name: ta-screener selftests
+
+on:
+  push:
+    paths:
+      - "ta-screener/**"
+      - ".github/workflows/ta-screener-tests.yml"
+  pull_request:
+    paths:
+      - "ta-screener/**"
+      - ".github/workflows/ta-screener-tests.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  selftests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ta-screener
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install pandas
+
+      - name: Contract selftests (golden operator values, panel fixture)
+        run: |
+          python3 ops.py --selftest
+          python3 panel.py --selftest
+          python3 screen_lib.py --selftest
+          python3 evidence.py --selftest
+          python3 empirical.py --selftest
+
+      - name: Catalog selftest (exactly 150 validated screens)
+        run: python3 catalog.py --selftest
+
+      - name: All 150 screens on the synthetic panel
+        run: python3 run_screens.py --selftest

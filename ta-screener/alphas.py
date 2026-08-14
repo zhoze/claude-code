@@ -32,7 +32,7 @@ from screen_lib import ScreenSpec
 
 DEFS_MODULES = ("alphas_defs_a", "alphas_defs_b", "alphas_defs_c", "alphas_defs_d")
 DELAY0 = {42, 48, 53, 54}
-IND_NEUTRALIZED = {58, 59, 63, 67, 69, 70, 76, 79, 80, 82, 87, 89, 90, 91, 93, 97}
+IND_NEUTRALIZED = {48, 58, 59, 63, 67, 69, 70, 76, 79, 80, 82, 87, 89, 90, 91, 93, 97, 100}
 
 # Family-level evidence rubric (see screen_lib docstring + README):
 # arXiv backtest-only (0.6 validation), US universe (1.0), attenuated persistence (0.6),
