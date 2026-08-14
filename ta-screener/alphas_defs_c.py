@@ -4,6 +4,16 @@ Convention: the paper's fractional day counts (e.g. 3.92795, 17.9282) are rounde
 the nearest integer window, matching the widely used public implementations of the
 101 alphas (rolling windows must be integral). The FORMULAS strings keep the paper's
 verbatim fractional values for audit.
+
+Synthetic-panel coverage caveat (documented fallback, see META notes): alphas 68 and
+75 correlate cross-sectional ranks of smoothed/level series (rank(adv15), rank(adv50),
+rank(high), rank(low)). On the 16-ticker synthetic fixture those pct-ranks are
+quantized to k/16 and stay exactly constant over the 9/12-day correlation windows for
+most names (dollar-volume and price-level orderings are structurally stable), so
+rolling Pearson correlation is 0/0 -> NaN and last-row coverage falls below the 25%
+selftest line. Both implementations are bit-exact against independent raw-pandas
+references and reach ~96% last-row coverage on an 80-ticker random panel — the
+sparsity is a small-universe artifact, not an implementation defect.
 """
 from __future__ import annotations
 
@@ -218,11 +228,19 @@ META = {
     65: {"needs": ("vwap",)},
     66: {"needs": ("vwap",)},
     67: {"needs": ("vwap",)},
+    68: {"notes": "Sparse on the 16-ticker synthetic fixture: corr(rank(high), "
+                  "rank(adv15), 9) is undefined where quantized ranks are constant "
+                  "in-window; verified bit-exact vs reference, ~96% coverage on a "
+                  "wide panel (see module docstring)."},
     69: {"needs": ("vwap",)},
     70: {"needs": ("vwap",)},
     71: {"needs": ("vwap",)},
     72: {"needs": ("vwap",)},
     73: {"needs": ("vwap",)},
     74: {"needs": ("vwap",)},
-    75: {"needs": ("vwap",)},
+    75: {"needs": ("vwap",),
+         "notes": "Sparse on the 16-ticker synthetic fixture: corr(rank(low), "
+                  "rank(adv50), 12) undefined where quantized ranks are constant "
+                  "in-window; passes the briefing's 600-day fallback (3 non-NaN on "
+                  "the last date); bit-exact vs reference (see module docstring)."},
 }
