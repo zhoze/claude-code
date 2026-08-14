@@ -22,8 +22,15 @@ Shared event mechanics (per the frozen briefing):
   ex-ante schedule for the backfilled history.
 
 Documented deviations (also in ScreenSpec.notes):
+- Announcements dated before the panel's first trading day are history-only:
+  they feed trailing-quarter windows (SUE/streak/surprise-vol) but are never
+  stamped — their hold window is anchored off-panel, and stamping them at
+  day 0 would score a stale event as fresh.
 - beat_streak's cap ("capped at 8") reuses cfg sue_lookback_quarters=8 so no
-  magic number lives in code.
+  magic number lives in code. An event with a NaN eps_est stamps NaN (cannot
+  evaluate) and conservatively breaks the streak for later events.
+- pead_car_smallcap: a CAR window containing a missing abnormal return is NaN
+  (cannot evaluate) — missing days are never counted as 0 contribution.
 - surprise_volatility: the literal "std of trailing SUEs" needs >= 8 events per
   name (4 prior quarters to define each SUE + 4 SUEs for the std) — zero
   coverage on the 400-day synthetic fixture and very thin on 3y real history.
@@ -50,13 +57,20 @@ FALLBACK_COVERAGE = ("beat_and_drop", "double_beat", "preearnings_runup")
 # ------------------------------------------------------------- event plumbing
 
 def _events(panel: Panel) -> pd.DataFrame:
-    """Usable past announcements with trading-day `pos` and column index `col`."""
+    """Usable past announcements with trading-day `pos` and column index `col`.
+
+    Announcements dated before the panel's first trading day keep their row
+    (they feed trailing-quarter history for SUE / streak / surprise-vol) but get
+    pos = -1 so `_stamp` never scores them: their true hold window is anchored
+    off-panel, and stamping them at day 0 would misdate the event.
+    """
     e = panel.require_earnings()
     idx = panel.close.index
     cols = pd.Index(panel.close.columns)
     e = e[e["eps_actual"].notna() & (e["date"] <= idx[-1]) & e["ticker"].isin(cols)]
     e = e.sort_values(["ticker", "date"]).reset_index(drop=True)
     e["pos"] = idx.searchsorted(e["date"].to_numpy())
+    e.loc[e["date"] < idx[0], "pos"] = -1
     e = e[e["pos"] < len(idx)].reset_index(drop=True)
     e["col"] = cols.get_indexer(e["ticker"])
     return e
@@ -117,7 +131,7 @@ def _ear_events(panel: Panel, cfg: dict,
     p = ev["pos"].to_numpy(dtype=int)
     c = ev["col"].to_numpy(dtype=int)
     lo, hi = p + start - 1, p + end
-    ok = (lo >= 0) & (hi <= T - 1)
+    ok = (p >= 0) & (lo >= 0) & (hi <= T - 1)   # p = -1 marks pre-panel history rows
     vals = np.full(len(ev), np.nan)
     with np.errstate(divide="ignore", invalid="ignore"):
         srel = a[hi[ok], c[ok]] / a[lo[ok], c[ok]]
@@ -153,10 +167,14 @@ def _rev_frame(panel: Panel, cfg: dict) -> pd.DataFrame:
 def _streak_frame(panel: Panel, cfg: dict) -> pd.DataFrame:
     ec = cfg["earnings"]
     ev = _events(panel)
-    beat = ev["eps_actual"] > ev["eps_est"]          # NaN estimate -> not a beat
+    est_ok = ev["eps_est"].notna()
+    # NaN estimate: the event itself cannot be evaluated (stamped NaN below);
+    # for later events it conservatively breaks the streak (unknown != beat).
+    beat = (ev["eps_actual"] > ev["eps_est"]) & est_ok
     cum = beat.groupby(ev["ticker"]).cumsum()
     base = cum.where(~beat).groupby(ev["ticker"]).ffill().fillna(0)
     streak = (cum - base).clip(upper=ec["sue_lookback_quarters"]).astype(float)
+    streak[~est_ok] = np.nan
     return _stamp(panel, ev["pos"].to_numpy(), ev["col"].to_numpy(),
                   streak.to_numpy(), ec["pead_hold_days"])
 
@@ -216,19 +234,28 @@ def pead_car_smallcap(panel: Panel, cfg: dict) -> pd.DataFrame:
     ec = cfg["earnings"]
     hold, car_days, w = ec["pead_hold_days"], ec["car_days"], ec["car_small_cap_weight"]
     ev = _events(panel)
+    ev = ev[ev["pos"] >= 0].reset_index(drop=True)   # stampable events only
     mret = _market_prices(panel, cfg).pct_change()
     abn = ops.clean(np.log1p(panel.returns).sub(np.log1p(mret), axis=0))
+    # cumsum with NaN->0 is only an anchor-difference device; the nancum mask
+    # below restores NaN discipline (a window containing a missing abnormal
+    # return is "cannot evaluate", never "contributed 0").
     cum = abn.fillna(0.0).cumsum()
+    nancum = abn.isna().cumsum().astype(float)
     p = ev["pos"].to_numpy(dtype=int)
     c = ev["col"].to_numpy(dtype=int)
     anchor = _stamp(panel, p, c, cum.to_numpy()[p, c], hold)
+    nan_anchor = _stamp(panel, p, c, nancum.to_numpy()[p, c], hold)
     start = _stamp(panel, p, c, p.astype(float), hold)
     rowpos = pd.DataFrame(
         np.broadcast_to(np.arange(len(cum), dtype=float)[:, None], cum.shape).copy(),
         index=cum.index, columns=cum.columns)
     dsa = rowpos - start                      # trading days since announcement
     running = (cum - anchor).where(dsa <= car_days)
+    running_nan = (nancum - nan_anchor).where(dsa <= car_days)
     car = running.ffill(limit=hold).where(anchor.notna())   # freeze after car_days
+    nan_frozen = running_nan.ffill(limit=hold).where(anchor.notna())
+    car = car.where(nan_frozen <= 0)          # gap inside the (frozen) window -> NaN
     cap = panel.cap().reindex(car.columns)
     negcap = pd.DataFrame(
         np.broadcast_to(-cap.to_numpy(dtype=float), car.shape).copy(),
@@ -302,7 +329,7 @@ def announcement_volume_shock(panel: Panel, cfg: dict) -> pd.DataFrame:
     dollar = (panel.close * panel.volume).to_numpy(dtype=float)
     advf = panel.adv(cfg["adv_days"]).to_numpy(dtype=float)
     vals = np.full(len(ev), np.nan)
-    ok = p + 1 <= T - 1
+    ok = (p >= 0) & (p + 1 <= T - 1)          # p = -1 marks pre-panel history rows
     with np.errstate(divide="ignore", invalid="ignore"):
         num = (dollar[p[ok], c[ok]] + dollar[p[ok] + 1, c[ok]]) / 2.0
         vals[ok] = num / advf[p[ok], c[ok]]
