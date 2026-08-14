@@ -1,0 +1,107 @@
+{
+  "_note": "Every tunable threshold for the 150 screens lives here — no magic numbers in screen code.",
+
+  "universe": {
+    "target": 1000,
+    "min_market_cap": 1500000000,
+    "min_price_bars": 400
+  },
+  "history_years": 3,
+
+  "benchmarks": {
+    "market": "SPY",
+    "_sector_etfs_note": "FMP profile sector name -> SPDR sector ETF used for residual/EAR/sector-momentum screens.",
+    "sector_etfs": {
+      "Technology": "XLK",
+      "Financial Services": "XLF",
+      "Energy": "XLE",
+      "Healthcare": "XLV",
+      "Industrials": "XLI",
+      "Consumer Defensive": "XLP",
+      "Consumer Cyclical": "XLY",
+      "Basic Materials": "XLB",
+      "Real Estate": "XLRE",
+      "Utilities": "XLU",
+      "Communication Services": "XLC"
+    }
+  },
+
+  "adv_days": 20,
+
+  "earnings": {
+    "_note": "SUE/EAR/PEAD parameters. ear_window is [start,end] trading-day offsets around the announcement; the +-1 window absorbs FMP's BMO/AMC timing ambiguity (Kishore et al., SSRN 909563).",
+    "sue_lookback_quarters": 8,
+    "sue_std_floor_frac": 0.005,
+    "ear_window": [-1, 1],
+    "pead_hold_days": 60,
+    "min_quarters": 4,
+    "runup_days": 10,
+    "car_days": 20,
+    "car_small_cap_weight": 0.5,
+    "surprise_vol_quarters": 8
+  },
+
+  "momentum": {
+    "skip_days": 21,
+    "lookback_12m": 252,
+    "lookback_6m": 126,
+    "vol_scale_days": 126,
+    "sharpe_days": 126,
+    "regime_vol_days": 63,
+    "regime_lookback": 252,
+    "regime_pct": 0.80,
+    "macd_scales": [[8, 24], [16, 48], [32, 96]],
+    "id_days": 252
+  },
+
+  "meanrev": {
+    "reversal_days": 5,
+    "ou_window": 60,
+    "s_entry": -1.25,
+    "pca_k": 5,
+    "pca_window": 252,
+    "rsi_days": 2,
+    "bb_days": 20,
+    "bb_sigma": 2.0,
+    "gap_min": 0.01,
+    "dd_days": 63,
+    "stabilize_days": 5
+  },
+
+  "lowrisk": {
+    "beta_days": 252,
+    "vol_days": 252,
+    "blume_shrink": [0.6, 0.4],
+    "max_n": 5,
+    "max_days": 21
+  },
+
+  "trend": {
+    "ppo_fast": 12,
+    "ppo_slow": 26,
+    "adx_days": 14,
+    "adx_min": 25,
+    "donchian_days": 55,
+    "obv_days": 20,
+    "bb_days": 20,
+    "bb_sigma": 2.0,
+    "keltner_mult": 1.5,
+    "ichimoku": [9, 26, 52],
+    "sma_fast": 50,
+    "sma_slow": 200
+  },
+
+  "ranking": {
+    "top": 10,
+    "min_coverage": 0.10,
+    "_turnover_note": "Net-of-cost haircut on the profitability leg by rebalance frequency class.",
+    "turnover_multipliers": {"low": 1.0, "medium": 0.85, "high": 0.7}
+  },
+
+  "empirical": {
+    "horizons": [5, 20],
+    "skip_days": 1,
+    "min_dates": 120,
+    "min_names": 30
+  }
+}
