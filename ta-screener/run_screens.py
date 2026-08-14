@@ -234,7 +234,8 @@ def write_summary_md(rows, ranked_tables, fam_df, overall, skipped, no_signal, e
             if top5.empty:
                 continue
             lines += [f"### {fam}", "",
-                      _md_table(top5.rename("family_score").reset_index(names="ticker")), ""]
+                      _md_table(top5.rename("family_score").rename_axis("ticker")
+                                .reset_index()), ""]
     if no_signal:
         lines += ["## No current signal (conditional screens with nothing triggered)", "",
                   ", ".join(f"`{k}`" for k in no_signal), ""]
