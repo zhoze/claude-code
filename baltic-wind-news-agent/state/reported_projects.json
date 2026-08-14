@@ -817,6 +817,20 @@
       "links": [
         "https://sunly.ee/en/news/alutaguse-municipality-and-sunly-agree-on-local-benefits-for-the-alutaguse-wind-park"
       ]
+    },
+    {
+      "key": "sunly-valga-wind-farm-ee",
+      "name": "Sunly Valga Wind Farm",
+      "country": "EE",
+      "aliases": [
+        "Valga Sunly wind park",
+        "Valga tuulepark"
+      ],
+      "developer": "Sunly",
+      "first_reported": "2026-08-14",
+      "links": [
+        "https://www.aripaev.ee/uudised/2026/08/13/valgas-haaletati-maha-sunly-sadu-miljoneid-maksev-tuulepark"
+      ]
     }
   ]
 }
