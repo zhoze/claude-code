@@ -1,4 +1,12 @@
-"""Alphas 1..25 of Kakushadze (2016), 101 Formulaic Alphas (arXiv:1601.00991)."""
+"""Alphas 1..25 of Kakushadze (2016), 101 Formulaic Alphas (arXiv:1601.00991).
+
+Documented deviation (alpha 15 only): correlation windows that are fully observed
+but degenerate (zero variance on either side, pandas 0/0 -> NaN) evaluate to 0.0 via
+alphas_defs_d._corr_dz — see that module's docstring for the full rationale. Ranks
+of price levels are quantized and stay constant over the 3-day window for most names
+on narrow universes, so plain rolling correlation would wipe the nested
+rank/ts_sum chain to near-zero coverage. Missing data still propagates NaN.
+"""
 from __future__ import annotations
 
 import numpy as np
@@ -9,6 +17,7 @@ from ops import (clean, rank, delay, delta, correlation, covariance, stddev, ts_
                  product, ts_min, ts_max, ts_argmax, ts_argmin, ts_rank, decay_linear,
                  scale, signedpower, sign, log, abs_, min_, max_, lt, le, gt, ge, eq,
                  or_, and_, not_, where)
+from alphas_defs_d import _corr_dz
 
 FORMULAS = {
     1: "(rank(Ts_ArgMax(SignedPower(((returns < 0) ? stddev(returns, 20) : close), 2.), 5)) - 0.5)",
@@ -108,7 +117,7 @@ def alpha_014(p):
 
 
 def alpha_015(p):
-    return -1.0 * ts_sum(rank(correlation(rank(p.high), rank(p.volume), 3)), 3)
+    return -1.0 * ts_sum(rank(_corr_dz(rank(p.high), rank(p.volume), 3)), 3)
 
 
 def alpha_016(p):
@@ -179,5 +188,7 @@ ALPHAS = {
 META = {
     5: {"needs": ("vwap",)},
     11: {"needs": ("vwap",)},
+    15: {"notes": "degenerate (zero-variance) correlation windows evaluate to 0.0, "
+                  "not NaN — see alphas_defs_d._corr_dz and module docstrings."},
     25: {"needs": ("vwap",)},
 }

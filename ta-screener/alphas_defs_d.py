@@ -12,7 +12,9 @@ slow-moving levels (price, adv) hold their rank for many consecutive days on nar
 universes, so short corr windows over them are degenerate most days; the frozen
 any-NaN window ops then wipe every downstream nested window (decay_linear/ts_rank/
 ts_argmax) to 100% NaN. Missing data still propagates NaN. Applied ONLY where the
-wipe-out otherwise leaves an alpha with zero coverage: alphas 92, 96 and 100.
+wipe-out otherwise drops an alpha below usable coverage: alphas 92, 96 and 100 here,
+plus alphas 15, 68 and 75 (alphas_defs_a / alphas_defs_c import _corr_dz from this
+module so the convention has a single definition).
 """
 from __future__ import annotations
 

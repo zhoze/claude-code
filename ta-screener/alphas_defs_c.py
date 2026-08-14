@@ -5,15 +5,16 @@ the nearest integer window, matching the widely used public implementations of t
 101 alphas (rolling windows must be integral). The FORMULAS strings keep the paper's
 verbatim fractional values for audit.
 
-Synthetic-panel coverage caveat (documented fallback, see META notes): alphas 68 and
-75 correlate cross-sectional ranks of smoothed/level series (rank(adv15), rank(adv50),
-rank(high), rank(low)). On the 16-ticker synthetic fixture those pct-ranks are
-quantized to k/16 and stay exactly constant over the 9/12-day correlation windows for
-most names (dollar-volume and price-level orderings are structurally stable), so
-rolling Pearson correlation is 0/0 -> NaN and last-row coverage falls below the 25%
-selftest line. Both implementations are bit-exact against independent raw-pandas
-references and reach ~96% last-row coverage on an 80-ticker random panel — the
-sparsity is a small-universe artifact, not an implementation defect.
+Documented deviation (alphas 68 and 75 only): correlation windows that are fully
+observed but degenerate (zero variance on either side, pandas 0/0 -> NaN) evaluate
+to 0.0 via alphas_defs_d._corr_dz — see that module's docstring for the full
+rationale. Both alphas correlate cross-sectional ranks of level series (rank(high),
+rank(low), rank(adv15), rank(adv50)); on narrow universes those pct-ranks are
+quantized to k/N and stay exactly constant over the 9/12-day correlation windows for
+most names, so plain rolling Pearson correlation is 0/0 -> NaN and the frozen
+any-NaN window ops wipe the nested ts_rank/rank chain to near-zero coverage
+(alpha 68 reaches 0% on the 400-day synthetic fixture and still fails the 600-day
+fallback). Missing data still propagates NaN.
 """
 from __future__ import annotations
 
@@ -25,6 +26,7 @@ from ops import (clean, rank, delay, delta, correlation, covariance, stddev, ts_
                  product, ts_min, ts_max, ts_argmax, ts_argmin, ts_rank, decay_linear,
                  scale, signedpower, sign, log, abs_, min_, max_, lt, le, gt, ge, eq,
                  or_, and_, not_, where)
+from alphas_defs_d import _corr_dz
 
 FORMULAS = {
     51: "(((((delay(close, 20) - delay(close, 10)) / 10) - ((delay(close, 10) - close) / 10)) < (-1 * 0.05)) ? 1 : ((-1 * 1) * (close - delay(close, 1))))",
@@ -157,7 +159,7 @@ def alpha_067(p):
 
 
 def alpha_068(p):
-    p1 = ts_rank(correlation(rank(p.high), rank(p.adv(15)), 9), 14)
+    p1 = ts_rank(_corr_dz(rank(p.high), rank(p.adv(15)), 9), 14)
     p2 = rank(delta(p.close * 0.518371 + p.low * (1.0 - 0.518371), 1))
     return -1.0 * lt(p1, p2)
 
@@ -206,7 +208,7 @@ def alpha_074(p):
 
 def alpha_075(p):
     return lt(rank(correlation(p.vwap, p.volume, 4)),
-              rank(correlation(rank(p.low), rank(p.adv(50)), 12)))
+              rank(_corr_dz(rank(p.low), rank(p.adv(50)), 12)))
 
 
 ALPHAS = {
@@ -228,10 +230,8 @@ META = {
     65: {"needs": ("vwap",)},
     66: {"needs": ("vwap",)},
     67: {"needs": ("vwap",)},
-    68: {"notes": "Sparse on the 16-ticker synthetic fixture: corr(rank(high), "
-                  "rank(adv15), 9) is undefined where quantized ranks are constant "
-                  "in-window; verified bit-exact vs reference, ~96% coverage on a "
-                  "wide panel (see module docstring)."},
+    68: {"notes": "degenerate (zero-variance) correlation windows evaluate to 0.0, "
+                  "not NaN — see alphas_defs_d._corr_dz and module docstrings."},
     69: {"needs": ("vwap",)},
     70: {"needs": ("vwap",)},
     71: {"needs": ("vwap",)},
@@ -239,8 +239,6 @@ META = {
     73: {"needs": ("vwap",)},
     74: {"needs": ("vwap",)},
     75: {"needs": ("vwap",),
-         "notes": "Sparse on the 16-ticker synthetic fixture: corr(rank(low), "
-                  "rank(adv50), 12) undefined where quantized ranks are constant "
-                  "in-window; passes the briefing's 600-day fallback (3 non-NaN on "
-                  "the last date); bit-exact vs reference (see module docstring)."},
+         "notes": "degenerate (zero-variance) correlation windows evaluate to 0.0, "
+                  "not NaN — see alphas_defs_d._corr_dz and module docstrings."},
 }

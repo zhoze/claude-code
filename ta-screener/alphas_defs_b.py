@@ -45,7 +45,7 @@ def alpha_026(p):
 
 def alpha_027(p):
     inner = rank(clean(ts_sum(correlation(rank(p.volume), rank(p.vwap), 6), 2) / 2.0))
-    return where(lt(0.5, inner), -1.0, 1.0)
+    return clean(where(lt(0.5, inner), -1.0, 1.0))
 
 
 def alpha_028(p):
@@ -85,7 +85,7 @@ def alpha_033(p):
 
 def alpha_034(p):
     ratio = rank(clean(stddev(p.returns, 2) / stddev(p.returns, 5)))
-    return rank((1.0 - ratio) + (1.0 - rank(delta(p.close, 1))))
+    return clean(rank((1.0 - ratio) + (1.0 - rank(delta(p.close, 1)))))
 
 
 def alpha_035(p):
