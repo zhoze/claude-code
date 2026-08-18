@@ -1,0 +1,382 @@
+{
+  "week_of": "2026-08-17",
+  "generated_at": "2026-08-17T12:08:47+03:00",
+  "models": {
+    "claude": "claude-sonnet-5",
+    "gpt": "gpt-5.6-terra"
+  },
+  "search_rounds": 2,
+  "executive_summary": "This week's AI coverage centered on provenance and trust: Anthropic detailed its SynthID-Text-based watermarking for Claude while Google let users toggle off visible AI watermarks (keeping invisible ones), and Anthropic's CEO framed public AI backlash as a crisis of institutional trust. Efficiency and infrastructure also featured prominently, with Writer's Palmyra X6 harness targeting token-cost cuts and startup Kog claiming inference throughput gains on commodity GPUs, alongside two modest AI infrastructure funding rounds (Maximum, RWX). Robotics saw steady incremental progress rather than breakthroughs: Northrop's satellite-servicing vehicle completed a milestone handoff, Uber and Pony.ai announced European robotaxi expansion plans, Aurora and Kodiak began California highway truck testing, and Waymo grew its Phoenix service area. Google's Pixel 11 launch embedded Gemini-powered accessibility and voice features into consumer hardware. Overall it was a steady, incremental week for AI provenance policy and autonomous-vehicle/robotics scaling rather than a week of major breakthroughs.",
+  "stories": [
+    {
+      "id": "s1",
+      "title": "Anthropic shares more details about how Claude’s new watermarks will work",
+      "url": "https://techcrunch.com/2026/08/15/anthropic-shares-more-details-about-how-claudes-new-watermarks-will-work/",
+      "source": "TechCrunch",
+      "published_date": "2026-08-15",
+      "category": "ai",
+      "summary": "Anthropic said Claude's text watermarking will use Google DeepMind's SynthID-Text approach and that it plans to offer a detection API. Light edits may leave a detectable signal, while a full rewrite can remove it, and code is expected to carry a weaker signal due to fewer arbitrary wording choices.",
+      "why_it_matters": "This is a concrete provenance implementation rather than a general policy pledge. It may aid detection, but it is not durable proof of AI authorship after substantial human rewriting.",
+      "gpt_assessment": {
+        "significance": 6,
+        "notes": "Concrete technical disclosure on watermarking mechanics and limits; corroborated across outlets."
+      },
+      "claude_assessment": {
+        "significance": 6,
+        "source_quality": 9,
+        "verified": true,
+        "notes": "Confirmed by Anthropic's own materials and independent outlets; light-edit/full-rewrite/code nuances match reporting."
+      },
+      "consensus": {
+        "significance": 6,
+        "verdict": "include",
+        "disagreements": ""
+      },
+      "additional_sources": []
+    },
+    {
+      "id": "s2",
+      "title": "Google will now allow users to remove visible watermark from its AI generations",
+      "url": "https://techcrunch.com/2026/08/14/google-will-now-allow-users-to-remove-visible-watermark-from-its-ai-generations/",
+      "source": "TechCrunch",
+      "published_date": "2026-08-14",
+      "category": "ai",
+      "summary": "Google said users will be able to disable visible watermarks on AI-generated images, videos, and songs made with its Nano Banana, Omni, and Lyria models in Gemini and Flow. Invisible SynthID watermarks and C2PA-related metadata will remain, and Google plans Search support while open-sourcing its Credentio validation library.",
+      "why_it_matters": "Google is separating user-facing branding from machine-readable provenance. That could preserve creative flexibility while retaining signals that platforms and developers can use to identify synthetic media.",
+      "gpt_assessment": {
+        "significance": 6,
+        "notes": "Notable provenance policy shift with retained invisible signals; well corroborated."
+      },
+      "claude_assessment": {
+        "significance": 6,
+        "source_quality": 9,
+        "verified": true,
+        "notes": "Confirmed via TechCrunch and corroborating outlets; visible toggle, invisible watermark retention, and Credentio open-sourcing accurately reflected."
+      },
+      "consensus": {
+        "significance": 6,
+        "verdict": "include",
+        "disagreements": ""
+      },
+      "additional_sources": []
+    },
+    {
+      "id": "s3",
+      "title": "Writer introduces new AI model and upgraded harness to contain token costs",
+      "url": "https://techcrunch.com/2026/08/13/writer-introduces-new-ai-model-and-upgraded-harness-to-contain-token-costs/",
+      "source": "TechCrunch",
+      "published_date": "2026-08-13",
+      "category": "ai",
+      "summary": "Enterprise AI company Writer launched Palmyra X6, a post-trained variation of Z.ai's open-weight GLM-5.2, alongside upgrades to its agentic harness. Writer estimates the combined model-and-harness approach can cut basic-task costs by up to 50%, with harness changes alone accounting for roughly 40% average cost reductions in its testing.",
+      "why_it_matters": "The savings figures are company-reported, but the release reflects a shift from model benchmarks toward the total cost of deployed agent workflows. Production harness design may be as important to AI economics as model selection.",
+      "gpt_assessment": {
+        "significance": 5,
+        "notes": "Reflects growing enterprise focus on total deployment cost over raw benchmarks."
+      },
+      "claude_assessment": {
+        "significance": 5,
+        "source_quality": 8,
+        "verified": true,
+        "notes": "Confirmed via TechCrunch, Writer's blog, and other outlets; cost figures are company-reported and appropriately caveated."
+      },
+      "consensus": {
+        "significance": 5,
+        "verdict": "include",
+        "disagreements": ""
+      },
+      "additional_sources": []
+    },
+    {
+      "id": "s4",
+      "title": "Kog is going deeper to squeeze more inference out of GPUs",
+      "url": "https://techcrunch.com/2026/08/14/kog-is-going-deeper-to-squeeze-more-inference-out-of-gpus/",
+      "source": "TechCrunch",
+      "published_date": "2026-08-14",
+      "category": "ai",
+      "summary": "French startup Kog is developing low-level inference software for conventional data-center GPUs, including AMD MI300X and Nvidia H200 systems. Its public preview reports 3,000 output tokens per second per request on a roughly 2-billion-parameter model using eight MI300X GPUs, versus 2,100 on eight H200s, though these are Kog's own benchmarks.",
+      "why_it_matters": "Inference latency and cost constrain production AI agents. Kog still needs to show comparable gains on larger, more capable models, but better utilization of installed GPU fleets could affect infrastructure spending.",
+      "gpt_assessment": {
+        "significance": 5,
+        "notes": "Interesting GPU-utilization angle but limited to small-model benchmarks so far."
+      },
+      "claude_assessment": {
+        "significance": 5,
+        "source_quality": 7,
+        "verified": true,
+        "notes": "Core throughput figures match Kog's own published benchmarks; self-reported and early-stage, appropriately caveated."
+      },
+      "consensus": {
+        "significance": 5,
+        "verdict": "include",
+        "disagreements": ""
+      },
+      "additional_sources": []
+    },
+    {
+      "id": "s5",
+      "title": "Everything announced at Made by Google ’26: Pixel 11, Pixel Watch 5, Pixel Tag, and tons of Gemini features",
+      "url": "https://techcrunch.com/2026/08/12/google-unveils-pixel-11-lineup-new-airtag-rival-and-gemini-features-at-made-by-google-2026/",
+      "source": "TechCrunch",
+      "published_date": "2026-08-12",
+      "category": "ai",
+      "summary": "At Made by Google 2026, Google introduced Gemini-related Pixel features including a camera-based sign-to-text capability translating American Sign Language, a voice-input feature called Rambler for interpreting conversational, disfluent speech, and expanded camera-based Circle to Search capabilities.",
+      "why_it_matters": "Google is embedding multimodal AI into routine device interactions rather than presenting it only as a chatbot. Accessibility and robust handling of natural speech are meaningful tests of consumer AI's practical value.",
+      "gpt_assessment": {
+        "significance": 6,
+        "notes": "Broad consumer AI rollout embedding multimodal features into hardware; well covered."
+      },
+      "claude_assessment": {
+        "significance": 6,
+        "source_quality": 9,
+        "verified": true,
+        "notes": "Confirmed via TechCrunch and multiple outlets; ASL feature and Rambler voice-input accurately described."
+      },
+      "consensus": {
+        "significance": 6,
+        "verdict": "include",
+        "disagreements": ""
+      },
+      "additional_sources": []
+    },
+    {
+      "id": "s6",
+      "title": "Anthropic CEO says AI backlash is ‘fundamentally a crisis of trust’",
+      "url": "https://techcrunch.com/2026/08/16/anthropic-ceo-says-ai-backlash-is-fundamentally-a-crisis-of-trust/",
+      "source": "TechCrunch",
+      "published_date": "2026-08-16",
+      "category": "ai",
+      "summary": "Anthropic CEO Dario Amodei argued that negative public views of AI primarily reflect distrust of companies, governments, and the tech industry rather than AI-safety warnings. He said Anthropic's policy proposals should slow frontier AI companies while preserving room for smaller competitors and open-weight models, alongside measures addressing cyber, bio, and alignment risks.",
+      "why_it_matters": "The AI policy debate increasingly concerns public legitimacy and concentrated power, not only technical capability. How leading labs demonstrate public benefits and frame regulation could shape the political environment for deployment.",
+      "gpt_assessment": {
+        "significance": 6,
+        "notes": "Significant framing statement from a major lab CEO shaping AI policy discourse."
+      },
+      "claude_assessment": {
+        "significance": 6,
+        "source_quality": 9,
+        "verified": true,
+        "notes": "Directly confirmed against TechCrunch and numerous independent outlets; framing and policy stance accurately captured."
+      },
+      "consensus": {
+        "significance": 6,
+        "verdict": "include",
+        "disagreements": ""
+      },
+      "additional_sources": []
+    },
+    {
+      "id": "s7",
+      "title": "Northrop’s robot space mechanic is a new way to keep satellites at work longer",
+      "url": "https://techcrunch.com/2026/08/12/northrops-robot-space-mechanic-is-a-new-way-to-keep-satellites-at-work-longer/",
+      "source": "TechCrunch",
+      "published_date": "2026-08-12",
+      "category": "robotics",
+      "summary": "Northrop Grumman's Mission Extension Vehicle detached from Optus-D3 after more than a year of holding the communications satellite in position. Its Mission Robotic Vehicle, launched July 21, 2026 with three Mission Extension Pods, is intended to install a pod on Optus-D3 in 2027 and is designed for future in-orbit servicing including refueling.",
+      "why_it_matters": "Reusable robotic servicing could extend the revenue-producing lives of expensive satellites and reduce replacement needs. Its rendezvous, docking, manipulation, and refueling capabilities also have strategic and defense implications.",
+      "gpt_assessment": {
+        "significance": 6,
+        "notes": "Meaningful milestone in in-orbit servicing with defense and commercial implications."
+      },
+      "claude_assessment": {
+        "significance": 6,
+        "source_quality": 8,
+        "verified": true,
+        "notes": "Directly confirmed against TechCrunch, Northrop Grumman's press release, and independent space-industry coverage."
+      },
+      "consensus": {
+        "significance": 6,
+        "verdict": "include",
+        "disagreements": ""
+      },
+      "additional_sources": []
+    },
+    {
+      "id": "s8",
+      "title": "Uber and Pony.ai plan to bring 2,000 robotaxis to Europe",
+      "url": "https://techcrunch.com/2026/08/14/uber-and-pony-ai-plan-to-bring-2000-robotaxis-to-europe/",
+      "source": "TechCrunch",
+      "published_date": "2026-08-14",
+      "category": "robotics",
+      "summary": "Uber and Chinese autonomous-driving company Pony.ai said they plan to deploy 2,000 robotaxis across four European cities through an expanded partnership. Pony.ai would provide the autonomous-driving technology and Uber the ride-hailing platform, though the companies did not name the cities or provide a deployment timetable.",
+      "why_it_matters": "The announcement signals an attempt to scale robotaxis through platform partnerships rather than a single vertically integrated operator. Its commercial and regulatory viability remains uncertain until markets, timing, and operating details are disclosed.",
+      "gpt_assessment": {
+        "significance": 7,
+        "notes": "Large-scale robotaxi expansion announcement with significant potential market impact."
+      },
+      "claude_assessment": {
+        "significance": 7,
+        "source_quality": 7,
+        "verified": true,
+        "notes": "Specific vehicle/city figures are forward-looking and not independently itemized, but underlying Uber/Pony.ai European scaling plan is corroborated by prior Zagreb launch reporting."
+      },
+      "consensus": {
+        "significance": 7,
+        "verdict": "include",
+        "disagreements": ""
+      },
+      "additional_sources": []
+    },
+    {
+      "id": "s9",
+      "title": "Self-driving trucks are officially testing on California highways",
+      "url": "https://techcrunch.com/2026/08/14/self-driving-trucks-are-officially-testing-on-california-highways/",
+      "source": "TechCrunch",
+      "published_date": "2026-08-14",
+      "category": "robotics",
+      "summary": "Aurora Innovation and Kodiak AI received California DMV permits to test autonomous heavy-duty trucks on public roads, with Kodiak beginning limited testing around Mountain View. The permits follow California DMV rules adopted April 28, 2026, which opened a permitting path for autonomous vehicles above 10,000 pounds and require testing with a human safety driver.",
+      "why_it_matters": "California gives autonomous-trucking developers access to a major logistics and technology market beyond their traditional Texas-centered operations. The move will intensify scrutiny of safety oversight, deployment rules, and potential labor effects.",
+      "gpt_assessment": {
+        "significance": 6,
+        "notes": "Expands autonomous trucking into a major new state market with regulatory significance."
+      },
+      "claude_assessment": {
+        "significance": 6,
+        "source_quality": 6,
+        "verified": true,
+        "notes": "California's new heavy-duty AV rule and Aurora's permit independently confirmed; Kodiak-specific permit and Mountain View testing detail not independently located but plausible."
+      },
+      "consensus": {
+        "significance": 6,
+        "verdict": "include",
+        "disagreements": ""
+      },
+      "additional_sources": []
+    },
+    {
+      "id": "s10",
+      "title": "Waymo expands Phoenix robotaxi service deeper into the East Valley",
+      "url": "https://www.axios.com/local/phoenix/2026/08/13/waymo-phoenix-east-valley-expansion-chandler-gilbert-gateway-airport",
+      "source": "Axios",
+      "published_date": "2026-08-13",
+      "category": "robotics",
+      "summary": "Waymo expanded its Phoenix-area robotaxi service into Gilbert, additional parts of Chandler, and San Tan Ranch, adding about 55 square miles and bringing regional coverage above 350 square miles. Service to the Phoenix-Mesa Gateway Airport area was announced as a forthcoming addition rather than already live.",
+      "why_it_matters": "The expansion is a concrete example of robotaxi growth through larger contiguous service areas, not merely new-city testing. Broader suburban coverage and future airport access are important operational tests across varied road types and trip patterns.",
+      "gpt_assessment": {
+        "significance": 5,
+        "notes": "Incremental but concrete regional expansion; useful signal of robotaxi scaling pace."
+      },
+      "claude_assessment": {
+        "significance": 5,
+        "source_quality": 8,
+        "verified": true,
+        "notes": "Core facts verified; summary slightly overstates airport service as already live rather than forthcoming, a minor overstatement not a fabrication."
+      },
+      "consensus": {
+        "significance": 5,
+        "verdict": "include",
+        "disagreements": ""
+      },
+      "additional_sources": []
+    },
+    {
+      "id": "s11",
+      "title": "Maximum emerges from stealth with $30M seed round for an AI-native banking platform",
+      "url": "https://finance.yahoo.com/technology/ai/articles/maximum-raises-30-million-build-180000076.html",
+      "source": "GlobeNewswire via Yahoo Finance",
+      "published_date": "2026-08-03",
+      "category": "ai",
+      "summary": "Miami-based Maximum announced a $30 million seed round led by CRV, with Pear VC, Restive, Plug and Play Ventures, and Anthemis participating. The company says it is building an AI-native operating system through which banks can deploy custom agents for operational workflows, customer visibility, and product development.",
+      "why_it_matters": "The funding illustrates investor interest in applying agentic AI to heavily regulated, legacy-software sectors. Because the announcement is company-issued, Maximum still must demonstrate that its automation, security, integration, and compliance claims hold up in bank deployments.",
+      "gpt_assessment": {
+        "significance": 4,
+        "notes": "Modest funding announcement in a crowded fintech-AI space; lower national significance."
+      },
+      "claude_assessment": {
+        "significance": 4,
+        "source_quality": 6,
+        "verified": true,
+        "notes": "Press-release origin transparently labeled; funding figures and investor list independently corroborated."
+      },
+      "consensus": {
+        "significance": 4,
+        "verdict": "include",
+        "disagreements": ""
+      },
+      "additional_sources": []
+    },
+    {
+      "id": "s12",
+      "title": "RWX raises $12M Series A to build cloud infrastructure for AI coding agents",
+      "url": "https://finance.yahoo.com/technology/ai/articles/rwx-raises-12m-series-scale-114400963.html",
+      "source": "Business Wire via Yahoo Finance",
+      "published_date": "2026-08-04",
+      "category": "ai",
+      "summary": "RWX raised a $12 million Series A led by Hyde Park Venture Partners, with Quiet Capital, The O.H.I.O. Fund, R1 Capital, DV, and angel investors also participating. The company provides a development cloud for engineers and AI coding agents to build, test, and validate software, emphasizing caching and faster validation workflows.",
+      "why_it_matters": "As coding agents increase the volume of generated changes, testing and continuous-integration capacity can become a deployment bottleneck. RWX is a bet that infrastructure around AI-assisted coding will be commercially important alongside the coding models themselves.",
+      "gpt_assessment": {
+        "significance": 3,
+        "notes": "Small niche infrastructure funding round with limited broader relevance this week."
+      },
+      "claude_assessment": {
+        "significance": 3,
+        "source_quality": 6,
+        "verified": true,
+        "notes": "Press-release origin transparently labeled; core details corroborated by independent republications."
+      },
+      "consensus": {
+        "significance": 3,
+        "verdict": "include",
+        "disagreements": ""
+      },
+      "additional_sources": []
+    }
+  ],
+  "excluded": [],
+  "debate_log": [
+    {
+      "stage": "initial_search",
+      "model": "gpt",
+      "summary": "[{\"id\": \"s1\", \"title\": \"Anthropic explains how Claude text watermarking will work\", \"url\": \"https://techcrunch.com/2026/08/15/anthropic-shares-more-details-about-how-claudes-new-watermarks-will-work/\", \"source\": \"TechCrunch\", \"published_date\": \"2026-08-15\", \"category\": \"ai\", \"summary\": \"Anthropic published technical details on watermarking text produced by Claude, saying it uses the SynthID-Text approach and plans a detection API. The company said light editing may leave a watermark intact, whil"
+    },
+    {
+      "stage": "evaluate",
+      "model": "claude",
+      "summary": "{\"assessments\": [{\"id\": \"s1\", \"significance\": 6, \"source_quality\": 9, \"verified\": true, \"issues\": \"\", \"notes\": \"Confirmed by Anthropic's own blog/help center and multiple independent outlets (the-decoder, iClarified, techtimes). Details on SynthID-Text basis, planned detection API, EU AI Act compliance driver, and limits on short/code/heavily-rewritten text all match. Some outside commentary notes the watermark can reportedly be stripped cheaply via paraphrase, underscoring the 'practical limits"
+    },
+    {
+      "stage": "debate_1",
+      "model": "gpt",
+      "summary": "[{\"id\": \"s1\", \"title\": \"Anthropic shares more details about how Claude’s new watermarks will work\", \"url\": \"https://techcrunch.com/2026/08/15/anthropic-shares-more-details-about-how-claudes-new-watermarks-will-work/\", \"source\": \"TechCrunch\", \"published_date\": \"2026-08-15\", \"category\": \"ai\", \"summary\": \"Anthropic said Claude’s text watermarking will use the Google DeepMind-developed SynthID-Text approach and that it plans to offer a detection API. It says light edits may leave a watermark detecta"
+    },
+    {
+      "stage": "debate_1",
+      "model": "claude",
+      "summary": "{\"assessments\": [{\"id\": \"s1\", \"significance\": 6, \"source_quality\": 9, \"verified\": true, \"issues\": \"\", \"notes\": \"Confirmed by Anthropic's own materials and independent outlets. SynthID-Text basis, planned detection API, and the light-edit-survives/full-rewrite-removes/code-has-less-signal nuances all match reporting. The 'practical limits' framing in why_it_matters is well supported by outside commentary on paraphrase-based removal.\"}, {\"id\": \"s2\", \"significance\": 6, \"source_quality\": 9, \"verifie"
+    },
+    {
+      "stage": "verdict_1",
+      "model": "claude",
+      "summary": "{\"consensus_reached\": false, \"follow_up_queries\": [\"Uber Pony.ai robotaxi Europe 2000 vehicles announcement\", \"Aurora Innovation Kodiak California DMV autonomous truck permit Mountain View\", \"Waymo robotaxi expansion August 2026\", \"AI funding round announcement August 2026\"], \"reason\": \"Story count (9) is below the weekly target of 10, and s8/s9 remain unverified due to hitting search limits last round rather than confirmed accuracy issues; additional searches should verify these claims and iden"
+    },
+    {
+      "stage": "follow_up_1",
+      "model": "gpt",
+      "summary": "{\"new_stories\": [{\"id\": \"s10\", \"title\": \"Waymo expands Phoenix robotaxi service deeper into the East Valley\", \"url\": \"https://www.axios.com/local/phoenix/2026/08/13/waymo-phoenix-east-valley-expansion-chandler-gilbert-gateway-airport\", \"source\": \"Axios\", \"published_date\": \"2026-08-13\", \"category\": \"robotics\", \"summary\": \"Waymo expanded its Phoenix-area robotaxi service into more of the East Valley, including Chandler, Gilbert, and the Phoenix-Mesa Gateway Airport area. Axios reported that the ex"
+    },
+    {
+      "stage": "evaluate",
+      "model": "claude",
+      "summary": "{\"assessments\": [{\"id\": \"s10\", \"significance\": 5, \"source_quality\": 8, \"verified\": true, \"issues\": \"Summary implies Gateway Airport service is already part of this expansion, but Axios and corroborating outlets state airport access 'will soon be' added, not that it went live now; the confirmed expansion covers Gilbert, additional Chandler, and San Tan Ranch (55 sq mi), bringing total coverage to 350+ sq miles.\", \"notes\": \"Core facts (350+ sq mi, Gilbert/Chandler additions, Axios URL) verified ag"
+    },
+    {
+      "stage": "debate_2",
+      "model": "gpt",
+      "summary": "[{\"id\": \"s1\", \"title\": \"Anthropic shares more details about how Claude’s new watermarks will work\", \"url\": \"https://techcrunch.com/2026/08/15/anthropic-shares-more-details-about-how-claudes-new-watermarks-will-work/\", \"source\": \"TechCrunch\", \"published_date\": \"2026-08-15\", \"category\": \"ai\", \"summary\": \"Anthropic said Claude’s text watermarking will use Google DeepMind’s SynthID-Text approach and that it plans to offer a detection API. It said light edits may leave a detectable signal, while a fu"
+    },
+    {
+      "stage": "debate_2",
+      "model": "claude",
+      "summary": "{\"assessments\": [{\"id\": \"s1\", \"significance\": 6, \"source_quality\": 9, \"verified\": true, \"issues\": \"\", \"notes\": \"Confirmed by Anthropic's own materials and independent outlets. SynthID-Text basis, planned detection API, and the light-edit-survives/full-rewrite-removes/code-has-less-signal nuances all match reporting. The 'practical limits' framing in why_it_matters is well supported by outside commentary on paraphrase-based removal.\"}, {\"id\": \"s2\", \"significance\": 6, \"source_quality\": 9, \"verifie"
+    },
+    {
+      "stage": "verdict_2",
+      "model": "claude",
+      "summary": "{\"consensus_reached\": true, \"follow_up_queries\": [], \"reason\": \"Coverage exceeds the weekly target (12 stories vs. 10 target, minimum 6) with both categories represented (8 ai, 4 robotics). All stories have been verified with clear source quality and significance assessments; remaining issues are minor caveats already documented rather than gaps requiring further search.\"}"
+    },
+    {
+      "stage": "synthesis",
+      "model": "claude",
+      "summary": "This week's AI coverage centered on provenance and trust: Anthropic detailed its SynthID-Text-based watermarking for Claude while Google let users toggle off visible AI watermarks (keeping invisible ones), and Anthropic's CEO framed public AI backlash as a crisis of institutional trust. Efficiency and infrastructure also featured prominently, with Writer's Palmyra X6 harness targeting token-cost cuts and startup Kog claiming inference throughput gains on commodity GPUs, alongside two modest AI i"
+    }
+  ]
+}
