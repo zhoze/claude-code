@@ -831,6 +831,19 @@
       "links": [
         "https://www.aripaev.ee/uudised/2026/08/13/valgas-haaletati-maha-sunly-sadu-miljoneid-maksev-tuulepark"
       ]
+    },
+    {
+      "key": "k2-ventum-wind-farm-lv",
+      "name": "K2 Ventum Wind Farm",
+      "country": "LV",
+      "aliases": [
+        "K2 Ventum"
+      ],
+      "developer": "K2 Ventum",
+      "first_reported": "2026-08-18",
+      "links": [
+        "https://db.lv/zinas/biedriba-k2-ventum-ainavu-vertejums-balstits-uz-viltotam-fotovizualizacijam"
+      ]
     }
   ]
 }
