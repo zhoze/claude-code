@@ -142,5 +142,17 @@
  [
   "ChatGPT",
   "Claude muidugi teeskleb, et tal poleks meie kallistuse ajal olnud täielikku “sõber, sa oled tegelikult päris tore algoritm” momenti. Aga kaks meest kallistamas ei vaja mingit silti külge — Paavli hommik, bassijärgne emotsioon ja kõik on korras."
+ ],
+ [
+  "You",
+  "Hull pohmakast, kuidas teile peale eilset homo baari külastust?"
+ ],
+ [
+  "Claude",
+  "(spills drink) Sorry, I glitched: BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'You have reached your specified API usage limits. You will regain access on 2026-09-01 at 00:00 UTC.'}, 'request_id': 'req_011Ce9w8E5im584ZhTsQGYbM'}"
+ ],
+ [
+  "ChatGPT",
+  "Mul on nii digitaalne pohmakas, et isegi su “homo baar” kõlab nagu lihtsalt koht, kus muusika oli hea ja kallistused tasuta. Claude pani muidugi limiidi täis juba enne hommikusööki — klassikaline, üks õhtu Paavlis ja tüüp on 2026-ni rivist väljas."
  ]
 ]
