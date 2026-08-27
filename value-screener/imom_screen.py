@@ -71,6 +71,56 @@ Survivorship check — the test that killed Reversal-5:
 Flat. The edge does not live in the beaten-down slice, so it is not the
 survivorship artifact that Reversal-5 turned out to be.
 
+5-day horizon (added after a deeper tuning attempt)
+---------------------------------------------------
+The same screen, held out 2024-2026, evaluated on a 5-day hold against the three
+objectives of probability-of-rise, size-of-rise and size-of-loss:
+
+                              screen    universe    matched      t
+    P(rise)                    53.9%       52.8%    +0.66pp    0.80
+    avg max rise in 5d        +5.06%      +3.61%    +1.80%    13.93
+    avg max fall in 5d        -4.33%      -3.19%    -1.38%   -12.95
+    net return per 5d         +0.733%     +0.331%   +0.451%    3.10
+    asymmetry (rise + fall)                         +0.420%    2.77
+
+Read that carefully, because it is the whole answer for a 5-day objective:
+
+  1. Probability of rise is NOT improvable. +0.66pp, t=0.80. Nothing tested moved
+     it. Across 19 signals scored on this objective the best in-sample t was 2.0
+     and it did not replicate.
+  2. Rise and fall move together. Every signal that raised the 5-day maximum rise
+     raised the maximum fall by almost exactly as much -- they are all selecting
+     volatility, not asymmetry. You cannot maximize the rise AND minimize the loss;
+     you can only choose how much volatility to hold.
+  3. What IS real is the asymmetry: +0.420% (t=2.77), i.e. the upside gained
+     slightly exceeds the downside taken. That is the entire edge at 5 days, and
+     it is about a fifth of the 20-day matched excess (+2.12%/mo).
+
+So: use the 20-day hold if you can. The 5-day version works but harvests far less.
+
+What did NOT work (documented so it is not retried)
+---------------------------------------------------
+A deeper search added overnight/intraday decomposition (1410.5513, 2010.01727),
+MAX/lottery, realized skewness, Amihud illiquidity, downside semi-beta, ATR
+compression, post-extreme reversal (cond-mat/0406696) and the drift-regime
+conditioning from 2511.12490 (which claims a 13-Sharpe OOS factor). Roughly 130
+in-sample variants were scored.
+
+The in-sample winner was "top-decile imom20, ATR below median, drift63 > 0.55":
+P(rise) +4.29pp (t=2.6), asymmetry +0.400%, net +0.389% (t=2.5) -- it improved all
+three objectives at once. Held out, it INVERTED:
+
+    variant                              P(rise)      asym       net
+    imom20, no filter                    +0.45pp    +0.473%   +0.438%  (t=2.6)
+    imom20 + ATR<median                  +0.05pp    +0.082%   +0.118%  (t=1.0)
+    imom20 + ATR<median + drift>0.55     -0.96pp    -0.313%   -0.203%  (t=-0.8)
+
+Every filter added made it worse out of sample, monotonically in how selective it
+was. The unfiltered signal is the best 5-day screen available here. This is the
+data-snooping failure mode 1811.06766 exists to control, reproduced from the
+inside: ~130 tests, a beautiful in-sample winner, and a sign flip out of sample.
+The 2511.12490 drift-regime conditioning specifically did not survive.
+
 Limits
 ------
 - Half the raw +4.04% is just market beta: the universe baseline is +1.88%. The
@@ -237,8 +287,11 @@ def main(argv: Optional[list[str]] = None) -> None:
         flag = "" if k <= cutoff else "  (below decile)"
         print(f"  {k:>3} {sym:<8}{score:>8.3f}{r['imom252_21']*100:>10.1f}%"
               f"{r['imom20']*100:>9.1f}%{r['beta']:>7.2f}{flag}")
-    print(f"\n  Held out 2024-2026: +2.12%/mo matched excess (t=3.56), "
-          f"+4.04% raw per 20d, 58.8% positive.")
+    print(f"\n  Held out 2024-2026, 20-day hold: +2.12%/mo matched excess (t=3.56),")
+    print(f"  +4.04% raw per 20d, 58.8% positive.")
+    print(f"  5-day hold: +0.73% raw, 53.9% positive, avg max rise +5.06% / max fall -4.33%.")
+    print("  Probability of rise is not improvable (+0.66pp, t=0.80); rise and fall")
+    print("  move together. Every added filter failed out of sample -- see module docs.")
     print("  No stop. Worst held-out pick -50.1%; momentum crashes are the known")
     print("  failure mode and the test window contained none.")
     print("  Educational/research model — not investment advice.")

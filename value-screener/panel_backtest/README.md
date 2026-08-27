@@ -395,3 +395,77 @@ Reversal-5 was. (Reversal-5 went +0.275pp → −0.026pp under the same restrict
 - Universe is current listings. Matched excess controls the drawdown channel of
   survivorship, not every channel. A point-in-time universe is still the right fix.
 - Momentum is the most crowded factor in equities; published edges decay.
+
+---
+
+# 5-day deep tuning attempt → the filters all failed out of sample
+
+`feat5.py` adds the extended 5-day feature set. Objective: higher probability of
+rise, larger rise within 5 days, smaller loss in that window.
+
+New families tested, with sources: overnight/intraday decomposition
+(`1410.5513`, `2010.01727`), MAX/lottery, realized skewness, Amihud illiquidity,
+downside semi-beta, ATR compression, post-extreme reversal (`cond-mat/0406696`),
+and drift-regime conditioning (`2511.12490`, which claims a 13-Sharpe OOS factor).
+
+## Finding 1 — the three objectives are structurally in conflict
+
+Scoring 19 signals on all three objectives at once (in-sample, matched):
+
+```
+  signal          P(rise)     t   maxRise     t   maxFall     t
+  imom252_21      -0.10pp  -0.1    +1.36%  17.8    -1.14% -11.6
+  ma_1_200        -0.48pp  -0.7    +1.37%  15.7    -1.17% -13.9
+  imom20          +0.04pp   0.1    +1.04%  12.6    -0.77% -10.6
+  rvol20 (low)    +0.19pp   0.2    -0.83% -17.0    +0.77%  17.9
+  max21 (low)     -0.41pp  -0.5    -0.79% -16.0    +0.68%  15.4
+```
+
+The maxRise and maxFall columns are near mirror images. Every signal that raises
+the 5-day upside raises the downside by almost exactly as much — they are all
+selecting **volatility**, not asymmetry. You can choose how much volatility to
+hold; you cannot have the rise without the fall.
+
+## Finding 2 — probability of rise is not predictable at 5 days
+
+No signal moved it. Best in-sample was 52-week-high proximity at +0.48pp (t=2.0),
+which is the weakest signal at 20 days and did not replicate.
+
+## Finding 3 — the tuning inverted out of sample
+
+~130 in-sample variants were scored. The winner combined top-decile `imom20` with
+ATR below median and `drift63 > 0.55`, improving **all three objectives at once**:
+P(rise) +4.29pp (t=2.6), asymmetry +0.400%, net +0.389% (t=2.5).
+
+Held out on 2024-2026, one shot, thresholds fixed on the in-sample half:
+
+```
+  variant                              P(rise)      asym       net       t
+  imom20, no filter                    +0.45pp    +0.473%   +0.438%    2.6
+  imom20 + ATR<median                  +0.05pp    +0.082%   +0.118%    1.0
+  imom20 + ATR<median + drift>0.55     -0.96pp    -0.313%   -0.203%   -0.8
+```
+
+Every filter made it worse, monotonically in how selective it was. The
+in-sample winner flipped sign. This is exactly the data-snooping failure mode
+`1811.06766` builds its discrete-FDR machinery to control, reproduced from the
+inside — and a caution about `2511.12490`'s 13-Sharpe claim, whose conditioning
+rule is the component that did most damage here.
+
+## What survives at 5 days
+
+The unfiltered screen, unchanged from the 20-day version:
+
+```
+                          screen    universe    matched      t
+  P(rise)                  53.9%       52.8%    +0.66pp    0.80
+  avg max rise in 5d      +5.06%      +3.61%    +1.80%    13.93
+  avg max fall in 5d      -4.33%      -3.19%    -1.38%   -12.95
+  net return per 5d       +0.733%     +0.331%   +0.451%    3.10
+  asymmetry (rise+fall)                         +0.420%    2.77
+```
+
+Survivorship-flat (+0.438% → +0.433% excluding names below 75% of their 52-week
+high) and random control p < 0.0001. The real edge is the **asymmetry**: upside
+gained slightly exceeds downside taken. It is about a fifth of the 20-day matched
+excess, so prefer the 20-day hold.
