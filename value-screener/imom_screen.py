@@ -71,7 +71,48 @@ Survivorship check — the test that killed Reversal-5:
 Flat. The edge does not live in the beaten-down slice, so it is not the
 survivorship artifact that Reversal-5 turned out to be.
 
-5-day horizon (added after a deeper tuning attempt)
+Holding period: 5 to 120 days, and the re-tuning for 30-60d
+-----------------------------------------------------------
+Held out 2024-2026, same 26,727 observations at every horizon, Newey-West t
+(lag = horizon in months) to correct for overlapping windows:
+
+    hold    excess   per 20d   NW t   raw net   win%    cost drag/yr
+      5d   +0.508%   +2.032%   3.28   +0.773%  54.7%        6.05%
+     20d   +2.070%   +2.070%   3.47   +3.907%  59.1%        1.51%
+     30d   +3.427%   +2.284%   3.98   +6.041%  61.3%        1.01%
+     60d   +6.652%   +2.217%   3.82  +11.929%  64.2%        0.50%
+     90d   +9.691%   +2.154%   4.24  +18.164%  66.8%        0.34%
+    120d  +12.855%   +2.142%   4.50  +24.693%  70.2%        0.25%
+
+Excess per unit of time is flat (~2.0-2.3%); the win rate and t-stat rise with
+the horizon and the cost drag collapses. 90d and 120d rest on only 7 and 5
+non-overlapping periods, so their apparent superiority is not established -- and
+a long hold cannot exit a momentum crash, which is this factor's failure mode and
+did not occur in the test window. 30-60 days is the supported range.
+
+Re-tuning the legs for 30-60d. ``imom20`` is a one-month signal and decays over a
+longer hold (in-sample t drops to 1.28 at 60d); the 200-day trend leg takes over.
+Legs re-ranked in-sample, then validated once out of sample:
+
+    composite                        30d/20d     t   60d/20d     t
+    imom252_21 + imom20 (the 20d)    +2.284%  3.90   +2.217%  3.82
+    imom252_21 + ma_1_200            +2.648%  3.67   +2.630%  4.22   <- adopted
+    imom252_21 + ma_1_200 + irev5    +1.427%  2.98   +1.483%  3.52
+
+At 60 days the trend pair is 19% better on excess and clearly better on t. The
+three-leg variant looked best in-sample on t and failed out of sample, so it was
+dropped. ``LEGS_BY_HOLD`` keeps the 20-day pair for a 20-day hold.
+
+Adopted configuration, held out at 60d: +2.630% per 20 days (t=4.22), +12.75%
+raw per 60-day trade, 63.8% positive. Survivorship-flat (+2.630% -> +2.333%
+excluding names below 75% of their 52-week high). By year +1.96% / +2.78% /
++4.44%. Random control p < 0.0001 at both 30d and 60d.
+
+Caveat on horizon selection: 30-60d was chosen after seeing out-of-sample results
+across horizons, so that choice itself carries selection risk. The leg re-ranking
+within it was done in-sample and validated once.
+
+5-day horizon (from an earlier tuning attempt)
 ---------------------------------------------------
 The same screen, held out 2024-2026, evaluated on a 5-day hold against the three
 objectives of probability-of-rise, size-of-rise and size-of-loss:
@@ -148,9 +189,19 @@ LOOKBACK_LONG = 252
 SKIP = 21          # 12-1: skip the most recent month
 LOOKBACK_SHORT = 20
 BETA_WINDOW = 252
+TREND_MA = 200
 WARMUP = 260
-HOLD_DAYS = 20
+DEFAULT_HOLD = 60
 DEFAULT_DECILE = 0.10
+
+# The best leg pair depends on how long you hold. imom20 is a 1-month signal and
+# decays over a 60-day hold (in-sample t falls to 1.28); the 200-day trend leg
+# takes over. Both sets were selected in-sample and validated once out-of-sample.
+LEGS_BY_HOLD = {
+    20: ("imom252_21", "imom20"),      # +2.12%/mo matched excess, t=3.56
+    30: ("imom252_21", "ma_1_200"),    # +2.648% per 20d, t=3.67
+    60: ("imom252_21", "ma_1_200"),    # +2.630% per 20d, t=4.22  <- best evidence
+}
 
 
 def load_bars(path: str) -> list[tuple]:
@@ -201,9 +252,19 @@ def residual_returns(dates, closes, bench_close_by_date):
     return resid, beta
 
 
+def _sma(vals: list[float], period: int) -> list[Optional[float]]:
+    n = len(vals); out: list[Optional[float]] = [None] * n; run = 0.0
+    for i, x in enumerate(vals):
+        run += x
+        if i >= period:
+            run -= vals[i - period]
+        if i >= period - 1:
+            out[i] = run / period
+    return out
+
+
 def signals(bars: list[tuple], bench_close_by_date: dict[str, float]) -> list[dict[str, Any]]:
-    """Per-day idiosyncratic momentum legs. No look-ahead: every value at index i
-    uses only bars 0..i."""
+    """Per-day signal legs. No look-ahead: every value at index i uses only bars 0..i."""
     dates = [b[0] for b in bars]
     closes = [b[4] for b in bars]
     n = len(bars)
@@ -211,9 +272,10 @@ def signals(bars: list[tuple], bench_close_by_date: dict[str, float]) -> list[di
     cres = [0.0] * (n + 1)
     for i in range(n):
         cres[i + 1] = cres[i] + resid[i]
+    ma200 = _sma(closes, TREND_MA)
     out = []
     for i in range(WARMUP, n):
-        if beta[i] is None or i < LOOKBACK_LONG:
+        if beta[i] is None or i < LOOKBACK_LONG or ma200[i] is None:
             continue
         out.append({
             "date": dates[i],
@@ -221,27 +283,29 @@ def signals(bars: list[tuple], bench_close_by_date: dict[str, float]) -> list[di
             "beta": beta[i],
             "imom252_21": cres[i + 1 - SKIP] - cres[i + 1 - LOOKBACK_LONG],
             "imom20": cres[i + 1] - cres[i + 1 - LOOKBACK_SHORT],
+            "ma_1_200": closes[i] / ma200[i] - 1.0,
         })
     return out
 
 
-def rank_composite(records_by_symbol: dict[str, dict[str, Any]]) -> list[tuple[str, float]]:
+def rank_composite(records_by_symbol: dict[str, dict[str, Any]],
+                   legs: tuple[str, ...] = LEGS_BY_HOLD[DEFAULT_HOLD]) -> list[tuple[str, float]]:
     """Cross-sectional rank composite for ONE date. Input: {symbol: signal dict}.
 
     Ranking is what makes this work — the legs are combined as within-day ranks,
     not raw values, so no leg can dominate through scale.
     """
     syms = [s for s, r in records_by_symbol.items()
-            if r.get("imom252_21") is not None and r.get("imom20") is not None]
+            if all(r.get(leg) is not None for leg in legs)]
     if len(syms) < 20:
         return []
     ranks: dict[str, float] = {s: 0.0 for s in syms}
-    for leg in ("imom252_21", "imom20"):
+    for leg in legs:
         ordered = sorted(syms, key=lambda s: records_by_symbol[s][leg])
         m = len(ordered) - 1
         for k, s in enumerate(ordered):
             ranks[s] += (k / m if m else 0.5)
-    return sorted(((s, ranks[s] / 2.0) for s in syms), key=lambda x: -x[1])
+    return sorted(((s, ranks[s] / len(legs)) for s in syms), key=lambda x: -x[1])
 
 
 def main(argv: Optional[list[str]] = None) -> None:
@@ -250,6 +314,8 @@ def main(argv: Optional[list[str]] = None) -> None:
     p.add_argument("--data-dir", required=True,
                    help="directory of per-symbol OHLCV CSVs (date,open,high,low,close,volume)")
     p.add_argument("--benchmark", default="SPY", help="benchmark symbol inside --data-dir")
+    p.add_argument("--hold", type=int, choices=sorted(LEGS_BY_HOLD), default=DEFAULT_HOLD,
+                   help="holding period in trading days; selects the validated leg pair")
     p.add_argument("--decile", type=float, default=DEFAULT_DECILE)
     p.add_argument("--top", type=int, default=20, help="how many names to print")
     args = p.parse_args(argv)
@@ -273,25 +339,31 @@ def main(argv: Optional[list[str]] = None) -> None:
         if sig:
             latest[sym] = sig[-1]
 
-    ranked = rank_composite(latest)
+    legs = LEGS_BY_HOLD[args.hold]
+    ranked = rank_composite(latest, legs)
     if not ranked:
         raise SystemExit("not enough symbols with sufficient history to rank")
     cutoff = max(1, int(len(ranked) * args.decile))
 
     asof = max(r["date"] for r in latest.values())
+    second = legs[1]
+    head = {"imom20": "imom1m", "ma_1_200": "vs 200dMA"}[second]
     print(f"===== IMOM SCREEN — {asof} =====")
-    print(f"Universe {len(ranked)} symbols; top decile = {cutoff} names; hold {HOLD_DAYS} days\n")
-    print(f"  {'#':>3} {'symbol':<8}{'score':>8}{'imom12-1':>11}{'imom1m':>10}{'beta':>7}")
+    print(f"Universe {len(ranked)} symbols; top decile = {cutoff} names; "
+          f"hold {args.hold} days; legs {' + '.join(legs)}\n")
+    print(f"  {'#':>3} {'symbol':<8}{'score':>8}{'imom12-1':>11}{head:>11}{'beta':>7}")
     for k, (sym, score) in enumerate(ranked[:args.top], 1):
         r = latest[sym]
         flag = "" if k <= cutoff else "  (below decile)"
         print(f"  {k:>3} {sym:<8}{score:>8.3f}{r['imom252_21']*100:>10.1f}%"
-              f"{r['imom20']*100:>9.1f}%{r['beta']:>7.2f}{flag}")
-    print(f"\n  Held out 2024-2026, 20-day hold: +2.12%/mo matched excess (t=3.56),")
-    print(f"  +4.04% raw per 20d, 58.8% positive.")
-    print(f"  5-day hold: +0.73% raw, 53.9% positive, avg max rise +5.06% / max fall -4.33%.")
-    print("  Probability of rise is not improvable (+0.66pp, t=0.80); rise and fall")
-    print("  move together. Every added filter failed out of sample -- see module docs.")
+              f"{r[second]*100:>10.1f}%{r['beta']:>7.2f}{flag}")
+    held = {20: "+2.12% per 20d matched excess (t=3.56), +4.04% raw, 58.8% positive",
+            30: "+2.65% per 20d matched excess (t=3.67), +6.35% raw per 30d, 60.7% positive",
+            60: "+2.63% per 20d matched excess (t=4.22), +12.75% raw per 60d, 63.8% positive"}
+    print(f"\n  Held out 2024-2026 at a {args.hold}-day hold: {held[args.hold]}.")
+    print("  Excess per unit of time is flat across 5-120 day holds; longer holds win on")
+    print("  costs (60d = 0.50%/yr vs 5d = 6.05%/yr) and hit rate, but are more exposed")
+    print("  to a momentum crash -- the test window contained none.")
     print("  No stop. Worst held-out pick -50.1%; momentum crashes are the known")
     print("  failure mode and the test window contained none.")
     print("  Educational/research model — not investment advice.")

@@ -469,3 +469,62 @@ Survivorship-flat (+0.438% → +0.433% excluding names below 75% of their 52-wee
 high) and random control p < 0.0001. The real edge is the **asymmetry**: upside
 gained slightly exceeds downside taken. It is about a fifth of the 20-day matched
 excess, so prefer the 20-day hold.
+
+---
+
+# Holding-period sweep and the 30-60 day re-tune
+
+Same 26,727 held-out observations at every horizon, so the rows are comparable.
+Newey-West t (lag = horizon in months) corrects the overlapping windows — the
+naive t-stats at 120d would otherwise be badly inflated.
+
+```
+   hold    excess   per 20d   NW t   raw net   win%   cost drag/yr
+     5d   +0.508%   +2.032%   3.28   +0.773%  54.7%      6.05%
+    20d   +2.070%   +2.070%   3.47   +3.907%  59.1%      1.51%
+    30d   +3.427%   +2.284%   3.98   +6.041%  61.3%      1.01%
+    60d   +6.652%   +2.217%   3.82  +11.929%  64.2%      0.50%
+    90d   +9.691%   +2.154%   4.24  +18.164%  66.8%      0.34%
+   120d  +12.855%   +2.142%   4.50  +24.693%  70.2%      0.25%
+```
+
+The signal does not decay per unit of time. What changes is turnover cost (12×
+between 5d and 120d) and hit rate (54.7% → 70.2%).
+
+Non-overlapping rebalances, compounded:
+
+```
+   hold  periods     total     CAGR   maxDD
+     5d      109    +94.2%   +35.9%  -22.6%
+    20d       28   +168.4%   +55.9%  -13.6%
+    30d       19   +154.8%   +51.2%  -10.4%
+    60d       10   +179.4%   +54.0%   -9.6%
+    90d        7   +206.7%   +56.6%    0.0%
+   120d        5   +212.4%   +61.4%    0.0%
+```
+
+**90d and 120d are not established.** Seven and five non-overlapping periods; a
+0.0% drawdown on five observations is five coin flips landing heads. A long hold
+also cannot exit a momentum crash, which is this factor's known failure mode and
+did not occur in 2024-2026 — so the window structurally flatters long horizons.
+
+## Re-tuned legs for 30-60d
+
+`imom20` is a one-month signal and decays over a longer hold (in-sample t falls
+to 1.28 at 60d). Legs re-ranked in-sample, one out-of-sample shot:
+
+```
+  composite                        30d/20d     t   60d/20d     t
+  imom252_21 + imom20 (20d legs)   +2.284%  3.90   +2.217%  3.82
+  imom252_21 + ma_1_200            +2.648%  3.67   +2.630%  4.22   <- adopted
+  imom252_21 + ma_1_200 + irev5    +1.427%  2.98   +1.483%  3.52
+```
+
+The three-leg variant was the in-sample favourite on t and failed out of sample —
+dropped. Adopted configuration at 60d: survivorship-flat (+2.630% → +2.333%
+excluding names below 75% of their 52-week high), by year +1.96% / +2.78% /
++4.44%, random control p < 0.0001 at both 30d and 60d.
+
+`--hold 20` still selects the original pair. Note the 30-60d range itself was
+chosen after seeing out-of-sample results across horizons, so that choice carries
+selection risk; the leg re-ranking within it did not.
