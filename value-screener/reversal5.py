@@ -1,8 +1,42 @@
 #!/usr/bin/env python3
-"""Reversal-5 — a 5-day-horizon entry model for the AEGIS screener family.
+"""Reversal-5 — a 5-day-horizon entry model. SUPERSEDED: see the warning below.
 
-Why this exists
----------------
+!! DO NOT TRADE THIS !!
+-----------------------
+A wider re-test on 507 US large caps (see ``panel_backtest/README.md``, "507-name
+re-test") shows the edge reported below is a SURVIVORSHIP ARTIFACT, not a signal.
+
+The tell is that the *unconditional* baseline slopes with drawdown. Simply holding
+any stock in the universe for 5 days paid, by how far below its 52-week high it was:
+
+    <40% of 52w high   +1.780% / 5d   (~+142%/yr)
+    40-60%             +1.120%        (~+74%/yr)
+    60-75%             +0.493%        (~+28%/yr)
+    75-90%             +0.340%        (~+18%/yr)
+    >90%               +0.211%        (~+11%/yr)
+
+In a survivorship-free sample that column should be flat or mildly negative —
+distressed stocks are riskier, not a free +142%/yr. The gradient exists because a
+stock that is down 60% only appears in a "today's largest 500" universe if it
+subsequently recovered; the ones that kept falling or delisted are absent.
+
+Reversal-5's entire lift lives in exactly that contaminated slice:
+
+    no drawdown restriction        lift +0.275pp over baseline
+    exclude names <40% of 52w high lift +0.054pp
+    exclude names <50%             lift -0.026pp
+    exclude names <60%             lift -0.214pp
+
+Require a stock to be within 50% of its 52-week high and the edge is gone. The
+earlier 36-name result that motivated this module (+0.818% held out) is the same
+artifact — the Dow 30 are the most extreme survivors available.
+
+Fixing this needs a point-in-time universe including delisted names (CRSP or
+similar). Until then this module is retained as a documented negative result and
+as a worked example of the diagnostic, not as a tradable model.
+
+Original (now-superseded) rationale
+-----------------------------------
 ``magic_screener_v2_4``'s entry model was panel-tested on 36 US large caps over
 2020-2026 (see ``panel_backtest/``). It showed no measurable timing edge: the
 composite score correlated -0.0152 with forward 20-day returns and lost to random
@@ -177,13 +211,15 @@ def main(argv: Optional[list[str]] = None) -> None:
     print(f"As of {latest['date']}  close {latest['close']:.2f}")
     print(f"  score5              : {latest['score5']:+.3f}")
     print(f"  top-{args.select_pct*100:.0f}% threshold  : {thr:+.3f}  (from this ticker's own history)")
-    print(f"  SETUP               : {'BUY (5-day hold, no stop)' if fires else 'NONE'}")
+    print(f"  score in top {args.select_pct*100:.0f}%     : {'YES' if fires else 'no'}"
+          "   (NOT a buy signal — see the survivorship warning in this module)")
     print("  inputs:")
     for k in SIGNALS:
         print(f"    {k:<20}{ms.fmt(latest[k], 2)}")
-    print(f"\n  Held-out expectancy at this selectivity: +0.82% per 5-day trade "
-          f"(56.4% positive). Falling-knife risk is real; see module docstring.")
-    print("  Educational/research model — not investment advice.")
+    print("\n  !! The +0.82% held-out result for this rule was shown to be a")
+    print("     survivorship artifact on a 507-name re-test. Requiring a stock to be")
+    print("     within 50% of its 52-week high removes the entire edge.")
+    print("     Retained as a documented negative result. Not investment advice.")
 
     if args.json_output:
         with open(args.json_output, "w", encoding="utf-8") as fh:

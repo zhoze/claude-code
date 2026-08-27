@@ -218,3 +218,76 @@ the stop first when both were touched.
 - **Crowding.** Short-horizon reversal is well documented and capacity-limited.
 - Liquid US large caps, 2020–2026, long-only. The held-out period has now been
   looked at, so it is no longer a clean holdout for further tuning.
+
+---
+
+# 507-name re-test → Reversal-5 is a survivorship artifact
+
+`fetch500.py` pulls the top ~520 US listings by market cap; `fast5.py` computes the
+four Reversal-5 inputs in O(n) (verified **bit-exact** against
+`compute_technical_features` across 59,625 rows and 7 fields, so the 80s/symbol
+reference path is not needed); `wide.py` runs the tests.
+
+## The rule generalizes across stocks
+
+Applying the rule **unchanged** — same features, same signs, same normalizer fitted
+on 2020–2023 — to the 468 names it was never derived from, held out on 2024–2026:
+
+```
+                                      n   symbols   net 5d  success
+  all 507 names, top 5%           16070       319  +1.113%    57.5%
+  OUT-OF-UNIVERSE only, top 5%    14948       290  +1.115%    57.5%
+```
+
+Identical. Concentration is also solved: 290 symbols instead of 5.
+
+Realistic portfolio (rank all 507 daily, buy the best N, hold 5 days) gives
++0.606% net at top-10/day, random control p < 0.0001. Note the "top 5% pooled"
+figure needs the full-period score distribution to set its threshold and is
+therefore not implementable; top-N-per-day is the honest number.
+
+## …and none of it is real
+
+The unconditional baseline — holding **any** stock in the universe for 5 days —
+slopes with how beaten down it is:
+
+```
+  proximity to 52w high        n      net 5d   annualized
+  <40%                      1704     +1.780%       +142%
+  40-60%                   12576     +1.120%        +74%
+  60-75%                   39099     +0.493%        +28%
+  75-90%                  110771     +0.340%        +18%
+  >90%                    164142     +0.211%        +11%
+```
+
+That column should be flat or mildly negative — distressed stocks are riskier, not
+a free +142%/yr. The gradient exists because a stock down 60% only appears in a
+"today's largest 500" universe if it later recovered. The ones that kept falling
+left the universe or delisted.
+
+Reversal-5's lift lives entirely inside that contaminated slice:
+
+```
+  no drawdown restriction          lift +0.275pp over baseline   (n=6600)
+  exclude names <40% of 52w high   lift +0.054pp                 (n=6008)
+  exclude names <50%               lift -0.026pp                 (n=4950)
+  exclude names <60%               lift -0.214pp                 (n=3654)
+```
+
+Require a stock to be within 50% of its 52-week high and the edge is gone. The
+deep bucket is 0.52% of observations and just 35 symbols.
+
+**This also retracts the 36-name result** (+0.818% held out) reported in the
+previous section: the Dow 30 are the most extreme survivors available, so that
+number was the same artifact measured on a smaller sample.
+
+## What would settle it
+
+A point-in-time universe including delisted and dropped names — CRSP, or
+Sharadar/Norgate-style delisted history. Every free endpoint used here (Nasdaq,
+FMP, Stooq) serves *current* listings only, so no amount of extra symbols from
+them fixes this. Until that data is in place, any "buy the dip" result on this
+infrastructure should be assumed contaminated.
+
+The baseline-gradient check above is cheap and worth running against any future
+mean-reversion signal before believing it.
