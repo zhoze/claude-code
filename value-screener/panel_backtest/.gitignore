@@ -1,0 +1,5 @@
+data/
+tapes/
+panel_results.json
+*.log
+__pycache__/
