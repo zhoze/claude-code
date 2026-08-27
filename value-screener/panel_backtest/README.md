@@ -136,3 +136,85 @@ model, is where the money goes.
 - Survivorship bias in the universe, flattering the strategy.
 - No multiple-testing correction is applied to the parameter grid — the grid is
   reported as a robustness check, not as a search for a winning setting.
+
+---
+
+# 5-day horizon study → Reversal-5
+
+`tape2.py` rebuilds the tape with the full feature set plus 5-day outcomes;
+`find5.py` ranks features by information coefficient; `setup5.py` builds and
+validates the composite; `search.py` is the earlier win-rate grid search.
+
+Discovery used 2020–2023 only. 2024–2026 was held out and touched once.
+
+## What predicts a 5-day rise
+
+In-sample Spearman IC vs forward 5-day return (n=35,865):
+
+```
+  atrPct                      +0.0613      maxDrawdown252Pct    -0.0566
+  realizedVol20AnnPct         +0.0515      sma50Slope10d        -0.0412
+  downsideDeviation60AnnPct   +0.0502      volatilitySetup      -0.0395
+  bollingerBandwidthPct       +0.0483      breakout55Pct        -0.0384
+  gapRisk95_60Pct             +0.0459      perf60               -0.0369
+                                           proximity52wPct      -0.0316
+```
+
+High own-volatility and deep drawdown predict a rise; breakouts, 52-week-high
+proximity and 60-day momentum predict the opposite. **The v2.4 entry model is
+built on the wrong side of every one of these at this horizon** — it rewards
+breakouts and 52w proximity and explicitly penalises high ATR in
+`_volatility_setup_component`.
+
+The effect survives per-symbol demeaning (atrPct IC +0.0603 within-stock), so it
+is timing rather than a standing high-beta bet, and it was positive in every
+in-sample year including 2022 (spread +0.42%).
+
+## Reversal-5, held out
+
+`score5 = z(atrPct) − z(proximity52wPct) − z(perf60) − z(breakout55Pct)`,
+per-symbol z-scores, top 5%. Net of 12bps round trip:
+
+```
+                          IN-SAMPLE 2020-23        HELD OUT 2024-26
+  all days baseline       +0.102%  50.9%           +0.199%  52.1%
+  Reversal-5 top 20%      +0.690%  55.5%           +0.359%  53.6%
+  Reversal-5 top 10%      +1.224%  58.7%           +0.554%  53.9%
+  Reversal-5 top  5%      +1.818%  61.2%           +0.818%  56.4%
+  Reversal-5 top  1%      +4.970%  67.0%           +0.748%  53.2%
+  v2.4 screener >=75      +0.028%  50.7%           +0.210%  49.8%
+```
+
+Random-entry control on the held-out top 5%: setup +0.818% vs random +0.206%,
+**one-sided p < 0.0001**.
+
+Note the top 1% collapses out of sample (+4.97% → +0.75%) — the extreme tail was
+overfit. Top 5% is the recommended operating point, and even it retains only ~45%
+of its in-sample magnitude.
+
+## Exits: do not add a stop
+
+Barrier pairs tuned in-sample, applied held-out. None beat a plain 5-day hold:
+
+```
+  hold 5 days (no barriers)      IS +1.818%   OOS +0.818%   <- best held-out
+  target 3.0xATR / stop 2.0xATR  IS +1.808%   OOS +0.760%
+  target 2.0xATR / stop 3.0xATR  IS +1.926%   OOS +0.715%   <- best in-sample
+  target 1.0xATR / stop 2.0xATR  IS +1.173%   OOS +0.312%
+```
+
+Barrier outcomes here are approximated from the 5-day excursion envelope, taking
+the stop first when both were touched.
+
+## Risks
+
+- **Falling knives.** Worst held-out trades: UNH −28.9/−23.4/−21.2/−21.0% in one
+  week, INTC −19.0%. 5th percentile −7.9%. And the evidence says no stop.
+- **Concentration.** 71% of held-out signals came from 5 names (UNH 24%). Few
+  stocks are deeply beaten down at once in a 36-name universe. Excluding UNH the
+  result *improves* to +1.032%, so it is not one lucky name — but breadth needs a
+  wider universe.
+- **Decay.** ~45% of in-sample magnitude survived. Expect more attrition live.
+- **Crowding.** Short-horizon reversal is well documented and capacity-limited.
+- Liquid US large caps, 2020–2026, long-only. The held-out period has now been
+  looked at, so it is no longer a clean holdout for further tuning.
