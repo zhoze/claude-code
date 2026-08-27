@@ -291,3 +291,107 @@ infrastructure should be assumed contaminated.
 
 The baseline-gradient check above is cheap and worth running against any future
 mean-reversion signal before believing it.
+
+---
+
+# Literature bake-off → the v2.4 screen is replaced by IMOM
+
+`fastfeat.py` computes every rule's inputs in O(n) (validated against
+`compute_technical_features`: SMA/ATR/momentum/proximity/realized-vol all match to
+1e-15 or exactly). `bakeoff.py` runs the comparison.
+
+## Method
+
+Rank the universe cross-sectionally each day, buy the top decile at the next open,
+hold 20 days. Judge on **matched excess return**:
+
+```
+excess = fwd(stock) − mean(fwd of every stock that day in the SAME 52w-drawdown bucket)
+```
+
+Date matching removes market direction. Bucket matching removes the survivorship
+gradient that made Reversal-5 look profitable. Significance uses **monthly
+non-overlapping portfolio returns** (31 months held out), so overlapping 20-day
+windows do not inflate the t-stats — the naive pooled t-stats were ~26, the honest
+ones are ~3.
+
+## Results — held out 2024-2026, 502 symbols, 789,424 obs
+
+```
+  rule                        excess/mo      t     source
+  idiosyncratic mom 12-1        +2.391%   3.31     1910.13115
+  cross-sectional mom 12-1      +2.350%   2.90     classic
+  MA(1,200) crossover           +2.172%   3.06     1504.04254, 1811.06766
+  MA(1,50) crossover            +2.018%   3.29     Brock/Lakonishok/LeBaron
+  idiosyncratic mom 1m          +1.985%   3.49     1910.13115
+  1-month momentum              +1.941%   3.22
+  12-1 momentum, vol-scaled     +1.354%   2.61     2212.07288, 1904.04912
+  short-term reversal 1w        +0.410%   2.12
+  trading range break 50d       +0.264%   1.66     <- v2.4's core signal
+  trading range break 200d      +0.214%   2.09     <- v2.4's core signal
+  52-week-high proximity        +0.039%   0.71     <- v2.4 rewards this
+  low idiosyncratic vol         -0.534%  -1.97
+  time-series mom, vol-scaled   -0.633%  -1.86
+  low realized vol              -0.712%  -2.25     <- v2.4 rewards this
+  low beta                      -0.830%  -1.46
+```
+
+**The v2.4 model is built on the three weakest signals in the set.** Breakouts are
+near-noise, 52-week-high proximity is zero, and `_volatility_setup_component`
+penalises high ATR — the wrong sign. Measured directly on the same yardstick:
+
+```
+  v2.4 score >= 75 and setup fires   +0.571%/mo   t= 0.41
+  v2.4 top decile of score           -0.180%/mo   t=-0.18
+  IMOM on the SAME 36 names          +1.912%/mo   t= 1.94
+```
+
+Note `1504.04254`'s finding that TRB beats MA does **not** replicate here: on US
+large caps 2024-2026, MA(1,200) beats TRB50 by an order of magnitude. Their result
+is index-level on Chinese exchanges; this is cross-sectional stock selection.
+
+## The amended screen (`../imom_screen.py`)
+
+```
+score = rank(idiosyncratic momentum 12-1) + rank(idiosyncratic momentum 1m)
+top decile, hold 20 days, no stop
+```
+
+The two legs are rank-correlated **−0.01**, so the pair genuinely diversifies and
+has the best t of any composite tried (3.56 vs 3.31 for the 12-1 leg alone).
+Adding MA(1,200) (+2.085%, t=3.30) or a reversal leg (+1.898%, t=3.43) made it
+worse — MA is 0.59 correlated with the 12-1 leg and adds nothing.
+
+```
+  matched excess       +2.122%/mo, t=3.56, 31 months
+  random control       screen +2.169% vs random -0.001%, p < 0.0001
+  raw, net of 12bps    +4.037% per 20 days, 58.8% positive, 398 symbols
+  universe baseline    +1.882% per 20 days, 56.5% positive
+  by year              2024 +1.94% (t=2.65)  2025 +2.64% (t=2.86)
+                       2026 +1.55% (t=0.84, 7 months)
+```
+
+Survivorship check — the test Reversal-5 failed:
+
+```
+  no restriction                  +2.122%/mo  t=3.56
+  exclude names <40% of 52w high  +2.122%     t=3.56
+  exclude <50%                    +2.094%     t=3.55
+  exclude <60%                    +2.068%     t=3.53
+  exclude <75%                    +2.001%     t=3.56
+```
+
+Flat. The edge is not in the beaten-down slice, so it is not the artifact that
+Reversal-5 was. (Reversal-5 went +0.275pp → −0.026pp under the same restriction.)
+
+## Limits
+
+- **Half the raw +4.04% is beta**, not skill: the universe baseline is +1.88%. The
+  honest selection component is the +2.12% matched excess.
+- **No stop, wide tail**: worst held-out pick −50.1%, 5th percentile −16.1%,
+  median +2.2%. Momentum crashes are this factor's known failure mode and
+  2024-2026 contained none — expect a bad one eventually.
+- 2026 is 7 months and not individually significant.
+- Universe is current listings. Matched excess controls the drawdown channel of
+  survivorship, not every channel. A point-in-time universe is still the right fix.
+- Momentum is the most crowded factor in equities; published edges decay.
