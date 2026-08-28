@@ -1,13 +1,10 @@
 name: AI & Robotics Weekly News
 
 on:
-  schedule:
-    # 11:00 Europe/Tallinn on Mondays: 08:00 UTC in summer (EEST), 09:00 UTC in
-    # winter (EET). The script's local-time guard lets the right one through.
-    # NOTE: schedule is throttled in this repo and only fires from main — the
-    # Claude Code Remote Routine + workflow_dispatch is the primary trigger.
-    - cron: "0 8 * * 1"
-    - cron: "0 9 * * 1"
+  # Schedule removed 2026-08-28: the agent is stopped (user request). The
+  # companion Claude Code Remote Routine is disabled too. Re-add the two cron
+  # lines ("0 8 * * 1" and "0 9 * * 1" — 11:00 Europe/Tallinn summer/winter,
+  # DST-guarded by the script) and re-enable the Routine to resume weekly runs.
   workflow_dispatch:
     inputs:
       force:
