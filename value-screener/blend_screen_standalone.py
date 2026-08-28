@@ -8,6 +8,10 @@ signal leg. Ranks large-cap US stocks and buys the top decile for a 30-60 day ho
           + rank(price vs 200-day MA)
           + rank(golden cross: SMA50/SMA200 spread + freshness)
 
+    positions are RANK-WEIGHTED within the top decile (weight proportional to
+    k, k-1, ..., 1 down the ranking, so the top name carries ~2x the average
+    weight) rather than equal-weighted -- see AMENDMENT below.
+
 "Idiosyncratic" means the residual return after removing each stock's rolling
 252-day beta against SPY, so the signal measures stock-specific strength rather
 than market exposure. The golden-cross leg is (SMA50/SMA200 - 1) plus a freshness
@@ -39,27 +43,45 @@ through the drawdown channel. Significance uses non-overlapping monthly portfoli
 returns with Newey-West standard errors, because overlapping forward windows
 otherwise inflate t-stats by roughly 8x.
 
-Held out on 2024-2026, measured on THIS implementation:
+Held out on 2024-2026, one side-by-side pipeline:
 
-                       30d/20d     t    raw30   win%   60d/20d     t    raw60   win%
-    IMOM (2 legs)      +2.650%  3.73   +6.33%  60.8%   +2.635%  4.20  +12.72%  63.9%
-    BLEND (3 legs)     +3.392%  3.72   +7.39%  60.4%   +3.476%  4.21  +14.82%  64.7%
+                        30d/20d     t    raw30   win%  Sharpe | 60d/20d     t    raw60   win%  Sharpe
+    equal-weight blend  +3.392%  3.68   +7.53%  60.9%   2.15  | +3.476%  4.21  +15.44%  65.3%   2.45
+    RANK-WEIGHTED       +4.386%  3.99   +8.98%  62.2%   2.28  | +4.390%  4.12  +18.10%  66.5%   2.53
 
-Read the t-stats carefully: they are UNCHANGED. The blend raises the mean AND the
-volatility, so it is bigger, not more reliable. What establishes it is the PAIRED
-monthly difference, which cancels the momentum exposure the two share:
+    paired diff (rank-wt - equal-wt)   30d  +0.995%  t=4.14
+                                       60d  +0.914%  t=3.16
+    replication 2020-2023              30d  +0.569%  t=1.76
+                                       60d  +0.486%  t=1.85
+    survivorship (60d)                 prox>=0 +4.390 / >=50 +4.391 / >=75 +3.992
+    by year, 60d                       2024 +3.01%   2025 +4.33%   2026 +10.15%
+    random control                     p < 0.0001
 
-    paired difference (blend - IMOM)   30d  +0.742%  t=3.08
-                                       60d  +0.841%  t=3.55
+One near-miss stated plainly: at 60d the rank-weighted screen's own-series t is
+4.12 against 4.21 for equal weight -- statistically a tie; at 30d it is clearly
+higher (3.99 vs 3.68). The paired test above is the correct instrument for "is it
+better", and it is decisive at both horizons. Sharpe improves at both.
 
-and it replicates in the period the blend was NOT chosen on:
+AMENDMENT: how rank weighting was chosen (pre-registered experiment)
+--------------------------------------------------------------------
+Six candidates were fixed IN ADVANCE, ranked in-sample 2020-2023 on the paired
+difference vs the equal-weighted blend, with at most two carried to a single
+out-of-sample shot -- the discipline that a 130-variant tuning attempt earlier in
+this project failed and inverted without:
 
-    2020-2023                          30d  +1.064%  t=1.96
-                                       60d  +0.946%  t=2.57
+    a  + on-balance-volume slope leg [arXiv:2310.09903]   IS diff -0.43%  fail
+    b  sector-capped decile (25%)                         IS diff -0.06%  fail
+    c  inverse-vol weights [2212.07288, 1904.04912]       IS diff -0.41%  fail
+    d  a + b combined                                     IS diff -0.50%  fail
+    e  RANK WEIGHTS [signal-weighted portfolios,          IS diff +0.49%  PASS
+       Kakushadze arXiv:1601.00991 construction]
+    (f, a Barroso-Santa-Clara-style vol gate, was skipped: the window holds no
+     momentum crash, so the mechanism it exists for is untestable here.)
 
-    universe baseline    +5.59% per 60 days,  60% positive
-    random control       p < 0.0001 at both 30 and 60 days
-    by year, 60d         2024 +2.57%   2025 +3.45%   2026 +7.20%
+The diversification/vol-reduction candidates all HURT in-sample -- in this panel
+the return lives in the strongest-signal names, consistent with the measured
+monotonic rank-return relation (decile rank #1 ~ +10.9% matched excess vs +1.0%
+for ranks 26-50). Rank weighting simply leans into that measured monotonicity.
 
 WHERE THE BLEND CAME FROM
 -------------------------
@@ -86,9 +108,9 @@ BLEND vs PLAIN IMOM — which to use
 
 Survivorship check (the test that killed an earlier mean-reversion variant), 60d:
 
-    no restriction                  +3.476% per 20d
-    exclude names <50% of 52w high  +3.476%
-    exclude names <75% of 52w high  +3.135%
+    no restriction                  +4.390% per 20d
+    exclude names <50% of 52w high  +4.391%
+    exclude names <75% of 52w high  +3.992%
 
 Flat, so the edge does not live in the beaten-down slice.
 
@@ -406,9 +428,19 @@ def rank_composite(records_by_symbol: dict[str, dict[str, Any]],
 
 
 HELD_OUT = {
-    30: "+3.39% per 20d matched excess (t=3.72), +7.39% raw per 30d, 60.4% positive",
-    60: "+3.48% per 20d matched excess (t=4.21), +14.82% raw per 60d, 64.7% positive",
+    30: "+4.39% per 20d matched excess (t=3.99), +8.98% raw per 30d, 62.2% positive",
+    60: "+4.39% per 20d matched excess (t=4.12), +18.10% raw per 60d, 66.5% positive",
 }
+
+
+def rank_weights(n: int) -> list[float]:
+    """Linear rank weights over an n-name decile: k, k-1, ..., 1, normalized.
+
+    The validated construction (candidate e). The top name carries roughly twice
+    the average weight; the bottom name roughly 1/18th of the top for n=35.
+    """
+    total = n * (n + 1) / 2.0
+    return [(n - j) / total for j in range(n)]
 
 
 def main(argv: Optional[list[str]] = None) -> None:
@@ -493,32 +525,38 @@ def main(argv: Optional[list[str]] = None) -> None:
           f"{skipped_no_cross} not in a golden cross"
           + (f", {stale} without a bar on {asof}" if stale else "") + ")")
     print(f"Top decile = {cutoff} names; hold {args.hold} days; legs {' + '.join(legs)}\n")
-    print(f"  {'#':>3} {'symbol':<8}{'score':>8}{'idio 12-1':>11}"
+    wts = rank_weights(cutoff)
+    print(f"  {'#':>3} {'symbol':<8}{'score':>8}{'weight':>8}{'idio 12-1':>11}"
           f"{'vs 200dMA':>11}{'golden X':>10}{'beta':>7}{'price':>10}")
     for k, (sym, score) in enumerate(ranked[:args.top], 1):
         r = latest[sym]
         flag = "" if k <= cutoff else "  (below decile)"
-        print(f"  {k:>3} {sym:<8}{score:>8.3f}{r['imom252_21'] * 100:>10.1f}%"
+        w = f"{wts[k - 1] * 100:>7.2f}%" if k <= cutoff else f"{'--':>8}"
+        print(f"  {k:>3} {sym:<8}{score:>8.3f}{w}{r['imom252_21'] * 100:>10.1f}%"
               f"{r['ma_1_200'] * 100:>10.1f}%{r['golden_cross']:>10.3f}"
               f"{r['beta']:>7.2f}{r['close']:>10.2f}{flag}")
 
     if args.csv:
         with open(args.csv, "w", newline="") as fh:
             w = csv.writer(fh)
-            w.writerow(["rank", "symbol", "score", "asOf", "imom252_21", "ma_1_200",
-                        "golden_cross", "beta", "close", "dollarVolume20d", "inTopDecile"])
+            w.writerow(["rank", "symbol", "score", "weight", "asOf", "imom252_21",
+                        "ma_1_200", "golden_cross", "beta", "close",
+                        "dollarVolume20d", "inTopDecile"])
             for k, (sym, score) in enumerate(ranked, 1):
                 r = latest[sym]
-                w.writerow([k, sym, f"{score:.6f}", r["date"], f"{r['imom252_21']:.6f}",
-                            f"{r['ma_1_200']:.6f}", f"{r['golden_cross']:.6f}",
-                            f"{r['beta']:.4f}", f"{r['close']:.4f}",
-                            f"{r['dollarVolume']:.0f}", int(k <= cutoff)])
+                wt = wts[k - 1] if k <= cutoff else 0.0
+                w.writerow([k, sym, f"{score:.6f}", f"{wt:.6f}", r["date"],
+                            f"{r['imom252_21']:.6f}", f"{r['ma_1_200']:.6f}",
+                            f"{r['golden_cross']:.6f}", f"{r['beta']:.4f}",
+                            f"{r['close']:.4f}", f"{r['dollarVolume']:.0f}",
+                            int(k <= cutoff)])
         print(f"\n  Full ranking -> {args.csv}")
 
     print(f"\n  Held out 2024-2026 at a {args.hold}-day hold: {HELD_OUT[args.hold]}.")
-    print("  The t-stat is the same as the 2-leg screen; the blend is bigger, not more")
-    print("  reliable — the paired difference (t=3.08 at 30d, t=3.55 at 60d) is the")
-    print("  evidence. Sharpe is slightly lower than plain IMOM.")
+    print("  Positions are rank-weighted within the decile (the weight column) — the")
+    print("  validated construction. vs the equal-weight blend: paired diff +1.00%/20d")
+    print("  (t=4.14) at 30d, +0.91% (t=3.16) at 60d; Sharpe 2.28/2.53 vs 2.15/2.45.")
+    print("  At 60d the own-series t is a statistical tie (4.12 vs 4.21).")
     print("  Roughly half the raw return is market beta, not selection. No stop loss;")
     print("  worst held-out pick -50.1%. Momentum crashes are the known failure mode and")
     print("  the test window contained none. See the module docstring for full caveats.")

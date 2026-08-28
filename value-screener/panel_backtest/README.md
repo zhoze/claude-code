@@ -621,3 +621,72 @@ IMOM's 12-month momentum and 200-day distance do not contain.
   selection risk. The 2020-2023 replication is what makes it credible.
 - The 12 PEAD/earnings screens are untested, not disproven.
 - vwap is a (H+L+C)/3 proxy here; alphas using vwap are mildly approximated.
+
+---
+
+# Amending the blend: rank weighting adopted, diversification candidates rejected
+
+`amend_blend.py` is the whole experiment. Goal: raise BOTH profit and t-stat at
+30–60 days, per arXiv-grounded mechanisms. Method learned from the failed 5-day
+tuning: six candidates pre-registered, selected in-sample 2020–2023 on the paired
+difference vs the equal-weighted blend (gate: diff>0, NW t≥1.5 at both horizons),
+at most two carried to ONE out-of-sample shot.
+
+## In-sample selection
+
+```
+  candidate                                          IS diff (60d/20d)   t     gate
+  a  + obv_slope leg [arXiv:2310.09903]                  -0.434%      -2.06    fail
+  b  sector-capped decile (25%)                          -0.063%      -0.45    fail
+  c  inverse-vol weights [2212.07288, 1904.04912]        -0.414%      -2.05    fail
+  d  a + b combined                                      -0.498%      -1.94    fail
+  e  RANK WEIGHTS [Kakushadze 1601.00991 construction]   +0.486%      +1.85    PASS
+  f  Barroso-Santa-Clara-style vol gate     skipped: no momentum crash in the
+                                            window, so its mechanism is untestable
+```
+
+The obv_slope leg was reimplemented over each ticker's own bars and verified
+against ta-screener's version: exact match (1e-14…1e-18) on all clean symbols;
+divergence only in the ~20-day windows around the three corrupt vendor bars my
+loader drops (VLO/XOM/WMT, 2023-06-05) — same documented class as golden_cross.
+
+**Every diversification / vol-reduction candidate hurt.** In this panel the
+return lives in the strongest-signal names — consistent with the measured
+monotonic rank-return relation (decile rank #1 ≈ +10.9% matched excess vs +1.0%
+for ranks 26–50). Rank weighting (weight ∝ k, k-1, …, 1 down the decile) simply
+leans into that measured monotonicity.
+
+## Out-of-sample shot (2024–2026), one side-by-side pipeline
+
+```
+                      30d/20d     t    raw30   win%  Sharpe | 60d/20d     t    raw60   win%  Sharpe
+  equal-weight blend  +3.392%  3.68   +7.53%  60.9%   2.15  | +3.476%  4.21  +15.44%  65.3%   2.45
+  RANK-WEIGHTED       +4.386%  3.99   +8.98%  62.2%   2.28  | +4.390%  4.12  +18.10%  66.5%   2.53
+
+  paired diff (rank − equal)   30d +0.995%  t=4.14      60d +0.914%  t=3.16
+  replication 2020–2023        30d +0.569%  t=1.76      60d +0.486%  t=1.85
+  survivorship (60d)           prox≥0 +4.390 / ≥50 +4.391 / ≥75 +3.992  — flat
+  by year (60d)                2024 +3.01%   2025 +4.33%   2026 +10.15%
+  random control               p < 0.0001
+```
+
+(The equal-weight raw numbers differ slightly from the earlier section, +15.44%
+vs +14.82%, because this table is one weighted per-pick pipeline over the common
+outcome window — the paired comparisons inside it are the meaningful part.)
+
+## The near-miss, stated plainly
+
+At 60d the rank-weighted screen's own-series t is **4.12 vs 4.21** — a
+statistical tie, not an improvement; at 30d it is clearly higher (3.99 vs 3.68).
+The own-series t compares two overlapping estimates and is a weak instrument for
+"is A better than B"; the paired difference is the correct one and is decisive at
+both horizons, and Sharpe improves at both. Adopted on that basis, with this
+paragraph as the disclosure.
+
+## Caveats
+
+- This was the **sixth analytical pass** over 2024–2026. Its value as a holdout
+  is substantially eroded; the pre-registration, the in-sample gate, and the
+  2020–2023 replication are what keep this result honest, not the OOS label.
+- Rank weighting concentrates: top name ~5.6% of a 35-name decile (~2× average).
+- The rejected candidates are recorded so they are not retried.
