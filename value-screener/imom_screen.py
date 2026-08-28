@@ -112,6 +112,51 @@ Caveat on horizon selection: 30-60d was chosen after seeing out-of-sample result
 across horizons, so that choice itself carries selection risk. The leg re-ranking
 within it was done in-sample and validated once.
 
+Blending in ta-screener's golden_cross (--blend)
+------------------------------------------------
+A head-to-head against the 150-screen ta-screener package (see
+``panel_backtest/README.md``) put IMOM 4th of 138 on 60-day matched excess, with
+the highest t-stat of the leading group. No single screen beat it — every paired
+monthly difference was insignificant — because the top four overlap IMOM's decile
+by 73-79% and are effectively the same trade.
+
+``golden_cross`` is the exception: it overlaps only ~50%, so it adds information.
+It is ``SMA50 > SMA200`` scored as the spread plus a freshness bonus
+``1/(1 + days since the cross up)`` — it rewards a *young* cross, which 12-month
+momentum and distance-above-200dMA do not encode. Because it is undefined outside
+a golden cross, adding it also filters the universe (507 -> ~357 eligible).
+
+Measured on THIS implementation (not ta-screener's), held out 2024-2026:
+
+                         30d/20d     t    raw30   win%   60d/20d     t    raw60   win%
+    IMOM (2 legs)        +2.650%  3.73   +6.33%  60.8%   +2.635%  4.20  +12.72%  63.9%
+    BLEND (3 legs)       +3.392%  3.72   +7.39%  60.4%   +3.476%  4.21  +14.82%  64.7%
+
+Paired monthly difference, blend minus IMOM:
+
+    30d  +0.742%  t=3.08     60d  +0.841%  t=3.55
+
+and it replicates in the period the blend was NOT chosen on:
+
+    2020-2023   30d  +1.064%  t=1.96      60d  +0.946%  t=2.57
+
+Survivorship-flat: 60d +3.476% -> +3.476% (>=50% of 52w high) -> +3.135% (>=75%).
+By year, 60d: 2024 +2.57%, 2025 +3.45%, 2026 +7.20%. Random control p < 0.0001 at
+both horizons.
+
+Note the 60-day case is the better supported one: its 2020-2023 replication is
+significant (t=2.57) where the 30-day replication is marginal (t=1.96).
+
+Implementation note: this ``_golden_cross`` computes its moving averages over each
+ticker's OWN bars, whereas ta-screener computes them over shared panel rows that
+contain NaN gaps (dropped bad bars, pre-IPO history). Ours is the right definition
+for a screen and scores names theirs cannot (e.g. recent listings), which is why
+the 60-day blend measures +3.476% here against +3.565% there. The number above is
+the one this code produces.
+
+Caveat: golden_cross was picked after seeing the 138-screen leaderboard, so the
+choice carries selection risk. The 2020-2023 replication is what makes it credible.
+
 5-day horizon (from an earlier tuning attempt)
 ---------------------------------------------------
 The same screen, held out 2024-2026, evaluated on a 5-day hold against the three
@@ -190,6 +235,8 @@ SKIP = 21          # 12-1: skip the most recent month
 LOOKBACK_SHORT = 20
 BETA_WINDOW = 252
 TREND_MA = 200
+SMA_FAST = 50      # golden-cross fast leg
+SMA_SLOW = 200     # golden-cross slow leg
 WARMUP = 260
 DEFAULT_HOLD = 60
 DEFAULT_DECILE = 0.10
@@ -201,6 +248,16 @@ LEGS_BY_HOLD = {
     20: ("imom252_21", "imom20"),      # +2.12%/mo matched excess, t=3.56
     30: ("imom252_21", "ma_1_200"),    # +2.648% per 20d, t=3.67
     60: ("imom252_21", "ma_1_200"),    # +2.630% per 20d, t=4.22  <- best evidence
+}
+LEG_LABEL = {"imom20": "idio 1m", "ma_1_200": "vs 200dMA", "golden_cross": "golden X"}
+
+# The blended screen adds ta-screener's golden_cross leg. It overlaps IMOM's decile
+# only ~50%, so it carries information the momentum legs do not: the freshness of
+# the SMA50/SMA200 cross. Because golden_cross is undefined outside a golden cross,
+# adding it also acts as a FILTER -- only names with SMA50 > SMA200 are eligible.
+BLEND_LEGS_BY_HOLD = {
+    30: ("imom252_21", "ma_1_200", "golden_cross"),   # +3.392% per 20d, t=3.72
+    60: ("imom252_21", "ma_1_200", "golden_cross"),   # +3.476% per 20d, t=4.21
 }
 
 
@@ -263,6 +320,37 @@ def _sma(vals: list[float], period: int) -> list[Optional[float]]:
     return out
 
 
+def _golden_cross(closes: list[float]) -> list[Optional[float]]:
+    """ta-screener's golden_cross leg, reimplemented without pandas.
+
+        bull    = SMA50 > SMA200
+        score   = (SMA50/SMA200 - 1) + 1/(1 + trading days since the cross up)
+        NaN when not in a golden cross
+
+    The freshness term is what makes this add to IMOM: it rewards a *young*
+    cross, which 12-month momentum and distance-above-200dMA do not encode.
+    """
+    n = len(closes)
+    fast = _sma(closes, SMA_FAST)
+    slow = _sma(closes, SMA_SLOW)
+    out: list[Optional[float]] = [None] * n
+    last_cross: Optional[int] = None
+    prev_bull: Optional[bool] = None
+    for i in range(n):
+        if fast[i] is None or slow[i] is None or slow[i] == 0:
+            prev_bull = None
+            continue
+        bull = fast[i] > slow[i]
+        # A cross-up needs a defined previous state, matching and_(bull, not_(delay(bull,1)))
+        if bull and prev_bull is False:
+            last_cross = i
+        prev_bull = bull
+        if not bull or last_cross is None:
+            continue
+        out[i] = (fast[i] / slow[i] - 1.0) + 1.0 / (1.0 + (i - last_cross))
+    return out
+
+
 def signals(bars: list[tuple], bench_close_by_date: dict[str, float]) -> list[dict[str, Any]]:
     """Per-day signal legs. No look-ahead: every value at index i uses only bars 0..i."""
     dates = [b[0] for b in bars]
@@ -273,6 +361,7 @@ def signals(bars: list[tuple], bench_close_by_date: dict[str, float]) -> list[di
     for i in range(n):
         cres[i + 1] = cres[i] + resid[i]
     ma200 = _sma(closes, TREND_MA)
+    gcross = _golden_cross(closes)
     out = []
     for i in range(WARMUP, n):
         if beta[i] is None or i < LOOKBACK_LONG or ma200[i] is None:
@@ -284,6 +373,7 @@ def signals(bars: list[tuple], bench_close_by_date: dict[str, float]) -> list[di
             "imom252_21": cres[i + 1 - SKIP] - cres[i + 1 - LOOKBACK_LONG],
             "imom20": cres[i + 1] - cres[i + 1 - LOOKBACK_SHORT],
             "ma_1_200": closes[i] / ma200[i] - 1.0,
+            "golden_cross": gcross[i],
         })
     return out
 
@@ -316,6 +406,9 @@ def main(argv: Optional[list[str]] = None) -> None:
     p.add_argument("--benchmark", default="SPY", help="benchmark symbol inside --data-dir")
     p.add_argument("--hold", type=int, choices=sorted(LEGS_BY_HOLD), default=DEFAULT_HOLD,
                    help="holding period in trading days; selects the validated leg pair")
+    p.add_argument("--blend", action="store_true",
+                   help="add ta-screener's golden_cross leg (30/60-day holds only). "
+                        "Higher excess, but only names in a golden cross are eligible.")
     p.add_argument("--decile", type=float, default=DEFAULT_DECILE)
     p.add_argument("--top", type=int, default=20, help="how many names to print")
     args = p.parse_args(argv)
@@ -339,7 +432,14 @@ def main(argv: Optional[list[str]] = None) -> None:
         if sig:
             latest[sym] = sig[-1]
 
-    legs = LEGS_BY_HOLD[args.hold]
+    if args.blend:
+        if args.hold not in BLEND_LEGS_BY_HOLD:
+            raise SystemExit(f"--blend is validated for holds {sorted(BLEND_LEGS_BY_HOLD)} only")
+        legs = BLEND_LEGS_BY_HOLD[args.hold]
+        # golden_cross is undefined outside a golden cross, so it also filters.
+        latest = {s: r for s, r in latest.items() if r.get("golden_cross") is not None}
+    else:
+        legs = LEGS_BY_HOLD[args.hold]
     ranked = rank_composite(latest, legs)
     if not ranked:
         raise SystemExit("not enough symbols with sufficient history to rank")
@@ -347,20 +447,26 @@ def main(argv: Optional[list[str]] = None) -> None:
 
     asof = max(r["date"] for r in latest.values())
     second = legs[1]
-    head = {"imom20": "imom1m", "ma_1_200": "vs 200dMA"}[second]
-    print(f"===== IMOM SCREEN — {asof} =====")
+    head = LEG_LABEL[second]
+    print(f"===== {'IMOM + GOLDEN-CROSS BLEND' if args.blend else 'IMOM SCREEN'} — {asof} =====")
     print(f"Universe {len(ranked)} symbols; top decile = {cutoff} names; "
           f"hold {args.hold} days; legs {' + '.join(legs)}\n")
-    print(f"  {'#':>3} {'symbol':<8}{'score':>8}{'imom12-1':>11}{head:>11}{'beta':>7}")
+    extra = "golden X" if args.blend else ""
+    print(f"  {'#':>3} {'symbol':<8}{'score':>8}{'imom12-1':>11}{head:>11}"
+          + (f"{extra:>10}" if args.blend else "") + f"{'beta':>7}")
     for k, (sym, score) in enumerate(ranked[:args.top], 1):
         r = latest[sym]
         flag = "" if k <= cutoff else "  (below decile)"
+        gc = f"{r['golden_cross']:>10.3f}" if args.blend else ""
         print(f"  {k:>3} {sym:<8}{score:>8.3f}{r['imom252_21']*100:>10.1f}%"
-              f"{r[second]*100:>10.1f}%{r['beta']:>7.2f}{flag}")
+              f"{r[second]*100:>10.1f}%{gc}{r['beta']:>7.2f}{flag}")
     held = {20: "+2.12% per 20d matched excess (t=3.56), +4.04% raw, 58.8% positive",
             30: "+2.65% per 20d matched excess (t=3.67), +6.35% raw per 30d, 60.7% positive",
             60: "+2.63% per 20d matched excess (t=4.22), +12.75% raw per 60d, 63.8% positive"}
-    print(f"\n  Held out 2024-2026 at a {args.hold}-day hold: {held[args.hold]}.")
+    held_blend = {30: "+3.39% per 20d matched excess (t=3.72), +7.39% raw per 30d, 60.4% positive",
+                  60: "+3.48% per 20d matched excess (t=4.21), +14.82% raw per 60d, 64.7% positive"}
+    tag = held_blend[args.hold] if args.blend else held[args.hold]
+    print(f"\n  Held out 2024-2026 at a {args.hold}-day hold{' (blend)' if args.blend else ''}: {tag}.")
     print("  Excess per unit of time is flat across 5-120 day holds; longer holds win on")
     print("  costs (60d = 0.50%/yr vs 5d = 6.05%/yr) and hit rate, but are more exposed")
     print("  to a momentum crash -- the test window contained none.")

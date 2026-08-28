@@ -22,6 +22,7 @@ import csv, gzip, json, os, subprocess, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data500")
+ETF_DATA = os.path.join(HERE, "data500_etf")
 OUT = os.path.join(HERE, "ta_zip", "ta-screener", "inputs")
 os.makedirs(OUT, exist_ok=True)
 UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -61,7 +62,8 @@ def load_csv(path):
 
 
 def fetch_etf(sym):
-    path = os.path.join(DATA, f"{sym}.csv")
+    os.makedirs(ETF_DATA, exist_ok=True)
+    path = os.path.join(ETF_DATA, f"{sym}.csv")
     if os.path.exists(path):
         return path
     url = (f"https://api.nasdaq.com/api/quote/{sym}/historical?assetclass=etf"
@@ -107,7 +109,7 @@ if __name__ == "__main__":
     print(f"  benchmarks: {bench_syms}", flush=True)
 
     stocks = sorted(f[:-4] for f in os.listdir(DATA)
-                    if f.endswith(".csv") and f[:-4] not in set(SECTOR_ETFS) | {"SPY"})
+                    if f.endswith(".csv") and f[:-4] != "SPY")
 
     # prices.csv.gz
     n_rows = 0
@@ -145,7 +147,8 @@ if __name__ == "__main__":
     # benchmarks.csv.gz — long: date,symbol,adjclose (load_panel pivots it)
     series = {}
     for s in bench_syms:
-        series[s] = {d: c for d, _o, _h, _l, c, _v in load_csv(os.path.join(DATA, f"{s}.csv"))}
+        src = DATA if s == "SPY" else ETF_DATA
+        series[s] = {d: c for d, _o, _h, _l, c, _v in load_csv(os.path.join(src, f"{s}.csv"))}
     all_dates = sorted(set().union(*[set(v) for v in series.values()]))
     with gzip.open(os.path.join(OUT, "benchmarks.csv.gz"), "wt", newline="") as fh:
         w = csv.writer(fh)
