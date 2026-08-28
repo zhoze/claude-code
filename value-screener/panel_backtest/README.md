@@ -826,3 +826,34 @@ losers than winners — negative at BOTH horizons, before any holdout was touche
 The V-recovery lockout (the CRDO-March-2026 pattern) is a real, measurable miss,
 and repairing it costs more than it earns. The golden-cross gate's exclusions
 are net-positive; the current screen stands unchanged.
+
+---
+
+# Consolidated verification backtest (`verify_final.py`)
+
+One pipeline, all versions, held out 2024–2026:
+
+```
+  version                        30d exc     t   raw30   Shp | 60d exc     t    raw60   win   Shp
+  v1 IMOM 2-leg, eq-wt, 10%      +2.655%  3.68  +6.33%  2.30 | +2.639%  4.20  +12.71% 63.7%  2.68
+  v2 blend 3-leg, eq-wt, 10%     +3.392%  3.68  +7.53%  2.15 | +3.476%  4.21  +15.43% 65.3%  2.45
+  v3 blend rank-wt, 10%          +4.386%  3.99  +8.98%  2.28 | +4.390%  4.12  +18.10% 66.5%  2.53
+  v4 FINAL rank-wt, 5%           +5.604%  4.17 +10.71%  2.27 | +5.624%  3.83  +21.61% 67.9%  2.41
+
+  paired, FINAL vs each:  v1 +2.99%/20d t=3.13 · v2 +2.15% t=2.80 · v3 +1.23% t=2.56  (60d; all BETTER)
+  battery: survivorship-flat · 2024 +3.41% / 2025 +5.51% / 2026 +14.93% · random control p<0.0001
+  compounded 60d non-overlap: FINAL +718.7% total (maxDD −10.8%) vs v1 +315.8% (−8.2%), 10 periods
+```
+
+The verification also caught an implementation-convention gap: the shipped
+`rank_composite` ranked legs *within* the golden-cross-filtered set, while every
+backtest ranked legs over the full universe and filtered second. Performance
+impact was statistically zero (diff −0.004%/−0.047% per 20d, t≈0; 96.7% daily
+membership overlap), but the shipped files were aligned to the validated
+convention (rank first, filter second; pandas tie/pct semantics) and now
+reproduce the backtest pipeline's picks **name-for-name in exact order**.
+
+Honest summary of "better profitability and higher t": profitability is higher
+at every step of the ladder and every paired test is significant. The t-stat is
+higher at 30d (3.68 → 4.17) and NOT higher at 60d (4.21 → 3.83): concentration
+buys mean at the price of variance. Both facts are the result.

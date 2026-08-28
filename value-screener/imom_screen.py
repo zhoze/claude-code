@@ -430,20 +430,33 @@ def rank_composite(records_by_symbol: dict[str, dict[str, Any]],
                    legs: tuple[str, ...] = LEGS_BY_HOLD[DEFAULT_HOLD]) -> list[tuple[str, float]]:
     """Cross-sectional rank composite for ONE date. Input: {symbol: signal dict}.
 
-    Ranking is what makes this work — the legs are combined as within-day ranks,
-    not raw values, so no leg can dominate through scale.
+    Each leg is percentile-ranked over EVERY name where that leg is defined
+    (rank first, filter second — the exact construction the backtests validated);
+    a name is scored only if all legs are defined for it, so an undefined
+    golden_cross leg acts as the eligibility filter. Ties get average ranks,
+    pandas pct convention (avg_rank / n).
     """
-    syms = [s for s, r in records_by_symbol.items()
-            if all(r.get(leg) is not None for leg in legs)]
+    leg_rank: dict[str, dict[str, float]] = {}
+    for leg in legs:
+        vals = sorted((r[leg], s) for s, r in records_by_symbol.items()
+                      if r.get(leg) is not None)
+        n = len(vals)
+        rk: dict[str, float] = {}
+        i = 0
+        while i < n:
+            j = i
+            while j + 1 < n and vals[j + 1][0] == vals[i][0]:
+                j += 1
+            avg = (i + j) / 2.0 + 1.0
+            for t in range(i, j + 1):
+                rk[vals[t][1]] = avg / n
+            i = j + 1
+        leg_rank[leg] = rk
+    syms = [s for s in records_by_symbol if all(s in leg_rank[l] for l in legs)]
     if len(syms) < 20:
         return []
-    ranks: dict[str, float] = {s: 0.0 for s in syms}
-    for leg in legs:
-        ordered = sorted(syms, key=lambda s: records_by_symbol[s][leg])
-        m = len(ordered) - 1
-        for k, s in enumerate(ordered):
-            ranks[s] += (k / m if m else 0.5)
-    return sorted(((s, ranks[s] / len(legs)) for s in syms), key=lambda x: -x[1])
+    return sorted(((s, sum(leg_rank[l][s] for l in legs) / len(legs)) for s in syms),
+                  key=lambda x: -x[1])
 
 
 def main(argv: Optional[list[str]] = None) -> None:
@@ -485,8 +498,9 @@ def main(argv: Optional[list[str]] = None) -> None:
         if args.hold not in BLEND_LEGS_BY_HOLD:
             raise SystemExit(f"--blend is validated for holds {sorted(BLEND_LEGS_BY_HOLD)} only")
         legs = BLEND_LEGS_BY_HOLD[args.hold]
-        # golden_cross is undefined outside a golden cross, so it also filters.
-        latest = {s: r for s, r in latest.items() if r.get("golden_cross") is not None}
+        # golden_cross is undefined outside a golden cross; rank_composite ranks
+        # each leg over the FULL universe first (the validated construction) and
+        # the undefined gc leg then filters eligibility on its own.
     else:
         legs = LEGS_BY_HOLD[args.hold]
     if args.decile is None:
