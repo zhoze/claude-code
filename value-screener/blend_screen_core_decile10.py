@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""blend_screen_core — the final screen as a pure algorithm. No I/O of any kind.
+"""blend_screen_core_decile10 — the decile-10 blend screen as a pure algorithm.
+No I/O of any kind.
 
 The caller supplies price data; this module computes the picks. There is no
 downloading, no file access, no universe construction and no assumption about
@@ -22,9 +23,11 @@ day (no look-ahead anywhere):
 Selection: each leg is percentile-ranked across EVERY symbol where that leg is
 defined (rank first, filter second — ties get average ranks, rank/n). A symbol
 is scored only if all legs are defined. The composite is the equal mean of the
-three leg ranks. The top ``selection`` fraction (default 5%) is taken, weighted
+three leg ranks. The top ``selection`` fraction (default 10%) is taken, weighted
 linearly by rank: k, k-1, ..., 1, normalized (top position ~2x average weight).
-The decile-10 configuration ships as a sibling file, blend_screen_core_decile10.py.
+This file is the DECILE-10 configuration — the calmer point on the measured
+risk/return frontier (best 60-day own-series t-stat and Sharpe of the ladder).
+The top-5% configuration lives in its sibling file, blend_screen_core.py.
 
 Intended protocol: enter at the next session's open, hold ``60`` trading days
 (30 also validated), re-rank, rebalance.
@@ -66,9 +69,11 @@ integrating system can filter on ``picks[i]["date"]`` if staleness matters.
 VALIDATION SUMMARY (full detail in panel_backtest/README.md of the repository)
 ------------------------------------------------------------------------------
 Held out 2024-2026 on ~500 US large caps, next-open execution, 12bps round trip:
-60-day hold +21.61% raw per trade (67.9% positive), +5.62% per 20 days matched
-excess vs same-day same-drawdown-bucket peers (Newey-West t=3.83), survivorship-
-flat, random control p<0.0001; 30-day hold +10.71% raw, t=4.17. Caveats: about
+60-day hold +18.10% raw per trade (66.5% positive), +4.39% per 20 days matched
+excess vs same-day same-drawdown-bucket peers (Newey-West t=4.12, Sharpe 2.53),
+survivorship-flat, random control p<0.0001; 30-day hold +8.98% raw, t=3.99.
+The 5% sibling returns ~28% more excess per trade (+21.61% raw at 60d) at the
+cost of concentration and a lower 60d t (3.83). Caveats: about
 half the raw return is market beta; the portfolio runs beta ~2 and concentrates
 in the leading momentum theme; there is no stop loss (stops tested worse); the
 window contained no momentum crash; validated long-only on liquid US large caps.
@@ -87,7 +92,7 @@ TREND_MA = 200
 SMA_FAST = 50           # golden-cross fast leg
 SMA_SLOW = 200          # golden-cross slow leg
 WARMUP = 260
-DEFAULT_SELECTION = 0.05
+DEFAULT_SELECTION = 0.10
 LEGS = ("imom252_21", "ma_1_200", "golden_cross")
 MIN_BARS = WARMUP + 5
 

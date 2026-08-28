@@ -2,7 +2,7 @@
 """BLEND Screen — standalone, single-file momentum + golden-cross stock screener.
 
 The DECILE-10 configuration of the blend: identical signals and construction to
-blend_screen_decile10.py, but selecting the TOP 10% of eligible names (~35
+blend_screen_standalone.py, but selecting the TOP 10% of eligible names (~35
 stocks) instead of the top 5% (~18). This is the configuration with the best
 60-day own-series t-stat (4.12) and the best blend Sharpe (2.53) — the calmer
 point on the measured risk/return frontier. Use the 5% sibling for maximum
