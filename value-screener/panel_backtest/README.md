@@ -528,3 +528,96 @@ excluding names below 75% of their 52-week high), by year +1.96% / +2.78% /
 `--hold 20` still selects the original pair. Note the 30-60d range itself was
 chosen after seeing out-of-sample results across horizons, so that choice carries
 selection risk; the leg re-ranking within it did not.
+
+---
+
+# Head-to-head vs the 150-screen ta-screener package
+
+`build_ta_inputs.py` rebuilds ta-screener's FMP-shaped input contract from this
+panel (507 names, split-adjusted so its back-adjust factor is exactly 1.0, Nasdaq
+sectors mapped to FMP names, SPY + 11 SPDR sector ETFs as benchmarks).
+`compare_screens.py` scores every screen on the yardstick used throughout this
+directory; `deepdive.py` stress-tests the leaders.
+
+ta-screener ranks its 150 screens by an **evidence-metadata rubric, not a
+backtest** (its README says so explicitly). This is the empirical counterpart.
+
+Method unchanged: top decile ranked daily, matched excess against same-day
+same-drawdown-bucket peers, non-overlapping monthly portfolio returns with
+Newey-West errors, held out on 2024-2026. That window is out-of-sample for
+ta-screener (never fitted here) and for IMOM (legs chosen on 2020-2023).
+
+**138 of 150 scored, 0 errors.** 13 skipped: the 12 earnings/PEAD screens (no
+earnings feed) plus `ttm_squeeze`. The PEAD family is untested here, not judged.
+
+The IMOM reimplementation used for the comparison rank-correlates 0.9999 with the
+production module and matches its decile 50/50, reproducing +2.622%/t=4.28 against
+the module's +2.630%/t=4.22.
+
+## Leaderboard — 60-day matched excess per 20 days
+
+```
+  #  screen                    family      60d/20d     t  30d/20d     t    raw60   win%
+  1  golden_cross              trend       +3.221%  3.75  +2.969%  3.48  +14.25%  62.8%
+  2  ts_momentum               momentum    +3.092%  4.22  +3.119%  3.91  +14.30%  64.0%
+  3  mom_12_1                  momentum    +2.830%  4.05  +2.836%  3.53  +13.58%  63.2%
+  4  IMOM (this screen)        imom        +2.622%  4.28  +2.644%  3.79  +12.76%  64.0%
+  5  regime_filtered_momentum  momentum    +2.395%  3.35  +2.474%  2.57   +9.20%  57.7%
+  7  ppo                       trend       +2.093%  2.99  +2.058%  3.03  +11.24%  62.3%
+  9  alpha_042                 alphas101   +1.743%  5.40  +1.652%  5.72  +11.79%  66.1%
+ 15  alpha_100                 alphas101   +1.100%  7.46  +0.968%  6.83   +9.24%  64.3%
+```
+
+IMOM places 4th on excess but carries the **highest t of the leaders**. The
+alphas101 family produces the highest t-stats of all (alpha_100 t=7.46) on modest
+excess — but alpha_100 turns over 67% of its decile daily, and alpha_042 and
+obv_slope both go negative in 2026, so none survive as 30-60 day holds.
+
+## No single screen beats IMOM
+
+Paired monthly differences vs IMOM, Newey-West:
+
+```
+  golden_cross     +0.599%  t= 1.67   tied
+  ts_momentum      +0.470%  t= 1.74   tied
+  mom_12_1         +0.208%  t= 0.65   tied
+  ppo              -0.529%  t=-1.25   tied
+  alpha_042        -0.879%  t=-1.20   tied
+```
+
+Every difference is insignificant. The top four are statistically the same screen —
+unsurprising given overlap with IMOM's decile: ts_momentum 79%, regime_filtered
+75%, mom_12_1 73%.
+
+## The blend is genuinely better
+
+golden_cross overlaps IMOM only 50%, so it diversifies. Averaging the two
+cross-sectional ranks and taking the top decile:
+
+```
+                    30d/20d     t   60d/20d     t    raw60   win%
+  IMOM alone        +2.644%  3.79   +2.622%  4.28  +12.76%  64.0%
+  golden_cross      +2.969%  3.48   +3.221%  3.75  +14.25%  62.8%
+  BLEND             +3.372%  3.72   +3.565%  4.21  +15.15%  64.8%
+```
+
+The blend beats IMOM by +0.943% per 20 days at t=3.42 — and it **replicates in the
+period it was not chosen on**:
+
+```
+  2020-2023 (independent)   IMOM +1.005%   blend +2.081%   diff +1.076%  t=2.61
+  2024-2026 (chosen on)     IMOM +2.622%   blend +3.565%   diff +0.943%  t=3.42
+```
+
+Survivorship-flat: +3.565% -> +3.564% (>=50% of 52w high) -> +3.172% (>=75%).
+
+`golden_cross` is `SMA50 > SMA200`, scored as the spread plus a freshness bonus
+`1/(1+days since the cross)` — it rewards a *young* golden cross, information that
+IMOM's 12-month momentum and 200-day distance do not contain.
+
+## Caveats
+
+- golden_cross was chosen after seeing the leaderboard, so the choice carries
+  selection risk. The 2020-2023 replication is what makes it credible.
+- The 12 PEAD/earnings screens are untested, not disproven.
+- vwap is a (H+L+C)/3 proxy here; alphas using vwap are mildly approximated.
