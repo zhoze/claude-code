@@ -1,45 +1,33 @@
 name: Baltic Wind Energy News Report
 
 on:
-  schedule:
-    # Fallback trigger only — the reliable one is a Routine dispatching this
-    # workflow (see SCHEDULING.md). 09:30 Europe/Tallinn is 06:30 UTC in
-    # summer (EEST) / 07:30 UTC in winter (EET); the script's local-time guard
-    # lets the right one through and skips the other, and last_run.json makes
-    # a second run the same day a no-op.
-    #
-    # Keep this list SHORT. A 10-entry fan was tried on 2026-07-28 to work
-    # around GitHub's cron lag and the workflow then got zero scheduled runs
-    # the next day, while the repo's 2-entry workflows kept firing — matching
-    # GitHub's documented throttling of high-frequency schedules.
-    - cron: "30 6 * * 1-5"
-    - cron: "30 7 * * 1-5"
-  workflow_run:
-    # Reliability chain — the real fix while this repo's cron keeps skipping
-    # this workflow (zero scheduled runs on both 2026-07-28 and 2026-07-29).
-    # These two digests DO get triggered every day, so run right after one of
-    # them finishes: the law digest is dispatched ~07:00 UTC (10:00 Tallinn)
-    # and ERR News fires by cron ~07:45 UTC. Both are past the 09:30 Tallinn
-    # guard, and last_run.json means whichever lands first sends and the other
-    # is a no-op. Needs no connector, no push, no Claude session.
-    workflows: ["Estonian Law Daily Digest", "ERR News Trustworthiness Digest"]
-    types: [completed]
+  # ---------------------------------------------------------------------
+  # PAUSED 2026-08-03 at the user's request ("Stop agent"). All automatic
+  # triggers are disabled, so no runs happen and no report emails are sent.
+  # Only manual dispatch remains.
+  #
+  # To re-enable, uncomment the schedule / workflow_run / push blocks below.
+  # The workflow_run chain was the one that actually delivered daily (fires
+  # ~07:01 UTC = 10:01 Tallinn); cron alone was unreliable. See SCHEDULING.md.
+  #
+  #  schedule:
+  #    - cron: "30 6 * * 1-5"   # 09:30 Tallinn in summer (EEST)
+  #    - cron: "30 7 * * 1-5"   # 09:30 Tallinn in winter (EET)
+  #  workflow_run:
+  #    workflows: ["Estonian Law Daily Digest", "ERR News Trustworthiness Digest"]
+  #    types: [completed]
+  #  push:
+  #    branches: ["main"]
+  #    paths: ["baltic-wind-news-agent/trigger/**"]
+  # ---------------------------------------------------------------------
   workflow_dispatch:
     inputs:
       force:
-        # Defaults to FALSE on purpose: clicking "Run workflow" used to force
-        # a send, which is how 2026-07-28 got three identical reports. Tick it
-        # only when you deliberately want a duplicate/off-hours report.
+        # Defaults to FALSE: a plain "Run workflow" still respects the 09:30
+        # Tallinn and once-per-day guards. Tick it to force a report now.
         description: "Bypass the 09:30 Tallinn and once-per-day guards"
         type: boolean
         default: false
-  push:
-    # Manual escape hatch for anyone who has push access: committing a
-    # timestamp to trigger/run-request.txt on main starts a run without the
-    # Actions UI. State commits touch only state/ (and say [skip ci]), so
-    # they never retrigger this.
-    branches: ["main"]
-    paths: ["baltic-wind-news-agent/trigger/**"]
 
 concurrency:
   group: baltic-wind-daily
