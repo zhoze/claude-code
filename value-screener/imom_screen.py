@@ -532,9 +532,18 @@ def main(argv: Optional[list[str]] = None) -> None:
     held = {20: "+2.12% per 20d matched excess (t=3.56), +4.04% raw, 58.8% positive",
             30: "+2.65% per 20d matched excess (t=3.67), +6.35% raw per 30d, 60.7% positive",
             60: "+2.63% per 20d matched excess (t=4.22), +12.75% raw per 60d, 63.8% positive"}
-    held_blend = {30: "+5.60% per 20d matched excess (t=4.17), +10.71% raw per 30d, 63.4% positive",
-                  60: "+5.62% per 20d matched excess (t=3.83), +21.61% raw per 60d, 67.9% positive"}
-    tag = held_blend[args.hold] if args.blend else held[args.hold]
+    held_blend_05 = {30: "+5.60% per 20d matched excess (t=4.17), +10.71% raw per 30d, 63.4% positive",
+                     60: "+5.62% per 20d matched excess (t=3.83), +21.61% raw per 60d, 67.9% positive"}
+    held_blend_10 = {30: "+4.39% per 20d matched excess (t=3.99), +8.98% raw per 30d, 62.2% positive",
+                     60: "+4.39% per 20d matched excess (t=4.12), +18.10% raw per 60d, 66.5% positive"}
+    if args.blend and abs(args.decile - 0.05) < 1e-9:
+        tag = held_blend_05[args.hold]
+    elif args.blend and abs(args.decile - 0.10) < 1e-9:
+        tag = held_blend_10[args.hold]
+    elif args.blend:
+        tag = "no validated figures for this selection fraction (validated: 0.05, 0.10)"
+    else:
+        tag = held[args.hold]
     print(f"\n  Held out 2024-2026 at a {args.hold}-day hold{' (blend)' if args.blend else ''}: {tag}.")
     print("  Excess per unit of time is flat across 5-120 day holds; longer holds win on")
     print("  costs (60d = 0.50%/yr vs 5d = 6.05%/yr) and hit rate, but are more exposed")
