@@ -413,7 +413,7 @@ def main(argv: Optional[list[str]] = None) -> None:
     print(f"\n===== IMOM SCREEN — {asof} =====")
     print(f"Universe {len(ranked)} ranked ({skipped_illiquid} dropped on liquidity"
           + (f", {stale} without a bar on {asof}" if stale else "") + ")")
-    print(f"Top decile = {cutoff} names; hold {args.hold} days; legs {' + '.join(legs)}\n")
+    print(f"Top {args.decile*100:.0f}% = {cutoff} names; hold {args.hold} days; legs {' + '.join(legs)}\n")
     print(f"  {'#':>3} {'symbol':<8}{'score':>8}{'idio 12-1':>11}"
           f"{LEG_LABEL[second]:>11}{'beta':>7}{'price':>10}")
     for k, (sym, score) in enumerate(ranked[:args.top], 1):

@@ -690,3 +690,64 @@ paragraph as the disclosure.
   2020–2023 replication are what keep this result honest, not the OOS label.
 - Rank weighting concentrates: top name ~5.6% of a 35-name decile (~2× average).
 - The rejected candidates are recorded so they are not retried.
+
+---
+
+# Fine-tuning the amended blend: decile 5% adopted (+28% held-out, target was +10%)
+
+`finetune.py` is the experiment. Target set by the user: results ≥10% better than
+the rank-weighted blend (+4.390%/20d excess, +18.10% raw at 60d). The literal
+instruction — iterate until the backtest shows +10% — is the data-mining loop the
+5-day experiment proved fatal, so the +10% gate was applied **in-sample**, with
+one out-of-sample confirmation shot.
+
+## Pre-registered grid (15 variants, one parameter at a time + combos)
+
+```
+  A decile fraction   .05 / .075 / .15        B rank-weight power  p=2 / p=3
+  C leg weights       six alternatives to equal thirds
+  D combos            of the per-family winners
+```
+
+In-sample gate: 60d own excess ≥ 1.10× baseline AND paired t ≥ 1.5 AND 30d diff > 0.
+
+```
+  A decile .050   +3.109%  diff +0.653% t=1.78   PASS   <- winner
+  A decile .075   +2.825%  diff +0.369% t=1.69   PASS
+  A decile .150   +2.078%  diff -0.378% t=-2.06  fail
+  B power 2/3     PASS (weaker than A)
+  C leg weights   ALL fail — every alternative within ±0.05% of equal thirds
+  D all combos    fail the paired-t gate — concentration levers do NOT stack
+```
+
+Two useful negative findings: the composite is **robust to leg weights** (a flat
+parameter is a good sign — nothing to tune, nothing to overfit), and stacking
+concentration levers (5% + steeper weights) degrades reliability.
+
+## Out-of-sample shot (2024–2026)
+
+```
+                       30d/20d     t    raw30  Sharpe | 60d/20d     t    raw60  Sharpe
+  decile 10% (was)     +4.386%  3.99  +8.98%   2.28  | +4.390%  4.12  +18.10%   2.53
+  DECILE 5% (adopted)  +5.604%  4.17  +10.71%  2.27  | +5.624%  3.83  +21.61%   2.41
+
+  vs the +10% target:  excess +27.7% (30d) / +28.1% (60d);  raw +19.3% / +19.4%
+  paired diff          t=3.34 (30d) / t=2.56 (60d)
+  survivorship (60d)   prox≥0 +5.624 / ≥50 +5.628 / ≥75 +5.070 — flat
+  by year (60d)        2024 +3.41%   2025 +5.51%   2026 +14.93%
+  random control       p < 0.0001
+```
+
+Target met on both metrics at both horizons, out of sample, on the first and only
+shot — the mechanism is simply leaning further up the measured monotonic
+rank-return curve (rank #1 ≈ +10.9% excess vs +1.0% for ranks 26–50).
+
+## Costs, stated plainly
+
+- ~18 names instead of 35; top position ~11% of capital.
+- 60d own-series t slips 4.12 → 3.83; 60d Sharpe 2.53 → 2.41 (30d own-t improves,
+  3.99 → 4.17). Higher mean, higher variance.
+- 2026's +14.93%/20d is AI-concentration-driven; do not extrapolate it.
+- **Seventh analytical pass over 2024–2026.** The holdout label is worn out; the
+  pre-registration, in-sample gates and single-shot protocol carry the weight.
+- `--decile` still overrides (0.10 restores the prior construction).

@@ -177,9 +177,21 @@ measured monotonic rank-return relation). One out-of-sample shot, 2024-2026:
 
 Stated plainly: at 60d the own-series t is a statistical tie (4.12 vs 4.21);
 at 30d it is clearly higher. The paired test is the correct instrument and is
-decisive at both horizons. This was the sixth analytical pass over the 2024-2026
-window, so its value as a holdout is eroded -- the in-sample replication and the
-pre-registration are what keep this honest.
+decisive at both horizons.
+
+Fine-tuning (adopted): a second pre-registered grid over decile fraction,
+rank-weight power and leg weights (15 variants, in-sample selection with a +10%
+gate, one OOS shot) settled on cutting the selection from the top 10% to the TOP
+5% (~18 names, linear rank weights, top position ~11%). Held out 2024-2026:
+30d excess +5.604% (t=4.17), 60d +5.624% (t=3.83) -- +28% over the decile-10%
+version (paired t=3.34/2.56), raw +10.71%/30d and +21.61%/60d, survivorship-flat,
+every year positive. Costs stated plainly: 60d own-t 4.12 -> 3.83 and 60d Sharpe
+2.53 -> 2.41; breadth halves. Concentration levers do not stack (all combos
+failed the in-sample paired-t gate) and leg weights are flat (all six
+alternatives within 0.05% of equal thirds). --blend now defaults to 5%;
+--decile overrides. This was the seventh analytical pass over the 2024-2026
+window -- the pre-registration, gates and in-sample selection are what keep it
+honest, not the holdout label.
 
 5-day horizon (from an earlier tuning attempt)
 ---------------------------------------------------
@@ -445,7 +457,8 @@ def main(argv: Optional[list[str]] = None) -> None:
     p.add_argument("--blend", action="store_true",
                    help="add ta-screener's golden_cross leg (30/60-day holds only). "
                         "Higher excess, but only names in a golden cross are eligible.")
-    p.add_argument("--decile", type=float, default=DEFAULT_DECILE)
+    p.add_argument("--decile", type=float, default=None,
+                   help="selection fraction (default 0.10 plain, 0.05 for --blend)")
     p.add_argument("--top", type=int, default=20, help="how many names to print")
     args = p.parse_args(argv)
 
@@ -476,6 +489,8 @@ def main(argv: Optional[list[str]] = None) -> None:
         latest = {s: r for s, r in latest.items() if r.get("golden_cross") is not None}
     else:
         legs = LEGS_BY_HOLD[args.hold]
+    if args.decile is None:
+        args.decile = 0.05 if args.blend else DEFAULT_DECILE
     ranked = rank_composite(latest, legs)
     if not ranked:
         raise SystemExit("not enough symbols with sufficient history to rank")
@@ -485,7 +500,7 @@ def main(argv: Optional[list[str]] = None) -> None:
     second = legs[1]
     head = LEG_LABEL[second]
     print(f"===== {'IMOM + GOLDEN-CROSS BLEND' if args.blend else 'IMOM SCREEN'} — {asof} =====")
-    print(f"Universe {len(ranked)} symbols; top decile = {cutoff} names; "
+    print(f"Universe {len(ranked)} symbols; top {args.decile*100:g}% = {cutoff} names; "
           f"hold {args.hold} days; legs {' + '.join(legs)}\n")
     extra = "golden X" if args.blend else ""
     wts = rank_weights(cutoff) if args.blend else None
@@ -503,8 +518,8 @@ def main(argv: Optional[list[str]] = None) -> None:
     held = {20: "+2.12% per 20d matched excess (t=3.56), +4.04% raw, 58.8% positive",
             30: "+2.65% per 20d matched excess (t=3.67), +6.35% raw per 30d, 60.7% positive",
             60: "+2.63% per 20d matched excess (t=4.22), +12.75% raw per 60d, 63.8% positive"}
-    held_blend = {30: "+4.39% per 20d matched excess (t=3.99), +8.98% raw per 30d, 62.2% positive",
-                  60: "+4.39% per 20d matched excess (t=4.12), +18.10% raw per 60d, 66.5% positive"}
+    held_blend = {30: "+5.60% per 20d matched excess (t=4.17), +10.71% raw per 30d, 63.4% positive",
+                  60: "+5.62% per 20d matched excess (t=3.83), +21.61% raw per 60d, 67.9% positive"}
     tag = held_blend[args.hold] if args.blend else held[args.hold]
     print(f"\n  Held out 2024-2026 at a {args.hold}-day hold{' (blend)' if args.blend else ''}: {tag}.")
     print("  Excess per unit of time is flat across 5-120 day holds; longer holds win on")
