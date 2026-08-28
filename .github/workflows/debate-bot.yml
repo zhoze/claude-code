@@ -1,9 +1,9 @@
 name: Telegram Debate Bot
 
 on:
-  schedule:
-    # every 5 min (GitHub cron is best-effort; often 10-20 min in practice)
-    - cron: "*/5 * * * *"
+  # Bot paused by owner request. To re-enable, restore:
+  # schedule:
+  #   - cron: "*/5 * * * *"
   workflow_dispatch:
 
 concurrency:
