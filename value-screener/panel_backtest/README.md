@@ -751,3 +751,34 @@ rank-return curve (rank #1 ≈ +10.9% excess vs +1.0% for ranks 26–50).
 - **Seventh analytical pass over 2024–2026.** The holdout label is worn out; the
   pre-registration, in-sample gates and single-shot protocol carry the weight.
 - `--decile` still overrides (0.10 restores the prior construction).
+
+---
+
+# Final same-construction comparison (fine-tuned blend vs ta-screener leaders)
+
+The attached ta-screener package (re-uploaded; byte-identical to the earlier one)
+compared against the fine-tuned blend with EVERY screen given the identical
+construction — top 5%, linear rank weights, held out 2024–2026 (`final_compare.py`):
+
+```
+  screen                      60d exc     t    raw60   win   Shp   vs blend    t
+  BLEND (fine-tuned)          +5.624%  3.83  +21.61% 67.9%  2.41        --
+  ts_momentum                 +5.497%  4.38  +21.58% 65.2%  2.24   -0.127% -0.16
+  mom_12_1                    +5.044%  4.10  +20.33% 64.1%  2.20   -0.580% -0.70
+  golden_cross                +4.578%  3.24  +18.48% 65.0%  1.68   -1.046% -1.97
+  mom_6_1                     +4.449%  3.34  +18.73% 64.2%  2.22   -1.175% -3.05
+  donchian_55                 +4.312%  4.55  +17.73% 63.8%  1.04   -1.134% -0.72
+  ppo                         +4.309%  3.79  +18.15% 64.5%  1.98   -1.315% -0.90
+  alpha_042                   +3.522%  5.63  +17.60% 71.2%  3.65   -2.102% -1.10
+  vol_scaled_momentum         +3.244%  3.66  +14.34% 64.1%  1.91   -2.380% -2.08
+  obv_slope                   +2.330%  4.65  +12.74% 65.6%  2.82   -3.295% -1.83
+  alpha_100                   +1.927%  5.15  +12.11% 64.8%  2.76   -3.698% -2.30
+```
+
+The blend leads on 60d excess and raw profit; ts_momentum is a statistical tie
+(diff t=-0.16; the two deciles overlap ~79%). At 30d the two are a dead heat
+(blend +5.604%/+10.71% raw vs ts_momentum +5.676%/+10.99%). Everything else is
+behind, several significantly. Notables: golden_cross ALONE degrades badly under
+concentration (Sharpe 1.68) — its value is as a leg, not a screen; alpha_042 is
+the Sharpe king (3.65) at two-thirds of the profit, the pick for a
+volatility-targeted book.
