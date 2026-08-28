@@ -782,3 +782,47 @@ behind, several significantly. Notables: golden_cross ALONE degrades badly under
 concentration (Sharpe 1.68) — its value is as a leg, not a screen; alpha_042 is
 the Sharpe king (3.65) at two-thirds of the profit, the pick for a
 volatility-targeted book.
+
+---
+
+# Full-universe recall scan: the screen already catches the winners; all three "catch more" amendments rejected
+
+`scan_amend.py`. Question: how much of the best performance does the screen
+actually capture, and can eligibility/momentum changes capture more?
+
+## Recall diagnosis (held out 2024–2026)
+
+"Golden stock-days" = (stock, day) pairs whose forward-60d return lands in the
+top 2% of the whole panel (≥ +57.4%). n = 5,393.
+
+```
+  CAUGHT (in the 17-name selection)      21.3%   <- 4.3x the 4.8% random base rate
+  eligible, ranked in the 5-10% band     11.6%   (the decile-10 construction catches these)
+  eligible, ranked below 10%             40.0%
+  INELIGIBLE (no golden cross)           27.1%
+```
+
+Engagement with the period's top-25 buy-and-hold stocks (up to +1737%): the
+screen selected **24 of 25** at some point, typically for 160–380 days each
+(LITE 227d, BE 305d, CLS 378d, HOOD 348d, APP 352d…). The single miss is GEV —
+100% ineligible because it is a 2024 spin-off: 252d of beta history + a 200d MA
++ a golden cross takes roughly a year of listed life. **Young listings are the
+screen's one structural blind spot** (NBIS was also ineligible 55% of days), and
+it is a data-history constraint, not a parameter.
+
+## Pre-registered amendments — all failed the in-sample gate
+
+```
+  candidate                        60d IS own   diff      t    gate
+  CURRENT screen                    +3.109%
+  C1 early-entry eligibility        +2.655%   -0.454%  -1.62   fail
+     (cross OR above-200dMA with rising SMA50)
+  C2 above-200dMA eligibility only  +2.815%   -0.294%  -0.99   fail
+  C3 + idio momentum 63d leg        +2.813%   -0.296%  -2.09*  fail  (*30d t)
+```
+
+Every relaxation aimed at catching the 27% locked-out golden days admitted more
+losers than winners — negative at BOTH horizons, before any holdout was touched.
+The V-recovery lockout (the CRDO-March-2026 pattern) is a real, measurable miss,
+and repairing it costs more than it earns. The golden-cross gate's exclusions
+are net-positive; the current screen stands unchanged.
