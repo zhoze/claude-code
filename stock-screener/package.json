@@ -1,0 +1,11 @@
+{
+  "name": "elite-magic-trader",
+  "version": "1.0.0",
+  "description": "Elite Magic Trader stock screener — static web app + command-line runner",
+  "bin": { "magic": "./cli.js" },
+  "scripts": {
+    "screen": "node cli.js --screen",
+    "serve": "python3 -m http.server 8000"
+  },
+  "private": true
+}

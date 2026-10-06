@@ -1,0 +1,34 @@
+# Manual walk-forward backtest of the Buffett screen.
+# Runs the screen as of ~N days ago and prints forward returns to the job log.
+# Requires the FMP_KEY secret in the "screen" GitHub Environment. Manual-only.
+name: Backtest screener
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "How far back the as-of screen is (calendar days)"
+        type: string
+        default: "60"
+      top:
+        description: "Top N picks to evaluate"
+        type: string
+        default: "10"
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    environment: screen   # uses the GitHub Environment "screen" (and its FMP_KEY secret)
+    defaults:
+      run:
+        working-directory: value-screener
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run backtest (FMP)
+        env:
+          FMP_KEY: ${{ secrets.FMP_KEY }}   # stored secret — never hardcoded
+        run: python3 backtest.py --days "${{ inputs.days || '60' }}" --top "${{ inputs.top || '10' }}"
