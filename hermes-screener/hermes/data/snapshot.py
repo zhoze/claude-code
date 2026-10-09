@@ -30,7 +30,7 @@ import numpy as np
 import pandas as pd
 
 from .. import vendored
-from .flatfiles import FlatFiles, apply_corporate_actions
+from .flatfiles import FlatFiles, GroupedDaily, apply_corporate_actions
 from .massive import years_ago
 
 log = logging.getLogger(__name__)
@@ -272,22 +272,34 @@ def load_histories(cfg, massive, syms, bsyms, frm, long_from, session, flatfiles
     start = min(frm, long_from)
     mode = infra["apis"]["massive"].get("history_source", "auto")
     ff_cfg = infra["apis"]["massive"]["flatfiles"]
+    workers = int(ff_cfg.get("workers", 8))
+    raw = None
     if flatfiles is None and mode in ("auto", "flatfiles") and FlatFiles.available(ff_cfg):
         flatfiles = FlatFiles(ff_cfg, cfg.path("flatfiles"))
     if mode == "flatfiles" and flatfiles is None:
         raise RuntimeError("history_source=flatfiles but MASSIVE_S3_ACCESS_KEY_ID / "
                            "MASSIVE_S3_SECRET_ACCESS_KEY are not set")
-    if flatfiles is not None and mode != "rest":
-        raw = flatfiles.bars(set(every), start, session,
-                             workers=int(ff_cfg.get("workers", 8)))
+    if flatfiles is not None and mode in ("auto", "flatfiles"):
+        raw = flatfiles.bars(set(every), start, session, workers=workers)
         if raw.empty:
             msg = (f"Massive flat files gave no bars ({len(flatfiles.missing)} days failed: "
                    f"{flatfiles.errors})")
             if mode == "flatfiles":
                 raise RuntimeError(msg)
-            log.warning("%s — falling back to per-ticker REST aggregates", msg)
-            flatfiles = None
-    if flatfiles is not None and mode != "rest":
+            log.warning("%s — falling back to the grouped-daily REST endpoint", msg)
+            raw = None
+    source = "massive_flatfiles"
+    if raw is None and mode in ("auto", "grouped"):
+        grouped = GroupedDaily(massive, cfg.path("grouped"))
+        raw = grouped.bars(set(every), start, session,
+                           workers=int(infra["apis"]["massive"]["workers"]))
+        source = "massive_grouped_daily"
+        log.info("grouped daily: %d downloaded, %d cached, %d failed %s", grouped.downloaded,
+                 grouped.cached, len(grouped.missing), grouped.errors)
+        if raw.empty:
+            log.warning("grouped-daily endpoint gave no bars — per-ticker REST fallback")
+            raw = None
+    if raw is not None:
         splits = massive.splits_bulk(every, start)
         divs = massive.dividends_bulk(every, start)
         if splits is None or divs is None:
@@ -299,9 +311,10 @@ def load_histories(cfg, massive, syms, bsyms, frm, long_from, session, flatfiles
             dv = divs[divs["ticker"] == t] if len(divs) else None
             h = apply_corporate_actions(g.drop(columns="ticker"), sp, dv)
             # day aggregates carry no VWAP: typical price (H+L+C)/3 stands in, flagged
-            h["vwap"] = (h["high"] + h["low"] + h["close"]) / 3.0
+            if h["vwap"].isna().all():
+                h["vwap"] = (h["high"] + h["low"] + h["close"]) / 3.0
             out[t] = h.reset_index(drop=True)
-        return out, "massive_flatfiles"
+        return out, source
 
     def one(sym):
         return sym, massive.daily_history(sym, frm if sym in set(syms) else long_from, session)

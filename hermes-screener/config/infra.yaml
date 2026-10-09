@@ -8,6 +8,7 @@ paths:
   audit: audit
   flatfiles: data/flatfiles   # local cache of Massive day-aggregate files (persist it!)
   cache: data/cache
+  grouped: data/grouped       # local cache of grouped-daily REST pulls (persist it!)
 
 apis:
   fmp:
@@ -20,7 +21,7 @@ apis:
     key_env: MASSIVE_KEY
     workers: 4
     max_rpm: null           # Massive plan limit: Basic (free) = 5; paid plans = unlimited (null)
-    history_source: auto    # auto (flat files if S3 keys are set) | flatfiles | rest
+    history_source: auto    # auto: flat files (S3) -> grouped daily (REST) -> per-ticker | flatfiles | grouped | rest
     flatfiles:              # Massive Flat Files — bulk daily history (Starter: 5 years)
       endpoint: https://files.massive.com
       bucket: flatfiles
@@ -36,6 +37,7 @@ history:
   market_since: null        # SPY + sector ETFs history start, e.g. "2007-01-01" (Advanced plan)
   market_years: 5           # used when market_since is null (Massive Starter = 5y history)
   name_since_years: 5       # per-name depth for scenarios (Massive plan permitting)
+  min_price_bars: null      # override ta-screener's 400-bar panel minimum (e.g. 200 for 1y)
 
 benchmarks:
   market: SPY

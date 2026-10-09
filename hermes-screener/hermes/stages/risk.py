@@ -105,7 +105,7 @@ def _hmm_2state(x: np.ndarray, iters: int = 200, tol: float = 1e-8):
 def market_regime(market: pd.DataFrame, cfg, years: int = 10) -> dict:
     spy = market[market["symbol"] == cfg.infra["benchmarks"]["market"]].sort_values("date")
     px = spy["adjclose"].astype(float).to_numpy()
-    if len(px) < 300:
+    if len(px) < 200:
         return {"label": "unknown", "probs": {}, "model": "insufficient SPY history"}
     x = np.diff(np.log(px))[-252 * years:]
     mu, var, A, filt, ll = _hmm_2state(x)

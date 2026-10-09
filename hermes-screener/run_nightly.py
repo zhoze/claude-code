@@ -38,13 +38,31 @@ def main(argv=None) -> int:
     ap.add_argument("--root", help="output root for data/db/reports (default: this dir)")
     ap.add_argument("--massive-rpm", type=float,
                     help="Massive requests/minute cap (plan limit; overrides infra.yaml)")
+    ap.add_argument("--history-years", type=float,
+                    help="price history depth for names and benchmarks (e.g. 1); also scales "
+                         "the TA panel's minimum bar count")
+    ap.add_argument("--history-source", choices=["auto", "flatfiles", "grouped", "rest"],
+                    help="Massive price-history source (overrides infra.yaml)")
+    ap.add_argument("--no-options-check", action="store_true",
+                    help="skip the listed-options universe filter (saves ~1 call per name)")
     ap.add_argument("--demo", action="store_true", help="offline synthetic data (no keys)")
     ap.add_argument("-v", "--verbose", action="store_true")
     a = ap.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if a.verbose else logging.INFO,
                         format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 
-    over = {"infra": {"apis": {"massive": {"max_rpm": a.massive_rpm}}}} if a.massive_rpm else None
+    over: dict = {"infra": {"apis": {"massive": {}}, "history": {}}, "strategy": {}}
+    if a.massive_rpm:
+        over["infra"]["apis"]["massive"]["max_rpm"] = a.massive_rpm
+    if a.history_source:
+        over["infra"]["apis"]["massive"]["history_source"] = a.history_source
+    if a.history_years:
+        y = a.history_years - 31 / 365.25   # years_ago() adds a 30-day margin; keep the cap exact
+        over["infra"]["history"].update({
+            "ta_years": y, "market_years": y + 0.1,
+            "min_price_bars": int(min(400, 200 * a.history_years))})
+    if a.no_options_check:
+        over["strategy"]["universe"] = {"require_options": False}
     cfg = load_config(strategy_path=a.strategy, root=a.root, overrides=over)
     if a.pass_ == "premarket":
         session = a.session

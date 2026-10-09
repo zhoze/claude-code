@@ -141,7 +141,8 @@ class FlatFiles:
         for day, p in zip(days, paths):
             if p is None:
                 continue
-            df = pd.read_csv(p, usecols=["ticker", "volume", "open", "close", "high", "low"],
+            df = pd.read_csv(p, usecols=lambda c: c in ("ticker", "volume", "open", "close",
+                                                        "high", "low", "vwap"),
                              dtype={"ticker": str})
             df = df[df["ticker"].isin(tickers)]
             if df.empty:
@@ -152,9 +153,63 @@ class FlatFiles:
             return pd.DataFrame(columns=["ticker", "date", "open", "high", "low", "close",
                                          "volume", "vwap"])
         out = pd.concat(frames, ignore_index=True)
-        out["vwap"] = np.nan      # not in day aggregates; screens needing vwap skip (NaN)
+        if "vwap" not in out.columns:
+            out["vwap"] = np.nan  # S3 day aggregates carry no VWAP (filled downstream)
         return out[["ticker", "date", "open", "high", "low", "close", "volume", "vwap"]] \
             .sort_values(["ticker", "date"]).reset_index(drop=True)
+
+
+class GroupedDaily(FlatFiles):
+    """Same daily-file cache, filled from the REST grouped-daily endpoint instead of S3.
+
+    GET /v2/aggs/grouped/locale/us/market/stocks/{date}?adjusted=false returns every
+    US stock for one session (o/h/l/c/v/vw), so a year of history is ~250 calls no
+    matter how large the universe. It works on REST-only plans without Flat Files.
+    Weekends are skipped; holidays come back empty and are cached as such.
+    """
+
+    def __init__(self, massive, cache_dir: str):
+        os.makedirs(cache_dir, exist_ok=True)
+        self.massive = massive
+        self.cache_dir = cache_dir
+        self.downloaded = self.cached = 0
+        self.missing: list[str] = []
+        self.errors: dict[str, int] = {}
+
+    def list_days(self, frm: str, to: str) -> list[str]:
+        return [d.strftime("%Y-%m-%d") for d in pd.bdate_range(frm, to)]
+
+    def fetch_day(self, day: str) -> str | None:
+        path = self._local(day)
+        if os.path.exists(path):
+            self.cached += 1
+            return path if os.path.getsize(path) > 0 else None
+        d = self.massive.http.get(f"v2/aggs/grouped/locale/us/market/stocks/{day}",
+                                  {"adjusted": "false", "include_otc": "false"})
+        if not isinstance(d, dict):
+            self.missing.append(day)
+            self.errors["request failed"] = self.errors.get("request failed", 0) + 1
+            return None
+        rows = d.get("results") or []
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        if not rows:
+            # market holiday -> cache an empty marker; a recent empty day may simply not
+            # be published yet, so it is retried next run instead of cached
+            if dt.date.fromisoformat(day) < dt.date.today() - dt.timedelta(days=3):
+                open(path, "wb").close()
+            return None
+        df = pd.DataFrame(rows).rename(columns={"T": "ticker", "o": "open", "h": "high",
+                                                "l": "low", "c": "close", "v": "volume",
+                                                "vw": "vwap"})
+        for c in ("ticker", "open", "high", "low", "close", "volume", "vwap"):
+            if c not in df.columns:
+                df[c] = np.nan
+        tmp = path + ".part"
+        df[["ticker", "volume", "open", "close", "high", "low", "vwap"]].to_csv(
+            tmp, index=False, compression="gzip")
+        os.replace(tmp, path)
+        self.downloaded += 1
+        return path
 
 
 def _factor_after(dates: np.ndarray, ev_dates: np.ndarray, ev_factors: np.ndarray) -> np.ndarray:

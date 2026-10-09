@@ -27,9 +27,18 @@ def _bday_gap(a: pd.Timestamp, b: pd.Timestamp) -> int:
     return int(np.busday_count(lo.date(), hi.date()))
 
 
-def run_ta_registry(panel) -> dict:
+def ta_config(cfg) -> dict:
+    """The vendored ta-screener config, with the panel's bar minimum overridable."""
+    tcfg = vendored.ta().panel.load_config()
+    mpb = cfg.infra.get("history", {}).get("min_price_bars")
+    if mpb:
+        tcfg["universe"]["min_price_bars"] = int(mpb)
+    return tcfg
+
+
+def run_ta_registry(panel, tcfg: dict | None = None) -> dict:
     v = vendored.ta()
-    tcfg = v.panel.load_config()
+    tcfg = tcfg or v.panel.load_config()
     rows, ranked, full_pct, skipped, no_signal, errors, _ = v.run_screens.run_all(
         panel, tcfg, top=10, empirical=False)
     fam_df, overall = v.run_screens.consensus(rows, full_pct, tcfg)

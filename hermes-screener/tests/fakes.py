@@ -74,10 +74,33 @@ class FakeMarket:
         return raw[BAR_COLS], df[BAR_COLS], divs
 
 
+class _GroupedHttp(_Http):
+    """Serves v2/aggs/grouped/... (one session, all names) from the fake market."""
+
+    def __init__(self, market):
+        self.m = market
+        self._raw = None
+
+    def get(self, path, params=None):
+        if not path.startswith("v2/aggs/grouped/"):
+            return None
+        if self._raw is None:
+            frames = [self.m.bars(sym, "2000-01-01", self.m.session)[0].assign(T=sym)
+                      for sym in self.m.ret]
+            self._raw = pd.concat(frames).set_index("date")
+        day = path.rsplit("/", 1)[-1]
+        if day not in self._raw.index:
+            return {"status": "OK", "results": []}
+        g = self._raw.loc[[day]]
+        return {"status": "OK", "results": [
+            {"T": r.T, "o": r.open, "h": r.high, "l": r.low, "c": r.close, "v": r.volume,
+             "vw": r.vwap} for r in g.itertuples()]}
+
+
 class FakeMassive:
     def __init__(self, market: FakeMarket):
         self.m = market
-        self.http = _Http()
+        self.http = _GroupedHttp(market)
 
     def aggs(self, ticker, frm, to, adjusted):
         raw, adj, _ = self.m.bars(ticker, frm, to)

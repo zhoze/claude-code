@@ -35,7 +35,7 @@ from .stages.optimizer import Constraints, SolverPolicy, optimize_portfolio, por
 from .stages.resolve import resolve_final
 from .stages.risk import run_risk_layer
 from .stages.scenarios import generate_scenarios
-from .stages.technical import gate, run_ta_registry
+from .stages.technical import gate, run_ta_registry, ta_config
 from .stages.universe import screen_universe
 
 log = logging.getLogger(__name__)
@@ -222,7 +222,7 @@ class Orchestrator:
         if not ok:
             return self._abort(ctx, session, "validation failed: " + "; ".join(errs), warnings)
 
-        tcfg = vendored.ta().panel.load_config()
+        tcfg = ta_config(cfg)
         panel = vendored.ta().panel.load_panel(os.path.join(snap, "ta"), tcfg)
         market = pd.read_csv(os.path.join(snap, "market.csv.gz"))
         returns = panel.returns
@@ -296,7 +296,7 @@ class Orchestrator:
         # 7. technical gate on the book
         macro = load_macro(macro_path, prev_gate=(prev or {}).get("exposure_gate"))
         ta, _ = self._tool(ctx, audit, "run_technical_screens",
-                           lambda: gate(cfg, run_ta_registry(panel), list(book), session,
+                           lambda: gate(cfg, run_ta_registry(panel, tcfg), list(book), session,
                                         panel.earnings, macro))
         warnings += ta["warnings"]
         counts["triggered"] = len(ta["triggers"])
@@ -473,8 +473,7 @@ class Orchestrator:
         delayed = sorted(set(state["ta"]["triggers"]) - set(triggers))
         snap = snapshot_dir(cfg, session)
         uni = screen_universe(cfg, snap, session)
-        panel = vendored.ta().panel.load_panel(os.path.join(snap, "ta"),
-                                               vendored.ta().panel.load_config())
+        panel = vendored.ta().panel.load_panel(os.path.join(snap, "ta"), ta_config(cfg))
         sectors = {t: (s if isinstance(s, str) else None) for t, s in panel.meta["sector"].items()}
         clusters = state["clusters"]
         fund_cons = pd.read_parquet(os.path.join(art, "fund_consensus.parquet"))
