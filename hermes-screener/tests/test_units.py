@@ -208,3 +208,41 @@ def test_macro_stub_and_schema(tmp_path):
     p.write_text(json.dumps({"exposure_gate": 0.5, "event_risk": [{"ticker": "A", "score": 0.8}]}))
     ok = load_macro(str(p))
     assert not ok["macro_stale"] and ok["exposure_gate"] == 0.5 and ok["event_risk"][0]["ticker"] == "A"
+
+
+def test_endpoint_family_strips_tickers_and_dates():
+    assert http.endpoint_family("v2/aggs/ticker/AAPL/range/1/day/2024-01-01/2026-01-01") == \
+        "v2/aggs/ticker"
+    assert http.endpoint_family("stocks/v1/dividends") == "stocks/v1/dividends"
+    assert http.endpoint_family("https://x.com/stable/key-metrics?symbol=A") == "key-metrics"
+
+
+def test_429_is_retried_with_retry_after(monkeypatch):
+    import threading
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+    hits = {"n": 0}
+
+    class H(BaseHTTPRequestHandler):
+        def do_GET(self):  # noqa: N802
+            hits["n"] += 1
+            if hits["n"] <= 2:
+                self.send_response(429)
+                self.send_header("Retry-After", "0")
+                self.end_headers()
+                return
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b'{"ok": true}')
+
+        def log_message(self, *a):
+            pass
+
+    srv = HTTPServer(("127.0.0.1", 0), H)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    try:
+        c = http.JsonClient(f"http://127.0.0.1:{srv.server_port}", "K", retries=1,
+                            max_rpm=6000)
+        assert c.get("v2/aggs/ticker/AAPL") == {"ok": True}
+        assert c.status_summary() == {"v2/aggs/ticker 200": 1, "v2/aggs/ticker 429": 2}
+    finally:
+        srv.shutdown()

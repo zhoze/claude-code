@@ -36,13 +36,16 @@ def main(argv=None) -> int:
     ap.add_argument("--macro", help="macro-agent JSON (spec §5 schema); optional")
     ap.add_argument("--strategy", help="alternate strategy.yaml (research only)")
     ap.add_argument("--root", help="output root for data/db/reports (default: this dir)")
+    ap.add_argument("--massive-rpm", type=float,
+                    help="Massive requests/minute cap (plan limit; overrides infra.yaml)")
     ap.add_argument("--demo", action="store_true", help="offline synthetic data (no keys)")
     ap.add_argument("-v", "--verbose", action="store_true")
     a = ap.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if a.verbose else logging.INFO,
                         format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 
-    cfg = load_config(strategy_path=a.strategy, root=a.root)
+    over = {"infra": {"apis": {"massive": {"max_rpm": a.massive_rpm}}}} if a.massive_rpm else None
+    cfg = load_config(strategy_path=a.strategy, root=a.root, overrides=over)
     if a.pass_ == "premarket":
         session = a.session
         if not session:   # latest nightly pass with saved state
@@ -67,9 +70,11 @@ def main(argv=None) -> int:
                 from hermes.data.massive import MassiveClient  # noqa: PLC0415
                 api = cfg.infra["apis"]
                 fmp = FMPClient(api["fmp"]["base_url"], api["fmp"]["key_env"],
-                                api["retries"], api["timeout_s"])
+                                api["retries"], api["timeout_s"],
+                                max_rpm=api["fmp"].get("max_rpm"))
                 massive = MassiveClient(api["massive"]["base_url"], api["massive"]["key_env"],
-                                        api["retries"], api["timeout_s"])
+                                        api["retries"], api["timeout_s"],
+                                        max_rpm=api["massive"].get("max_rpm"))
             session = a.session
         tickers = [t.strip().upper() for t in a.tickers.split(",")] if a.tickers else None
         out = Orchestrator(cfg, fmp, massive).run_nightly(

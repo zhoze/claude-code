@@ -23,9 +23,10 @@ BAR_COLS = ["date", "open", "high", "low", "close", "volume", "vwap"]
 
 class MassiveClient:
     def __init__(self, base_url: str, key_env: str = "MASSIVE_KEY", retries: int = 4,
-                 timeout: float = 30.0, key: str | None = None):
+                 timeout: float = 30.0, key: str | None = None,
+                 max_rpm: float | None = None):
         self.http = JsonClient(base_url, key or require_key(key_env), key_param=None,
-                               bearer=True, retries=retries, timeout=timeout)
+                               bearer=True, retries=retries, timeout=timeout, max_rpm=max_rpm)
 
     def _paged(self, path: str, params: dict | None = None, max_pages: int = 50) -> list | None:
         out, url, first = [], path, True

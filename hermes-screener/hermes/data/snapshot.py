@@ -232,9 +232,18 @@ def build_snapshot(cfg, fmp, massive, session: str, tickers: list[str] | None = 
         f.write(stamp + "\n")
     with open(os.path.join(out_dir, "fetch_failures.json"), "w") as f:
         json.dump(failures, f, indent=1, sort_keys=True)
+    status = {"fmp": _status(fmp), "massive": _status(massive)}
+    for src, st in status.items():
+        log.info("snapshot %s: %s HTTP status by endpoint: %s", session, src, st)
     return write_manifest(out_dir, session, extra={
         "api_calls": {"fmp": fmp.http.calls, "massive": massive.http.calls},
+        "http_status": status, "universe_requested": len(syms),
         "pit_classification": PIT_FIELDS})
+
+
+def _status(client) -> dict:
+    f = getattr(client.http, "status_summary", None)
+    return f() if callable(f) else {}
 
 
 def nan_rates(out_dir: str) -> dict[str, float]:

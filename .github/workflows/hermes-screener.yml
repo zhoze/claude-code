@@ -18,6 +18,10 @@ on:
         description: "Universe size (largest N names; empty = full Russell 1000 proxy)"
         default: "60"
         required: false
+      massive_rpm:
+        description: "Massive requests/minute cap (empty = unlimited; free Basic plan = 5)"
+        default: ""
+        required: false
       live:
         description: "Run the live pass with FMP + Massive data"
         type: boolean
@@ -59,6 +63,7 @@ jobs:
       FMP_KEY: ${{ secrets.FMP_KEY }}
       MASSIVE_KEY: ${{ secrets.MASSIVE_KEY }}
       LIMIT: ${{ inputs.limit || '60' }}
+      MASSIVE_RPM: ${{ inputs.massive_rpm }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -82,11 +87,17 @@ jobs:
         run: |
           args=""
           [ -n "$LIMIT" ] && args="--limit $LIMIT"
+          [ -n "$MASSIVE_RPM" ] && args="$args --massive-rpm $MASSIVE_RPM"
           python run_nightly.py $args
       - name: Report to job summary
         if: always() && steps.keys.outputs.ok == 'true'
         run: |
           for f in reports/*/report.md; do [ -f "$f" ] && cat "$f" >> "$GITHUB_STEP_SUMMARY"; done
+          for f in data/snapshots/*/manifest.json; do
+            [ -f "$f" ] && { echo '### API HTTP status by endpoint'; echo '```json';
+              python -c "import json,sys; print(json.dumps(json.load(open(sys.argv[1])).get('http_status'), indent=1))" "$f";
+              echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          done
           for f in data/snapshots/*/fetch_failures.json; do
             [ -f "$f" ] && { echo '### Fetch failures'; echo '```json'; cat "$f"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
           done

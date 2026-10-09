@@ -83,6 +83,25 @@ def validate_snapshot(cfg, out_dir: str, session: str, expected_universe: int | 
             errors.append(f"price staleness: {len(stale)} tickers ({frac:.0%}) have no bar on "
                           f"{session}")
 
+    ff_path = os.path.join(out_dir, "fetch_failures.json")
+    if os.path.exists(ff_path):
+        import json  # noqa: PLC0415
+        with open(ff_path) as f:
+            ff = json.load(f)
+        requested = load_manifest(out_dir).get("universe_requested") or n_uni or 1
+        rate = len(ff.get("prices", [])) / requested
+        if rate > v.get("max_fetch_failure_rate", 0.10):
+            st = load_manifest(out_dir).get("http_status", {}).get("massive", {})
+            errors.append(f"Massive price downloads failed for {len(ff['prices'])} of "
+                          f"{requested} names ({rate:.0%}); HTTP status by endpoint: {st} "
+                          "— 429 = plan rate limit (set apis.massive.max_rpm), "
+                          "403 = endpoint not in plan")
+        if ff.get("options"):
+            log_opts = len(ff["options"])
+            if log_opts / requested > v.get("max_fetch_failure_rate", 0.10):
+                errors.append(f"options-tradability check failed for {log_opts} names; "
+                              "see http_status in manifest.json")
+
     min_rows = v["min_fundamental_rows"]
     if expected_universe is not None:
         min_rows = min(min_rows, int(0.8 * expected_universe))

@@ -22,9 +22,10 @@ NON_EQUITY_RE = re.compile(
 
 class FMPClient:
     def __init__(self, base_url: str, key_env: str = "FMP_KEY", retries: int = 4,
-                 timeout: float = 30.0, key: str | None = None):
+                 timeout: float = 30.0, key: str | None = None,
+                 max_rpm: float | None = None):
         self.http = JsonClient(base_url, key or require_key(key_env), key_param="apikey",
-                               retries=retries, timeout=timeout)
+                               retries=retries, timeout=timeout, max_rpm=max_rpm)
 
     def get(self, path: str):
         """Vendored-compatible getter: returns parsed JSON or None on error/restriction."""
