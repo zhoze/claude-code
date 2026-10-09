@@ -82,6 +82,12 @@ jobs:
           else
             echo "ok=true" >> "$GITHUB_OUTPUT"
           fi
+      - name: API probe (HTTP status per endpoint)
+        if: steps.keys.outputs.ok == 'true'
+        continue-on-error: true
+        run: |
+          python scripts/probe_apis.py AAPL | tee probe.txt
+          { echo '### API probe'; echo '```'; cat probe.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Live nightly pass
         if: steps.keys.outputs.ok == 'true'
         run: |
