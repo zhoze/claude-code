@@ -55,7 +55,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     environment: screen   # holds the FMP_KEY and MASSIVE_KEY secrets
-    if: github.event_name == 'push' || inputs.live
+    # push: live only when the commit message contains [live]; dispatch: the 'live' input
+    if: (github.event_name == 'push' && contains(github.event.head_commit.message, '[live]')) || inputs.live
     defaults:
       run:
         working-directory: hermes-screener

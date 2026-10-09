@@ -194,7 +194,8 @@ def build_snapshot(cfg, fmp, massive, session: str, tickers: list[str] | None = 
     # ------------------------------------------------------- benchmarks
     bench = infra["benchmarks"]
     bsyms = [bench["market"], *bench["sector_etfs"]]
-    long_from = infra["history"]["market_since"]
+    long_from = infra["history"].get("market_since") or \
+        years_ago(session, infra["history"].get("market_years", 5) - 0.1)
     brows = []
     for sym in bsyms:
         h = massive.daily_history(sym, long_from, session)

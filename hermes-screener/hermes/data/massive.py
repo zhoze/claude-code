@@ -1,8 +1,7 @@
 """Massive (formerly Polygon) client: daily OHLCV, dividends, options tradability, quotes.
 
-The technical panel needs both raw and adjusted prices:
-  - aggregates with adjusted=false -> raw open/high/low/close/vwap/volume
-  - aggregates with adjusted=true  -> split-adjusted close
+Prices per name = two calls:
+  - aggregates with adjusted=true  -> split-adjusted open/high/low/close/vwap/volume
   - /stocks/v1/dividends           -> historical_adjustment_factor per ex-date
   adjclose (total return) = split-adjusted close x the factor of the first dividend
   whose ex-date is after the bar date, matching the "dividend-adjusted" series the
@@ -74,13 +73,19 @@ class MassiveClient:
         return df[cols].dropna(subset=["ex_dividend_date"]).sort_values("ex_dividend_date")
 
     def daily_history(self, ticker: str, frm: str, to: str) -> pd.DataFrame | None:
-        """Raw OHLCV + vwap + total-return adjclose, one row per session."""
-        raw = self.aggs(ticker, frm, to, adjusted=False)
-        if raw is None or raw.empty:
-            return raw
-        adj = self.aggs(ticker, frm, to, adjusted=True)
+        """Split-adjusted OHLCV + vwap + total-return adjclose, one row per session.
+
+        One aggregates call (adjusted=true) plus one dividends call. Unadjusted bars are
+        not needed: split-adjusted O/H/L/C/volume leave no phantom split gaps, the
+        latest close equals the tradable price, and close x volume is split-invariant,
+        so ADV is unchanged. The ta panel's adjclose/close factor then carries only
+        the dividend adjustment.
+        """
+        bars = self.aggs(ticker, frm, to, adjusted=True)
+        if bars is None or bars.empty:
+            return bars
         divs = self.dividends(ticker)
-        return assemble_history(raw, adj, divs)
+        return assemble_history(bars, None, divs)
 
     # ----------------------------------------------------- tradability/quotes
     def has_listed_options(self, ticker: str) -> bool | None:

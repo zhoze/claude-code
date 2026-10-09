@@ -52,8 +52,8 @@ def summarize(body) -> str:
         first = res[0] if isinstance(res, list) and res else None
         extra = ""
         if first and "t" in first:
-            extra = f" first={dt.datetime.utcfromtimestamp(first['t'] / 1000).date()}"
-        return f"status={body.get('status')} n={n}{extra} {str(msg)[:120]}"
+            extra = f" first={dt.datetime.fromtimestamp(first['t'] / 1000, dt.timezone.utc).date()}"
+        return f"status={body.get('status')} n={n}{extra} {str(msg)[:160]}"
     return str(body)[:120]
 
 

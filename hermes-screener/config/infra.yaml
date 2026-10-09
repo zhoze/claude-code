@@ -16,14 +16,15 @@ apis:
   massive:
     base_url: https://api.massive.com
     key_env: MASSIVE_KEY
-    workers: 8
+    workers: 4
     max_rpm: null           # Massive plan limit: Basic (free) = 5; paid plans = unlimited (null)
   retries: 4                # spec §2.1: <= 4 retries with backoff
   timeout_s: 30
 
 history:
   ta_years: 3               # TA panel depth (ta-screener config.history_years)
-  market_since: "2007-01-01"  # SPY + sector ETFs: long history for named stress windows
+  market_since: null        # SPY + sector ETFs history start, e.g. "2007-01-01" (Advanced plan)
+  market_years: 5           # used when market_since is null (Massive Starter = 5y history)
   name_since_years: 5       # per-name depth for scenarios (Massive plan permitting)
 
 benchmarks:

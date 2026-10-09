@@ -40,7 +40,7 @@ Also written: `data/snapshots/<session>/` (immutable, with a SHA-256 manifest),
 | Path | What |
 |---|---|
 | `config/strategy.yaml` | the versioned champion strategy; every threshold lives here |
-| `config/infra.yaml` | API hosts, paths, CPU/GPU backend policy, validation limits |
+| `config/infra.yaml` | API hosts, rate limits, paths, CPU/GPU backend policy, validation limits |
 | `screens/fundamental/`, `screens/ta/`, `screens/blend/` | your screen code, **vendored byte-for-byte unmodified** |
 | `hermes/vendored.py` | loads the vendored packages side by side (both use flat `screen_lib` imports) |
 | `hermes/data/` | FMP + Massive clients, snapshot builder, §2.4 validation gates |

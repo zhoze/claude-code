@@ -57,14 +57,17 @@ class RateLimiter:
         self._lock = threading.Lock()
 
     def wait(self) -> None:
-        if not self.interval:
-            return
         with self._lock:
             now = time.monotonic()
             t = max(now, self._next)
             self._next = t + self.interval
         if t > now:
             time.sleep(t - now)
+
+    def cooldown(self, seconds: float) -> None:
+        """Pause every thread sharing this limiter (server said 429)."""
+        with self._lock:
+            self._next = max(self._next, time.monotonic() + seconds)
 
 
 class JsonClient:
@@ -131,7 +134,7 @@ class JsonClient:
                     except (TypeError, ValueError):
                         wait = min(5.0 * n429, 60.0)
                     log.debug("GET %s -> HTTP 429, waiting %.0fs", safe, wait)
-                    time.sleep(wait)
+                    self.limiter.cooldown(wait)    # all threads back off together
                     continue                       # 429s do not consume normal retries
                 if e.code in (400, 401, 403, 404):
                     log.debug("GET %s -> HTTP %s (not retried)", safe, e.code)
