@@ -136,6 +136,15 @@ The cuOpt adapter (`solve_cuopt`) uses the `cuopt.linear_programming` data-model
 API. It has not been exercised here, because no GPU is available. A failure falls
 back to HiGHS and is recorded in the solver log.
 
+## GitHub Actions
+
+`.github/workflows/hermes-screener.yml` runs the offline tests and the demo on every
+push. The live job needs these secrets in the `screen` environment: `FMP_KEY`,
+`MASSIVE_KEY`, `MASSIVE_S3_ACCESS_KEY_ID` and `MASSIVE_S3_SECRET_ACCESS_KEY`. It runs
+on **Run workflow**, or on a push whose commit message contains `[live]`. It starts
+with `scripts/probe_apis.py`, which checks every endpoint, and caches the flat files
+between runs.
+
 ## Schedule (Europe/Tallinn, spec §10)
 
 ```cron
