@@ -1,0 +1,2 @@
+# The only third-party dependency. numpy ships with pandas.
+pandas>=2.0

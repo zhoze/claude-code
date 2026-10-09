@@ -1,0 +1,46 @@
+# Infrastructure settings — paths, API hosts, backends. Secrets are NEVER stored here:
+# FMP_KEY and MASSIVE_KEY come from environment variables only (spec §2.1, R6).
+paths:
+  snapshots: data/snapshots
+  db: db/learning.duckdb
+  artifacts: db/artifacts
+  reports: reports
+  audit: audit
+
+apis:
+  fmp:
+    base_url: https://financialmodelingprep.com/stable
+    key_env: FMP_KEY
+    workers: 12
+  massive:
+    base_url: https://api.massive.com
+    key_env: MASSIVE_KEY
+    workers: 8
+  retries: 4                # spec §2.1: <= 4 retries with backoff
+  timeout_s: 30
+
+history:
+  ta_years: 3               # TA panel depth (ta-screener config.history_years)
+  market_since: "2007-01-01"  # SPY + sector ETFs: long history for named stress windows
+  name_since_years: 5       # per-name depth for scenarios (Massive plan permitting)
+
+benchmarks:
+  market: SPY
+  sector_etfs: [XLK, XLF, XLE, XLV, XLI, XLP, XLY, XLB, XLRE, XLU, XLC]
+
+backend:
+  # PERF4 rules: CPU is always correct; GPU is optional; AUTO picks GPU only above
+  # measured crossover thresholds AND only when the GPU is healthy.
+  arrays: auto              # cpu | gpu | auto   (CuPy for scenario generation)
+  solver: auto              # cpu | gpu | auto   (cuOpt; HiGHS is the CPU path)
+  gpu_min_scenario_cells: 5.0e+7   # scenarios x names x horizon below this stays on CPU
+  gpu_min_lp_nnz: 2.0e+6           # LP nonzeros below this stays on HiGHS
+
+validation:
+  universe_tolerance: 0.10
+  nan_rate_multiple: 2.0
+  nan_trailing_days: 30
+  min_fundamental_rows: 800
+  max_price_staleness_days: 0   # trading days a ticker's last bar may lag the session
+
+seed_base: 0                # run seed = seed_base + YYYYMMDD of the session date (R8)

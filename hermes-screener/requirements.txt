@@ -1,0 +1,12 @@
+# Core (CPU path — always sufficient for correct results)
+pandas>=2.0
+numpy>=1.26
+scipy>=1.11          # HiGHS (scipy.optimize.milp) + hierarchical clustering
+pyyaml>=6.0
+duckdb>=1.0          # learning database
+pyarrow>=14          # parquet artifacts
+pytest>=8            # tests
+
+# Optional GPU path on DGX Spark (CUDA 13, aarch64) — install separately, see README:
+#   cupy-cuda13x      scenario generation (AUTO only above the measured crossover)
+#   cuopt-cu13        Mean-CVaR LP/MILP (HiGHS cross-check stays on)

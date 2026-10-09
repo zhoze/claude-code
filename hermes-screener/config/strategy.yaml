@@ -1,0 +1,103 @@
+# Hermes strategy config — THE versioned champion (spec Appendix B).
+# Every number here is a config-owned default, not a claim. Changing any of them
+# in production goes through the champion–challenger gate (spec §9); the engine
+# never edits this file.
+version: 1.0.0
+
+universe:
+  target: 1000              # Russell 1000 proxy: largest US common stocks by market cap
+  min_market_cap: 1.5e+9
+  min_adv_usd: 10.0e+6       # 20-day average dollar volume floor
+  adv_days: 20
+  max_spread_bp: 25         # median spread ceiling
+  spread_source: auto       # auto | snapshot | corwin_schultz (see README)
+  require_options: true     # Massive options contracts must exist for the name
+
+fundamental:
+  n_candidates: 75          # range 50–100
+  min_families: 4           # of 6; capped at the number of families that actually ran
+  family_weights: {value: 1, quality: 1, safety: 1,
+                   earnings_quality: 1, growth_investment: 1, payout: 1}
+  families:
+    value: [composite_value, fcf_yield, graham_defensive, magic_formula]
+    quality: [buffett_quality, gross_profitability, operating_profitability,
+              low_leverage_quality, residual_income]
+    safety: [altman_z, ohlson_o]
+    earnings_quality: [piotroski, accruals, beneish_m, fundamental_signals]
+    growth_investment: [garp_peg, mohanram_g, asset_growth]
+    payout: [dividend_growth, shareholder_yield]
+  piotroski: {min_f_score: 7, pb_quantile: 0.4}
+
+risk_layer:
+  carried: 40               # range 30–50
+  lookback_days: 252        # correlation / clustering window
+  cluster_method: hierarchical   # hierarchical (CPU, scipy) | hdbscan (cuML, optional)
+  cluster_distance: 0.7     # cut height on sqrt(2(1-rho)) distance, average linkage
+  regime_model: markov_switching_2state
+  anomaly_return_sigma: 8.0 # |1d return| > 8 sigma of trailing year => data anomaly
+  anomaly_max_stale_days: 3
+
+scenarios:
+  n: 100000
+  n_cpu: 20000              # used when the scenario/solver backend is CPU (flagged in report)
+  horizon_days: 21
+  mix: {kde: 0.4, block_bootstrap: 0.4, historical: 0.1, stress: 0.1}
+  block_mean_days: 10
+  history_days: 756         # daily history used for KDE / bootstrap
+  jump_overlay: per_name_earnings_gaps
+  jump_unknown_date_prob: 0.333   # P(announcement inside horizon) when no date is scheduled
+  historical_windows:
+    "2008-09": ["2008-09-01", "2008-11-30"]
+    "2011-08": ["2011-07-20", "2011-10-10"]
+    "2015-08": ["2015-08-10", "2015-09-30"]
+    "2018-Q4": ["2018-10-01", "2018-12-31"]
+    "2020-03": ["2020-02-19", "2020-04-15"]
+    "2022": ["2022-01-03", "2022-10-14"]
+    "2025-04": ["2025-03-25", "2025-05-15"]
+  stress:
+    market_shocks: [-0.10, -0.20, -0.30]
+    sector_shock: -0.15
+    single_name_gap: -0.25
+    stress_vol_mult: 2.0
+
+optimizer:
+  alpha: 0.95
+  frontier_points: 15
+  cvar_cap: 0.08
+  cardinality: [10, 20]
+  w_max: 0.15
+  w_min: 0.02
+  sector_cap: 0.30
+  cluster_cap: 0.35
+  turnover_cap: 0.40
+  adv_participation: 0.05   # position notional <= 5% of 20d ADV (needs account_value_usd)
+  account_value_usd: null   # set to enable the liquidity constraint and dollar sizes
+  time_limit_s: 300         # per MILP solve on the CPU fallback
+  mip_rel_gap: 1.0e-4
+  solver: {primary: cuopt_barrier, sweep: cuopt_pdlp, crosscheck: highs, tol: 1.0e-6}
+  crosscheck_tol: 1.0e-4    # ||w_cuopt - w_highs||_inf
+  resolve_relax_step: 0.05  # sector/cluster cap relaxation step for the restricted re-solve
+  min_entries: 3
+
+technical:
+  t_entry: 60
+  t_entry_floor: 55
+  percentile_basis: book    # book (spec §4.4) | universe
+  earnings_blackout_days: 2
+  max_spike_pct: 10         # veto when MAX-avoidance percentile <= this (most lottery-like decile)
+  min_families: 2
+
+macro:
+  gate_levels: [1.0, 0.5, 0.0]
+  event_risk_delay: 0.7
+  models: {nightly: gpt-oss-120b, premarket: gpt-oss-20b}
+
+blend:                      # separate parallel output (not part of the Hermes funnel)
+  enabled: true
+  variant: decile10         # decile10 (top 10%, ~35 names) | top5 (top 5%, ~18 names)
+  universe_size: 500
+  hold: 60
+  min_dollar_volume: 5.0e+6
+
+learning: {cadence: monthly, ic_halflife_days: 126, shrinkage: 0.5, regime_min_obs: 60}
+promotion: {dsr_margin: 1.10, mdd_tolerance: 1.20, shadow_weeks: 4}

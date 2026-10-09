@@ -1,0 +1,12 @@
+# Secrets — keys come from FMP_KEY / MASSIVE_KEY env vars only
+.env
+.env.*
+*.key
+# Runtime outputs (snapshots, learning DB, reports, audit log)
+data/
+db/
+reports/
+audit/
+__pycache__/
+*.py[cod]
+.pytest_cache/
