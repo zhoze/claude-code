@@ -117,8 +117,25 @@ def main() -> int:
                 r = s3.list_objects_v2(Bucket="flatfiles", Prefix=pfx)
                 keys = [o["Key"] for o in r.get("Contents", []) or []]
                 info.append(f"{pfx[-8:-1]}: {len(keys)} files")
-            rows.append(("massive flat files (S3)", 200, time.perf_counter() - t0,
+            rows.append(("massive flat files list (S3)", 200, time.perf_counter() - t0,
                          "; ".join(info)))
+            t1 = time.perf_counter()
+            d = today - dt.timedelta(days=20)
+            pfx = f"us_stocks_sip/day_aggs_v1/{d.year:04d}/{d.month:02d}/"
+            keys = [o["Key"] for o in s3.list_objects_v2(Bucket="flatfiles", Prefix=pfx)
+                    .get("Contents", []) or []]
+            try:
+                obj = s3.get_object(Bucket="flatfiles", Key=keys[-1])
+                n = len(obj["Body"].read())
+                rows.append(("massive flat files get (S3)", 200, time.perf_counter() - t1,
+                             f"{keys[-1]} {n} bytes"))
+            except Exception as e:  # noqa: BLE001
+                r = getattr(e, "response", {}) or {}
+                rows.append(("massive flat files get (S3)",
+                             r.get("ResponseMetadata", {}).get("HTTPStatusCode", type(e).__name__),
+                             time.perf_counter() - t1,
+                             f"{keys[-1] if keys else '-'} {r.get('Error', {})}"[:200]))
+                needed_bad.append("massive flat files get (S3)")
             if info[0].endswith(": 0 files"):        # last month must have files
                 needed_bad.append("massive flat files (S3)")
         except Exception as e:  # noqa: BLE001

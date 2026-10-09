@@ -32,6 +32,16 @@ from .http import require_key
 log = logging.getLogger(__name__)
 
 
+def s3_error(e: Exception) -> str:
+    """'HTTP 403 AccessDenied: message' from a botocore ClientError (no secrets in it)."""
+    r = getattr(e, "response", None) or {}
+    err = r.get("Error", {}) if isinstance(r, dict) else {}
+    code = r.get("ResponseMetadata", {}).get("HTTPStatusCode") if isinstance(r, dict) else None
+    if err or code:
+        return f"HTTP {code} {err.get('Code', '')}: {str(err.get('Message', ''))[:120]}".strip()
+    return type(e).__name__
+
+
 class FlatFiles:
     def __init__(self, cfg_ff: dict, cache_dir: str, client=None):
         self.c = cfg_ff
@@ -42,6 +52,7 @@ class FlatFiles:
         self.downloaded = 0
         self.cached = 0
         self.missing: list[str] = []
+        self.errors: dict[str, int] = {}
         os.makedirs(cache_dir, exist_ok=True)
 
     @staticmethod
@@ -101,12 +112,18 @@ class FlatFiles:
         os.makedirs(os.path.dirname(path), exist_ok=True)
         tmp = path + ".part"
         try:
-            self.client.download_file(self.bucket, self._key(day), tmp)
+            # GetObject directly (download_file issues a HEAD first, which some
+            # S3-compatible stores do not allow)
+            resp = self.client.get_object(Bucket=self.bucket, Key=self._key(day))
+            with open(tmp, "wb") as f:
+                for chunk in iter(lambda: resp["Body"].read(1 << 20), b""):
+                    f.write(chunk)
             os.replace(tmp, path)
             self.downloaded += 1
             return path
         except Exception as e:  # noqa: BLE001 — missing day / permission -> recorded
-            log.warning("flat file %s unavailable: %s", day, type(e).__name__)
+            self.errors[s3_error(e)] = self.errors.get(s3_error(e), 0) + 1
+            log.warning("flat file %s unavailable: %s", day, s3_error(e))
             self.missing.append(day)
             if os.path.exists(tmp):
                 os.remove(tmp)

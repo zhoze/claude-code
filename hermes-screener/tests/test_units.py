@@ -260,9 +260,10 @@ class _FakeS3:
         names = sorted(os.listdir(d)) if os.path.isdir(d) else []
         return {"Contents": [{"Key": Prefix + n} for n in names], "IsTruncated": False}
 
-    def download_file(self, bucket, key, dest):
-        import shutil
-        shutil.copy(f"{self.root}/{key}", dest)
+    def get_object(self, Bucket, Key):  # noqa: N803
+        import io
+        with open(f"{self.root}/{Key}", "rb") as f:
+            return {"Body": io.BytesIO(f.read())}
 
 
 def test_flatfiles_bars_and_corporate_actions(tmp_path):

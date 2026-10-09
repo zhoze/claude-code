@@ -250,7 +250,7 @@ def build_snapshot(cfg, fmp, massive, session: str, tickers: list[str] | None = 
         "price_source": source,
         "flatfiles": None if flatfiles is None else
         {"downloaded": flatfiles.downloaded, "cached": flatfiles.cached,
-         "missing_days": flatfiles.missing},
+         "missing_days": len(flatfiles.missing), "errors": flatfiles.errors},
         "pit_classification": PIT_FIELDS})
 
 
@@ -280,6 +280,14 @@ def load_histories(cfg, massive, syms, bsyms, frm, long_from, session, flatfiles
     if flatfiles is not None and mode != "rest":
         raw = flatfiles.bars(set(every), start, session,
                              workers=int(ff_cfg.get("workers", 8)))
+        if raw.empty:
+            msg = (f"Massive flat files gave no bars ({len(flatfiles.missing)} days failed: "
+                   f"{flatfiles.errors})")
+            if mode == "flatfiles":
+                raise RuntimeError(msg)
+            log.warning("%s — falling back to per-ticker REST aggregates", msg)
+            flatfiles = None
+    if flatfiles is not None and mode != "rest":
         splits = massive.splits_bulk(every, start)
         divs = massive.dividends_bulk(every, start)
         if splits is None or divs is None:
