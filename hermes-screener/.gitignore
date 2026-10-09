@@ -3,10 +3,10 @@
 .env.*
 *.key
 # Runtime outputs (snapshots, learning DB, reports, audit log)
-data/
-db/
-reports/
-audit/
+/data/
+/db/
+/reports/
+/audit/
 __pycache__/
 *.py[cod]
 .pytest_cache/
