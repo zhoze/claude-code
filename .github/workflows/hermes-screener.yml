@@ -150,4 +150,5 @@ jobs:
             hermes-screener/audit/
             hermes-screener/data/snapshots/*/manifest.json
             hermes-screener/data/snapshots/*/fetch_failures.json
+            hermes-screener/data/snapshots/*/liquidity.csv
           if-no-files-found: warn

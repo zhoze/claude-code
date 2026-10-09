@@ -9,7 +9,9 @@ universe:
   min_market_cap: 1.5e+9
   min_adv_usd: 10.0e+6       # 20-day average dollar volume floor
   adv_days: 20
-  max_spread_bp: 25         # median spread ceiling
+  max_spread_bp: 25         # median quoted (NBBO) spread ceiling
+  max_spread_bp_estimated: 100  # ceiling when the spread is a Corwin-Schultz high/low estimate
+                                #   (no quote data in the plan; the estimate runs high)
   spread_source: auto       # auto | snapshot | corwin_schultz (see README)
   require_options: true     # Massive options contracts must exist for the name
 

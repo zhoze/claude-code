@@ -30,7 +30,13 @@ def screen_universe(cfg, snap_dir: str, session: str) -> dict:
     adv = pd.to_numeric(df["adv20"], errors="coerce")
     drop(adv.isna() | (adv < u["min_adv_usd"]), f"ADV20 < ${u['min_adv_usd'] / 1e6:.0f}M")
     spr = pd.to_numeric(df["spread_bp"], errors="coerce")
-    drop(spr.isna() | (spr > u["max_spread_bp"]), f"spread > {u['max_spread_bp']} bp")
+    # A quoted (NBBO) spread is held to max_spread_bp. A Corwin-Schultz estimate from daily
+    # high/low ranges is noisy and biased high for large caps, so it gets its own ceiling.
+    est = df.get("spread_source", pd.Series("", index=df.index)).astype(str) \
+        .str.startswith("corwin")
+    cap = est.map({True: float(u.get("max_spread_bp_estimated", u["max_spread_bp"])),
+                   False: float(u["max_spread_bp"])})
+    drop(spr.isna() | (spr > cap), "spread above ceiling")
 
     kept = df[~df["ticker"].isin(reasons)].sort_values("ticker")
     liquidity = kept.set_index("ticker")[["adv20", "spread_bp", "spread_source"]].to_dict("index")
