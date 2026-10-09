@@ -6,6 +6,7 @@ pyyaml>=6.0
 duckdb>=1.0          # learning database
 pyarrow>=14          # parquet artifacts
 pytest>=8            # tests
+boto3>=1.34          # Massive Flat Files (S3-compatible bulk price history)
 
 # Optional GPU path on DGX Spark (CUDA 13, aarch64) — install separately, see README:
 #   cupy-cuda13x      scenario generation (AUTO only above the measured crossover)

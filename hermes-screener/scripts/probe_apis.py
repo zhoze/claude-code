@@ -87,11 +87,11 @@ def main() -> int:
         print("FMP_KEY not set — skipping FMP")
     if mk:
         for name, path, needed in [
-            ("massive aggs raw 3y", f"v2/aggs/ticker/{sym}/range/1/day/{y3}/{today}?adjusted=false&limit=50000", True),
             ("massive aggs adj 3y", f"v2/aggs/ticker/{sym}/range/1/day/{y3}/{today}?adjusted=true&limit=50000", True),
             ("massive aggs SPY 5y", f"v2/aggs/ticker/SPY/range/1/day/{y5}/{today}?adjusted=true&limit=50000", True),
             ("massive aggs SPY 8y", f"v2/aggs/ticker/SPY/range/1/day/{y8}/{today}?adjusted=true&limit=50000", False),
-            ("massive dividends", f"stocks/v1/dividends?ticker={sym}&limit=10", False),
+            ("massive dividends", f"stocks/v1/dividends?ticker={sym}&limit=10", True),
+            ("massive splits", f"stocks/v1/splits?ticker={sym}&limit=10", True),
             ("massive options contracts", f"v3/reference/options/contracts?underlying_ticker={sym}&limit=1", False),
             ("massive snapshot NBBO", f"v2/snapshot/locale/us/markets/stocks/tickers?tickers={sym}", False),
         ]:
@@ -101,6 +101,33 @@ def main() -> int:
                 needed_bad.append(name)
     else:
         print("MASSIVE_KEY not set — skipping Massive")
+    ak, sk = os.environ.get("MASSIVE_S3_ACCESS_KEY_ID"), os.environ.get("MASSIVE_S3_SECRET_ACCESS_KEY")
+    if ak and sk:
+        t0 = time.perf_counter()
+        try:
+            import boto3
+            from botocore.config import Config
+            s3 = boto3.Session(aws_access_key_id=ak, aws_secret_access_key=sk).client(
+                "s3", endpoint_url="https://files.massive.com",
+                config=Config(signature_version="s3v4"))
+            info = []
+            for yrs in (0, 5):
+                d = today - dt.timedelta(days=365 * yrs + 20)
+                pfx = f"us_stocks_sip/day_aggs_v1/{d.year:04d}/{d.month:02d}/"
+                r = s3.list_objects_v2(Bucket="flatfiles", Prefix=pfx)
+                keys = [o["Key"] for o in r.get("Contents", []) or []]
+                info.append(f"{pfx[-8:-1]}: {len(keys)} files")
+            rows.append(("massive flat files (S3)", 200, time.perf_counter() - t0,
+                         "; ".join(info)))
+            if info[0].endswith(": 0 files"):        # last month must have files
+                needed_bad.append("massive flat files (S3)")
+        except Exception as e:  # noqa: BLE001
+            rows.append(("massive flat files (S3)", type(e).__name__,
+                         time.perf_counter() - t0, str(e)[:160]))
+            needed_bad.append("massive flat files (S3)")
+    else:
+        print("MASSIVE_S3_ACCESS_KEY_ID / MASSIVE_S3_SECRET_ACCESS_KEY not set — "
+              "skipping Flat Files (REST per-ticker fallback will be used)")
     w = max(len(r[0]) for r in rows) if rows else 10
     for name, code, s, info in rows:
         print(f"{name:<{w}}  {str(code):>5}  {s:5.2f}s  {info}")

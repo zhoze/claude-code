@@ -1,4 +1,8 @@
-"""Massive (formerly Polygon) client: daily OHLCV, dividends, options tradability, quotes.
+"""Massive (formerly Polygon) REST client: daily OHLCV, corporate actions, options, quotes.
+
+Live runs normally take price history from Massive Flat Files (data/flatfiles.py)
+and use this client only for bulk splits/dividends and options tradability. The
+per-ticker aggregates path below is the fallback when no S3 credentials are set.
 
 Prices per name = two calls:
   - aggregates with adjusted=true  -> split-adjusted open/high/low/close/vwap/volume
@@ -86,6 +90,30 @@ class MassiveClient:
             return bars
         divs = self.dividends(ticker)
         return assemble_history(bars, None, divs)
+
+    # ---------------------------------------------- bulk corporate actions
+    def _bulk(self, path: str, tickers: list[str], date_field: str, frm: str,
+              chunk: int = 100) -> pd.DataFrame | None:
+        rows, failed = [], False
+        for i in range(0, len(tickers), chunk):
+            got = self._paged(path, {"ticker.any_of": ",".join(tickers[i:i + chunk]),
+                                     f"{date_field}.gte": frm, "limit": 5000,
+                                     "sort": f"{date_field}.asc"}, max_pages=200)
+            if got is None:
+                failed = True
+                continue
+            rows.extend(got)
+        if failed and not rows:
+            return None
+        return pd.DataFrame(rows)
+
+    def splits_bulk(self, tickers: list[str], frm: str) -> pd.DataFrame | None:
+        """Splits with execution_date >= frm for many tickers (a handful of calls)."""
+        return self._bulk("stocks/v1/splits", tickers, "execution_date", frm)
+
+    def dividends_bulk(self, tickers: list[str], frm: str) -> pd.DataFrame | None:
+        """Dividends with ex_dividend_date >= frm for many tickers (a handful of calls)."""
+        return self._bulk("stocks/v1/dividends", tickers, "ex_dividend_date", frm)
 
     # ----------------------------------------------------- tradability/quotes
     def has_listed_options(self, ticker: str) -> bool | None:

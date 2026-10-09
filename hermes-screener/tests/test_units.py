@@ -246,3 +246,51 @@ def test_429_is_retried_with_retry_after(monkeypatch):
         assert c.status_summary() == {"v2/aggs/ticker 200": 1, "v2/aggs/ticker 429": 2}
     finally:
         srv.shutdown()
+
+
+class _FakeS3:
+    """Directory-backed stand-in for the Massive S3 file store."""
+
+    def __init__(self, root):
+        self.root = root
+
+    def list_objects_v2(self, Bucket, Prefix, ContinuationToken=None):  # noqa: N803
+        import os
+        d = os.path.join(self.root, Prefix)
+        names = sorted(os.listdir(d)) if os.path.isdir(d) else []
+        return {"Contents": [{"Key": Prefix + n} for n in names], "IsTruncated": False}
+
+    def download_file(self, bucket, key, dest):
+        import shutil
+        shutil.copy(f"{self.root}/{key}", dest)
+
+
+def test_flatfiles_bars_and_corporate_actions(tmp_path):
+    import os
+    from hermes.data.flatfiles import FlatFiles, apply_corporate_actions
+    pfx = "us_stocks_sip/day_aggs_v1"
+    days = ["2026-01-02", "2026-01-05", "2026-01-06"]
+    closes = {"AAA": [100.0, 50.0, 51.0], "SPY": [600.0, 601.0, 602.0]}
+    for i, d in enumerate(days):
+        p = tmp_path / "bucket" / pfx / d[:4] / d[5:7]
+        os.makedirs(p, exist_ok=True)
+        rows = [{"ticker": t, "volume": 1000, "open": c[i], "close": c[i], "high": c[i] * 1.01,
+                 "low": c[i] * 0.99, "window_start": 0, "transactions": 1}
+                for t, c in {**closes, "ZZZ": [1, 1, 1]}.items()]
+        pd.DataFrame(rows).to_csv(p / f"{d}.csv.gz", index=False)
+    ff = FlatFiles({"bucket": "flatfiles", "day_aggs_prefix": pfx, "access_key_env": "X",
+                    "secret_key_env": "Y", "endpoint": "-"}, str(tmp_path / "cache"),
+                   client=_FakeS3(str(tmp_path / "bucket")))
+    bars = ff.bars({"AAA", "SPY"}, "2026-01-01", "2026-01-31")
+    assert set(bars["ticker"]) == {"AAA", "SPY"} and len(bars) == 6
+    assert ff.downloaded == 3
+    ff.bars({"AAA"}, "2026-01-01", "2026-01-31")
+    assert ff.cached == 3                                   # second pass hits the cache
+    a = bars[bars["ticker"] == "AAA"].drop(columns="ticker")
+    splits = pd.DataFrame({"ticker": ["AAA"], "execution_date": ["2026-01-05"],
+                           "split_from": [1], "split_to": [2]})
+    divs = pd.DataFrame({"ticker": ["AAA"], "ex_dividend_date": ["2026-01-06"],
+                         "historical_adjustment_factor": [0.99]})
+    h = apply_corporate_actions(a, splits, divs)
+    assert list(h["split_close"]) == [50.0, 50.0, 51.0]
+    assert list(h["adjclose"].round(6)) == [49.5, 49.5, 51.0]

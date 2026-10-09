@@ -4,7 +4,9 @@ name: Hermes stock screener
 # real data via "Run workflow". The live run needs two secrets in the GitHub
 # Environment "screen" (Settings -> Environments -> screen -> Environment secrets):
 #   FMP_KEY      Financial Modeling Prep key (already used by the Russell 1000 screens)
-#   MASSIVE_KEY  Massive (formerly Polygon) key
+#   MASSIVE_KEY  Massive (formerly Polygon) REST API key
+#   MASSIVE_S3_ACCESS_KEY_ID / MASSIVE_S3_SECRET_ACCESS_KEY
+#                Massive Flat Files S3 credentials (bulk price history; dashboard/keys)
 # Keys are passed as environment variables only; they are never written to the repo.
 
 on:
@@ -63,6 +65,8 @@ jobs:
     env:
       FMP_KEY: ${{ secrets.FMP_KEY }}
       MASSIVE_KEY: ${{ secrets.MASSIVE_KEY }}
+      MASSIVE_S3_ACCESS_KEY_ID: ${{ secrets.MASSIVE_S3_ACCESS_KEY_ID }}
+      MASSIVE_S3_SECRET_ACCESS_KEY: ${{ secrets.MASSIVE_S3_SECRET_ACCESS_KEY }}
       LIMIT: ${{ inputs.limit || '60' }}
       MASSIVE_RPM: ${{ inputs.massive_rpm }}
     steps:
@@ -83,6 +87,14 @@ jobs:
           else
             echo "ok=true" >> "$GITHUB_OUTPUT"
           fi
+      - name: Restore Massive flat-file cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            hermes-screener/data/flatfiles
+            hermes-screener/data/cache
+          key: massive-flatfiles-${{ github.run_id }}
+          restore-keys: massive-flatfiles-
       - name: API probe (HTTP status per endpoint)
         if: steps.keys.outputs.ok == 'true'
         continue-on-error: true

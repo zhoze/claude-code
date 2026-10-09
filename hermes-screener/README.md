@@ -25,6 +25,8 @@ python3 run_nightly.py --demo                      # offline synthetic market, n
 python3 -m pytest                                  # 20 tests, ~35 s, offline
 
 export FMP_KEY=...  MASSIVE_KEY=...                # environment only, never on disk
+export MASSIVE_S3_ACCESS_KEY_ID=... MASSIVE_S3_SECRET_ACCESS_KEY=...   # Massive Flat Files
+python3 scripts/probe_apis.py                      # check every endpoint + plan limits
 python3 run_nightly.py --limit 60                  # smoke run on the 60 largest names
 python3 run_nightly.py                             # full nightly pass (Russell 1000 proxy)
 python3 run_nightly.py --pass premarket --macro macro.json    # latest nightly session
@@ -56,14 +58,17 @@ Also written: `data/snapshots/<session>/` (immutable, with a SHA-256 manifest),
 | Universe (largest US common stocks) | FMP | `company-screener` |
 | 5y annual statements → the 4 screen-input CSVs | FMP | `key-metrics`, `ratios`, `income/balance-sheet/cash-flow-statement`, `profile`, `quote` (via the vendored `build_record`) |
 | EPS/revenue actual vs estimate + next date | FMP | `earnings` (Massive has no consensus estimates; agreed) |
-| Daily OHLCV raw + split-adjusted | Massive | `/v2/aggs/ticker/{t}/range/1/day/...` (`adjusted=false/true`) |
-| Total-return adjustment | Massive | `/stocks/v1/dividends` → `historical_adjustment_factor` |
+| Daily OHLCV history (all names, 5y on Starter) | Massive **Flat Files** | S3 `files.massive.com`, bucket `flatfiles`, `us_stocks_sip/day_aggs_v1/YYYY/MM/YYYY-MM-DD.csv.gz`; one file per day, cached in `data/flatfiles/`, so nightly runs fetch only the new day |
+| Split + total-return adjustment | Massive REST | `/stocks/v1/splits`, `/stocks/v1/dividends` in bulk (`ticker.any_of`), `historical_adjustment_factor` |
+| Fallback when no S3 keys | Massive REST | `/v2/aggs/ticker/{t}/range/1/day/...` per ticker — slow, limited to the REST plan's history |
 | Listed options (tradability) | Massive | `/v3/reference/options/contracts?underlying_ticker=` |
 | Spread | Massive | full-market snapshot NBBO. If the plan lacks quotes for ≥ 20 % of names, a 20-day Corwin–Schultz high-low estimate is used instead (`universe.spread_source`) |
 | SPY + 11 SPDR sector ETFs since 2007 | Massive | aggregates (named stress windows, beta, regime) |
 
-`adjclose` = split-adjusted close × the dividend factor. It matches the
+`adjclose` = raw close × split factor × dividend factor. It matches the
 dividend-adjusted series that `ta-screener/panel.py` back-adjusts by.
+Day-aggregate flat files carry no VWAP, so the typical price (H+L+C)/3 stands in
+for the alpha formulas that use `vwap`.
 
 ## Decisions taken (from the Q&A)
 

@@ -93,3 +93,22 @@ def test_premarket_macro_delay(run, tmp_path):
     assert t3["exposure_gate"] == 0.5
     if t3["all_entries"]:
         assert sum(t3["all_entries"].values()) == pytest.approx(0.5, abs=1e-4)
+
+
+def test_nightly_on_flat_files(tmp_path):
+    """Same pipeline with price history from (fake) Massive Flat Files + bulk corporate actions."""
+    from test_units import _FakeS3
+    from hermes.data.flatfiles import FlatFiles
+    root = str(tmp_path / "run")
+    cfg = load_config(overrides={**FAST, "infra": {**FAST["infra"], "apis": {"massive": {
+        "history_source": "flatfiles"}}}}, root=root)
+    m = FakeMarket(n=60, session=SESSION)
+    fm = FakeMassive(m)
+    fm.write_flatfiles(str(tmp_path / "bucket"), "2021-09-01")
+    ff = FlatFiles(cfg.infra["apis"]["massive"]["flatfiles"], cfg.path("flatfiles"),
+                   client=_FakeS3(str(tmp_path / "bucket")))
+    snap = build_snapshot(cfg, FakeFMP(m), fm, SESSION, limit=60, flatfiles=ff)
+    assert snap["price_source"] == "massive_flatfiles"
+    out = Orchestrator(cfg).run_nightly(session=SESSION, build=False)
+    assert out["status"] in ("ok", "fewer_than_3"), out["top3"].get("status_reason")
+    assert out["top3"]["funnel_counts"]["universe"] == 60

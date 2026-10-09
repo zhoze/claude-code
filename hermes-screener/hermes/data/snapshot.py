@@ -30,6 +30,7 @@ import numpy as np
 import pandas as pd
 
 from .. import vendored
+from .flatfiles import FlatFiles, apply_corporate_actions
 from .massive import years_ago
 
 log = logging.getLogger(__name__)
@@ -87,7 +88,7 @@ def last_session(massive, today: str | None = None) -> str:
 
 
 def build_snapshot(cfg, fmp, massive, session: str, tickers: list[str] | None = None,
-                   limit: int | None = None) -> dict:
+                   limit: int | None = None, flatfiles=None) -> dict:
     out_dir = snapshot_dir(cfg, session)
     if os.path.exists(os.path.join(out_dir, "manifest.json")):
         raise SnapshotExistsError(f"snapshot {session} already exists and is immutable")
@@ -146,35 +147,46 @@ def build_snapshot(cfg, fmp, massive, session: str, tickers: list[str] | None = 
 
     # ------------------------------------------------- prices + earnings
     frm = years_ago(session, infra["history"]["ta_years"])
+    bench = infra["benchmarks"]
+    bsyms = [bench["market"], *bench["sector_etfs"]]
+    long_from = infra["history"].get("market_since") or \
+        years_ago(session, infra["history"].get("market_years", 5) - 0.1)
+    histories, source = load_histories(cfg, massive, syms, bsyms, frm, long_from, session,
+                                       flatfiles)
+    log.info("snapshot %s: price history from %s (%d of %d names)", session, source,
+             sum(1 for t in syms if t in histories), len(syms))
+    options = options_flags(cfg, massive, syms, session) \
+        if strat["universe"]["require_options"] else {}
 
-    def pull(sym):
-        hist = massive.daily_history(sym, frm, session)
-        earn = fmp.earnings(sym)
-        opts = massive.has_listed_options(sym) if strat["universe"]["require_options"] else None
-        return sym, hist, earn, opts
+    with ThreadPoolExecutor(max_workers=infra["apis"]["fmp"]["workers"]) as ex:
+        earnings_by = dict(zip(syms, ex.map(fmp.earnings, syms)))
 
     price_frames, earn_rows, liq = [], [], []
-    with ThreadPoolExecutor(max_workers=infra["apis"]["massive"]["workers"]) as ex:
-        for sym, hist, earn, opts in ex.map(pull, syms):
-            if hist is None or hist.empty:
-                failures["prices"].append(sym)
-                continue
-            hist = hist.copy()
-            hist.insert(0, "ticker", sym)
-            price_frames.append(hist)
-            if not earn:
-                failures["earnings"].append(sym)
-            earn_rows.extend(earn)
-            if opts is None and strat["universe"]["require_options"]:
-                failures["options"].append(sym)
-            adv_days = strat["universe"]["adv_days"]
-            tail = hist.tail(adv_days)
-            liq.append({"ticker": sym,
-                        "adv20": float((tail["close"] * tail["volume"]).mean())
-                        if len(tail) == adv_days else np.nan,
-                        "spread_cs_bp": corwin_schultz_bp(hist["high"], hist["low"], adv_days),
-                        "has_options": opts,
-                        "last_bar": str(hist["date"].iloc[-1])})
+    adv_days = strat["universe"]["adv_days"]
+    for sym in syms:
+        hist = histories.get(sym)
+        if hist is not None:
+            hist = hist[hist["date"] >= frm]
+        if hist is None or hist.empty:
+            failures["prices"].append(sym)
+            continue
+        hist = hist.copy()
+        hist.insert(0, "ticker", sym)
+        price_frames.append(hist)
+        earn = earnings_by.get(sym) or []
+        if not earn:
+            failures["earnings"].append(sym)
+        earn_rows.extend(earn)
+        opts = options.get(sym)
+        if opts is None and strat["universe"]["require_options"]:
+            failures["options"].append(sym)
+        tail = hist.tail(adv_days)
+        liq.append({"ticker": sym,
+                    "adv20": float((tail["close"] * tail["volume"]).mean())
+                    if len(tail) == adv_days else np.nan,
+                    "spread_cs_bp": corwin_schultz_bp(hist["high"], hist["low"], adv_days),
+                    "has_options": opts,
+                    "last_bar": str(hist["date"].iloc[-1])})
 
     prices = pd.concat(price_frames, ignore_index=True) if price_frames else pd.DataFrame()
     if prices.empty:
@@ -192,13 +204,9 @@ def build_snapshot(cfg, fmp, massive, session: str, tickers: list[str] | None = 
         os.path.join(tdir, "universe.csv"), index=False)
 
     # ------------------------------------------------------- benchmarks
-    bench = infra["benchmarks"]
-    bsyms = [bench["market"], *bench["sector_etfs"]]
-    long_from = infra["history"].get("market_since") or \
-        years_ago(session, infra["history"].get("market_years", 5) - 0.1)
     brows = []
     for sym in bsyms:
-        h = massive.daily_history(sym, long_from, session)
+        h = histories.get(sym)
         if h is None or h.empty:
             failures["benchmarks"].append(sym)
             continue
@@ -239,12 +247,82 @@ def build_snapshot(cfg, fmp, massive, session: str, tickers: list[str] | None = 
     return write_manifest(out_dir, session, extra={
         "api_calls": {"fmp": fmp.http.calls, "massive": massive.http.calls},
         "http_status": status, "universe_requested": len(syms),
+        "price_source": source,
+        "flatfiles": None if flatfiles is None else
+        {"downloaded": flatfiles.downloaded, "cached": flatfiles.cached,
+         "missing_days": flatfiles.missing},
         "pit_classification": PIT_FIELDS})
 
 
 def _status(client) -> dict:
     f = getattr(client.http, "status_summary", None)
     return f() if callable(f) else {}
+
+
+def load_histories(cfg, massive, syms, bsyms, frm, long_from, session, flatfiles=None
+                   ) -> tuple[dict[str, pd.DataFrame], str]:
+    """{ticker: daily history with split_close + adjclose} and the source used.
+
+    Massive Flat Files when S3 credentials are configured (one file per day for all
+    names, cached locally; splits/dividends in bulk via REST). Otherwise per-ticker
+    REST aggregates (fallback; slow and rate-limited for a full universe).
+    """
+    infra = cfg.infra
+    every = list(dict.fromkeys(list(syms) + list(bsyms)))
+    start = min(frm, long_from)
+    mode = infra["apis"]["massive"].get("history_source", "auto")
+    ff_cfg = infra["apis"]["massive"]["flatfiles"]
+    if flatfiles is None and mode in ("auto", "flatfiles") and FlatFiles.available(ff_cfg):
+        flatfiles = FlatFiles(ff_cfg, cfg.path("flatfiles"))
+    if mode == "flatfiles" and flatfiles is None:
+        raise RuntimeError("history_source=flatfiles but MASSIVE_S3_ACCESS_KEY_ID / "
+                           "MASSIVE_S3_SECRET_ACCESS_KEY are not set")
+    if flatfiles is not None and mode != "rest":
+        raw = flatfiles.bars(set(every), start, session,
+                             workers=int(ff_cfg.get("workers", 8)))
+        splits = massive.splits_bulk(every, start)
+        divs = massive.dividends_bulk(every, start)
+        if splits is None or divs is None:
+            raise RuntimeError("Massive corporate actions (splits/dividends) unavailable — "
+                               "cannot adjust flat-file prices")
+        out = {}
+        for t, g in raw.groupby("ticker", sort=False):
+            sp = splits[splits["ticker"] == t] if len(splits) else None
+            dv = divs[divs["ticker"] == t] if len(divs) else None
+            h = apply_corporate_actions(g.drop(columns="ticker"), sp, dv)
+            # day aggregates carry no VWAP: typical price (H+L+C)/3 stands in, flagged
+            h["vwap"] = (h["high"] + h["low"] + h["close"]) / 3.0
+            out[t] = h.reset_index(drop=True)
+        return out, "massive_flatfiles"
+
+    def one(sym):
+        return sym, massive.daily_history(sym, frm if sym in set(syms) else long_from, session)
+
+    with ThreadPoolExecutor(max_workers=infra["apis"]["massive"]["workers"]) as ex:
+        res = dict(ex.map(one, every))
+    return {k: v for k, v in res.items() if v is not None and not v.empty}, "massive_rest"
+
+
+def options_flags(cfg, massive, syms, session) -> dict[str, bool | None]:
+    """Listed-options flag per name, cached for a week (tradability rarely changes)."""
+    cache = os.path.join(cfg.path("cache"), "options_flags.json")
+    data = {}
+    if os.path.exists(cache):
+        with open(cache) as f:
+            data = json.load(f)
+    week = dt.date.fromisoformat(session).isocalendar()[:2]
+    fresh = {t: v["flag"] for t, v in data.items()
+             if tuple(v.get("week", ())) == tuple(week) and v.get("flag") is not None}
+    todo = [t for t in syms if t not in fresh]
+    with ThreadPoolExecutor(max_workers=cfg.infra["apis"]["massive"]["workers"]) as ex:
+        for t, flag in zip(todo, ex.map(massive.has_listed_options, todo)):
+            fresh[t] = flag
+            if flag is not None:
+                data[t] = {"flag": flag, "week": list(week)}
+    os.makedirs(os.path.dirname(cache), exist_ok=True)
+    with open(cache, "w") as f:
+        json.dump(data, f, sort_keys=True)
+    return {t: fresh.get(t) for t in syms}
 
 
 def nan_rates(out_dir: str) -> dict[str, float]:

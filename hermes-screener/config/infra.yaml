@@ -6,6 +6,8 @@ paths:
   artifacts: db/artifacts
   reports: reports
   audit: audit
+  flatfiles: data/flatfiles   # local cache of Massive day-aggregate files (persist it!)
+  cache: data/cache
 
 apis:
   fmp:
@@ -18,6 +20,14 @@ apis:
     key_env: MASSIVE_KEY
     workers: 4
     max_rpm: null           # Massive plan limit: Basic (free) = 5; paid plans = unlimited (null)
+    history_source: auto    # auto (flat files if S3 keys are set) | flatfiles | rest
+    flatfiles:              # Massive Flat Files — bulk daily history (Starter: 5 years)
+      endpoint: https://files.massive.com
+      bucket: flatfiles
+      day_aggs_prefix: us_stocks_sip/day_aggs_v1
+      access_key_env: MASSIVE_S3_ACCESS_KEY_ID      # from massive.com/dashboard/keys
+      secret_key_env: MASSIVE_S3_SECRET_ACCESS_KEY
+      workers: 8
   retries: 4                # spec §2.1: <= 4 retries with backoff
   timeout_s: 30
 

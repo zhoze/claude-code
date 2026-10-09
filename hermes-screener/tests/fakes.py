@@ -92,6 +92,36 @@ class FakeMassive:
     def has_listed_options(self, ticker):
         return True
 
+    def _split_date(self):
+        return (pd.Timestamp(self.m.session) - pd.Timedelta(days=730)).strftime("%Y-%m-%d")
+
+    def splits_bulk(self, tickers, frm):
+        rows = [{"ticker": t, "execution_date": self._split_date(), "split_from": 1,
+                 "split_to": 2, "historical_adjustment_factor": 0.5}
+                for t in tickers if t.startswith("T") and int(t[1:]) % 7 == 0]
+        return pd.DataFrame(rows, columns=["ticker", "execution_date", "split_from",
+                                           "split_to", "historical_adjustment_factor"])
+
+    def dividends_bulk(self, tickers, frm):
+        return pd.DataFrame([{"ticker": t, "ex_dividend_date": self._split_date(),
+                              "cash_amount": 0.5, "historical_adjustment_factor": 0.99}
+                             for t in tickers])
+
+    def write_flatfiles(self, root, frm, prefix="us_stocks_sip/day_aggs_v1"):
+        """Materialise the fake market as Massive day-aggregate flat files under root."""
+        import os
+        frames = []
+        for sym in self.m.ret:
+            raw, _, _ = self.m.bars(sym, frm, self.m.session)
+            frames.append(raw.assign(ticker=sym))
+        allb = pd.concat(frames)
+        for d, g in allb.groupby("date"):
+            p = os.path.join(root, prefix, d[:4], d[5:7])
+            os.makedirs(p, exist_ok=True)
+            g.assign(window_start=0, transactions=1)[
+                ["ticker", "volume", "open", "close", "high", "low", "window_start",
+                 "transactions"]].to_csv(os.path.join(p, f"{d}.csv.gz"), index=False)
+
     def snapshot_spreads_bp(self, tickers, chunk=200):
         return {t: 3.0 for t in tickers}
 
