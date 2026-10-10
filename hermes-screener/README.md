@@ -145,6 +145,11 @@ on **Run workflow**, or on a push whose commit message contains `[live]`. It sta
 with `scripts/probe_apis.py`, which checks every endpoint, and caches the flat files
 between runs.
 
+On a REST-only Massive plan (no Flat Files), use `--history-source grouped
+--history-years 1 --no-options-check`, which are the workflow defaults. One grouped-daily
+call returns every stock for a session, and the cache means later runs fetch only new days.
+Estimated spreads (Corwin–Schultz) use `universe.max_spread_bp_estimated`.
+
 ## Schedule (Europe/Tallinn, spec §10)
 
 ```cron
