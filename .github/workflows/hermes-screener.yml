@@ -16,6 +16,10 @@ on:
       - ".github/workflows/hermes-screener.yml"
   workflow_dispatch:
     inputs:
+      session:
+        description: "EOD session date YYYY-MM-DD (empty = latest published session)"
+        default: ""
+        required: false
       limit:
         description: "Universe size (largest N names; empty = full Russell 1000 proxy)"
         default: ""
@@ -80,6 +84,7 @@ jobs:
       MASSIVE_S3_ACCESS_KEY_ID: ${{ secrets.MASSIVE_S3_ACCESS_KEY_ID }}
       MASSIVE_S3_SECRET_ACCESS_KEY: ${{ secrets.MASSIVE_S3_SECRET_ACCESS_KEY }}
       LIMIT: ${{ inputs.limit }}
+      SESSION: ${{ inputs.session }}
       HISTORY_YEARS: ${{ inputs.history_years || '1' }}
       HISTORY_SOURCE: ${{ inputs.history_source || 'grouped' }}
       OPTIONS_CHECK: ${{ inputs.options_check && 'true' || 'false' }}
@@ -122,6 +127,7 @@ jobs:
         run: |
           args=""
           [ -n "$LIMIT" ] && args="--limit $LIMIT"
+          [ -n "$SESSION" ] && args="$args --session $SESSION"
           [ -n "$MASSIVE_RPM" ] && args="$args --massive-rpm $MASSIVE_RPM"
           [ -n "$HISTORY_YEARS" ] && args="$args --history-years $HISTORY_YEARS"
           [ -n "$HISTORY_SOURCE" ] && args="$args --history-source $HISTORY_SOURCE"
